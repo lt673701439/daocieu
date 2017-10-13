@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ConfCustom">
+	<resultMap id="confCustomResultMap" type="com.liketry.interaction.opt.confcustom.model.ConfCustomBO">
+		<result property="customId" column="custom_id"/>
+		<result property="customType" column="custom_type"/>
+		<result property="customPrice" column="custom_price"/>
+		<result property="createdTime" column="created_time"/>
+		<result property="createdBy" column="created_by"/>
+		<result property="modifiedTime" column="modified_time"/>
+		<result property="modifiedBy" column="modified_by"/>
+		<result property="version" column="version"/>
+		<result property="delflag" column="delflag"/>
+  	</resultMap>
+  
+  	<sql id="confCustomWhereCondition">
+		<where>
+	  	<if test=" custom_id != null and custom_id != '' and custom_id != 'null' ">
+			<![CDATA[ AND A.custom_id = #{custom_id} ]]>
+	  	</if>
+	  	<if test=" custom_type != null and custom_type != '' and custom_type != 'null' ">
+			<![CDATA[ AND A.custom_type = #{custom_type} ]]>
+	  	</if>
+	  	<if test=" custom_price != null ">
+	  		<![CDATA[ AND A.custom_price = ${custom_price} ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.created_time = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ AND A.created_by = #{created_by} ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.modified_time = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ AND A.modified_by = #{modified_by} ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.version = ${version} ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.delflag = #{delflag} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addConfCustom"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BU_CONF_CUSTOM
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" custom_id  != null and  custom_id  != ''  and  custom_id  != 'null' ">
+				<![CDATA[ custom_id , ]]>
+	  		</if>
+	  		<if test=" custom_type  != null and  custom_type  != ''  and  custom_type  != 'null' ">
+				<![CDATA[ custom_type , ]]>
+	  		</if>
+	  		<if test=" custom_price  != null ">
+				<![CDATA[ custom_price , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ created_time , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ created_by , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ modified_time , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ modified_by , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ version , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ delflag , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" custom_id  != null and  custom_id  != ''  and  custom_id  != 'null' ">
+	  			<![CDATA[ #{custom_id} , ]]>
+	  		</if>
+	  		<if test=" custom_type  != null and  custom_type  != ''  and  custom_type  != 'null' ">
+	  			<![CDATA[ #{custom_type} , ]]>
+	  		</if>
+	  		<if test=" custom_price  != null">
+	    		<![CDATA[ ${custom_price} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateConfCustom" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BU_CONF_CUSTOM A ]]>
+		<set>
+	  	<if test=" custom_type  != null and  custom_type  != ''  and  custom_type  != 'null' ">
+	  		<![CDATA[ A.custom_type = #{custom_type}, ]]>
+	  	</if>
+		<if test=" custom_price  != null ">
+  			<![CDATA[ A.custom_price = ${custom_price} , ]]>
+		</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.created_time = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.created_by = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.modified_time = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.modified_by = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.version = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.delflag = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.CUSTOM_ID = #{custom_id}]]>
+  	</update>
+  
+  	<delete id="deleteConfCustom" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BU_CONF_CUSTOM where CUSTOM_ID = #{custom_id} ]]>
+	</delete>
+  
+	<select id="findOneConfCustom" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BU_CONF_CUSTOM A  ]]>
+		<include refid="confCustomWhereCondition" />
+  	</select>
+    
+  	<select id="findAllConfCustom" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BU_CONF_CUSTOM A ]]>
+		<include refid="confCustomWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapConfCustom" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BU_CONF_CUSTOM A ]]>
+		<include refid="confCustomWhereCondition" />
+	</select>
+  
+  	<select id="findConfCustomTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BU_CONF_CUSTOM A ]]>
+		<include refid="confCustomWhereCondition" />
+  	</select>
+  
+  	<select id="queryConfCustomForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BU_CONF_CUSTOM A ]]>
+		where delflag = 1 
+		<if test=" customType != null and customType != '' and customType != 'null' ">
+            <![CDATA[ AND A.custom_type = {customType} ]]>
+        </if> 
+        <if test=" customPrice != null and customPrice != '' and customPrice != 'null' ">
+            <![CDATA[ AND A.custom_price like concat('%', #{customPrice}, '%') ]]>
+        </if> 
+         order by  created_time desc
+  	</select>
+</mapper>

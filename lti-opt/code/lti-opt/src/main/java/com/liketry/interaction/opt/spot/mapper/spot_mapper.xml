@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Spot">
+	<resultMap id="spotResultMap" type="com.liketry.interaction.opt.spot.model.SpotBO">
+		<result property="spotId" column="spot_id"/>
+		<result property="spotCode" column="spot_code"/>
+		<result property="spotName" column="spot_name"/>
+		<result property="spotStatus" column="spot_status"/>
+		<result property="spotProvince" column="spot_province"/>
+		<result property="spotCity" column="spot_city"/>
+		<result property="spotAddress" column="spot_address"/>
+		<result property="spotDescription" column="spot_description"/>
+  	</resultMap>
+  
+  	<sql id="spotWhereCondition">
+		<where>
+	  	<if test=" spot_id != null and spot_id != '' and spot_id != 'null' ">
+			<![CDATA[ AND A.spot_id = #{spot_id} ]]>
+	  	</if>
+	  	<if test=" spot_code != null and spot_code != '' and spot_code != 'null' ">
+			<![CDATA[ AND A.spot_code = #{spot_code} ]]>
+	  	</if>
+	  	<if test=" spot_name != null and spot_name != '' and spot_name != 'null' ">
+			<![CDATA[ AND A.spot_name = #{spot_name} ]]>
+	  	</if>
+	  	<if test=" spot_status != null and spot_status != '' and spot_status != 'null' ">
+			<![CDATA[ AND A.spot_status = #{spot_status} ]]>
+	  	</if>
+	  	<if test=" spot_province != null and spot_province != '' and spot_province != 'null' ">
+			<![CDATA[ AND A.spot_province = #{spot_province} ]]>
+	  	</if>
+	  	<if test=" spot_city != null and spot_city != '' and spot_city != 'null' ">
+			<![CDATA[ AND A.spot_city = #{spot_city} ]]>
+	  	</if>
+	  	<if test=" spot_address != null and spot_address != '' and spot_address != 'null' ">
+			<![CDATA[ AND A.spot_address = #{spot_address} ]]>
+	  	</if>
+	  	<if test=" spot_description != null and spot_description != '' and spot_description != 'null' ">
+			<![CDATA[ AND A.spot_description = #{spot_description} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addSpot"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BU_SPOT
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" spot_id  != null and  spot_id  != ''  and  spot_id  != 'null' ">
+				<![CDATA[ spot_id , ]]>
+	  		</if>
+	  		<if test=" spot_code  != null and  spot_code  != ''  and  spot_code  != 'null' ">
+				<![CDATA[ spot_code , ]]>
+	  		</if>
+	  		<if test=" spot_name  != null and  spot_name  != ''  and  spot_name  != 'null' ">
+				<![CDATA[ spot_name , ]]>
+	  		</if>
+	  		<if test=" spot_status  != null and  spot_status  != ''  and  spot_status  != 'null' ">
+				<![CDATA[ spot_status , ]]>
+	  		</if>
+	  		<if test=" spot_province  != null and  spot_province  != ''  and  spot_province  != 'null' ">
+				<![CDATA[ spot_province , ]]>
+	  		</if>
+	  		<if test=" spot_city  != null and  spot_city  != ''  and  spot_city  != 'null' ">
+				<![CDATA[ spot_city , ]]>
+	  		</if>
+	  		<if test=" spot_address  != null and  spot_address  != ''  and  spot_address  != 'null' ">
+				<![CDATA[ spot_address , ]]>
+	  		</if>
+	  		<if test=" spot_description  != null and  spot_description  != ''  and  spot_description  != 'null' ">
+				<![CDATA[ spot_description , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" spot_id  != null and  spot_id  != ''  and  spot_id  != 'null' ">
+	  			<![CDATA[ #{spot_id} , ]]>
+	  		</if>
+	  		<if test=" spot_code  != null and  spot_code  != ''  and  spot_code  != 'null' ">
+	  			<![CDATA[ #{spot_code} , ]]>
+	  		</if>
+	  		<if test=" spot_name  != null and  spot_name  != ''  and  spot_name  != 'null' ">
+	  			<![CDATA[ #{spot_name} , ]]>
+	  		</if>
+	  		<if test=" spot_status  != null and  spot_status  != ''  and  spot_status  != 'null' ">
+	  			<![CDATA[ #{spot_status} , ]]>
+	  		</if>
+	  		<if test=" spot_province  != null and  spot_province  != ''  and  spot_province  != 'null' ">
+	  			<![CDATA[ #{spot_province} , ]]>
+	  		</if>
+	  		<if test=" spot_city  != null and  spot_city  != ''  and  spot_city  != 'null' ">
+	  			<![CDATA[ #{spot_city} , ]]>
+	  		</if>
+	  		<if test=" spot_address  != null and  spot_address  != ''  and  spot_address  != 'null' ">
+	  			<![CDATA[ #{spot_address} , ]]>
+	  		</if>
+	  		<if test=" spot_description  != null and  spot_description  != ''  and  spot_description  != 'null' ">
+	  			<![CDATA[ #{spot_description} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateSpot" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BU_SPOT A ]]>
+		<set>
+	  	<if test=" spot_code  != null and  spot_code  != ''  and  spot_code  != 'null' ">
+	  		<![CDATA[ A.spot_code = #{spot_code}, ]]>
+	  	</if>
+	  	<if test=" spot_name  != null and  spot_name  != ''  and  spot_name  != 'null' ">
+	  		<![CDATA[ A.spot_name = #{spot_name}, ]]>
+	  	</if>
+	  	<if test=" spot_status  != null and  spot_status  != ''  and  spot_status  != 'null' ">
+	  		<![CDATA[ A.spot_status = #{spot_status}, ]]>
+	  	</if>
+	  	<if test=" spot_province  != null and  spot_province  != ''  and  spot_province  != 'null' ">
+	  		<![CDATA[ A.spot_province = #{spot_province}, ]]>
+	  	</if>
+	  	<if test=" spot_city  != null and  spot_city  != ''  and  spot_city  != 'null' ">
+	  		<![CDATA[ A.spot_city = #{spot_city}, ]]>
+	  	</if>
+	  	<if test=" spot_address  != null and  spot_address  != ''  and  spot_address  != 'null' ">
+	  		<![CDATA[ A.spot_address = #{spot_address}, ]]>
+	  	</if>
+	  	<if test=" spot_description  != null and  spot_description  != ''  and  spot_description  != 'null' ">
+	  		<![CDATA[ A.spot_description = #{spot_description}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.SPOT_ID = #{spot_id}]]>
+  	</update>
+  
+  	<delete id="deleteSpot" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BU_SPOT where SPOT_ID = #{spot_id} ]]>
+	</delete>
+  
+	<select id="findOneSpot" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BU_SPOT A  ]]>
+		<include refid="spotWhereCondition" />
+  	</select>
+    
+  	<select id="findAllSpot" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BU_SPOT A ]]>
+		<include refid="spotWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapSpot" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BU_SPOT A ]]>
+		<include refid="spotWhereCondition" />
+	</select>
+  
+  	<select id="findSpotTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BU_SPOT A ]]>
+		<include refid="spotWhereCondition" />
+  	</select>
+  
+  	<select id="querySpotForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BU_SPOT A ]]>
+		<include refid="spotWhereCondition" />
+  	</select>
+  	
+  	<select id="querySpotByConForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		SELECT A.* FROM BU_SPOT A
+          where 1=1 
+        <if test=" spotCode != null and spotCode != '' and spotCode != 'null' ">
+            <![CDATA[ AND A.spot_code like concat('%', #{spotCode}, '%') ]]>
+        </if> 
+        <if test=" spotName != null and spotName != '' and spotName != 'null' ">
+            <![CDATA[ AND A.spot_name like concat('%', #{spotName}, '%') ]]>
+        </if> 
+        <if test=" spotStatus != null and spotStatus != '' and spotStatus != 'null' ">
+            <![CDATA[ AND A.spot_status like concat('%', #{spotStatus}, '%') ]]>
+        </if>
+        order by  spot_code asc
+  	</select>
+</mapper>

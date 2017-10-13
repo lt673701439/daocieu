@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration> 
+    <classPathEntry location="C:\Users\dell\.m2\repository\mysql\mysql-connector-java\5.1.39\mysql-connector-java-5.1.39.jar" />
+   
+  <context id="mysqlTables" targetRuntime="MyBatis3">
+ <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://211.159.151.156:3306/interaction"
+      userId="root" password="Lti_1234"/> 
+    
+    <!-- 指定生成的类型为java类型，避免数据库中number等类型字段 -->
+    <javaTypeResolver>
+      <property name="forceBigDecimals" value="false"/>
+    </javaTypeResolver>
+     
+    <!-- 生成model模型，对应的包，存放位置可以指定具体的路径,如/ProjectName/src，也可以使用MyWebservice/src/main/java来自动生成 -->
+    <javaModelGenerator targetPackage="com.liketry.interaction.benison.model" targetProject="lti-bension/src/main/java">
+      <property name="enableSubPackages" value="true"/>
+    </javaModelGenerator>
+    
+    <!--对应的xml mapper文件  -->
+    <sqlMapGenerator targetPackage="mappers" targetProject="lti-bension/src/main/resources">
+      <property name="enableSubPackages" value="true"/>
+    </sqlMapGenerator>
+    
+    <!-- 对应的dao接口类 -->
+    <javaClientGenerator type="XMLMAPPER" targetPackage="com.liketry.interaction.benison.dao" targetProject="lti-bension/src/main/java">
+      <property name="enableSubPackages" value="true"/>
+    </javaClientGenerator>
+    <!-- tables 配置好表名和对应的实体对象名 -->
+    <!-- 基础表
+    <table tableName="bsc_admin" domainObjectName="Admin" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>-->
+    <!-- <table tableName="bsc_biz_seqno_t" domainObjectName="BizSeqno" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table> -->
+    <!-- <table tableName="bsc_dict_entry" domainObjectName="DictEntry" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>
+        <table tableName="bsc_dict_type" domainObjectName="DictType" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>
+    <table tableName="bsc_menu" domainObjectName="Menu" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>
+        <table tableName="bsc_role" domainObjectName="Role" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>
+    <table tableName="bsc_role_menu" domainObjectName="RoleMenu" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>
+    <table tableName="bsc_sequence" domainObjectName="Sequence" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>
+    <table tableName="bsc_user_role" domainObjectName="UserRole" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table> -->
+    
+    <!-- 业务表 
+    <table tableName="bu_benison" domainObjectName="Benison" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table> -->
+    <!--
+    <table tableName="bu_benison_img" domainObjectName="BenisonImg" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>
+    <table tableName="bu_benison_template" domainObjectName="BenisonTemplate" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>-->
+   
+     <!--<table tableName="bu_benison_type" domainObjectName="BenisonType" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table> 
+     
+    <table tableName="bu_commodity" domainObjectName="Commodity" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>
+     
+        <table tableName="bu_commodity_cost" domainObjectName="CommodityCost" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>
+    <table tableName="bu_commodity_sku" domainObjectName="CommoditySku" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table> -->
+    <!--<table tableName="bu_order" domainObjectName="Order" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>  -->
+    <!-- <table tableName="bu_order_detail" domainObjectName="OrderDetail" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>
+    <table tableName="bu_screen" domainObjectName="Screen" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table> -->
+    <!-- 
+    <table tableName="bu_spot" domainObjectName="Spot" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>  -->
+       <!--  <table tableName="bu_stock" domainObjectName="Stock" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>
+    <table tableName="bu_stock_detail" domainObjectName="StockDetail" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>
+        <table tableName="bu_user" domainObjectName="User" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>  -->
+    <!-- <table tableName="bu_promotion_detail" domainObjectName="PromotionDetail" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>
+    <table tableName="bu_promotion" domainObjectName="Promotion" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>-->
+    <!--
+    <table tableName="bu_conf_custom" domainObjectName="ConfCustom" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>-->
+    <table tableName="identifying_code" domainObjectName="IdentifyingCode" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>
+
+  </context>
+</generatorConfiguration>

@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Seller">
+	<resultMap id="sellerResultMap" type="com.taikang.iu.opt.seller.model.SellerBO">
+		<result property="sellerId" column="SELLER_ID"/>
+		<result property="userId" column="User_Id"/>
+		<result property="sellerName" column="SELLER_NAME"/>
+		<result property="sellerCode" column="SELLER_CODE"/>
+		<result property="sellerLinkman" column="SELLER_LINKMAN"/>
+		<result property="sellerTel" column="SELLER_TEL"/>
+		<result property="sellerMobile" column="SELLER_MOBILE"/>
+		<result property="sellerAddress" column="SELLER_ADDRESS"/>
+		<result property="sellerType" column="SELLER_TYPE"/>
+		<result property="sellerState" column="SELLER_STATE"/>
+		<result property="site" column="SITE"/>
+		<result property="bankName" column="BANK_NAME"/>
+		<result property="bankAccount" column="BANK_ACCOUNT"/>
+		<result property="accountHolder" column="ACCOUNT_HOLDER"/>
+		<result property="loginName" column="LOGIN_NAME"/>
+		<result property="loginInitPwd" column="LOGIN_INIT_PWD"/>
+		<result property="createdTime" column="CREATED_TIME"/>
+		<result property="createdBy" column="CREATED_BY"/>
+		<result property="modifiedTime" column="MODIFIED_TIME"/>
+		<result property="modifiedBy" column="MODIFIED_BY"/>
+		<result property="version" column="VERSION"/>
+		<result property="delflag" column="DELFLAG"/>
+  	</resultMap>
+  
+  	<sql id="sellerWhereCondition">
+		<where>
+	  	<if test=" seller_id != null and seller_id != '' and seller_id != 'null' ">
+			<![CDATA[ AND A.SELLER_ID = #{seller_id} ]]>
+	  	</if>
+	  	<if test=" user_id != null ">
+	  		<![CDATA[ AND A.User_Id = ${user_id} ]]>
+	  	</if>
+	  	<if test=" seller_name != null and seller_name != '' and seller_name != 'null' ">
+			<![CDATA[ AND A.SELLER_NAME = #{seller_name} ]]>
+	  	</if>
+	  	<if test=" seller_code != null and seller_code != '' and seller_code != 'null' ">
+			<![CDATA[ AND A.SELLER_CODE = #{seller_code} ]]>
+	  	</if>
+	  	<if test=" seller_linkman != null and seller_linkman != '' and seller_linkman != 'null' ">
+			<![CDATA[ AND A.SELLER_LINKMAN = #{seller_linkman} ]]>
+	  	</if>
+	  	<if test=" seller_tel != null and seller_tel != '' and seller_tel != 'null' ">
+			<![CDATA[ AND A.SELLER_TEL = #{seller_tel} ]]>
+	  	</if>
+	  	<if test=" seller_mobile != null and seller_mobile != '' and seller_mobile != 'null' ">
+			<![CDATA[ AND A.SELLER_MOBILE = #{seller_mobile} ]]>
+	  	</if>
+	  	<if test=" seller_address != null and seller_address != '' and seller_address != 'null' ">
+			<![CDATA[ AND A.SELLER_ADDRESS = #{seller_address} ]]>
+	  	</if>
+	  	<if test=" seller_type != null and seller_type != '' and seller_type != 'null' ">
+			<![CDATA[ AND A.SELLER_TYPE = #{seller_type} ]]>
+	  	</if>
+	  	<if test=" seller_state != null and seller_state != '' and seller_state != 'null' ">
+			<![CDATA[ AND A.SELLER_STATE = #{seller_state} ]]>
+	  	</if>
+	  	<if test=" site != null and site != '' and site != 'null' ">
+			<![CDATA[ AND A.SITE = #{site} ]]>
+	  	</if>
+	  	<if test=" bank_name != null and bank_name != '' and bank_name != 'null' ">
+			<![CDATA[ AND A.BANK_NAME = #{bank_name} ]]>
+	  	</if>
+	  	<if test=" bank_account != null and bank_account != '' and bank_account != 'null' ">
+			<![CDATA[ AND A.BANK_ACCOUNT = #{bank_account} ]]>
+	  	</if>
+	  	<if test=" account_holder != null and account_holder != '' and account_holder != 'null' ">
+			<![CDATA[ AND A.ACCOUNT_HOLDER = #{account_holder} ]]>
+	  	</if>
+	  	<if test=" login_name != null and login_name != '' and login_name != 'null' ">
+			<![CDATA[ AND A.LOGIN_NAME = #{login_name} ]]>
+	  	</if>
+	  	<if test=" login_init_pwd != null and login_init_pwd != '' and login_init_pwd != 'null' ">
+			<![CDATA[ AND A.LOGIN_INIT_PWD = #{login_init_pwd} ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ AND A.CREATED_BY = #{created_by} ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ AND A.MODIFIED_BY = #{modified_by} ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.VERSION = ${version} ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.DELFLAG = #{delflag} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addSeller"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BIZ_SELLER
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" seller_id  != null and  seller_id  != ''  and  seller_id  != 'null' ">
+				<![CDATA[ SELLER_ID , ]]>
+	  		</if>
+	  		<if test=" user_id  != null ">
+				<![CDATA[ User_Id , ]]>
+	  		</if>
+	  		<if test=" seller_name  != null and  seller_name  != ''  and  seller_name  != 'null' ">
+				<![CDATA[ SELLER_NAME , ]]>
+	  		</if>
+	  		<if test=" seller_code  != null and  seller_code  != ''  and  seller_code  != 'null' ">
+				<![CDATA[ SELLER_CODE , ]]>
+	  		</if>
+	  		<if test=" seller_linkman  != null and  seller_linkman  != ''  and  seller_linkman  != 'null' ">
+				<![CDATA[ SELLER_LINKMAN , ]]>
+	  		</if>
+	  		<if test=" seller_tel  != null and  seller_tel  != ''  and  seller_tel  != 'null' ">
+				<![CDATA[ SELLER_TEL , ]]>
+	  		</if>
+	  		<if test=" seller_mobile  != null and  seller_mobile  != ''  and  seller_mobile  != 'null' ">
+				<![CDATA[ SELLER_MOBILE , ]]>
+	  		</if>
+	  		<if test=" seller_address  != null and  seller_address  != ''  and  seller_address  != 'null' ">
+				<![CDATA[ SELLER_ADDRESS , ]]>
+	  		</if>
+	  		<if test=" seller_type  != null and  seller_type  != ''  and  seller_type  != 'null' ">
+				<![CDATA[ SELLER_TYPE , ]]>
+	  		</if>
+	  		<if test=" seller_state  != null and  seller_state  != ''  and  seller_state  != 'null' ">
+				<![CDATA[ SELLER_STATE , ]]>
+	  		</if>
+	  		<if test=" site  != null and  site  != ''  and  site  != 'null' ">
+				<![CDATA[ SITE , ]]>
+	  		</if>
+	  		<if test=" bank_name  != null and  bank_name  != ''  and  bank_name  != 'null' ">
+				<![CDATA[ BANK_NAME , ]]>
+	  		</if>
+	  		<if test=" bank_account  != null and  bank_account  != ''  and  bank_account  != 'null' ">
+				<![CDATA[ BANK_ACCOUNT , ]]>
+	  		</if>
+	  		<if test=" account_holder  != null and  account_holder  != ''  and  account_holder  != 'null' ">
+				<![CDATA[ ACCOUNT_HOLDER , ]]>
+	  		</if>
+	  		<if test=" login_name  != null and  login_name  != ''  and  login_name  != 'null' ">
+				<![CDATA[ LOGIN_NAME , ]]>
+	  		</if>
+	  		<if test=" login_init_pwd  != null and  login_init_pwd  != ''  and  login_init_pwd  != 'null' ">
+				<![CDATA[ LOGIN_INIT_PWD , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ CREATED_TIME , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ CREATED_BY , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ MODIFIED_TIME , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ MODIFIED_BY , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ VERSION , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ DELFLAG , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" seller_id  != null and  seller_id  != ''  and  seller_id  != 'null' ">
+	  			<![CDATA[ #{seller_id} , ]]>
+	  		</if>
+	  		<if test=" user_id  != null">
+	    		<![CDATA[ ${user_id} , ]]>
+	  		</if>
+	  		<if test=" seller_name  != null and  seller_name  != ''  and  seller_name  != 'null' ">
+	  			<![CDATA[ #{seller_name} , ]]>
+	  		</if>
+	  		<if test=" seller_code  != null and  seller_code  != ''  and  seller_code  != 'null' ">
+	  			<![CDATA[ #{seller_code} , ]]>
+	  		</if>
+	  		<if test=" seller_linkman  != null and  seller_linkman  != ''  and  seller_linkman  != 'null' ">
+	  			<![CDATA[ #{seller_linkman} , ]]>
+	  		</if>
+	  		<if test=" seller_tel  != null and  seller_tel  != ''  and  seller_tel  != 'null' ">
+	  			<![CDATA[ #{seller_tel} , ]]>
+	  		</if>
+	  		<if test=" seller_mobile  != null and  seller_mobile  != ''  and  seller_mobile  != 'null' ">
+	  			<![CDATA[ #{seller_mobile} , ]]>
+	  		</if>
+	  		<if test=" seller_address  != null and  seller_address  != ''  and  seller_address  != 'null' ">
+	  			<![CDATA[ #{seller_address} , ]]>
+	  		</if>
+	  		<if test=" seller_type  != null and  seller_type  != ''  and  seller_type  != 'null' ">
+	  			<![CDATA[ #{seller_type} , ]]>
+	  		</if>
+	  		<if test=" seller_state  != null and  seller_state  != ''  and  seller_state  != 'null' ">
+	  			<![CDATA[ #{seller_state} , ]]>
+	  		</if>
+	  		<if test=" site  != null and  site  != ''  and  site  != 'null' ">
+	  			<![CDATA[ #{site} , ]]>
+	  		</if>
+	  		<if test=" bank_name  != null and  bank_name  != ''  and  bank_name  != 'null' ">
+	  			<![CDATA[ #{bank_name} , ]]>
+	  		</if>
+	  		<if test=" bank_account  != null and  bank_account  != ''  and  bank_account  != 'null' ">
+	  			<![CDATA[ #{bank_account} , ]]>
+	  		</if>
+	  		<if test=" account_holder  != null and  account_holder  != ''  and  account_holder  != 'null' ">
+	  			<![CDATA[ #{account_holder} , ]]>
+	  		</if>
+	  		<if test=" login_name  != null and  login_name  != ''  and  login_name  != 'null' ">
+	  			<![CDATA[ #{login_name} , ]]>
+	  		</if>
+	  		<if test=" login_init_pwd  != null and  login_init_pwd  != ''  and  login_init_pwd  != 'null' ">
+	  			<![CDATA[ #{login_init_pwd} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateSeller" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BIZ_SELLER A ]]>
+		<set>
+		<if test=" user_id  != null ">
+  			<![CDATA[ A.User_Id = ${user_id} , ]]>
+		</if>
+	  	<if test=" seller_name  != null and  seller_name  != ''  and  seller_name  != 'null' ">
+	  		<![CDATA[ A.SELLER_NAME = #{seller_name}, ]]>
+	  	</if>
+	  	<if test=" seller_code  != null and  seller_code  != ''  and  seller_code  != 'null' ">
+	  		<![CDATA[ A.SELLER_CODE = #{seller_code}, ]]>
+	  	</if>
+	  	<if test=" seller_linkman  != null and  seller_linkman  != ''  and  seller_linkman  != 'null' ">
+	  		<![CDATA[ A.SELLER_LINKMAN = #{seller_linkman}, ]]>
+	  	</if>
+	  	<if test=" seller_tel  != null and  seller_tel  != ''  and  seller_tel  != 'null' ">
+	  		<![CDATA[ A.SELLER_TEL = #{seller_tel}, ]]>
+	  	</if>
+	  	<if test=" seller_mobile  != null and  seller_mobile  != ''  and  seller_mobile  != 'null' ">
+	  		<![CDATA[ A.SELLER_MOBILE = #{seller_mobile}, ]]>
+	  	</if>
+	  	<if test=" seller_address  != null and  seller_address  != ''  and  seller_address  != 'null' ">
+	  		<![CDATA[ A.SELLER_ADDRESS = #{seller_address}, ]]>
+	  	</if>
+	  	<if test=" seller_type  != null and  seller_type  != ''  and  seller_type  != 'null' ">
+	  		<![CDATA[ A.SELLER_TYPE = #{seller_type}, ]]>
+	  	</if>
+	  	<if test=" seller_state  != null and  seller_state  != ''  and  seller_state  != 'null' ">
+	  		<![CDATA[ A.SELLER_STATE = #{seller_state}, ]]>
+	  	</if>
+	  	<if test=" site  != null and  site  != ''  and  site  != 'null' ">
+	  		<![CDATA[ A.SITE = #{site}, ]]>
+	  	</if>
+	  	<if test=" bank_name  != null and  bank_name  != ''  and  bank_name  != 'null' ">
+	  		<![CDATA[ A.BANK_NAME = #{bank_name}, ]]>
+	  	</if>
+	  	<if test=" bank_account  != null and  bank_account  != ''  and  bank_account  != 'null' ">
+	  		<![CDATA[ A.BANK_ACCOUNT = #{bank_account}, ]]>
+	  	</if>
+	  	<if test=" account_holder  != null and  account_holder  != ''  and  account_holder  != 'null' ">
+	  		<![CDATA[ A.ACCOUNT_HOLDER = #{account_holder}, ]]>
+	  	</if>
+	  	<if test=" login_name  != null and  login_name  != ''  and  login_name  != 'null' ">
+	  		<![CDATA[ A.LOGIN_NAME = #{login_name}, ]]>
+	  	</if>
+	  	<if test=" login_init_pwd  != null and  login_init_pwd  != ''  and  login_init_pwd  != 'null' ">
+	  		<![CDATA[ A.LOGIN_INIT_PWD = #{login_init_pwd}, ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.CREATED_BY = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.MODIFIED_BY = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.VERSION = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.DELFLAG = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.SELLER_ID = #{seller_id}]]>
+  	</update>
+  
+  	<!-- 注意：删除语句必须去掉 A -->
+  	<delete id="deleteSeller" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BIZ_SELLER where SELLER_ID = #{seller_id} ]]>
+	</delete>
+  
+	<select id="findOneSeller" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BIZ_SELLER A  ]]>
+		<include refid="sellerWhereCondition" />
+  	</select>
+    
+  	<select id="findAllSeller" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BIZ_SELLER A ]]>
+		<include refid="sellerWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllSellers" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		  SELECT SELLER_ID,LOGIN_NAME,SELLER_CODE,SELLER_NAME,DICT_NAME SITE,SELLER_TEL, case SELLER_TYPE when '1' then '用品商'  when '2' then '服务商'   when '3' then '商户' else '' end AS SELLER_TYPE,CREATED_TIME 
+		  		 FROM BIZ_SELLER LEFT JOIN BSC_DICT_ENTRY_T ON BIZ_SELLER.SITE=BSC_DICT_ENTRY_T.DICT_ID
+		  		  where delflag = '0' 
+		<if test=" seller_code != null and seller_code != '' and seller_code != 'null' ">
+            <![CDATA[ AND Seller_Code like concat('%', #{seller_code}, '%') ]]>
+        </if> 
+        <if test=" seller_name != null and seller_name != '' and seller_name != 'null' ">
+            <![CDATA[ AND Seller_Name like concat('%', #{seller_name}, '%') ]]>
+        </if> 
+        <if test=" seller_type != null and seller_type != '' and seller_type != 'null' ">
+            <![CDATA[ AND SELLER_TYPE = #{seller_type} ]]>
+        </if>
+        <if test=" site != null and site != '' and site != 'null' ">
+            <![CDATA[ AND site = #{site} ]]>
+        </if>
+          ORDER BY CREATED_TIME DESC	
+  	</select>
+  	
+  	<select id="findAllMapSeller" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BIZ_SELLER A ]]>
+		<include refid="sellerWhereCondition" />
+	</select>
+  
+  	<select id="findSellerTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BIZ_SELLER A ]]>
+		<include refid="sellerWhereCondition" />
+  	</select>
+  
+  	<select id="querySellerForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BIZ_SELLER A ]]>
+		<include refid="sellerWhereCondition" />
+  	</select>
+  	
+  	<!-- 注意：查询语句要重新写 -->
+  	<select id="querySellerByConForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		 SELECT A.* FROM BIZ_SELLER A
+          where 1=1 
+          AND A.DELFLAG = '0' 
+        <if test=" sellerCode != null and sellerCode != '' and sellerCode != 'null' ">
+            <![CDATA[ AND A.Seller_Code like concat('%', #{sellerCode}, '%') ]]>
+        </if> 
+        <if test=" sellerName != null and sellerName != '' and sellerName != 'null' ">
+            <![CDATA[ AND A.Seller_Name like concat('%', #{sellerName}, '%') ]]>
+        </if> 
+        <if test=" sellerType != null and sellerType != '' and sellerType != 'null' ">
+            <![CDATA[ AND A.SELLER_TYPE = #{sellerType} ]]>
+        </if>
+         <if test=" site != null and site != '' and site != 'null' ">
+            <![CDATA[ AND A.site = #{site} ]]>
+        </if>
+          ORDER BY CREATED_TIME DESC
+  	</select>
+</mapper>

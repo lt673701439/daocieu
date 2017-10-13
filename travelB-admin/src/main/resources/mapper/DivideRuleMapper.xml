@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liketry.mapper.DivideRuleMapper">
+   <resultMap id="BaseResultMap" type="com.liketry.domain.DivideRule">
+    
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="rule_code" jdbcType="VARCHAR" property="ruleCode" />
+    <result column="type" jdbcType="CHAR" property="type" />
+    <result column="upper_limit" jdbcType="DECIMAL" property="upperLimit" />
+    <result column="is_upper" jdbcType="INTEGER" property="isUpper" />
+    <result column="lower_limit" jdbcType="DECIMAL" property="lowerLimit" />
+    <result column="is_lower" jdbcType="INTEGER" property="isLower" />
+    <result column="ratio" jdbcType="INTEGER" property="ratio" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="create_user_id" jdbcType="VARCHAR" property="createUserId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user_id" jdbcType="VARCHAR" property="updateUserId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="delflag" jdbcType="CHAR" property="delflag" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, rule_code, type, upper_limit, is_upper, lower_limit, is_lower, ratio, price, 
+    create_user_id, create_time, update_user_id, update_time, version, delflag
+  </sql> 
+  
+  <select id="findRepeatLimit" parameterType="com.liketry.domain.DivideRule" resultMap="BaseResultMap">
+    select 
+    id, rule_code, type, upper_limit, is_upper, lower_limit, is_lower, ratio, price
+    FROM
+    bu_divide_rule A
+    where 1=1 and type = #{type}
+    <if test=" id != null and id != '' and id != 'null' ">
+	  		<![CDATA[ AND id  != #{id} ]]>
+	  	</if>
+    <![CDATA[
+    	and ((A.upper_limit >= #{upperLimit} and A.lower_limit <= #{upperLimit})
+                or (A.upper_limit <= #{upperLimit} and A.upper_limit >= #{lowerLimit}))
+    ]]>
+  </select>
+  
+  <select id="selectNewListByMap" parameterType="map" resultMap="BaseResultMap">
+    select 
+    id, rule_code, type, upper_limit, is_upper, lower_limit, is_lower, ratio, price
+    FROM
+    bu_divide_rule A
+    where 1=1 and type = #{type}
+    <![CDATA[
+    	and A.upper_limit >= #{recDisPrice}
+    	and A.lower_limit <= #{recDisPrice}
+    ]]>
+    order by A.upper_limit desc
+  </select>
+  
+</mapper>

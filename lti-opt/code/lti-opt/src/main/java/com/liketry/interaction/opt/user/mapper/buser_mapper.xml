@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BUser">
+	<resultMap id="bUserResultMap" type="com.liketry.interaction.opt.user.model.BUserBO">
+		<result property="userId" column="user_id"/>
+		<result property="userNickname" column="user_nickname"/>
+		<result property="userPwd" column="user_pwd"/>
+		<result property="userType" column="user_type"/>
+		<result property="userIcon" column="user_icon"/>
+		<result property="userSex" column="user_sex"/>
+		<result property="userBirthday" column="user_birthday"/>
+		<result property="userProvince" column="user_province"/>
+		<result property="userCity" column="user_city"/>
+		<result property="userAddress" column="user_address"/>
+		<result property="userMail" column="user_mail"/>
+		<result property="userPhone" column="user_phone"/>
+		<result property="openId" column="open_id"/>
+		<result property="createdTime" column="created_time"/>
+		<result property="delflag" column="delflag"/>
+  	</resultMap>
+  
+  	<sql id="bUserWhereCondition">
+		<where>
+	  	<if test=" user_id != null and user_id != '' and user_id != 'null' ">
+			<![CDATA[ AND A.user_id = #{user_id} ]]>
+	  	</if>
+	  	<if test=" user_nickname != null and user_nickname != '' and user_nickname != 'null' ">
+			<![CDATA[ AND A.user_nickname = #{user_nickname} ]]>
+	  	</if>
+	  	<if test=" user_pwd != null and user_pwd != '' and user_pwd != 'null' ">
+			<![CDATA[ AND A.user_pwd = #{user_pwd} ]]>
+	  	</if>
+	  	<if test=" user_type != null and user_type != '' and user_type != 'null' ">
+			<![CDATA[ AND A.user_type = #{user_type} ]]>
+	  	</if>
+	  	<if test=" user_icon != null and user_icon != '' and user_icon != 'null' ">
+			<![CDATA[ AND A.user_icon = #{user_icon} ]]>
+	  	</if>
+	  	<if test=" user_sex != null and user_sex != '' and user_sex != 'null' ">
+			<![CDATA[ AND A.user_sex = #{user_sex} ]]>
+	  	</if>
+	  	<if test=" user_birthday != null and user_birthday != '' and user_birthday != 'null' ">
+			<![CDATA[ AND A.user_birthday = #{user_birthday} ]]>
+	  	</if>
+	  	<if test=" user_province != null and user_province != '' and user_province != 'null' ">
+			<![CDATA[ AND A.user_province = #{user_province} ]]>
+	  	</if>
+	  	<if test=" user_city != null and user_city != '' and user_city != 'null' ">
+			<![CDATA[ AND A.user_city = #{user_city} ]]>
+	  	</if>
+	  	<if test=" user_address != null and user_address != '' and user_address != 'null' ">
+			<![CDATA[ AND A.user_address = #{user_address} ]]>
+	  	</if>
+	  	<if test=" user_mail != null and user_mail != '' and user_mail != 'null' ">
+			<![CDATA[ AND A.user_mail = #{user_mail} ]]>
+	  	</if>
+	  	<if test=" user_phone != null and user_phone != '' and user_phone != 'null' ">
+			<![CDATA[ AND A.user_phone = #{user_phone} ]]>
+	  	</if>
+	  	<if test=" open_id != null and open_id != '' and open_id != 'null' ">
+			<![CDATA[ AND A.open_id = #{open_id} ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.created_time = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.delflag = #{delflag} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addBUser"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BU_USER
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" user_id  != null and  user_id  != ''  and  user_id  != 'null' ">
+				<![CDATA[ user_id , ]]>
+	  		</if>
+	  		<if test=" user_nickname  != null and  user_nickname  != ''  and  user_nickname  != 'null' ">
+				<![CDATA[ user_nickname , ]]>
+	  		</if>
+	  		<if test=" user_pwd  != null and  user_pwd  != ''  and  user_pwd  != 'null' ">
+				<![CDATA[ user_pwd , ]]>
+	  		</if>
+	  		<if test=" user_type  != null and  user_type  != ''  and  user_type  != 'null' ">
+				<![CDATA[ user_type , ]]>
+	  		</if>
+	  		<if test=" user_icon  != null and  user_icon  != ''  and  user_icon  != 'null' ">
+				<![CDATA[ user_icon , ]]>
+	  		</if>
+	  		<if test=" user_sex  != null and  user_sex  != ''  and  user_sex  != 'null' ">
+				<![CDATA[ user_sex , ]]>
+	  		</if>
+	  		<if test=" user_birthday  != null and  user_birthday  != ''  and  user_birthday  != 'null' ">
+				<![CDATA[ user_birthday , ]]>
+	  		</if>
+	  		<if test=" user_province  != null and  user_province  != ''  and  user_province  != 'null' ">
+				<![CDATA[ user_province , ]]>
+	  		</if>
+	  		<if test=" user_city  != null and  user_city  != ''  and  user_city  != 'null' ">
+				<![CDATA[ user_city , ]]>
+	  		</if>
+	  		<if test=" user_address  != null and  user_address  != ''  and  user_address  != 'null' ">
+				<![CDATA[ user_address , ]]>
+	  		</if>
+	  		<if test=" user_mail  != null and  user_mail  != ''  and  user_mail  != 'null' ">
+				<![CDATA[ user_mail , ]]>
+	  		</if>
+	  		<if test=" user_phone  != null and  user_phone  != ''  and  user_phone  != 'null' ">
+				<![CDATA[ user_phone , ]]>
+	  		</if>
+	  		<if test=" open_id  != null and  open_id  != ''  and  open_id  != 'null' ">
+				<![CDATA[ open_id , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ created_time , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ delflag , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" user_id  != null and  user_id  != ''  and  user_id  != 'null' ">
+	  			<![CDATA[ #{user_id} , ]]>
+	  		</if>
+	  		<if test=" user_nickname  != null and  user_nickname  != ''  and  user_nickname  != 'null' ">
+	  			<![CDATA[ #{user_nickname} , ]]>
+	  		</if>
+	  		<if test=" user_pwd  != null and  user_pwd  != ''  and  user_pwd  != 'null' ">
+	  			<![CDATA[ #{user_pwd} , ]]>
+	  		</if>
+	  		<if test=" user_type  != null and  user_type  != ''  and  user_type  != 'null' ">
+	  			<![CDATA[ #{user_type} , ]]>
+	  		</if>
+	  		<if test=" user_icon  != null and  user_icon  != ''  and  user_icon  != 'null' ">
+	  			<![CDATA[ #{user_icon} , ]]>
+	  		</if>
+	  		<if test=" user_sex  != null and  user_sex  != ''  and  user_sex  != 'null' ">
+	  			<![CDATA[ #{user_sex} , ]]>
+	  		</if>
+	  		<if test=" user_birthday  != null and  user_birthday  != ''  and  user_birthday  != 'null' ">
+	  			<![CDATA[ #{user_birthday} , ]]>
+	  		</if>
+	  		<if test=" user_province  != null and  user_province  != ''  and  user_province  != 'null' ">
+	  			<![CDATA[ #{user_province} , ]]>
+	  		</if>
+	  		<if test=" user_city  != null and  user_city  != ''  and  user_city  != 'null' ">
+	  			<![CDATA[ #{user_city} , ]]>
+	  		</if>
+	  		<if test=" user_address  != null and  user_address  != ''  and  user_address  != 'null' ">
+	  			<![CDATA[ #{user_address} , ]]>
+	  		</if>
+	  		<if test=" user_mail  != null and  user_mail  != ''  and  user_mail  != 'null' ">
+	  			<![CDATA[ #{user_mail} , ]]>
+	  		</if>
+	  		<if test=" user_phone  != null and  user_phone  != ''  and  user_phone  != 'null' ">
+	  			<![CDATA[ #{user_phone} , ]]>
+	  		</if>
+	  		<if test=" open_id  != null and  open_id  != ''  and  open_id  != 'null' ">
+	  			<![CDATA[ #{open_id} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateBUser" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BU_USER A ]]>
+		<set>
+	  	<if test=" user_nickname  != null and  user_nickname  != ''  and  user_nickname  != 'null' ">
+	  		<![CDATA[ A.user_nickname = #{user_nickname}, ]]>
+	  	</if>
+	  	<if test=" user_pwd  != null and  user_pwd  != ''  and  user_pwd  != 'null' ">
+	  		<![CDATA[ A.user_pwd = #{user_pwd}, ]]>
+	  	</if>
+	  	<if test=" user_type  != null and  user_type  != ''  and  user_type  != 'null' ">
+	  		<![CDATA[ A.user_type = #{user_type}, ]]>
+	  	</if>
+	  	<if test=" user_icon  != null and  user_icon  != ''  and  user_icon  != 'null' ">
+	  		<![CDATA[ A.user_icon = #{user_icon}, ]]>
+	  	</if>
+	  	<if test=" user_sex  != null and  user_sex  != ''  and  user_sex  != 'null' ">
+	  		<![CDATA[ A.user_sex = #{user_sex}, ]]>
+	  	</if>
+	  	<if test=" user_birthday  != null and  user_birthday  != ''  and  user_birthday  != 'null' ">
+	  		<![CDATA[ A.user_birthday = #{user_birthday}, ]]>
+	  	</if>
+	  	<if test=" user_province  != null and  user_province  != ''  and  user_province  != 'null' ">
+	  		<![CDATA[ A.user_province = #{user_province}, ]]>
+	  	</if>
+	  	<if test=" user_city  != null and  user_city  != ''  and  user_city  != 'null' ">
+	  		<![CDATA[ A.user_city = #{user_city}, ]]>
+	  	</if>
+	  	<if test=" user_address  != null and  user_address  != ''  and  user_address  != 'null' ">
+	  		<![CDATA[ A.user_address = #{user_address}, ]]>
+	  	</if>
+	  	<if test=" user_mail  != null and  user_mail  != ''  and  user_mail  != 'null' ">
+	  		<![CDATA[ A.user_mail = #{user_mail}, ]]>
+	  	</if>
+	  	<if test=" user_phone  != null and  user_phone  != ''  and  user_phone  != 'null' ">
+	  		<![CDATA[ A.user_phone = #{user_phone}, ]]>
+	  	</if>
+	  	<if test=" open_id  != null and  open_id  != ''  and  open_id  != 'null' ">
+	  		<![CDATA[ A.open_id = #{open_id}, ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.created_time = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.delflag = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.USER_ID = #{user_id}]]>
+  	</update>
+  
+  	<delete id="deleteBUser" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BU_USER A where A.USER_ID = #{user_id} ]]>
+	</delete>
+  
+	<select id="findOneBUser" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BU_USER A  ]]>
+		<include refid="bUserWhereCondition" />
+  	</select>
+    
+  	<select id="findAllBUser" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BU_USER A ]]>
+		<include refid="bUserWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapBUser" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BU_USER A ]]>
+		<include refid="bUserWhereCondition" />
+	</select>
+  
+  	<select id="findBUserTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BU_USER A ]]>
+		<include refid="bUserWhereCondition" />
+  	</select>
+  
+  	<select id="queryBUserForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BU_USER A ]]>
+		<include refid="bUserWhereCondition" />
+  	</select>
+  	
+  	<!-- 注意：查询语句要重新写 -->
+  	<select id="queryBUserByConForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		SELECT A.* FROM BU_USER A
+          where 1=1 
+          AND A.DELFLAG = '1' 
+        <if test=" openId != null and openId != '' and openId != 'null' ">
+            <![CDATA[ AND A.open_id like concat('%', #{openId}, '%') ]]>
+        </if> 
+        <if test=" userNickname != null and userNickname != '' and userNickname != 'null' ">
+            <![CDATA[ AND A.user_nickname like concat('%', #{userNickname}, '%') ]]>
+        </if> 
+        <if test=" userMail != null and userMail != '' and userMail != 'null' ">
+            <![CDATA[ AND A.user_mail like concat('%', #{userMail}, '%') ]]>
+        </if>
+        <if test=" userPhone != null and userPhone != '' and userPhone != 'null' ">
+            <![CDATA[ AND A.user_phone like concat('%', #{userPhone}, '%') ]]>
+        </if>
+          ORDER BY open_id
+  	</select>
+  	
+</mapper>

@@ -1,0 +1,138 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">
+	<%@ include file="/include.jsp"%>
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>/static/css/modern_op.css">
+	  <style type="text/css">
+        .listview{ margin:0 !important;}
+        .listview li{width:100px !important;background-color:skyblue !important;float:left;margin:3px;}
+    </style>
+    <title></title>
+     <% 
+       String roleNametmp = java.net.URLDecoder.decode(request.getParameter("roleName"),"UTF-8");
+       //System.out.println(roleNametmp);
+    %>
+</head>
+<body>
+	<div style="margin: 10px; height: 28px; ">
+		<div >
+			<span class="icon32 icon-group32"
+				style="padding-left: 48px; font-size: 14px; color: #666;"
+				id="sp"></span>
+		</div>
+	</div>
+    <input type="hidden" id="roleId"/>
+	<input type="hidden" id="roleName"/>
+	<input type="hidden" id="roleCode"/>   
+    <div id="tt" class="easyui-tabs" data-options="fit : true,border : true">   
+	    <div title="菜单权限" >
+	        <table id="menuTree"  style="padding:20px;border:false;height:auto"></table>
+	    </div>   
+    </div>  
+
+<script type="text/javascript">
+var roleId;
+var roleCode;
+var roleName;
+jQuery(function(){
+	roleId='${roleId}';
+	roleCode='${roleCode}';
+	roleName='${roleName}';
+	$('#sp').text('<%=roleNametmp%>');
+	$('#roleCode').val(roleCode);
+   	//初始化列表
+   	$('#menuTree').treegrid({
+   		iconCls:'icon-tip',
+   		fit: true,
+   		cascadeCheck:false,
+   		singleSelect : false,
+   		rownumbers:true,
+   		pagination:true,
+   		fit:true,	
+   		url:'${rootPath}/menu/getMenuList4Tree',
+   		method : 'post', 	
+      	idField:'Menu_Id',    
+        treeField:'Menu_Name', //此处根据实际情况进行填写
+        columns:[[
+					{field:'Menu_Id',checkbox:true,width:100},
+                  /*{field:'ck',checkbox:true},*/
+                  {field:'Menu_Name',title:'菜单名称',/* formatter:function(value,rowData,rowIndex){
+                      return "<input TYPE='checkbox' name='" + rowData.Menu_Id + "' id='" + rowData.Menu_Id + "'></INPUT>" + value + "";
+                  }, */width:340}
+				]],
+		toolbar : [{
+			id : 'btnadd',
+			text : '保存',
+			iconCls : 'icon-add',
+			handler : function() {
+				saveOrUpdate();
+				}
+			}, '-', {
+			id : 'btnadd',
+			text : '取消',
+			iconCls : 'icon-arrow_rotate_clockwise',
+			handler : function() {
+			  goBack(0);
+			   }
+			}],
+		onLoadSuccess : function(data) {
+			$('#dataMenuTable').treegrid('clearSelections'); //一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题
+		}
+	});
+   });
+
+//保存记录
+function saveOrUpdate() {
+	 var menuIdList = ""; 
+	 var id = "";
+     $("input[name=Menu_Id]:checked").each(function(i) {
+         id = $(this).val();
+//          alert(id);
+        
+         if (menuIdList =="" || menuIdList == null || menuIdList=="undefined" ) {
+        	 menuIdList = id; 
+         } else {
+        	 if (id =="" || id == null || id =="undefined" ) {
+        		 id = "";
+        	 }	 
+             menuIdList = menuIdList + "_" + id;
+         }
+     })
+     if (menuIdList==null || menuIdList=="") {
+    	 $.messager.alert("error", "请选择需要的菜单项！");
+    	 return;
+     }
+	var rows = $('#menuTree').treegrid('getSelections');
+	com.ajax({
+		type : "POST",
+		url : "${rootPath}/roleMenu/saveRoleMenu?roleId=" + roleId + "&menuIds=" + menuIdList,
+		contentType : "application/json",
+		data : JSON.stringify(rows),
+		dataType : "json",
+		success : function(data) {
+			if (data.result == 'true' || data.result == true) {
+				$.messager.alert("success", "权限设置成功！");
+				goBack(1);
+			} else {
+				$.messager.alert("error", "权限设置失败 ！");
+			}
+		}
+	});
+}
+	
+
+	function goBack(flag) {
+		if (flag == 1) {
+			url = '${rootPath}/menu/getMenuList4Tree', $('#dataMenuTable')
+					.treegrid('reload');
+		}
+		$("#divDialog").window('close');
+	}
+</script>
+</body>
+</html>

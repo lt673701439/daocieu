@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" 
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+	http://www.springframework.org/schema/mvc 
+	http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd 
+	http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
+	<!-- spring mvc -->
+	<!-- view resolver 视图解析器 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:viewClass="org.springframework.web.servlet.view.JstlView" 
+		p:prefix="/WEB-INF/view/"
+		p:suffix=".jsp" />
+	<!-- 自动扫描controller包下的所有类，使其认为spring mvc的控制器 -->
+	<context:component-scan base-package="com.**.controller" >
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+  		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />
+	</context:component-scan>
+
+	<!-- 默认的注解映射的支持，org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping -->
+	<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
+		<mvc:message-converters register-defaults="true">
+			<!-- 将StringHttpMessageConverter的默认编码设为UTF-8 -->
+			<!-- 方法直接返回字符串时，中文字符乱码的情况解决：
+					因为方法定义直接返回字符串时(Html或Json内容)，
+					调用的是StringHttpMessageConverter，
+					而此Converter默认编码是ISO-85591，需要重新设为UTF-8。
+			 -->
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+		    	<constructor-arg value="UTF-8" />
+			</bean>
+			<!-- 将Jackson2HttpMessageConverter的默认格式化输出为true -->
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="prettyPrint" value="true"/>
+                <property name="objectMapper">  
+                    <bean class="com.taikang.udp.framework.common.json.JsonMapper"></bean>  
+                </property> 
+                <property name="supportedMediaTypes">  
+            		<list>
+            			<!-- 防止后台传到页面的日期转换为长整形 -->
+            			<value>application/json;charset=UTF-8</value>
+                		<value>text/html;charset=UTF-8</value>  
+            		</list>  
+        		</property>  
+            </bean>
+            <!-- 使用XML格式输出数据 -->
+            <bean class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+		        <constructor-arg>
+		        	<bean class="org.springframework.oxm.xstream.XStreamMarshaller">
+				        <property name="streamDriver">
+				            <bean class="com.thoughtworks.xstream.io.xml.StaxDriver"/>
+				        </property>
+				    </bean>
+		        </constructor-arg>
+		        <property name="supportedMediaTypes" value="application/xml"></property>
+			</bean>
+			<bean id="byteArrayHttpMessageConverter" class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	
+    <!-- 自动判定Content-Type及相应的View -->
+	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+	    <property name="mediaTypes" >
+	        <map> 
+                <entry key="xml" value="application/xml"/> 
+                <entry key="json" value="application/json"/>
+                <entry key="html" value="text/html" />  
+            </map>
+	    </property>
+	    <property name="defaultContentType" value="application/json" />
+        <property name="ignoreAcceptHeader" value="true"/>
+        <property name="favorPathExtension" value="true"/>
+	</bean>
+	
+	<!-- 页面日期类型绑定转换到java的日期类型 -->
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">  
+		<property name="converters">  
+	    	<list>  
+	    		<bean class="com.taikang.udp.framework.common.util.web.TimestampConverter" />  
+	        	<bean class="com.taikang.udp.framework.common.util.web.SqlDateConverter" />
+	        	<bean class="com.taikang.udp.framework.common.util.web.DateConverter" />  
+	    	</list>   
+		</property>  
+	</bean>	
+	
+	<!-- 定义无Controller的path<->view直接映射 -->
+	<mvc:view-controller path="/" view-name="redirect:login"/>
+	
+	<!-- 系统日志跟踪功能 -->
+	<bean id="log4JDBCImpl" class="com.taikang.udp.framework.core.web.log.impl.Log4JDBCImpl" >
+		<property name="rootLogLevel" value="ERROR"/>
+		<property name="customLogLevel">
+           <map>
+              <entry key="com.taikang.udp" value="TRACE" />
+             <!--  <entry key="com.sample" value="INFO" /> -->
+           </map>
+       </property>
+	</bean>
+	
+	<mvc:interceptors>
+		<!-- 监控运行时间 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<!-- <mvc:mapping path="/login/timeout/success"/> -->
+			<!-- 通过session验证时用户信息取request的session中信息 -->
+			<!-- <bean class="com.taikang.udp.framework.core.web.log.interceptor.LogInterceptor" > -->
+			<!-- Shrio权限验证时日志拦截器使用自定义拦截器，通过UserUtils取缓存中的用户信息 -->
+			<bean class="com.taikang.udp.sys.util.LogInterceptor" >
+				<property name="logAPI" ref="log4JDBCImpl"/>
+			</bean>
+		</mvc:interceptor>		
+	</mvc:interceptors>
+
+	<!--  mvc:interceptors-->  
+	    <!-- 如果不定义 mvc:mapping path 将拦截所有的URL请求 -->
+	    <!--bean class="com.taikang.udp.framework.core.web.Interceptor.ValidationInterceptor"></bean-->
+	<!-- /mvc:interceptors-->
+
+    <!-- 支持Shiro对Controller的方法级AOP安全控制 begin-->
+    <!-- 以下这个bean在spring-context-shiro.xml中也进行了定义       原因是： -->
+    <!-- 
+        定义在spring-mvc.xml里的对象，在applicationContext*.xml中是不可见的，
+        想共享的东西最好放在applicationContext.xml那边。
+        而applicationContext*.xml里的一些BeanPostProccesor，
+        也不会作用到spring-mvc.xml定义/扫描到的Bean上，
+        如果有必要就在spring-mvc.xml里重新定义一次，像Shiro的AOP校验权限。
+     -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor">
+        <!-- 用AOP控制方法时，把DefaultAdvisorAutoProxyCreator的proxyTargetClass属性设为true，与事务AOP一起使用cglib -->
+        <property name="proxyTargetClass" value="true" />
+    </bean>
+    
+    <!-- 关于异常处理：    可以将Controller抛出的异常转到特定View, 保持SiteMesh的装饰效果-->
+    <!-- 
+        通过SimpleMappingExceptionResolver我们可以将不同的异常映射到不同的jsp页面（通过exceptionMappings属性的配置）。
+        同时我们也可以为所有的异常指定一个默认的异常提示页面（通过defaultErrorView属性的配置），
+        如果所抛出的异常在exceptionMappings中没有对应的映射，则Spring将用此默认配置显示异常信息。
+        注意这里配置的异常显示界面均仅包括主文件名，至于文件路径和后缀已经在viewResolver中指定。如/error/error表示/error/error.jsp
+    -->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">  
+        <property name="exceptionMappings">  
+            <props>  
+                <prop key="org.apache.shiro.authz.UnauthorizedException">/common/error/403</prop>
+            </props>  
+        </property>  
+    </bean>  
+    <!-- Shiro end -->	
+	<!-- 解决静态资源加载问题  -->
+	<!-- <bean id="resourceHttpRequestHandler" class="org.springframework.web.servlet.resource.ResourceHttpRequestHandler">
+	    <property name="locations" value="/static/"></property>   
+	</bean>
+	 
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+	    <property name="mappings">
+	        <props>
+	            <prop key="/static/images/**">resourceHttpRequestHandler</prop>
+	            <prop key="/static/js/**">resourceHttpRequestHandler</prop>
+	            <prop key="/static/css/**">resourceHttpRequestHandler</prop>
+	        </props>
+	    </property>
+	</bean> -->
+	<!-- 解决静态资源加载问题  -->
+	<bean class="org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler" />  
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">  
+	   <property name="urlMap">  
+	    <util:map>  
+	         <entry key="/**"  
+	    value="org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler" />  
+	    </util:map>  
+	   </property>  
+	</bean>  
+	<bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter" /> 
+	
+	<!-- 配置静态资源，直接映射到对应的文件夹，不被DispatcherServlet处理，3.04新增功能，需要重新设置spring-mvc-3.0.xsd -->  
+<!--     <mvc:resources mapping="/static/images/**" location="/static/images/" />  -->
+<!--     <mvc:resources mapping="/static/js/**" location="/static/js/"/>   -->
+<!--     <mvc:resources mapping="/static/css/**" location="/static/css/"/> -->
+<!--     <mvc:resources mapping="/image/**" location="/image/"/> -->
+    <!--  测试使用-->
+<!--     <mvc:resources mapping="/static/upload/**" location="/static/upload/"/> -->
+    <!--  生产使用-->
+<!--     <mvc:resources mapping="/static/upload/**" location="/static/iuhnfsdta/"/> -->
+<!--     <mvc:resources mapping="/upload/**" location="/static/iuhnfsdta/"/> -->
+    
+    <!--  kindEditor 编辑器添加-->
+<!--     <bean id="multipartResolver" class="com.taikang.iu.biz.appliance.controller.MyMultipartResolver"> -->
+<!--     	<property name="maxUploadSize"> -->
+<!--     		<value>104857600</value> -->
+<!--     	</property> -->
+<!--     </bean> -->
+</beans>

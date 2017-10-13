@@ -1,0 +1,188 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.liketry.interaction</groupId>
+    <artifactId>lti-benison</artifactId>
+    <packaging>jar</packaging>
+    <version>0.0.1</version>
+    <name>lti-benison</name>
+    <url>http://maven.apache.org</url>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.4.0.RELEASE</version>
+    </parent>
+
+    <properties>
+        <start-class>com.liketry.interaction.benison.LTIBenisonApplication</start-class>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <jdom2.version>2.0.5</jdom2.version>
+        <java-sdk-core.version>3.2.3</java-sdk-core.version>
+		<java-sdk-dysmsapi.version>1.0.0</java-sdk-dysmsapi.version>
+    </properties>
+
+    <dependencies>
+        <!-- spring boot 依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <!--     <dependency> -->
+        <!--         <groupId>org.springframework.boot</groupId> -->
+        <!--         <artifactId>spring-boot-starter-tomcat</artifactId> -->
+        <!--         <scope>provided</scope> -->
+        <!--     </dependency> -->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!--     <dependency> -->
+        <!--      	<groupId>org.springframework.boot</groupId> -->
+        <!--      	<artifactId>spring-boot-starter-data-mongodb</artifactId> -->
+        <!--     </dependency> -->
+
+        <!-- 数据库依连接池 依赖 -->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+        </dependency>
+        <!-- mybatis依赖 -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!-- servlet 依赖 -->
+        <!--     <dependency> -->
+        <!--         <groupId>javax.servlet</groupId> -->
+        <!--         <artifactId>javax.servlet-api</artifactId> -->
+        <!--         <scope>provided</scope> -->
+        <!--     </dependency> -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+        <!-- 分页插件 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>4.1.1</version>
+        </dependency>
+        <!-- json -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.8</version>
+        </dependency>
+	<dependency>
+    		<groupId>net.minidev</groupId>
+    		<artifactId>json-smart</artifactId>
+    		<version>2.2.1</version>
+	</dependency>
+	<dependency>
+    		<groupId>org.yaml</groupId>
+    		<artifactId>snakeyaml</artifactId>
+    		<version>1.17</version>
+	</dependency>
+
+        <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+		<dependency>
+		    <groupId>javax.mail</groupId>
+		    <artifactId>mail</artifactId>
+		    <version>1.4</version>
+		</dependency>
+		<!-- xml操作依赖 -->
+        <dependency>
+	        <groupId>org.jdom</groupId>
+	        <artifactId>jdom</artifactId>
+	        <version>1.1</version>
+	    </dependency>
+	    <!-- httpclient相关依赖 -->
+	    <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.3</version>
+        </dependency>
+	<!-- jwt 依赖 -->
+        <dependency>
+	    <groupId>io.jsonwebtoken</groupId>
+	    <artifactId>jjwt</artifactId>
+	    <version>0.7.0</version>
+	</dependency>
+	<!--aliyun sms jar-->
+		<dependency>
+			<groupId>com.aliyuncs</groupId>
+			<artifactId>java-sdk-core</artifactId>
+			<version>${java-sdk-core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.aliyuncs</groupId>
+			<artifactId>java-sdk-dysmsapi</artifactId>
+			<version>${java-sdk-dysmsapi.version}</version>
+		</dependency>
+    </dependencies>
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <jdk>1.8</jdk>
+            </activation>
+	    <properties>
+                <mysql.host>211.159.151.156</mysql.host>
+		<server.port>8090</server.port>
+                <maven.compiler.source>1.8</maven.compiler.source>
+                <maven.compiler.target>1.8</maven.compiler.target>
+                <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+            </properties>
+        </profile>
+	<profile>
+            <id>pro</id>
+	    <properties>
+                <mysql.host>localhost</mysql.host>
+		<server.port>8090</server.port>
+                <maven.compiler.source>1.8</maven.compiler.source>
+                <maven.compiler.target>1.8</maven.compiler.target>
+                <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+            </properties>
+        </profile>
+    </profiles>
+    <build>
+	<resources>
+	    <resource>
+                <directory>src/main/resources</directory>
+        	<filtering>true</filtering>
+            </resource>
+	</resources>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <executable>true</executable>
+                    <fork>true</fork>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

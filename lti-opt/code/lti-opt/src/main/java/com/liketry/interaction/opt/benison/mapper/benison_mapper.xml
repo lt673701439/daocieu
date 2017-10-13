@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Benison">
+	<resultMap id="benisonResultMap" type="com.liketry.interaction.opt.benison.model.BenisonBO">
+		<result property="benisonId" column="benison_id"/>
+		<result property="typeId" column="type_id"/>
+		<result property="benisonCode" column="benison_code"/>
+		<result property="benisonContent" column="benison_content"/>
+		<result property="ruleContent" column="rule_content"/>
+  	</resultMap>
+  
+  	<sql id="benisonWhereCondition">
+		<where>
+	  	<if test=" benison_id != null and benison_id != '' and benison_id != 'null' ">
+			<![CDATA[ AND A.benison_id = #{benison_id} ]]>
+	  	</if>
+	  	<if test=" type_id != null and type_id != '' and type_id != 'null' ">
+			<![CDATA[ AND A.type_id = #{type_id} ]]>
+	  	</if>
+	  	<if test=" benison_code != null and benison_code != '' and benison_code != 'null' ">
+			<![CDATA[ AND A.benison_code = #{benison_code} ]]>
+	  	</if>
+	  	<if test=" benison_content != null and benison_content != '' and benison_content != 'null' ">
+			<![CDATA[ AND A.benison_content = #{benison_content} ]]>
+	  	</if>
+	  	<if test=" rule_content != null and rule_content != '' and rule_content != 'null' ">
+			<![CDATA[ AND A.rule_content = #{rule_content} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addBenison"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BU_BENISON
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" benison_id  != null and  benison_id  != ''  and  benison_id  != 'null' ">
+				<![CDATA[ benison_id , ]]>
+	  		</if>
+	  		<if test=" type_id  != null and  type_id  != ''  and  type_id  != 'null' ">
+				<![CDATA[ type_id , ]]>
+	  		</if>
+	  		<if test=" benison_code  != null and  benison_code  != ''  and  benison_code  != 'null' ">
+				<![CDATA[ benison_code , ]]>
+	  		</if>
+	  		<if test=" benison_content  != null and  benison_content  != ''  and  benison_content  != 'null' ">
+				<![CDATA[ benison_content , ]]>
+	  		</if>
+	  		<if test=" rule_content  != null and  rule_content  != ''  and  rule_content  != 'null' ">
+				<![CDATA[ rule_content , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" benison_id  != null and  benison_id  != ''  and  benison_id  != 'null' ">
+	  			<![CDATA[ #{benison_id} , ]]>
+	  		</if>
+	  		<if test=" type_id  != null and  type_id  != ''  and  type_id  != 'null' ">
+	  			<![CDATA[ #{type_id} , ]]>
+	  		</if>
+	  		<if test=" benison_code  != null and  benison_code  != ''  and  benison_code  != 'null' ">
+	  			<![CDATA[ #{benison_code} , ]]>
+	  		</if>
+	  		<if test=" benison_content  != null and  benison_content  != ''  and  benison_content  != 'null' ">
+	  			<![CDATA[ #{benison_content} , ]]>
+	  		</if>
+	  		<if test=" rule_content  != null and  rule_content  != ''  and  rule_content  != 'null' ">
+	  			<![CDATA[ #{rule_content} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateBenison" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BU_BENISON A ]]>
+		<set>
+	  	<if test=" type_id  != null and  type_id  != ''  and  type_id  != 'null' ">
+	  		<![CDATA[ A.type_id = #{type_id}, ]]>
+	  	</if>
+	  	<if test=" benison_code  != null and  benison_code  != ''  and  benison_code  != 'null' ">
+	  		<![CDATA[ A.benison_code = #{benison_code}, ]]>
+	  	</if>
+	  	<if test=" benison_content  != null and  benison_content  != ''  and  benison_content  != 'null' ">
+	  		<![CDATA[ A.benison_content = #{benison_content}, ]]>
+	  	</if>
+	  	<if test=" rule_content  != null and  rule_content  != ''  and  rule_content  != 'null' ">
+	  		<![CDATA[ A.rule_content = #{rule_content}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.BENISON_ID = #{benison_id}]]>
+  	</update>
+  
+  	<delete id="deleteBenison" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BU_BENISON where BENISON_ID = #{benison_id} ]]>
+	</delete>
+  
+	<select id="findOneBenison" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BU_BENISON A  ]]>
+		<include refid="benisonWhereCondition" />
+  	</select>
+    
+  	<select id="findAllBenison" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BU_BENISON A ]]>
+		<include refid="benisonWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapBenison" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BU_BENISON A ]]>
+		<include refid="benisonWhereCondition" />
+	</select>
+  
+  	<select id="findBenisonTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BU_BENISON A ]]>
+		<include refid="benisonWhereCondition" />
+  	</select>
+  
+  	<select id="queryBenisonForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BU_BENISON A ]]>
+		<include refid="benisonWhereCondition" />
+  	</select>
+
+	<select id="queryBenisonByConForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		SELECT A.*,bt.type_name FROM BU_BENISON A left join bu_benison_type bt on A.type_id = bt.type_id
+          where 1=1 
+        <if test=" benisonCode != null and benisonCode != '' and benisonCode != 'null' ">
+            <![CDATA[ AND A.benison_code like concat('%', #{benisonCode}, '%') ]]>
+        </if> 
+        <if test=" benisonContent != null and benisonContent != '' and benisonContent != 'null' ">
+            <![CDATA[ AND A.benison_content like concat('%', #{benisonContent}, '%') ]]>
+        </if>
+        <if test=" typeName != null and typeName != '' and typeName != 'null' ">
+            <![CDATA[ AND bt.type_name like concat('%', #{typeName}, '%') ]]>
+        </if>
+        <if test=" typeId != null and typeId != '' and typeId != 'null' ">
+            <![CDATA[ AND bt.type_id = #{typeId} ]]>
+        </if>
+        order by  benison_code asc
+  	</select>
+  	
+  	<select id="findAllBySpotId" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		 SELECT A.* FROM BU_BENISON A 
+		where A.benison_id =  #{benisonId}
+	</select>
+</mapper>

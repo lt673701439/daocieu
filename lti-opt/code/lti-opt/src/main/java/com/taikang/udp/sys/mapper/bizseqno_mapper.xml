@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BizSeqNo">
+	<resultMap id="bizSeqNoResultMap" type="com.taikang.udp.sys.model.BizSeqNoBO">
+		<result property="seqType" column="Seq_Type"/>
+		<result property="seqPrefix" column="seq_prefix"/>
+		<result property="seqSuffix" column="seq_suffix"/>
+		<result property="placeHolder" column="place_holder"/>
+		<result property="alignType" column="align_type"/>
+		<result property="currValue" column="curr_value"/>
+		<result property="tIncrement" column="t_increment"/>
+		<result property="initValue" column="init_value"/>
+		<result property="maxValue" column="max_value"/>
+		<result property="maxLength" column="max_length"/>
+		<result property="cacheNum" column="cache_num"/>
+		<result property="tExplain" column="t_explain"/>
+  	</resultMap>
+  
+  	<sql id="bizSeqNoWhereCondition">
+		<where>
+	  	<if test=" seq_type != null and seq_type != '' and seq_type != 'null' ">
+			<![CDATA[ AND A.Seq_Type = #{seq_type} ]]>
+	  	</if>
+	  	<if test=" seq_prefix != null and seq_prefix != '' and seq_prefix != 'null' ">
+			<![CDATA[ AND A.seq_prefix = #{seq_prefix} ]]>
+	  	</if>
+	  	<if test=" seq_suffix != null and seq_suffix != '' and seq_suffix != 'null' ">
+			<![CDATA[ AND A.seq_suffix = #{seq_suffix} ]]>
+	  	</if>
+	  	<if test=" place_holder != null and place_holder != '' and place_holder != 'null' ">
+			<![CDATA[ AND A.place_holder = #{place_holder} ]]>
+	  	</if>
+	  	<if test=" align_type != null and align_type != '' and align_type != 'null' ">
+			<![CDATA[ AND A.align_type = #{align_type} ]]>
+	  	</if>
+	  	<if test=" curr_value != null ">
+	  		<![CDATA[ AND A.curr_value = ${curr_value} ]]>
+	  	</if>
+	  	<if test=" t_increment != null ">
+	  		<![CDATA[ AND A.t_increment = ${t_increment} ]]>
+	  	</if>
+	  	<if test=" init_value != null ">
+	  		<![CDATA[ AND A.init_value = ${init_value} ]]>
+	  	</if>
+	  	<if test=" max_value != null ">
+	  		<![CDATA[ AND A.max_value = ${max_value} ]]>
+	  	</if>
+	  	<if test=" max_length != null ">
+	  		<![CDATA[ AND A.max_length = ${max_length} ]]>
+	  	</if>
+	  	<if test=" cache_num != null ">
+	  		<![CDATA[ AND A.cache_num = ${cache_num} ]]>
+	  	</if>
+	  	<if test=" t_explain != null and t_explain != '' and t_explain != 'null' ">
+			<![CDATA[ AND A.t_explain = #{t_explain} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addBizSeqNo"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BSC_BIZ_SEQNO_T
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" seq_type  != null and  seq_type  != ''  and  seq_type  != 'null' ">
+				<![CDATA[ Seq_Type , ]]>
+	  		</if>
+	  		<if test=" seq_prefix  != null and  seq_prefix  != ''  and  seq_prefix  != 'null' ">
+				<![CDATA[ seq_prefix , ]]>
+	  		</if>
+	  		<if test=" seq_suffix  != null and  seq_suffix  != ''  and  seq_suffix  != 'null' ">
+				<![CDATA[ seq_suffix , ]]>
+	  		</if>
+	  		<if test=" place_holder  != null and  place_holder  != ''  and  place_holder  != 'null' ">
+				<![CDATA[ place_holder , ]]>
+	  		</if>
+	  		<if test=" align_type  != null and  align_type  != ''  and  align_type  != 'null' ">
+				<![CDATA[ align_type , ]]>
+	  		</if>
+	  		<if test=" curr_value  != null ">
+				<![CDATA[ curr_value , ]]>
+	  		</if>
+	  		<if test=" t_increment  != null ">
+				<![CDATA[ t_increment , ]]>
+	  		</if>
+	  		<if test=" init_value  != null ">
+				<![CDATA[ init_value , ]]>
+	  		</if>
+	  		<if test=" max_value  != null ">
+				<![CDATA[ max_value , ]]>
+	  		</if>
+	  		<if test=" max_length  != null ">
+				<![CDATA[ max_length , ]]>
+	  		</if>
+	  		<if test=" cache_num  != null ">
+				<![CDATA[ cache_num , ]]>
+	  		</if>
+	  		<if test=" t_explain  != null and  t_explain  != ''  and  t_explain  != 'null' ">
+				<![CDATA[ t_explain , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" seq_type  != null and  seq_type  != ''  and  seq_type  != 'null' ">
+	  			<![CDATA[ #{seq_type} , ]]>
+	  		</if>
+	  		<if test=" seq_prefix  != null and  seq_prefix  != ''  and  seq_prefix  != 'null' ">
+	  			<![CDATA[ #{seq_prefix} , ]]>
+	  		</if>
+	  		<if test=" seq_suffix  != null and  seq_suffix  != ''  and  seq_suffix  != 'null' ">
+	  			<![CDATA[ #{seq_suffix} , ]]>
+	  		</if>
+	  		<if test=" place_holder  != null and  place_holder  != ''  and  place_holder  != 'null' ">
+	  			<![CDATA[ #{place_holder} , ]]>
+	  		</if>
+	  		<if test=" align_type  != null and  align_type  != ''  and  align_type  != 'null' ">
+	  			<![CDATA[ #{align_type} , ]]>
+	  		</if>
+	  		<if test=" curr_value  != null">
+	    		<![CDATA[ ${curr_value} , ]]>
+	  		</if>
+	  		<if test=" t_increment  != null">
+	    		<![CDATA[ ${t_increment} , ]]>
+	  		</if>
+	  		<if test=" init_value  != null">
+	    		<![CDATA[ ${init_value} , ]]>
+	  		</if>
+	  		<if test=" max_value  != null">
+	    		<![CDATA[ ${max_value} , ]]>
+	  		</if>
+	  		<if test=" max_length  != null">
+	    		<![CDATA[ ${max_length} , ]]>
+	  		</if>
+	  		<if test=" cache_num  != null">
+	    		<![CDATA[ ${cache_num} , ]]>
+	  		</if>
+	  		<if test=" t_explain  != null and  t_explain  != ''  and  t_explain  != 'null' ">
+	  			<![CDATA[ #{t_explain} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateBizSeqNo" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BSC_BIZ_SEQNO_T A ]]>
+		<set>
+	  	<if test=" seq_prefix  != null and  seq_prefix  != ''  and  seq_prefix  != 'null' ">
+	  		<![CDATA[ A.seq_prefix = #{seq_prefix}, ]]>
+	  	</if>
+	  	<if test=" seq_suffix  != null and  seq_suffix  != ''  and  seq_suffix  != 'null' ">
+	  		<![CDATA[ A.seq_suffix = #{seq_suffix}, ]]>
+	  	</if>
+	  	<if test=" place_holder  != null and  place_holder  != ''  and  place_holder  != 'null' ">
+	  		<![CDATA[ A.place_holder = #{place_holder}, ]]>
+	  	</if>
+	  	<if test=" align_type  != null and  align_type  != ''  and  align_type  != 'null' ">
+	  		<![CDATA[ A.align_type = #{align_type}, ]]>
+	  	</if>
+		<if test=" curr_value  != null ">
+  			<![CDATA[ A.curr_value = ${curr_value} , ]]>
+		</if>
+		<if test=" t_increment  != null ">
+  			<![CDATA[ A.t_increment = ${t_increment} , ]]>
+		</if>
+		<if test=" init_value  != null ">
+  			<![CDATA[ A.init_value = ${init_value} , ]]>
+		</if>
+		<if test=" max_value  != null ">
+  			<![CDATA[ A.max_value = ${max_value} , ]]>
+		</if>
+		<if test=" max_length  != null ">
+  			<![CDATA[ A.max_length = ${max_length} , ]]>
+		</if>
+		<if test=" cache_num  != null ">
+  			<![CDATA[ A.cache_num = ${cache_num} , ]]>
+		</if>
+	  	<if test=" t_explain  != null and  t_explain  != ''  and  t_explain  != 'null' ">
+	  		<![CDATA[ A.t_explain = #{t_explain}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.SEQ_TYPE = #{seq_type}]]>
+  	</update>
+  
+  	<delete id="deleteBizSeqNo" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BSC_BIZ_SEQNO_T A where A.SEQ_TYPE = #{seq_type} ]]>
+	</delete>
+  
+	<select id="findOneBizSeqNo" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BSC_BIZ_SEQNO_T A  ]]>
+		<include refid="bizSeqNoWhereCondition" />
+  	</select>
+    
+  	<select id="findAllBizSeqNo" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BSC_BIZ_SEQNO_T A ]]>
+		<include refid="bizSeqNoWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapBizSeqNo" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BSC_BIZ_SEQNO_T A ]]>
+		<include refid="bizSeqNoWhereCondition" />
+	</select>
+  
+  	<select id="findBizSeqNoTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BSC_BIZ_SEQNO_T A ]]>
+		<include refid="bizSeqNoWhereCondition" />
+  	</select>
+  
+  	<select id="queryBizSeqNoForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BSC_BIZ_SEQNO_T A ]]>
+		<include refid="bizSeqNoWhereCondition" />
+  	</select>
+</mapper>

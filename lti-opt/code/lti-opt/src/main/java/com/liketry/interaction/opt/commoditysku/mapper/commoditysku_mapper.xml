@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CommoditySku">
+	<resultMap id="commoditySkuResultMap" type="com.liketry.interaction.opt.commoditysku.model.CommoditySkuBO">
+		<result property="skuId" column="sku_id"/>
+		<result property="commodityId" column="commodity_id"/>
+		<result property="skuCode" column="sku_code"/>
+		<result property="skuName" column="sku_name"/>
+		<result property="skuDescription" column="sku_description"/>
+		<result property="skuStatus" column="sku_status"/>
+		<result property="skuPrice" column="sku_price"/>
+		<result property="templateId" column="template_id"/>
+		<result property="typeId" column="type_id"/>
+		<result property="benisonId" column="benison_id"/>
+		<result property="createdTime" column="created_time"/>
+		<result property="createdBy" column="created_by"/>
+		<result property="modifiedTime" column="modified_time"/>
+		<result property="modifiedBy" column="modified_by"/>
+		<result property="version" column="version"/>
+		<result property="delflag" column="delflag"/>
+  	</resultMap>
+  
+  	<sql id="commoditySkuWhereCondition">
+		<where>
+	  	<if test=" sku_id != null and sku_id != '' and sku_id != 'null' ">
+			<![CDATA[ AND A.sku_id = #{sku_id} ]]>
+	  	</if>
+	  	<if test=" commodity_id != null and commodity_id != '' and commodity_id != 'null' ">
+			<![CDATA[ AND A.commodity_id = #{commodity_id} ]]>
+	  	</if>
+	  	<if test=" sku_code != null and sku_code != '' and sku_code != 'null' ">
+			<![CDATA[ AND A.sku_code = #{sku_code} ]]>
+	  	</if>
+	  	<if test=" sku_name != null and sku_name != '' and sku_name != 'null' ">
+			<![CDATA[ AND A.sku_name = #{sku_name} ]]>
+	  	</if>
+	  	<if test=" sku_description != null and sku_description != '' and sku_description != 'null' ">
+			<![CDATA[ AND A.sku_description = #{sku_description} ]]>
+	  	</if>
+	  	<if test=" sku_status != null and sku_status != '' and sku_status != 'null' ">
+			<![CDATA[ AND A.sku_status = #{sku_status} ]]>
+	  	</if>
+	  	<if test=" sku_price != null ">
+	  		<![CDATA[ AND A.sku_price = ${sku_price} ]]>
+	  	</if>
+	  	<if test=" template_id != null and template_id != '' and template_id != 'null' ">
+			<![CDATA[ AND A.template_id = #{template_id} ]]>
+	  	</if>
+	  	<if test=" type_id != null and type_id != '' and type_id != 'null' ">
+			<![CDATA[ AND A.type_id = #{type_id} ]]>
+	  	</if>
+	  	<if test=" benison_id != null and benison_id != '' and benison_id != 'null' ">
+			<![CDATA[ AND A.benison_id = #{benison_id} ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.created_time = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ AND A.created_by = #{created_by} ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.modified_time = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ AND A.modified_by = #{modified_by} ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.version = ${version} ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.delflag = #{delflag} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addCommoditySku"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BU_COMMODITY_SKU
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" sku_id  != null and  sku_id  != ''  and  sku_id  != 'null' ">
+				<![CDATA[ sku_id , ]]>
+	  		</if>
+	  		<if test=" commodity_id  != null and  commodity_id  != ''  and  commodity_id  != 'null' ">
+				<![CDATA[ commodity_id , ]]>
+	  		</if>
+	  		<if test=" sku_code  != null and  sku_code  != ''  and  sku_code  != 'null' ">
+				<![CDATA[ sku_code , ]]>
+	  		</if>
+	  		<if test=" sku_name  != null and  sku_name  != ''  and  sku_name  != 'null' ">
+				<![CDATA[ sku_name , ]]>
+	  		</if>
+	  		<if test=" sku_description  != null and  sku_description  != ''  and  sku_description  != 'null' ">
+				<![CDATA[ sku_description , ]]>
+	  		</if>
+	  		<if test=" sku_status  != null and  sku_status  != ''  and  sku_status  != 'null' ">
+				<![CDATA[ sku_status , ]]>
+	  		</if>
+	  		<if test=" sku_price  != null ">
+				<![CDATA[ sku_price , ]]>
+	  		</if>
+	  		<if test=" template_id  != null and  template_id  != ''  and  template_id  != 'null' ">
+				<![CDATA[ template_id , ]]>
+	  		</if>
+	  		<if test=" type_id  != null and  type_id  != ''  and  type_id  != 'null' ">
+				<![CDATA[ type_id , ]]>
+	  		</if>
+	  		<if test=" benison_id  != null and  benison_id  != ''  and  benison_id  != 'null' ">
+				<![CDATA[ benison_id , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ created_time , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ created_by , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ modified_time , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ modified_by , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ version , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ delflag , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" sku_id  != null and  sku_id  != ''  and  sku_id  != 'null' ">
+	  			<![CDATA[ #{sku_id} , ]]>
+	  		</if>
+	  		<if test=" commodity_id  != null and  commodity_id  != ''  and  commodity_id  != 'null' ">
+	  			<![CDATA[ #{commodity_id} , ]]>
+	  		</if>
+	  		<if test=" sku_code  != null and  sku_code  != ''  and  sku_code  != 'null' ">
+	  			<![CDATA[ #{sku_code} , ]]>
+	  		</if>
+	  		<if test=" sku_name  != null and  sku_name  != ''  and  sku_name  != 'null' ">
+	  			<![CDATA[ #{sku_name} , ]]>
+	  		</if>
+	  		<if test=" sku_description  != null and  sku_description  != ''  and  sku_description  != 'null' ">
+	  			<![CDATA[ #{sku_description} , ]]>
+	  		</if>
+	  		<if test=" sku_status  != null and  sku_status  != ''  and  sku_status  != 'null' ">
+	  			<![CDATA[ #{sku_status} , ]]>
+	  		</if>
+	  		<if test=" sku_price  != null">
+	    		<![CDATA[ ${sku_price} , ]]>
+	  		</if>
+	  		<if test=" template_id  != null and  template_id  != ''  and  template_id  != 'null' ">
+	  			<![CDATA[ #{template_id} , ]]>
+	  		</if>
+	  		<if test=" type_id  != null and  type_id  != ''  and  type_id  != 'null' ">
+	  			<![CDATA[ #{type_id} , ]]>
+	  		</if>
+	  		<if test=" benison_id  != null and  benison_id  != ''  and  benison_id  != 'null' ">
+	  			<![CDATA[ #{benison_id} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateCommoditySku" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BU_COMMODITY_SKU A ]]>
+		<set>
+	  	<if test=" commodity_id  != null and  commodity_id  != ''  and  commodity_id  != 'null' ">
+	  		<![CDATA[ A.commodity_id = #{commodity_id}, ]]>
+	  	</if>
+	  	<if test=" sku_code  != null and  sku_code  != ''  and  sku_code  != 'null' ">
+	  		<![CDATA[ A.sku_code = #{sku_code}, ]]>
+	  	</if>
+	  	<if test=" sku_name  != null and  sku_name  != ''  and  sku_name  != 'null' ">
+	  		<![CDATA[ A.sku_name = #{sku_name}, ]]>
+	  	</if>
+	  	<if test=" sku_description  != null and  sku_description  != ''  and  sku_description  != 'null' ">
+	  		<![CDATA[ A.sku_description = #{sku_description}, ]]>
+	  	</if>
+	  	<if test=" sku_status  != null and  sku_status  != ''  and  sku_status  != 'null' ">
+	  		<![CDATA[ A.sku_status = #{sku_status}, ]]>
+	  	</if>
+		<if test=" sku_price  != null ">
+  			<![CDATA[ A.sku_price = ${sku_price} , ]]>
+		</if>
+	  	<if test=" template_id  != null and  template_id  != ''  and  template_id  != 'null' ">
+	  		<![CDATA[ A.template_id = #{template_id}, ]]>
+	  	</if>
+	  	<if test=" type_id  != null and  type_id  != ''  and  type_id  != 'null' ">
+	  		<![CDATA[ A.type_id = #{type_id}, ]]>
+	  	</if>
+	  	<if test=" benison_id  != null and  benison_id  != ''  and  benison_id  != 'null' ">
+	  		<![CDATA[ A.benison_id = #{benison_id}, ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.created_time = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.created_by = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.modified_time = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.modified_by = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.version = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.delflag = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.SKU_ID = #{sku_id}]]>
+  	</update>
+  
+  	<delete id="deleteCommoditySku" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BU_COMMODITY_SKU where SKU_ID = #{sku_id} ]]>
+	</delete>
+  
+	<select id="findOneCommoditySku" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BU_COMMODITY_SKU A  ]]>
+		<include refid="commoditySkuWhereCondition" />
+  	</select>
+    
+  	<select id="findAllCommoditySku" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BU_COMMODITY_SKU A ]]>
+		<include refid="commoditySkuWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapCommoditySku" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BU_COMMODITY_SKU A ]]>
+		<include refid="commoditySkuWhereCondition" />
+	</select>
+  
+  	<select id="findCommoditySkuTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BU_COMMODITY_SKU A ]]>
+		<include refid="commoditySkuWhereCondition" />
+  	</select>
+  
+  	<select id="queryCommoditySkuForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BU_COMMODITY_SKU A ]]>
+		<include refid="commoditySkuWhereCondition" />
+  	</select>
+  	
+  	<!-- 注意：查询语句要重新写 -->
+	<select id="queryCommoditySkuByConForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		SELECT A.*, B.type_name FROM BU_COMMODITY_SKU A
+		  left join BU_BENISON_TYPE B
+		  on A.type_id = B.type_id        
+          where A.DELFLAG = '1' 
+		  AND A.commodity_id = #{commodityId}
+          ORDER BY A.sku_code
+  	</select>
+  		
+	<!-- 查询最新的商品sku -->
+	<select id="findLastOneCommoditySku" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BU_COMMODITY_SKU A  ]]>
+		<include refid="commoditySkuWhereCondition" />
+		ORDER BY A.sku_code DESC
+		limit 1
+  	</select>
+</mapper>

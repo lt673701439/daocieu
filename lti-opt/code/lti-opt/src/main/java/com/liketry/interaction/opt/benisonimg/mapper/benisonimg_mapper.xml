@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BenisonImg">
+	<resultMap id="benisonImgResultMap" type="com.liketry.interaction.opt.benisonimg.model.BenisonImgBO">
+		<result property="imgId" column="img_id"/>
+		<result property="imgCode" column="img_code"/>
+		<result property="imgName" column="img_name"/>
+		<result property="imgType" column="img_type"/>
+		<result property="imgUrl" column="img_url"/>
+  	</resultMap>
+  
+  	<sql id="benisonImgWhereCondition">
+		<where>
+	  	<if test=" img_id != null and img_id != '' and img_id != 'null' ">
+			<![CDATA[ AND A.img_id = #{img_id} ]]>
+	  	</if>
+	  	<if test=" img_code != null and img_code != '' and img_code != 'null' ">
+			<![CDATA[ AND A.img_code = #{img_code} ]]>
+	  	</if>
+	  	<if test=" img_name != null and img_name != '' and img_name != 'null' ">
+			<![CDATA[ AND A.img_name = #{img_name} ]]>
+	  	</if>
+	  	<if test=" img_type != null and img_type != '' and img_type != 'null' ">
+			<![CDATA[ AND A.img_type = #{img_type} ]]>
+	  	</if>
+	  	<if test=" img_url != null and img_url != '' and img_url != 'null' ">
+			<![CDATA[ AND A.img_url = #{img_url} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addBenisonImg"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BU_BENISON_IMG
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" img_id  != null and  img_id  != ''  and  img_id  != 'null' ">
+				<![CDATA[ img_id , ]]>
+	  		</if>
+	  		<if test=" img_code  != null and  img_code  != ''  and  img_code  != 'null' ">
+				<![CDATA[ img_code , ]]>
+	  		</if>
+	  		<if test=" img_name  != null and  img_name  != ''  and  img_name  != 'null' ">
+				<![CDATA[ img_name , ]]>
+	  		</if>
+	  		<if test=" img_type  != null and  img_type  != ''  and  img_type  != 'null' ">
+				<![CDATA[ img_type , ]]>
+	  		</if>
+	  		<if test=" img_url  != null and  img_url  != ''  and  img_url  != 'null' ">
+				<![CDATA[ img_url , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" img_id  != null and  img_id  != ''  and  img_id  != 'null' ">
+	  			<![CDATA[ #{img_id} , ]]>
+	  		</if>
+	  		<if test=" img_code  != null and  img_code  != ''  and  img_code  != 'null' ">
+	  			<![CDATA[ #{img_code} , ]]>
+	  		</if>
+	  		<if test=" img_name  != null and  img_name  != ''  and  img_name  != 'null' ">
+	  			<![CDATA[ #{img_name} , ]]>
+	  		</if>
+	  		<if test=" img_type  != null and  img_type  != ''  and  img_type  != 'null' ">
+	  			<![CDATA[ #{img_type} , ]]>
+	  		</if>
+	  		<if test=" img_url  != null and  img_url  != ''  and  img_url  != 'null' ">
+	  			<![CDATA[ #{img_url} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateBenisonImg" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BU_BENISON_IMG A ]]>
+		<set>
+	  	<if test=" img_code  != null and  img_code  != ''  and  img_code  != 'null' ">
+	  		<![CDATA[ A.img_code = #{img_code}, ]]>
+	  	</if>
+	  	<if test=" img_name  != null and  img_name  != ''  and  img_name  != 'null' ">
+	  		<![CDATA[ A.img_name = #{img_name}, ]]>
+	  	</if>
+	  	<if test=" img_type  != null and  img_type  != ''  and  img_type  != 'null' ">
+	  		<![CDATA[ A.img_type = #{img_type}, ]]>
+	  	</if>
+	  	<if test=" img_url  != null and  img_url  != ''  and  img_url  != 'null' ">
+	  		<![CDATA[ A.img_url = #{img_url}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.IMG_ID = #{img_id}]]>
+  	</update>
+  
+  	<delete id="deleteBenisonImg" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BU_BENISON_IMG where IMG_ID = #{img_id} ]]>
+	</delete>
+  
+	<select id="findOneBenisonImg" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BU_BENISON_IMG A  ]]>
+		<include refid="benisonImgWhereCondition" />
+  	</select>
+    
+  	<select id="findAllBenisonImg" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BU_BENISON_IMG A ]]>
+		<include refid="benisonImgWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapBenisonImg" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BU_BENISON_IMG A ]]>
+		<include refid="benisonImgWhereCondition" />
+	</select>
+  
+  	<select id="findBenisonImgTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BU_BENISON_IMG A ]]>
+		<include refid="benisonImgWhereCondition" />
+  	</select>
+  
+  	<select id="queryBenisonImgForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BU_BENISON_IMG A ]]>
+		<include refid="benisonImgWhereCondition" />
+  	</select>
+  	
+  	<select id="queryBenisonImgByConForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		SELECT A.* FROM BU_BENISON_IMG A
+          where 1=1 
+        <if test=" imgCode != null and imgCode != '' and imgCode != 'null' ">
+            <![CDATA[ AND A.img_code like concat('%', #{imgCode}, '%') ]]>
+        </if> 
+        <if test=" imgName != null and imgName != '' and imgName != 'null' ">
+            <![CDATA[ AND A.img_name like concat('%', #{imgName}, '%') ]]>
+        </if> 
+        <if test=" imgType != null and imgType != '' and imgType != 'null' ">
+            <![CDATA[ AND A.img_type = #{imgType} ]]>
+        </if> 
+        order by  img_code asc
+  	</select>
+</mapper>

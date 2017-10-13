@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Role">
+	<resultMap id="roleResultMap" type="com.taikang.udp.sys.model.RoleBO">
+		<result property="roleId" column="Role_Id"/>
+		<result property="roleCode" column="Role_Code"/>
+		<result property="roleName" column="Role_Name"/>
+		<result property="addProp" column="Add_Prop"/>
+		<result property="roleStatus" column="Role_Status"/>
+		<result property="roleNature" column="Role_Nature"/>
+		<result property="backup1" column="Backup1"/>
+		<result property="backup2" column="Backup2"/>
+		<result property="creator" column="CREATOR"/>
+		<result property="createTime" column="CREATE_TIME"/>
+		<result property="lastModby" column="LAST_MODBY"/>
+		<result property="lastModtime" column="LAST_MODTIME"/>
+  	</resultMap>
+  
+  	<sql id="roleWhereCondition">
+		<where>
+	  	<if test=" role_id != null ">
+	  		<![CDATA[ AND A.Role_Id = ${role_id} ]]>
+	  	</if>
+	  	<if test=" role_code != null and role_code != '' and role_code != 'null' ">
+			<![CDATA[ AND A.Role_Code = #{role_code} ]]>
+	  	</if>
+	  	<if test=" role_name != null and role_name != '' and role_name != 'null' ">
+			<![CDATA[ AND A.Role_Name = #{role_name} ]]>
+	  	</if>
+	  	<if test=" add_prop != null and add_prop != '' and add_prop != 'null' ">
+			<![CDATA[ AND A.Add_Prop = #{add_prop} ]]>
+	  	</if>
+	  	<if test=" role_status != null and role_status != '' and role_status != 'null' ">
+			<![CDATA[ AND A.Role_Status = #{role_status} ]]>
+	  	</if>
+	  	<if test=" role_nature != null and role_nature != '' and role_nature != 'null' ">
+			<![CDATA[ AND A.Role_Nature = #{role_nature} ]]>
+	  	</if>
+	  	<if test=" backup1 != null and backup1 != '' and backup1 != 'null' ">
+			<![CDATA[ AND A.Backup1 = #{backup1} ]]>
+	  	</if>
+	  	<if test=" backup2 != null and backup2 != '' and backup2 != 'null' ">
+			<![CDATA[ AND A.Backup2 = #{backup2} ]]>
+	  	</if>
+	  	<if test=" creator != null ">
+	  		<![CDATA[ AND A.CREATOR = ${creator} ]]>
+	  	</if>
+	  	<if test=" create_time != null and create_time != '' and create_time  != 'null' ">
+	    	<![CDATA[ AND A.CREATE_TIME = DATE_FORMAT(#{create_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" last_modby != null ">
+	  		<![CDATA[ AND A.LAST_MODBY = ${last_modby} ]]>
+	  	</if>
+	  	<if test=" last_modtime != null and last_modtime != '' and last_modtime  != 'null' ">
+	    	<![CDATA[ AND A.LAST_MODTIME = DATE_FORMAT(#{last_modtime},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addRole"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BSC_ROLE_T
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" role_id  != null ">
+				<![CDATA[ Role_Id , ]]>
+	  		</if>
+	  		<if test=" role_code  != null and  role_code  != ''  and  role_code  != 'null' ">
+				<![CDATA[ Role_Code , ]]>
+	  		</if>
+	  		<if test=" role_name  != null and  role_name  != ''  and  role_name  != 'null' ">
+				<![CDATA[ Role_Name , ]]>
+	  		</if>
+	  		<if test=" add_prop  != null and  add_prop  != ''  and  add_prop  != 'null' ">
+				<![CDATA[ Add_Prop , ]]>
+	  		</if>
+	  		<if test=" role_status  != null and  role_status  != ''  and  role_status  != 'null' ">
+				<![CDATA[ Role_Status , ]]>
+	  		</if>
+	  		<if test=" role_nature  != null and  role_nature  != ''  and  role_nature  != 'null' ">
+				<![CDATA[ Role_Nature , ]]>
+	  		</if>
+	  		<if test=" backup1  != null and  backup1  != ''  and  backup1  != 'null' ">
+				<![CDATA[ Backup1 , ]]>
+	  		</if>
+	  		<if test=" backup2  != null and  backup2  != ''  and  backup2  != 'null' ">
+				<![CDATA[ Backup2 , ]]>
+	  		</if>
+	  		<if test=" creator  != null ">
+				<![CDATA[ CREATOR , ]]>
+	  		</if>
+	  		<if test=" create_time  != null and  create_time  != ''  and  create_time  != 'null' ">
+				<![CDATA[ CREATE_TIME , ]]>
+	  		</if>
+	  		<if test=" last_modby  != null ">
+				<![CDATA[ LAST_MODBY , ]]>
+	  		</if>
+	  		<if test=" last_modtime  != null and  last_modtime  != ''  and  last_modtime  != 'null' ">
+				<![CDATA[ LAST_MODTIME , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" role_id  != null">
+	    		<![CDATA[ ${role_id} , ]]>
+	  		</if>
+	  		<if test=" role_code  != null and  role_code  != ''  and  role_code  != 'null' ">
+	  			<![CDATA[ #{role_code} , ]]>
+	  		</if>
+	  		<if test=" role_name  != null and  role_name  != ''  and  role_name  != 'null' ">
+	  			<![CDATA[ #{role_name} , ]]>
+	  		</if>
+	  		<if test=" add_prop  != null and  add_prop  != ''  and  add_prop  != 'null' ">
+	  			<![CDATA[ #{add_prop} , ]]>
+	  		</if>
+	  		<if test=" role_status  != null and  role_status  != ''  and  role_status  != 'null' ">
+	  			<![CDATA[ #{role_status} , ]]>
+	  		</if>
+	  		<if test=" role_nature  != null and  role_nature  != ''  and  role_nature  != 'null' ">
+	  			<![CDATA[ #{role_nature} , ]]>
+	  		</if>
+	  		<if test=" backup1  != null and  backup1  != ''  and  backup1  != 'null' ">
+	  			<![CDATA[ #{backup1} , ]]>
+	  		</if>
+	  		<if test=" backup2  != null and  backup2  != ''  and  backup2  != 'null' ">
+	  			<![CDATA[ #{backup2} , ]]>
+	  		</if>
+	  		<if test=" creator  != null">
+	    		<![CDATA[ ${creator} , ]]>
+	  		</if>
+	  		<if test=" create_time != null and create_time != '' and create_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{create_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" last_modby  != null">
+	    		<![CDATA[ ${last_modby} , ]]>
+	  		</if>
+	  		<if test=" last_modtime != null and last_modtime != '' and last_modtime  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{last_modtime},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateRole" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BSC_ROLE_T A ]]>
+		<set>
+	  	<if test=" role_code  != null and  role_code  != ''  and  role_code  != 'null' ">
+	  		<![CDATA[ A.Role_Code = #{role_code}, ]]>
+	  	</if>
+	  	<if test=" role_name  != null and  role_name  != ''  and  role_name  != 'null' ">
+	  		<![CDATA[ A.Role_Name = #{role_name}, ]]>
+	  	</if>
+	  	<if test=" add_prop  != null and  add_prop  != ''  and  add_prop  != 'null' ">
+	  		<![CDATA[ A.Add_Prop = #{add_prop}, ]]>
+	  	</if>
+	  	<if test=" role_status  != null and  role_status  != ''  and  role_status  != 'null' ">
+	  		<![CDATA[ A.Role_Status = #{role_status}, ]]>
+	  	</if>
+	  	<if test=" role_nature  != null and  role_nature  != ''  and  role_nature  != 'null' ">
+	  		<![CDATA[ A.Role_Nature = #{role_nature}, ]]>
+	  	</if>
+	  	<if test=" backup1  != null and  backup1  != ''  and  backup1  != 'null' ">
+	  		<![CDATA[ A.Backup1 = #{backup1}, ]]>
+	  	</if>
+	  	<if test=" backup2  != null and  backup2  != ''  and  backup2  != 'null' ">
+	  		<![CDATA[ A.Backup2 = #{backup2}, ]]>
+	  	</if>
+		<if test=" creator  != null ">
+  			<![CDATA[ A.CREATOR = ${creator} , ]]>
+		</if>
+	  	<if test=" create_time != null and create_time != '' and create_time  != 'null' ">
+	    	<![CDATA[ A.CREATE_TIME = DATE_FORMAT(#{create_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+		<if test=" last_modby  != null ">
+  			<![CDATA[ A.LAST_MODBY = ${last_modby} , ]]>
+		</if>
+	  	<if test=" last_modtime != null and last_modtime != '' and last_modtime  != 'null' ">
+	    	<![CDATA[ A.LAST_MODTIME = DATE_FORMAT(#{last_modtime},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.ROLE_ID = #{role_id}]]>
+  	</update>
+  
+  	<delete id="deleteRole" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BSC_ROLE_T where ROLE_ID = #{role_id} ]]>
+	</delete>
+  
+	<select id="findOneRole" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BSC_ROLE_T A  ]]>
+		<include refid="roleWhereCondition" />
+  	</select>
+  	
+	<select id="findRoleIdByCode" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.ROLE_ID FROM BSC_ROLE_T A  WHERE 1=1]]>
+		<if test=" role_code != null and role_code != '' and role_code != 'null' ">
+            <![CDATA[ AND A.Role_Code = #{role_code} ]]>
+        </if> 
+  	</select>
+    
+  	<select id="findAllRole" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BSC_ROLE_T A ]]>
+		<include refid="roleWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapRole" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BSC_ROLE_T A ]]>
+		<include refid="roleWhereCondition" />
+	</select>
+  
+  	<select id="findRoleTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BSC_ROLE_T A ]]>
+		<include refid="roleWhereCondition" />
+  	</select>
+  
+  	<select id="queryRoleForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BSC_ROLE_T A ]]>
+		<include refid="roleWhereCondition" />
+  	</select>
+  	
+  	<select id="queryRoleByConForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+        SELECT A.* FROM BSC_ROLE_T A
+          where 1=1 
+        <if test=" roleCode != null and roleCode != '' and roleCode != 'null' ">
+            <![CDATA[ and A.Role_Code = #{roleCode} ]]>
+        </if> 
+        <if test=" roleName != null and roleName != '' and roleName != 'null' ">
+            <![CDATA[ AND A.Role_Name like concat('%', #{roleName}, '%') ]]>
+        </if> 
+    </select>
+    
+</mapper>

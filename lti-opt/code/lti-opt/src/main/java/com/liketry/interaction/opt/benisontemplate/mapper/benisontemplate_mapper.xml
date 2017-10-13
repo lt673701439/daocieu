@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BenisonTemplate">
+	<resultMap id="benisonTemplateResultMap" type="com.liketry.interaction.opt.benisontemplate.model.BenisonTemplateBO">
+		<result property="templateId" column="template_id"/>
+		<result property="templateCode" column="template_code"/>
+		<result property="templateName" column="template_name"/>
+		<result property="screenId" column="screen_id"/>
+		<result property="typeId" column="type_id"/>
+		<result property="benisonId" column="benison_id"/>
+		<result property="bgImgId" column="bg_img_id"/>
+		<result property="smImgId" column="sm_img_id"/>
+		<result property="titleX" column="title_x"/>
+		<result property="titleY" column="title_y"/>
+		<result property="titleColour" column="title_colour"/>
+		<result property="titleSize" column="title_size"/>
+		<result property="titleType" column="title_type"/>
+		<result property="bodyX" column="body_x"/>
+		<result property="bodyY" column="body_y"/>
+		<result property="bodyColour" column="body_colour"/>
+		<result property="bodySize" column="body_size"/>
+		<result property="bodyType" column="body_type"/>
+		<result property="tailX" column="tail_x"/>
+		<result property="tailY" column="tail_y"/>
+		<result property="tailColour" column="tail_colour"/>
+		<result property="tailSize" column="tail_size"/>
+		<result property="tailType" column="tail_type"/>
+		<result property="benisonContent" column="benison_content"/>
+		<result property="imgUrl" column="img_url"/>
+		<result property="imgCode" column="img_code"/>
+		<result property="ruleContent" column="rule_content"/>
+  	</resultMap>
+  
+  	<sql id="benisonTemplateWhereCondition">
+		<where>
+	  	<if test=" template_id != null and template_id != '' and template_id != 'null' ">
+			<![CDATA[ AND A.template_id = #{template_id} ]]>
+	  	</if>
+	  	<if test=" template_code != null and template_code != '' and template_code != 'null' ">
+			<![CDATA[ AND A.template_code = #{template_code} ]]>
+	  	</if>
+	  	<if test=" template_name != null and template_name != '' and template_name != 'null' ">
+			<![CDATA[ AND A.template_name = #{template_name} ]]>
+	  	</if>
+	  	<if test=" screen_id != null and screen_id != '' and screen_id != 'null' ">
+			<![CDATA[ AND A.screen_id = #{screen_id} ]]>
+	  	</if>
+	  	<if test=" type_id != null and type_id != '' and type_id != 'null' ">
+			<![CDATA[ AND A.type_id = #{type_id} ]]>
+	  	</if>
+	  	<if test=" benison_id != null and benison_id != '' and benison_id != 'null' ">
+			<![CDATA[ AND A.benison_id = #{benison_id} ]]>
+	  	</if>
+	  	<if test=" bg_img_id != null and bg_img_id != '' and bg_img_id != 'null' ">
+			<![CDATA[ AND A.bg_img_id = #{bg_img_id} ]]>
+	  	</if>
+	  	<if test=" sm_img_id != null and sm_img_id != '' and sm_img_id != 'null' ">
+			<![CDATA[ AND A.sm_img_id = #{sm_img_id} ]]>
+	  	</if>
+	  	<if test=" title_x != null and title_x != '' and title_x != 'null' ">
+			<![CDATA[ AND A.title_x = #{title_x} ]]>
+	  	</if>
+	  	<if test=" title_y != null and title_y != '' and title_y != 'null' ">
+			<![CDATA[ AND A.title_y = #{title_y} ]]>
+	  	</if>
+	  	<if test=" title_colour != null and title_colour != '' and title_colour != 'null' ">
+			<![CDATA[ AND A.title_colour = #{title_colour} ]]>
+	  	</if>
+	  	<if test=" title_size != null and title_size != '' and title_size != 'null' ">
+			<![CDATA[ AND A.title_size = #{title_size} ]]>
+	  	</if>
+	  	<if test=" title_type != null and title_type != '' and title_type != 'null' ">
+			<![CDATA[ AND A.title_type = #{title_type} ]]>
+	  	</if>
+	  	<if test=" body_x != null and body_x != '' and body_x != 'null' ">
+			<![CDATA[ AND A.body_x = #{body_x} ]]>
+	  	</if>
+	  	<if test=" body_y != null and body_y != '' and body_y != 'null' ">
+			<![CDATA[ AND A.body_y = #{body_y} ]]>
+	  	</if>
+	  	<if test=" body_colour != null and body_colour != '' and body_colour != 'null' ">
+			<![CDATA[ AND A.body_colour = #{body_colour} ]]>
+	  	</if>
+	  	<if test=" body_size != null and body_size != '' and body_size != 'null' ">
+			<![CDATA[ AND A.body_size = #{body_size} ]]>
+	  	</if>
+	  	<if test=" body_type != null and body_type != '' and body_type != 'null' ">
+			<![CDATA[ AND A.body_type = #{body_type} ]]>
+	  	</if>
+	  	<if test=" tail_x != null and tail_x != '' and tail_x != 'null' ">
+			<![CDATA[ AND A.tail_x = #{tail_x} ]]>
+	  	</if>
+	  	<if test=" tail_y != null and tail_y != '' and tail_y != 'null' ">
+			<![CDATA[ AND A.tail_y = #{tail_y} ]]>
+	  	</if>
+	  	<if test=" tail_colour != null and tail_colour != '' and tail_colour != 'null' ">
+			<![CDATA[ AND A.tail_colour = #{tail_colour} ]]>
+	  	</if>
+	  	<if test=" tail_size != null and tail_size != '' and tail_size != 'null' ">
+			<![CDATA[ AND A.tail_size = #{tail_size} ]]>
+	  	</if>
+	  	<if test=" tail_type != null and tail_type != '' and tail_type != 'null' ">
+			<![CDATA[ AND A.tail_type = #{tail_type} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addBenisonTemplate"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BU_BENISON_TEMPLATE
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" template_id  != null and  template_id  != ''  and  template_id  != 'null' ">
+				<![CDATA[ template_id , ]]>
+	  		</if>
+	  		<if test=" template_code  != null and  template_code  != ''  and  template_code  != 'null' ">
+				<![CDATA[ template_code , ]]>
+	  		</if>
+	  		<if test=" template_name  != null and  template_name  != ''  and  template_name  != 'null' ">
+				<![CDATA[ template_name , ]]>
+	  		</if>
+	  		<if test=" screen_id  != null and  screen_id  != ''  and  screen_id  != 'null' ">
+				<![CDATA[ screen_id , ]]>
+	  		</if>
+	  		<if test=" type_id  != null and  type_id  != ''  and  type_id  != 'null' ">
+				<![CDATA[ type_id , ]]>
+	  		</if>
+	  		<if test=" benison_id  != null and  benison_id  != ''  and  benison_id  != 'null' ">
+				<![CDATA[ benison_id , ]]>
+	  		</if>
+	  		<if test=" bg_img_id  != null and  bg_img_id  != ''  and  bg_img_id  != 'null' ">
+				<![CDATA[ bg_img_id , ]]>
+	  		</if>
+	  		<if test=" sm_img_id  != null and  sm_img_id  != ''  and  sm_img_id  != 'null' ">
+				<![CDATA[ sm_img_id , ]]>
+	  		</if>
+	  		<if test=" title_x  != null and  title_x  != ''  and  title_x  != 'null' ">
+				<![CDATA[ title_x , ]]>
+	  		</if>
+	  		<if test=" title_y  != null and  title_y  != ''  and  title_y  != 'null' ">
+				<![CDATA[ title_y , ]]>
+	  		</if>
+	  		<if test=" title_colour  != null and  title_colour  != ''  and  title_colour  != 'null' ">
+				<![CDATA[ title_colour , ]]>
+	  		</if>
+	  		<if test=" title_size  != null and  title_size  != ''  and  title_size  != 'null' ">
+				<![CDATA[ title_size , ]]>
+	  		</if>
+	  		<if test=" title_type  != null and  title_type  != ''  and  title_type  != 'null' ">
+				<![CDATA[ title_type , ]]>
+	  		</if>
+	  		<if test=" body_x  != null and  body_x  != ''  and  body_x  != 'null' ">
+				<![CDATA[ body_x , ]]>
+	  		</if>
+	  		<if test=" body_y  != null and  body_y  != ''  and  body_y  != 'null' ">
+				<![CDATA[ body_y , ]]>
+	  		</if>
+	  		<if test=" body_colour  != null and  body_colour  != ''  and  body_colour  != 'null' ">
+				<![CDATA[ body_colour , ]]>
+	  		</if>
+	  		<if test=" body_size  != null and  body_size  != ''  and  body_size  != 'null' ">
+				<![CDATA[ body_size , ]]>
+	  		</if>
+	  		<if test=" body_type  != null and  body_type  != ''  and  body_type  != 'null' ">
+				<![CDATA[ body_type , ]]>
+	  		</if>
+	  		<if test=" tail_x  != null and  tail_x  != ''  and  tail_x  != 'null' ">
+				<![CDATA[ tail_x , ]]>
+	  		</if>
+	  		<if test=" tail_y  != null and  tail_y  != ''  and  tail_y  != 'null' ">
+				<![CDATA[ tail_y , ]]>
+	  		</if>
+	  		<if test=" tail_colour  != null and  tail_colour  != ''  and  tail_colour  != 'null' ">
+				<![CDATA[ tail_colour , ]]>
+	  		</if>
+	  		<if test=" tail_size  != null and  tail_size  != ''  and  tail_size  != 'null' ">
+				<![CDATA[ tail_size , ]]>
+	  		</if>
+	  		<if test=" tail_type  != null and  tail_type  != ''  and  tail_type  != 'null' ">
+				<![CDATA[ tail_type , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" template_id  != null and  template_id  != ''  and  template_id  != 'null' ">
+	  			<![CDATA[ #{template_id} , ]]>
+	  		</if>
+	  		<if test=" template_code  != null and  template_code  != ''  and  template_code  != 'null' ">
+	  			<![CDATA[ #{template_code} , ]]>
+	  		</if>
+	  		<if test=" template_name  != null and  template_name  != ''  and  template_name  != 'null' ">
+	  			<![CDATA[ #{template_name} , ]]>
+	  		</if>
+	  		<if test=" screen_id  != null and  screen_id  != ''  and  screen_id  != 'null' ">
+	  			<![CDATA[ #{screen_id} , ]]>
+	  		</if>
+	  		<if test=" type_id  != null and  type_id  != ''  and  type_id  != 'null' ">
+	  			<![CDATA[ #{type_id} , ]]>
+	  		</if>
+	  		<if test=" benison_id  != null and  benison_id  != ''  and  benison_id  != 'null' ">
+	  			<![CDATA[ #{benison_id} , ]]>
+	  		</if>
+	  		<if test=" bg_img_id  != null and  bg_img_id  != ''  and  bg_img_id  != 'null' ">
+	  			<![CDATA[ #{bg_img_id} , ]]>
+	  		</if>
+	  		<if test=" sm_img_id  != null and  sm_img_id  != ''  and  sm_img_id  != 'null' ">
+	  			<![CDATA[ #{sm_img_id} , ]]>
+	  		</if>
+	  		<if test=" title_x  != null and  title_x  != ''  and  title_x  != 'null' ">
+	  			<![CDATA[ #{title_x} , ]]>
+	  		</if>
+	  		<if test=" title_y  != null and  title_y  != ''  and  title_y  != 'null' ">
+	  			<![CDATA[ #{title_y} , ]]>
+	  		</if>
+	  		<if test=" title_colour  != null and  title_colour  != ''  and  title_colour  != 'null' ">
+	  			<![CDATA[ #{title_colour} , ]]>
+	  		</if>
+	  		<if test=" title_size  != null and  title_size  != ''  and  title_size  != 'null' ">
+	  			<![CDATA[ #{title_size} , ]]>
+	  		</if>
+	  		<if test=" title_type  != null and  title_type  != ''  and  title_type  != 'null' ">
+	  			<![CDATA[ #{title_type} , ]]>
+	  		</if>
+	  		<if test=" body_x  != null and  body_x  != ''  and  body_x  != 'null' ">
+	  			<![CDATA[ #{body_x} , ]]>
+	  		</if>
+	  		<if test=" body_y  != null and  body_y  != ''  and  body_y  != 'null' ">
+	  			<![CDATA[ #{body_y} , ]]>
+	  		</if>
+	  		<if test=" body_colour  != null and  body_colour  != ''  and  body_colour  != 'null' ">
+	  			<![CDATA[ #{body_colour} , ]]>
+	  		</if>
+	  		<if test=" body_size  != null and  body_size  != ''  and  body_size  != 'null' ">
+	  			<![CDATA[ #{body_size} , ]]>
+	  		</if>
+	  		<if test=" body_type  != null and  body_type  != ''  and  body_type  != 'null' ">
+	  			<![CDATA[ #{body_type} , ]]>
+	  		</if>
+	  		<if test=" tail_x  != null and  tail_x  != ''  and  tail_x  != 'null' ">
+	  			<![CDATA[ #{tail_x} , ]]>
+	  		</if>
+	  		<if test=" tail_y  != null and  tail_y  != ''  and  tail_y  != 'null' ">
+	  			<![CDATA[ #{tail_y} , ]]>
+	  		</if>
+	  		<if test=" tail_colour  != null and  tail_colour  != ''  and  tail_colour  != 'null' ">
+	  			<![CDATA[ #{tail_colour} , ]]>
+	  		</if>
+	  		<if test=" tail_size  != null and  tail_size  != ''  and  tail_size  != 'null' ">
+	  			<![CDATA[ #{tail_size} , ]]>
+	  		</if>
+	  		<if test=" tail_type  != null and  tail_type  != ''  and  tail_type  != 'null' ">
+	  			<![CDATA[ #{tail_type} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateBenisonTemplate" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BU_BENISON_TEMPLATE A ]]>
+		<set>
+	  	<if test=" template_code  != null and  template_code  != ''  and  template_code  != 'null' ">
+	  		<![CDATA[ A.template_code = #{template_code}, ]]>
+	  	</if>
+	  	<if test=" template_name  != null and  template_name  != ''  and  template_name  != 'null' ">
+	  		<![CDATA[ A.template_name = #{template_name}, ]]>
+	  	</if>
+	  	<if test=" screen_id  != null and  screen_id  != ''  and  screen_id  != 'null' ">
+	  		<![CDATA[ A.screen_id = #{screen_id}, ]]>
+	  	</if>
+	  	<if test=" type_id  != null and  type_id  != ''  and  type_id  != 'null' ">
+	  		<![CDATA[ A.type_id = #{type_id}, ]]>
+	  	</if>
+	  	<if test=" benison_id  != null and  benison_id  != ''  and  benison_id  != 'null' ">
+	  		<![CDATA[ A.benison_id = #{benison_id}, ]]>
+	  	</if>
+	  	<if test=" bg_img_id  != null and  bg_img_id  != ''  and  bg_img_id  != 'null' ">
+	  		<![CDATA[ A.bg_img_id = #{bg_img_id}, ]]>
+	  	</if>
+	  	<if test=" sm_img_id  != null and  sm_img_id  != ''  and  sm_img_id  != 'null' ">
+	  		<![CDATA[ A.sm_img_id = #{sm_img_id}, ]]>
+	  	</if>
+	  	<if test=" title_x  != null and  title_x  != ''  and  title_x  != 'null' ">
+	  		<![CDATA[ A.title_x = #{title_x}, ]]>
+	  	</if>
+	  	<if test=" title_y  != null and  title_y  != ''  and  title_y  != 'null' ">
+	  		<![CDATA[ A.title_y = #{title_y}, ]]>
+	  	</if>
+	  	<if test=" title_colour  != null and  title_colour  != ''  and  title_colour  != 'null' ">
+	  		<![CDATA[ A.title_colour = #{title_colour}, ]]>
+	  	</if>
+	  	<if test=" title_size  != null and  title_size  != ''  and  title_size  != 'null' ">
+	  		<![CDATA[ A.title_size = #{title_size}, ]]>
+	  	</if>
+	  	<if test=" title_type  != null and  title_type  != ''  and  title_type  != 'null' ">
+	  		<![CDATA[ A.title_type = #{title_type}, ]]>
+	  	</if>
+	  	<if test=" body_x  != null and  body_x  != ''  and  body_x  != 'null' ">
+	  		<![CDATA[ A.body_x = #{body_x}, ]]>
+	  	</if>
+	  	<if test=" body_y  != null and  body_y  != ''  and  body_y  != 'null' ">
+	  		<![CDATA[ A.body_y = #{body_y}, ]]>
+	  	</if>
+	  	<if test=" body_colour  != null and  body_colour  != ''  and  body_colour  != 'null' ">
+	  		<![CDATA[ A.body_colour = #{body_colour}, ]]>
+	  	</if>
+	  	<if test=" body_size  != null and  body_size  != ''  and  body_size  != 'null' ">
+	  		<![CDATA[ A.body_size = #{body_size}, ]]>
+	  	</if>
+	  	<if test=" body_type  != null and  body_type  != ''  and  body_type  != 'null' ">
+	  		<![CDATA[ A.body_type = #{body_type}, ]]>
+	  	</if>
+	  	<if test=" tail_x  != null and  tail_x  != ''  and  tail_x  != 'null' ">
+	  		<![CDATA[ A.tail_x = #{tail_x}, ]]>
+	  	</if>
+	  	<if test=" tail_y  != null and  tail_y  != ''  and  tail_y  != 'null' ">
+	  		<![CDATA[ A.tail_y = #{tail_y}, ]]>
+	  	</if>
+	  	<if test=" tail_colour  != null and  tail_colour  != ''  and  tail_colour  != 'null' ">
+	  		<![CDATA[ A.tail_colour = #{tail_colour}, ]]>
+	  	</if>
+	  	<if test=" tail_size  != null and  tail_size  != ''  and  tail_size  != 'null' ">
+	  		<![CDATA[ A.tail_size = #{tail_size}, ]]>
+	  	</if>
+	  	<if test=" tail_type  != null and  tail_type  != ''  and  tail_type  != 'null' ">
+	  		<![CDATA[ A.tail_type = #{tail_type}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.TEMPLATE_ID = #{template_id}]]>
+  	</update>
+  
+  	<delete id="deleteBenisonTemplate" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BU_BENISON_TEMPLATE  where TEMPLATE_ID = #{template_id} ]]>
+	</delete>
+  
+	<select id="findOneBenisonTemplate" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BU_BENISON_TEMPLATE A  ]]>
+		<include refid="benisonTemplateWhereCondition" />
+  	</select>
+    
+  	<select id="findAllBenisonTemplate" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BU_BENISON_TEMPLATE A ]]>
+		<include refid="benisonTemplateWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapBenisonTemplate" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BU_BENISON_TEMPLATE A ]]>
+		<include refid="benisonTemplateWhereCondition" />
+	</select>
+  
+  	<select id="findBenisonTemplateTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BU_BENISON_TEMPLATE A ]]>
+		<include refid="benisonTemplateWhereCondition" />
+  	</select>
+  
+  	<select id="queryBenisonTemplateForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BU_BENISON_TEMPLATE A ]]>
+		<include refid="benisonTemplateWhereCondition" />
+  	</select>
+  	
+  	<select id="queryBenisonTemplateByConForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		SELECT bt.*,s.screen_name FROM BU_BENISON_TEMPLATE bt 
+			left join bu_screen s on bt.screen_id = s.screen_id 
+          where 1=1 
+        <if test=" templateCode != null and templateCode != '' and templateCode != 'null' ">
+            <![CDATA[ AND bt.template_code like concat('%', #{templateCode}, '%') ]]>
+        </if> 
+        <if test=" templateName != null and templateName != '' and templateName != 'null' ">
+            <![CDATA[ AND bt.template_name like concat('%', #{templateName}, '%') ]]>
+        </if> 
+        <if test=" screenName != null and screenName != '' and screenName != 'null' ">
+            <![CDATA[ AND s.screen_name like concat('%', #{screenName}, '%') ]]>
+        </if>
+        order by  template_code asc
+  	</select>
+  	
+	<select id="findAllByBenisonId" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		SELECT A.* FROM BU_BENISON_TEMPLATE A
+		where A.benison_id = #{benisonId}
+	</select>
+	<select id="findAllByBgImgId" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		SELECT A.* FROM BU_BENISON_TEMPLATE A
+		where 
+		A.bg_img_id = #{imgId}
+	</select>
+	<select id="findAllBySmImgId" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		SELECT A.* FROM BU_BENISON_TEMPLATE A
+		where 
+		A.sm_img_id = #{imgId}
+	</select>
+	<select id="findAllByTypeId" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		SELECT A.* FROM BU_BENISON_TEMPLATE A
+		where A.type_id = #{typeId}
+	</select>
+	<select id="findAllByScreenId" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		SELECT A.* FROM BU_BENISON_TEMPLATE A
+		where A.screen_id = #{screenId}
+	</select>
+	<!-- 查询最新的模板 -->
+	<select id="findLastOneBenisonTemplate" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BU_BENISON_TEMPLATE A  ]]>
+		<include refid="benisonTemplateWhereCondition" />
+		ORDER BY A.template_code DESC
+		limit 1
+  	</select>
+  	
+  	<!-- 根据模板查出祝福语及模板的相关信息-->
+	<select id="findOneBenisonTemplateById" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT bt.*,b.benison_content,b.rule_content,bi.img_url,bi.img_code FROM BU_BENISON_TEMPLATE bt 
+		left join bu_benison b on bt.benison_id = b.benison_id
+		left join bu_benison_img bi on bt.bg_img_id = bi.img_id 
+		where bt.template_id = #{template_id} ]]>
+  	</select>
+</mapper>

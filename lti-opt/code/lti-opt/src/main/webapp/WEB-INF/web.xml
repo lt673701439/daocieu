@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+	<display-name>lti-opt</display-name>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:META-INF/app_config/context/context-*.xml</param-value>
+	</context-param>	
+	<listener>
+		<description>spring监听器</description>
+		<listener-class>com.taikang.udp.framework.core.web.listener.ContextInitListener</listener-class>
+	</listener>
+	<!-- 防止spring内存溢出监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+	<!-- 配置使得可以取得session和request对象 -->
+	<listener>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
+    <!-- 开启了异步查询分页数据总数的功能之后，需要增加此listener，便于在停止服务时关闭分业务查询总数的线程池 -->
+    <listener>
+        <listener-class>com.taikang.udp.framework.core.persistence.plugin.CleanupMybatisPaginatorListener</listener-class>
+    </listener>
+
+    <!-- Apache Shiro -->
+    <filter>
+        <filter-name>shiroFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <init-param>
+            <param-name>targetFilterLifecycle</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>shiroFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+	<!--
+	<filter>
+		<filter-name>sessionValidate</filter-name>
+		<filter-class>
+			com.taikang.udp.framework.authority.web.filter.LoginValidatorFilter
+		</filter-class>
+		<init-param>
+			<param-name>staticPath</param-name>
+			<param-value>/static/</param-value>
+		</init-param>
+		<init-param>
+			<param-name>excludedPages</param-name>
+			<param-value>/index,/login,/loginAction</param-value>
+		</init-param>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>false</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>sessionValidate</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	-->
+	
+	<!-- spring mvc servlet -->
+	<servlet>
+		<description>spring mvc servlet</description>
+		<servlet-name>springMvc</servlet-name>		
+		<servlet-class>com.taikang.udp.framework.core.web.springmvc.TKDispatcherServlet</servlet-class>
+		<init-param>
+			<description>spring mvc 配置文件</description>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:META-INF/app_config/web/springmvc-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>springMvc</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>/login</welcome-file>
+	</welcome-file-list>
+	<!-- 配置session超时时间，单位分钟 -->
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+	<!-- 出错页面定义 -->
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/common/error/500</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/common/error/500</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/common/error/404</location>
+	</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/common/error/403</location>
+	</error-page>
+</web-app>

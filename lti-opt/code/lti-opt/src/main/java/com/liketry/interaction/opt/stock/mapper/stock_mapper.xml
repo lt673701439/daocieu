@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Stock">
+	<resultMap id="stockResultMap" type="com.liketry.interaction.opt.stock.model.StockBO">
+		<result property="stockId" column="stock_id"/>
+		<result property="commodityId" column="commodity_id"/>
+		<result property="stockStatus" column="stock_status"/>
+		<result property="stockDate" column="stock_date"/>
+		<result property="startTime" column="start_time"/>
+		<result property="endTime" column="end_time"/>
+		<result property="sales" column="sales"/>
+		<result property="stock" column="stock"/>
+		<result property="scheduleStatus" column="schedule_status"/>
+		<result property="createdTime" column="created_time"/>
+		<result property="createdBy" column="created_by"/>
+		<result property="modifiedTime" column="modified_time"/>
+		<result property="modifiedBy" column="modified_by"/>
+		<result property="version" column="version"/>
+		<result property="delflag" column="delflag"/>
+  	</resultMap>
+  
+  	<sql id="stockWhereCondition">
+		<where>
+	  	<if test=" stock_id != null and stock_id != '' and stock_id != 'null' ">
+			<![CDATA[ AND A.stock_id = #{stock_id} ]]>
+	  	</if>
+	  	<if test=" commodity_id != null and commodity_id != '' and commodity_id != 'null' ">
+			<![CDATA[ AND A.commodity_id = #{commodity_id} ]]>
+	  	</if>
+	  	<if test=" stock_status != null and stock_status != '' and stock_status != 'null' ">
+			<![CDATA[ AND A.stock_status = #{stock_status} ]]>
+	  	</if>
+	  	<if test=" stock_date != null and stock_date != '' and stock_date != 'null' ">
+			<![CDATA[ AND A.stock_date = #{stock_date} ]]>
+	  	</if>
+	  	<if test=" start_time != null and start_time != '' and start_time != 'null' ">
+			<![CDATA[ AND A.start_time = #{start_time} ]]>
+	  	</if>
+	  	<if test=" end_time != null and end_time != '' and end_time != 'null' ">
+			<![CDATA[ AND A.end_time = #{end_time} ]]>
+	  	</if>
+	  	<if test=" sales != null ">
+	  		<![CDATA[ AND A.sales = ${sales} ]]>
+	  	</if>
+	  	<if test=" stock != null ">
+	  		<![CDATA[ AND A.stock = ${stock} ]]>
+	  	</if>
+	  	<if test=" schedule_status != null and schedule_status != '' and schedule_status != 'null' ">
+			<![CDATA[ AND A.schedule_status = #{schedule_status} ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.created_time = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ AND A.created_by = #{created_by} ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.modified_time = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ AND A.modified_by = #{modified_by} ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.version = ${version} ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.delflag = #{delflag} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addStock"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BU_STOCK
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" stock_id  != null and  stock_id  != ''  and  stock_id  != 'null' ">
+				<![CDATA[ stock_id , ]]>
+	  		</if>
+	  		<if test=" commodity_id  != null and  commodity_id  != ''  and  commodity_id  != 'null' ">
+				<![CDATA[ commodity_id , ]]>
+	  		</if>
+	  		<if test=" stock_status  != null and  stock_status  != ''  and  stock_status  != 'null' ">
+				<![CDATA[ stock_status , ]]>
+	  		</if>
+	  		<if test=" stock_date  != null and  stock_date  != ''  and  stock_date  != 'null' ">
+				<![CDATA[ stock_date , ]]>
+	  		</if>
+	  		<if test=" start_time  != null and  start_time  != ''  and  start_time  != 'null' ">
+				<![CDATA[ start_time , ]]>
+	  		</if>
+	  		<if test=" end_time  != null and  end_time  != ''  and  end_time  != 'null' ">
+				<![CDATA[ end_time , ]]>
+	  		</if>
+	  		<if test=" sales  != null ">
+				<![CDATA[ sales , ]]>
+	  		</if>
+	  		<if test=" stock  != null ">
+				<![CDATA[ stock , ]]>
+	  		</if>
+	  		<if test=" schedule_status  != null and  schedule_status  != ''  and  schedule_status  != 'null' ">
+				<![CDATA[ schedule_status , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ created_time , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ created_by , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ modified_time , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ modified_by , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ version , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ delflag , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" stock_id  != null and  stock_id  != ''  and  stock_id  != 'null' ">
+	  			<![CDATA[ #{stock_id} , ]]>
+	  		</if>
+	  		<if test=" commodity_id  != null and  commodity_id  != ''  and  commodity_id  != 'null' ">
+	  			<![CDATA[ #{commodity_id} , ]]>
+	  		</if>
+	  		<if test=" stock_status  != null and  stock_status  != ''  and  stock_status  != 'null' ">
+	  			<![CDATA[ #{stock_status} , ]]>
+	  		</if>
+	  		<if test=" stock_date  != null and  stock_date  != ''  and  stock_date  != 'null' ">
+	  			<![CDATA[ #{stock_date} , ]]>
+	  		</if>
+	  		<if test=" start_time  != null and  start_time  != ''  and  start_time  != 'null' ">
+	  			<![CDATA[ #{start_time} , ]]>
+	  		</if>
+	  		<if test=" end_time  != null and  end_time  != ''  and  end_time  != 'null' ">
+	  			<![CDATA[ #{end_time} , ]]>
+	  		</if>
+	  		<if test=" sales  != null">
+	    		<![CDATA[ ${sales} , ]]>
+	  		</if>
+	  		<if test=" stock  != null">
+	    		<![CDATA[ ${stock} , ]]>
+	  		</if>
+	  		<if test=" schedule_status  != null and  schedule_status  != ''  and  schedule_status  != 'null' ">
+	  			<![CDATA[ #{schedule_status} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateStock" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BU_STOCK A ]]>
+		<set>
+	  	<if test=" commodity_id  != null and  commodity_id  != ''  and  commodity_id  != 'null' ">
+	  		<![CDATA[ A.commodity_id = #{commodity_id}, ]]>
+	  	</if>
+	  	<if test=" stock_status  != null and  stock_status  != ''  and  stock_status  != 'null' ">
+	  		<![CDATA[ A.stock_status = #{stock_status}, ]]>
+	  	</if>
+	  	<if test=" stock_date  != null and  stock_date  != ''  and  stock_date  != 'null' ">
+	  		<![CDATA[ A.stock_date = #{stock_date}, ]]>
+	  	</if>
+	  	<if test=" start_time  != null and  start_time  != ''  and  start_time  != 'null' ">
+	  		<![CDATA[ A.start_time = #{start_time}, ]]>
+	  	</if>
+	  	<if test=" end_time  != null and  end_time  != ''  and  end_time  != 'null' ">
+	  		<![CDATA[ A.end_time = #{end_time}, ]]>
+	  	</if>
+		<if test=" sales  != null ">
+  			<![CDATA[ A.sales = ${sales} , ]]>
+		</if>
+		<if test=" stock  != null ">
+  			<![CDATA[ A.stock = ${stock} , ]]>
+		</if>
+	  	<if test=" schedule_status  != null and  schedule_status  != ''  and  schedule_status  != 'null' ">
+	  		<![CDATA[ A.schedule_status = #{schedule_status}, ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.created_time = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.created_by = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.modified_time = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.modified_by = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.version = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.delflag = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.STOCK_ID = #{stock_id}]]>
+  	</update>
+  
+  	<delete id="deleteStock" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BU_STOCK A where A.STOCK_ID = #{stock_id} ]]>
+	</delete>
+  
+	<select id="findOneStock" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.*, B.commodity_name FROM BU_STOCK A, BU_COMMODITY B  ]]>
+		<include refid="stockWhereCondition" />
+		<![CDATA[ AND A.commodity_id = B.commodity_id ]]>
+  	</select>
+    
+  	<select id="findAllStock" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BU_STOCK A ]]>
+		<include refid="stockWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapStock" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BU_STOCK A ]]>
+		<include refid="stockWhereCondition" />
+	</select>
+  
+  	<select id="findStockTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BU_STOCK A ]]>
+		<include refid="stockWhereCondition" />
+  	</select>
+  
+  	<select id="queryStockForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BU_STOCK A ]]>
+		<include refid="stockWhereCondition" />
+  	</select>
+  	
+  	<!-- 注意：查询语句要重新写 -->
+  	<select id="queryStockByConForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		SELECT A.*,B.commodity_name,B.shelf_time FROM BU_STOCK A, BU_COMMODITY B
+          where 1=1 
+          AND A.DELFLAG = '1' 
+          AND B.DELFLAG = '1' 
+          AND A.commodity_id = B.commodity_id
+        <if test=" stockDate != null and stockDate != '' and stockDate != 'null' ">
+            <![CDATA[ AND A.stock_date = #{stockDate} ]]>
+        </if>
+        <if test=" commodityName != null and commodityName != '' and commodityName != 'null' ">
+            <![CDATA[ AND B.commodity_name like concat('%', #{commodityName}, '%') ]]>
+        </if> 
+          ORDER BY A.stock_date,start_time
+  	</select>
+  	
+  	<select id="findAllByOrderId" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BU_STOCK A ]]>
+		<include refid="stockWhereCondition" />
+	</select>
+</mapper>

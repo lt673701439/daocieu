@@ -1,0 +1,1372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Order">
+	<resultMap id="orderResultMap" type="com.liketry.interaction.opt.order.model.OrderBO">
+		<result property="orderId" column="order_id"/>
+		<result property="orderCode" column="order_code"/>
+		<result property="transactionNo" column="transaction_no"/>
+		<result property="orderType" column="order_type"/>
+		<result property="orderStatus" column="order_status"/>
+		<result property="userId" column="user_id"/>
+		<result property="scene" column="scene"/>
+		<result property="userNickname" column="user_nickname"/>
+		<result property="userPhone" column="user_phone"/>
+		<result property="blessName" column="bless_name"/>
+		<result property="writeName" column="write_name"/>
+		<result property="templateId" column="template_id"/>
+		<result property="screenId" column="screen_id"/>
+		<result property="screenName" column="screen_name"/>
+		<result property="typeId" column="type_id"/>
+		<result property="typeName" column="type_name"/>
+		<result property="benisonId" column="benison_id"/>
+		<result property="benisonContent" column="benison_content"/>
+		<result property="ruleContent" column="rule_content"/>
+		<result property="bkimgId" column="bkimg_id"/>
+		<result property="bkimgName" column="bkimg_name"/>
+		<result property="bkimgUrl" column="bkimg_url"/>
+		<result property="totalPrice" column="total_price"/>
+		<result property="totalOrigPrice" column="total_orig_price"/>
+		<result property="payType" column="pay_type"/>
+		<result property="payTime" column="pay_time"/>
+		<result property="payPrice" column="pay_price"/>
+		<result property="confirmStatus" column="confirm_status"/>
+		<result property="confirmTime" column="confirm_time"/>
+		<result property="confirmBy" column="confirm_by"/>
+		<result property="confirmId" column="confirm_id"/>
+		<result property="confirmReason" column="confirm_reason"/>
+		<result property="backTime" column="back_time"/>
+		<result property="backBy" column="back_by"/>
+		<result property="backId" column="back_id"/>
+		<result property="backReason" column="back_reason"/>
+		<result property="backPrice" column="back_price"/>
+		<result property="backRemarks" column="back_remarks"/>
+		<result property="orderDescriptiion" column="order_descriptiion"/>
+		<result property="exportBy" column="export_by"/>
+		<result property="exportId" column="export_id"/>
+		<result property="exportTime" column="export_time"/>
+		<result property="resultUrl" column="result_url"/>
+		<result property="shareUrl" column="share_url"/>
+		<result property="promotionId" column="promotion_id"/>
+		<result property="createdTime" column="created_time"/>
+		<result property="createdBy" column="created_by"/>
+		<result property="modifiedTime" column="modified_time"/>
+		<result property="modifiedBy" column="modified_by"/>
+		<result property="version" column="version"/>
+		<result property="delflag" column="delflag"/>
+  	</resultMap>
+  
+  	<sql id="orderWhereCondition">
+		<where>
+	  	<if test=" order_id != null and order_id != '' and order_id != 'null' ">
+			<![CDATA[ AND A.order_id = #{order_id} ]]>
+	  	</if>
+	  	<if test=" order_code != null and order_code != '' and order_code != 'null' ">
+			<![CDATA[ AND A.order_code = #{order_code} ]]>
+	  	</if>
+	  	<if test=" transaction_no != null and transaction_no != '' and transaction_no != 'null' ">
+			<![CDATA[ AND A.transaction_no = #{transaction_no} ]]>
+	  	</if>
+	  	<if test=" order_type != null and order_type != '' and order_type != 'null' ">
+			<![CDATA[ AND A.order_type = #{order_type} ]]>
+	  	</if>
+	  	<if test=" order_status != null and order_status != '' and order_status != 'null' ">
+			<![CDATA[ AND A.order_status = #{order_status} ]]>
+	  	</if>
+	  	<if test=" user_id != null and user_id != '' and user_id != 'null' ">
+			<![CDATA[ AND A.user_id = #{user_id} ]]>
+	  	</if>
+	  	<if test=" scene != null and scene != '' and scene != 'null' ">
+			<![CDATA[ AND A.scene = #{scene} ]]>
+	  	</if>
+	  	<if test=" user_nickname != null and user_nickname != '' and user_nickname != 'null' ">
+			<![CDATA[ AND A.user_nickname = #{user_nickname} ]]>
+	  	</if>
+	  	<if test=" user_phone != null and user_phone != '' and user_phone != 'null' ">
+			<![CDATA[ AND A.user_phone = #{user_phone} ]]>
+	  	</if>
+	  	<if test=" bless_name != null and bless_name != '' and bless_name != 'null' ">
+			<![CDATA[ AND A.bless_name = #{bless_name} ]]>
+	  	</if>
+	  	<if test=" write_name != null and write_name != '' and write_name != 'null' ">
+			<![CDATA[ AND A.write_name = #{write_name} ]]>
+	  	</if>
+	  	<if test=" template_id != null and template_id != '' and template_id != 'null' ">
+			<![CDATA[ AND A.template_id = #{template_id} ]]>
+	  	</if>
+	  	<if test=" screen_id != null and screen_id != '' and screen_id != 'null' ">
+			<![CDATA[ AND A.screen_id = #{screen_id} ]]>
+	  	</if>
+	  	<if test=" screen_name != null and screen_name != '' and screen_name != 'null' ">
+			<![CDATA[ AND A.screen_name = #{screen_name} ]]>
+	  	</if>
+	  	<if test=" type_id != null and type_id != '' and type_id != 'null' ">
+			<![CDATA[ AND A.type_id = #{type_id} ]]>
+	  	</if>
+	  	<if test=" type_name != null and type_name != '' and type_name != 'null' ">
+			<![CDATA[ AND A.type_name = #{type_name} ]]>
+	  	</if>
+	  	<if test=" benison_id != null and benison_id != '' and benison_id != 'null' ">
+			<![CDATA[ AND A.benison_id = #{benison_id} ]]>
+	  	</if>
+	  	<if test=" benison_content != null and benison_content != '' and benison_content != 'null' ">
+			<![CDATA[ AND A.benison_content = #{benison_content} ]]>
+	  	</if>
+	  	<if test=" rule_content != null and rule_content != '' and rule_content != 'null' ">
+			<![CDATA[ AND A.rule_content = #{rule_content} ]]>
+	  	</if>
+	  	<if test=" bkimg_id != null and bkimg_id != '' and bkimg_id != 'null' ">
+			<![CDATA[ AND A.bkimg_id = #{bkimg_id} ]]>
+	  	</if>
+	  	<if test=" bkimg_name != null and bkimg_name != '' and bkimg_name != 'null' ">
+			<![CDATA[ AND A.bkimg_name = #{bkimg_name} ]]>
+	  	</if>
+	  	<if test=" bkimg_url != null and bkimg_url != '' and bkimg_url != 'null' ">
+			<![CDATA[ AND A.bkimg_url = #{bkimg_url} ]]>
+	  	</if>
+	  	<if test=" total_price != null ">
+	  		<![CDATA[ AND A.total_price = ${total_price} ]]>
+	  	</if>
+	  	<if test=" total_orig_price != null ">
+	  		<![CDATA[ AND A.total_orig_price = ${total_orig_price} ]]>
+	  	</if>
+	  	<if test=" pay_type != null and pay_type != '' and pay_type != 'null' ">
+			<![CDATA[ AND A.pay_type = #{pay_type} ]]>
+	  	</if>
+	  	<if test=" pay_time != null and pay_time != '' and pay_time != 'null' ">
+			<![CDATA[ AND A.pay_time = #{pay_time} ]]>
+	  	</if>
+	  	<if test=" pay_price != null ">
+	  		<![CDATA[ AND A.pay_price = ${pay_price} ]]>
+	  	</if>
+	  	<if test=" confirm_status != null and confirm_status != '' and confirm_status != 'null' ">
+			<![CDATA[ AND A.confirm_status = #{confirm_status} ]]>
+	  	</if>
+	  	<if test=" confirm_time != null and confirm_time != '' and confirm_time != 'null' ">
+			<![CDATA[ AND A.confirm_time = #{confirm_time} ]]>
+	  	</if>
+	  	<if test=" confirm_by != null and confirm_by != '' and confirm_by != 'null' ">
+			<![CDATA[ AND A.confirm_by = #{confirm_by} ]]>
+	  	</if>
+	  	<if test=" confirm_id != null and confirm_id != '' and confirm_id != 'null' ">
+			<![CDATA[ AND A.confirm_id = #{confirm_id} ]]>
+	  	</if>
+	  	<if test=" confirm_reason != null and confirm_reason != '' and confirm_reason != 'null' ">
+			<![CDATA[ AND A.confirm_reason = #{confirm_reason} ]]>
+	  	</if>
+	  	<if test=" back_time != null and back_time != '' and back_time != 'null' ">
+			<![CDATA[ AND A.back_time = #{back_time} ]]>
+	  	</if>
+	  	<if test=" back_by != null and back_by != '' and back_by != 'null' ">
+			<![CDATA[ AND A.back_by = #{back_by} ]]>
+	  	</if>
+	  	<if test=" back_id != null and back_id != '' and back_id != 'null' ">
+			<![CDATA[ AND A.back_id = #{back_id} ]]>
+	  	</if>
+	  	<if test=" back_reason != null and back_reason != '' and back_reason != 'null' ">
+			<![CDATA[ AND A.back_reason = #{back_reason} ]]>
+	  	</if>
+	  	<if test=" back_price != null ">
+	  		<![CDATA[ AND A.back_price = ${back_price} ]]>
+	  	</if>
+	  	<if test=" back_remarks != null and back_remarks != '' and back_remarks != 'null' ">
+			<![CDATA[ AND A.back_remarks = #{back_remarks} ]]>
+	  	</if>
+	  	<if test=" order_descriptiion != null and order_descriptiion != '' and order_descriptiion != 'null' ">
+			<![CDATA[ AND A.order_descriptiion = #{order_descriptiion} ]]>
+	  	</if>
+	  	<if test=" export_by != null and export_by != '' and export_by != 'null' ">
+			<![CDATA[ AND A.export_by = #{export_by} ]]>
+	  	</if>
+	  	<if test=" export_id != null and export_id != '' and export_id != 'null' ">
+			<![CDATA[ AND A.export_id = #{export_id} ]]>
+	  	</if>
+	  	<if test=" export_time != null and export_time != '' and export_time != 'null' ">
+			<![CDATA[ AND A.export_time = #{export_time} ]]>
+	  	</if>
+	  	<if test=" result_url != null and result_url != '' and result_url != 'null' ">
+			<![CDATA[ AND A.result_url = #{result_url} ]]>
+	  	</if>
+	  	<if test=" share_url != null and share_url != '' and share_url != 'null' ">
+			<![CDATA[ AND A.share_url = #{share_url} ]]>
+	  	</if>
+	  	<if test=" promotion_id != null and promotion_id != '' and promotion_id != 'null' ">
+			<![CDATA[ AND A.promotion_id = #{promotion_id} ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.created_time = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ AND A.created_by = #{created_by} ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.modified_time = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ AND A.modified_by = #{modified_by} ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.version = ${version} ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.delflag = #{delflag} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addOrder"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BU_ORDER
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" order_id  != null and  order_id  != ''  and  order_id  != 'null' ">
+				<![CDATA[ order_id , ]]>
+	  		</if>
+	  		<if test=" order_code  != null and  order_code  != ''  and  order_code  != 'null' ">
+				<![CDATA[ order_code , ]]>
+	  		</if>
+	  		<if test=" transaction_no  != null and  transaction_no  != ''  and  transaction_no  != 'null' ">
+				<![CDATA[ transaction_no , ]]>
+	  		</if>
+	  		<if test=" order_type  != null and  order_type  != ''  and  order_type  != 'null' ">
+				<![CDATA[ order_type , ]]>
+	  		</if>
+	  		<if test=" order_status  != null and  order_status  != ''  and  order_status  != 'null' ">
+				<![CDATA[ order_status , ]]>
+	  		</if>
+	  		<if test=" user_id  != null and  user_id  != ''  and  user_id  != 'null' ">
+				<![CDATA[ user_id , ]]>
+	  		</if>
+	  		<if test=" scene  != null and  scene  != ''  and  scene  != 'null' ">
+				<![CDATA[ scene , ]]>
+	  		</if>
+	  		<if test=" user_nickname  != null and  user_nickname  != ''  and  user_nickname  != 'null' ">
+				<![CDATA[ user_nickname , ]]>
+	  		</if>
+	  		<if test=" user_phone  != null and  user_phone  != ''  and  user_phone  != 'null' ">
+				<![CDATA[ user_phone , ]]>
+	  		</if>
+	  		<if test=" bless_name  != null and  bless_name  != ''  and  bless_name  != 'null' ">
+				<![CDATA[ bless_name , ]]>
+	  		</if>
+	  		<if test=" write_name  != null and  write_name  != ''  and  write_name  != 'null' ">
+				<![CDATA[ write_name , ]]>
+	  		</if>
+	  		<if test=" template_id  != null and  template_id  != ''  and  template_id  != 'null' ">
+				<![CDATA[ template_id , ]]>
+	  		</if>
+	  		<if test=" screen_id  != null and  screen_id  != ''  and  screen_id  != 'null' ">
+				<![CDATA[ screen_id , ]]>
+	  		</if>
+	  		<if test=" screen_name  != null and  screen_name  != ''  and  screen_name  != 'null' ">
+				<![CDATA[ screen_name , ]]>
+	  		</if>
+	  		<if test=" type_id  != null and  type_id  != ''  and  type_id  != 'null' ">
+				<![CDATA[ type_id , ]]>
+	  		</if>
+	  		<if test=" type_name  != null and  type_name  != ''  and  type_name  != 'null' ">
+				<![CDATA[ type_name , ]]>
+	  		</if>
+	  		<if test=" benison_id  != null and  benison_id  != ''  and  benison_id  != 'null' ">
+				<![CDATA[ benison_id , ]]>
+	  		</if>
+	  		<if test=" benison_content  != null and  benison_content  != ''  and  benison_content  != 'null' ">
+				<![CDATA[ benison_content , ]]>
+	  		</if>
+	  		<if test=" rule_content  != null and  rule_content  != ''  and  rule_content  != 'null' ">
+				<![CDATA[ rule_content , ]]>
+	  		</if>
+	  		<if test=" bkimg_id  != null and  bkimg_id  != ''  and  bkimg_id  != 'null' ">
+				<![CDATA[ bkimg_id , ]]>
+	  		</if>
+	  		<if test=" bkimg_name  != null and  bkimg_name  != ''  and  bkimg_name  != 'null' ">
+				<![CDATA[ bkimg_name , ]]>
+	  		</if>
+	  		<if test=" bkimg_url  != null and  bkimg_url  != ''  and  bkimg_url  != 'null' ">
+				<![CDATA[ bkimg_url , ]]>
+	  		</if>
+	  		<if test=" total_price  != null ">
+				<![CDATA[ total_price , ]]>
+	  		</if>
+	  		<if test=" total_orig_price  != null ">
+				<![CDATA[ total_orig_price , ]]>
+	  		</if>
+	  		<if test=" pay_type  != null and  pay_type  != ''  and  pay_type  != 'null' ">
+				<![CDATA[ pay_type , ]]>
+	  		</if>
+	  		<if test=" pay_time  != null and  pay_time  != ''  and  pay_time  != 'null' ">
+				<![CDATA[ pay_time , ]]>
+	  		</if>
+	  		<if test=" pay_price  != null ">
+				<![CDATA[ pay_price , ]]>
+	  		</if>
+	  		<if test=" confirm_status  != null and  confirm_status  != ''  and  confirm_status  != 'null' ">
+				<![CDATA[ confirm_status , ]]>
+	  		</if>
+	  		<if test=" confirm_time  != null and  confirm_time  != ''  and  confirm_time  != 'null' ">
+				<![CDATA[ confirm_time , ]]>
+	  		</if>
+	  		<if test=" confirm_by  != null and  confirm_by  != ''  and  confirm_by  != 'null' ">
+				<![CDATA[ confirm_by , ]]>
+	  		</if>
+	  		<if test=" confirm_id  != null and  confirm_id  != ''  and  confirm_id  != 'null' ">
+				<![CDATA[ confirm_id , ]]>
+	  		</if>
+	  		<if test=" confirm_reason  != null and  confirm_reason  != ''  and  confirm_reason  != 'null' ">
+				<![CDATA[ confirm_reason , ]]>
+	  		</if>
+	  		<if test=" back_time  != null and  back_time  != ''  and  back_time  != 'null' ">
+				<![CDATA[ back_time , ]]>
+	  		</if>
+	  		<if test=" back_by  != null and  back_by  != ''  and  back_by  != 'null' ">
+				<![CDATA[ back_by , ]]>
+	  		</if>
+	  		<if test=" back_id  != null and  back_id  != ''  and  back_id  != 'null' ">
+				<![CDATA[ back_id , ]]>
+	  		</if>
+	  		<if test=" back_reason  != null and  back_reason  != ''  and  back_reason  != 'null' ">
+				<![CDATA[ back_reason , ]]>
+	  		</if>
+	  		<if test=" back_price  != null ">
+				<![CDATA[ back_price , ]]>
+	  		</if>
+	  		<if test=" back_remarks  != null and  back_remarks  != ''  and  back_remarks  != 'null' ">
+				<![CDATA[ back_remarks , ]]>
+	  		</if>
+	  		<if test=" order_descriptiion  != null and  order_descriptiion  != ''  and  order_descriptiion  != 'null' ">
+				<![CDATA[ order_descriptiion , ]]>
+	  		</if>
+	  		<if test=" export_by  != null and  export_by  != ''  and  export_by  != 'null' ">
+				<![CDATA[ export_by , ]]>
+	  		</if>
+	  		<if test=" export_id  != null and  export_id  != ''  and  export_id  != 'null' ">
+				<![CDATA[ export_id , ]]>
+	  		</if>
+	  		<if test=" export_time  != null and  export_time  != ''  and  export_time  != 'null' ">
+				<![CDATA[ export_time , ]]>
+	  		</if>
+	  		<if test=" result_url  != null and  result_url  != ''  and  result_url  != 'null' ">
+				<![CDATA[ result_url , ]]>
+	  		</if>
+	  		<if test=" share_url  != null and  share_url  != ''  and  share_url  != 'null' ">
+				<![CDATA[ share_url , ]]>
+	  		</if>
+	  		<if test=" promotion_id  != null and  promotion_id  != ''  and  promotion_id  != 'null' ">
+				<![CDATA[ promotion_id , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ created_time , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ created_by , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ modified_time , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ modified_by , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ version , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ delflag , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" order_id  != null and  order_id  != ''  and  order_id  != 'null' ">
+	  			<![CDATA[ #{order_id} , ]]>
+	  		</if>
+	  		<if test=" order_code  != null and  order_code  != ''  and  order_code  != 'null' ">
+	  			<![CDATA[ #{order_code} , ]]>
+	  		</if>
+	  		<if test=" transaction_no  != null and  transaction_no  != ''  and  transaction_no  != 'null' ">
+	  			<![CDATA[ #{transaction_no} , ]]>
+	  		</if>
+	  		<if test=" order_type  != null and  order_type  != ''  and  order_type  != 'null' ">
+	  			<![CDATA[ #{order_type} , ]]>
+	  		</if>
+	  		<if test=" order_status  != null and  order_status  != ''  and  order_status  != 'null' ">
+	  			<![CDATA[ #{order_status} , ]]>
+	  		</if>
+	  		<if test=" user_id  != null and  user_id  != ''  and  user_id  != 'null' ">
+	  			<![CDATA[ #{user_id} , ]]>
+	  		</if>
+	  		<if test=" scene  != null and  scene  != ''  and  scene  != 'null' ">
+	  			<![CDATA[ #{scene} , ]]>
+	  		</if>
+	  		<if test=" user_nickname  != null and  user_nickname  != ''  and  user_nickname  != 'null' ">
+	  			<![CDATA[ #{user_nickname} , ]]>
+	  		</if>
+	  		<if test=" user_phone  != null and  user_phone  != ''  and  user_phone  != 'null' ">
+	  			<![CDATA[ #{user_phone} , ]]>
+	  		</if>
+	  		<if test=" bless_name  != null and  bless_name  != ''  and  bless_name  != 'null' ">
+	  			<![CDATA[ #{bless_name} , ]]>
+	  		</if>
+	  		<if test=" write_name  != null and  write_name  != ''  and  write_name  != 'null' ">
+	  			<![CDATA[ #{write_name} , ]]>
+	  		</if>
+	  		<if test=" template_id  != null and  template_id  != ''  and  template_id  != 'null' ">
+	  			<![CDATA[ #{template_id} , ]]>
+	  		</if>
+	  		<if test=" screen_id  != null and  screen_id  != ''  and  screen_id  != 'null' ">
+	  			<![CDATA[ #{screen_id} , ]]>
+	  		</if>
+	  		<if test=" screen_name  != null and  screen_name  != ''  and  screen_name  != 'null' ">
+	  			<![CDATA[ #{screen_name} , ]]>
+	  		</if>
+	  		<if test=" type_id  != null and  type_id  != ''  and  type_id  != 'null' ">
+	  			<![CDATA[ #{type_id} , ]]>
+	  		</if>
+	  		<if test=" type_name  != null and  type_name  != ''  and  type_name  != 'null' ">
+	  			<![CDATA[ #{type_name} , ]]>
+	  		</if>
+	  		<if test=" benison_id  != null and  benison_id  != ''  and  benison_id  != 'null' ">
+	  			<![CDATA[ #{benison_id} , ]]>
+	  		</if>
+	  		<if test=" benison_content  != null and  benison_content  != ''  and  benison_content  != 'null' ">
+	  			<![CDATA[ #{benison_content} , ]]>
+	  		</if>
+	  		<if test=" rule_content  != null and  rule_content  != ''  and  rule_content  != 'null' ">
+	  			<![CDATA[ #{rule_content} , ]]>
+	  		</if>
+	  		<if test=" bkimg_id  != null and  bkimg_id  != ''  and  bkimg_id  != 'null' ">
+	  			<![CDATA[ #{bkimg_id} , ]]>
+	  		</if>
+	  		<if test=" bkimg_name  != null and  bkimg_name  != ''  and  bkimg_name  != 'null' ">
+	  			<![CDATA[ #{bkimg_name} , ]]>
+	  		</if>
+	  		<if test=" bkimg_url  != null and  bkimg_url  != ''  and  bkimg_url  != 'null' ">
+	  			<![CDATA[ #{bkimg_url} , ]]>
+	  		</if>
+	  		<if test=" total_price  != null">
+	    		<![CDATA[ ${total_price} , ]]>
+	  		</if>
+	  		<if test=" total_orig_price  != null">
+	    		<![CDATA[ ${total_orig_price} , ]]>
+	  		</if>
+	  		<if test=" pay_type  != null and  pay_type  != ''  and  pay_type  != 'null' ">
+	  			<![CDATA[ #{pay_type} , ]]>
+	  		</if>
+	  		<if test=" pay_time  != null and  pay_time  != ''  and  pay_time  != 'null' ">
+	  			<![CDATA[ #{pay_time} , ]]>
+	  		</if>
+	  		<if test=" pay_price  != null">
+	    		<![CDATA[ ${pay_price} , ]]>
+	  		</if>
+	  		<if test=" confirm_status  != null and  confirm_status  != ''  and  confirm_status  != 'null' ">
+	  			<![CDATA[ #{confirm_status} , ]]>
+	  		</if>
+	  		<if test=" confirm_time  != null and  confirm_time  != ''  and  confirm_time  != 'null' ">
+	  			<![CDATA[ #{confirm_time} , ]]>
+	  		</if>
+	  		<if test=" confirm_by  != null and  confirm_by  != ''  and  confirm_by  != 'null' ">
+	  			<![CDATA[ #{confirm_by} , ]]>
+	  		</if>
+	  		<if test=" confirm_id  != null and  confirm_id  != ''  and  confirm_id  != 'null' ">
+	  			<![CDATA[ #{confirm_id} , ]]>
+	  		</if>
+	  		<if test=" confirm_reason  != null and  confirm_reason  != ''  and  confirm_reason  != 'null' ">
+	  			<![CDATA[ #{confirm_reason} , ]]>
+	  		</if>
+	  		<if test=" back_time  != null and  back_time  != ''  and  back_time  != 'null' ">
+	  			<![CDATA[ #{back_time} , ]]>
+	  		</if>
+	  		<if test=" back_by  != null and  back_by  != ''  and  back_by  != 'null' ">
+	  			<![CDATA[ #{back_by} , ]]>
+	  		</if>
+	  		<if test=" back_id  != null and  back_id  != ''  and  back_id  != 'null' ">
+	  			<![CDATA[ #{back_id} , ]]>
+	  		</if>
+	  		<if test=" back_reason  != null and  back_reason  != ''  and  back_reason  != 'null' ">
+	  			<![CDATA[ #{back_reason} , ]]>
+	  		</if>
+	  		<if test=" back_price  != null">
+	    		<![CDATA[ ${back_price} , ]]>
+	  		</if>
+	  		<if test=" back_remarks  != null and  back_remarks  != ''  and  back_remarks  != 'null' ">
+	  			<![CDATA[ #{back_remarks} , ]]>
+	  		</if>
+	  		<if test=" order_descriptiion  != null and  order_descriptiion  != ''  and  order_descriptiion  != 'null' ">
+	  			<![CDATA[ #{order_descriptiion} , ]]>
+	  		</if>
+	  		<if test=" export_by  != null and  export_by  != ''  and  export_by  != 'null' ">
+	  			<![CDATA[ #{export_by} , ]]>
+	  		</if>
+	  		<if test=" export_id  != null and  export_id  != ''  and  export_id  != 'null' ">
+	  			<![CDATA[ #{export_id} , ]]>
+	  		</if>
+	  		<if test=" export_time  != null and  export_time  != ''  and  export_time  != 'null' ">
+	  			<![CDATA[ #{export_time} , ]]>
+	  		</if>
+	  		<if test=" result_url  != null and  result_url  != ''  and  result_url  != 'null' ">
+	  			<![CDATA[ #{result_url} , ]]>
+	  		</if>
+	  		<if test=" share_url  != null and  share_url  != ''  and  share_url  != 'null' ">
+	  			<![CDATA[ #{share_url} , ]]>
+	  		</if>
+	  		<if test=" promotion_id  != null and  promotion_id  != ''  and  promotion_id  != 'null' ">
+	  			<![CDATA[ #{promotion_id} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateOrder" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BU_ORDER A ]]>
+		<set>
+	  	<if test=" order_code  != null and  order_code  != ''  and  order_code  != 'null' ">
+	  		<![CDATA[ A.order_code = #{order_code}, ]]>
+	  	</if>
+	  	<if test=" transaction_no  != null and  transaction_no  != ''  and  transaction_no  != 'null' ">
+	  		<![CDATA[ A.transaction_no = #{transaction_no}, ]]>
+	  	</if>
+	  	<if test=" order_type  != null and  order_type  != ''  and  order_type  != 'null' ">
+	  		<![CDATA[ A.order_type = #{order_type}, ]]>
+	  	</if>
+	  	<if test=" order_status  != null and  order_status  != ''  and  order_status  != 'null' ">
+	  		<![CDATA[ A.order_status = #{order_status}, ]]>
+	  	</if>
+	  	<if test=" user_id  != null and  user_id  != ''  and  user_id  != 'null' ">
+	  		<![CDATA[ A.user_id = #{user_id}, ]]>
+	  	</if>
+	  	<if test=" scene  != null and  scene  != ''  and  scene  != 'null' ">
+	  		<![CDATA[ A.scene = #{scene}, ]]>
+	  	</if>
+	  	<if test=" user_nickname  != null and  user_nickname  != ''  and  user_nickname  != 'null' ">
+	  		<![CDATA[ A.user_nickname = #{user_nickname}, ]]>
+	  	</if>
+	  	<if test=" user_phone  != null and  user_phone  != ''  and  user_phone  != 'null' ">
+	  		<![CDATA[ A.user_phone = #{user_phone}, ]]>
+	  	</if>
+	  	<if test=" bless_name  != null and  bless_name  != ''  and  bless_name  != 'null' ">
+	  		<![CDATA[ A.bless_name = #{bless_name}, ]]>
+	  	</if>
+	  	<if test=" write_name  != null and  write_name  != ''  and  write_name  != 'null' ">
+	  		<![CDATA[ A.write_name = #{write_name}, ]]>
+	  	</if>
+	  	<if test=" template_id  != null and  template_id  != ''  and  template_id  != 'null' ">
+	  		<![CDATA[ A.template_id = #{template_id}, ]]>
+	  	</if>
+	  	<if test=" screen_id  != null and  screen_id  != ''  and  screen_id  != 'null' ">
+	  		<![CDATA[ A.screen_id = #{screen_id}, ]]>
+	  	</if>
+	  	<if test=" screen_name  != null and  screen_name  != ''  and  screen_name  != 'null' ">
+	  		<![CDATA[ A.screen_name = #{screen_name}, ]]>
+	  	</if>
+	  	<if test=" type_id  != null and  type_id  != ''  and  type_id  != 'null' ">
+	  		<![CDATA[ A.type_id = #{type_id}, ]]>
+	  	</if>
+	  	<if test=" type_name  != null and  type_name  != ''  and  type_name  != 'null' ">
+	  		<![CDATA[ A.type_name = #{type_name}, ]]>
+	  	</if>
+	  	<if test=" benison_id  != null and  benison_id  != ''  and  benison_id  != 'null' ">
+	  		<![CDATA[ A.benison_id = #{benison_id}, ]]>
+	  	</if>
+	  	<if test=" benison_content  != null and  benison_content  != ''  and  benison_content  != 'null' ">
+	  		<![CDATA[ A.benison_content = #{benison_content}, ]]>
+	  	</if>
+	  	<if test=" rule_content  != null and  rule_content  != ''  and  rule_content  != 'null' ">
+	  		<![CDATA[ A.rule_content = #{rule_content}, ]]>
+	  	</if>
+	  	<if test=" bkimg_id  != null and  bkimg_id  != ''  and  bkimg_id  != 'null' ">
+	  		<![CDATA[ A.bkimg_id = #{bkimg_id}, ]]>
+	  	</if>
+	  	<if test=" bkimg_name  != null and  bkimg_name  != ''  and  bkimg_name  != 'null' ">
+	  		<![CDATA[ A.bkimg_name = #{bkimg_name}, ]]>
+	  	</if>
+	  	<if test=" bkimg_url  != null and  bkimg_url  != ''  and  bkimg_url  != 'null' ">
+	  		<![CDATA[ A.bkimg_url = #{bkimg_url}, ]]>
+	  	</if>
+		<if test=" total_price  != null ">
+  			<![CDATA[ A.total_price = ${total_price} , ]]>
+		</if>
+		<if test=" total_orig_price  != null ">
+  			<![CDATA[ A.total_orig_price = ${total_orig_price} , ]]>
+		</if>
+	  	<if test=" pay_type  != null and  pay_type  != ''  and  pay_type  != 'null' ">
+	  		<![CDATA[ A.pay_type = #{pay_type}, ]]>
+	  	</if>
+	  	<if test=" pay_time  != null and  pay_time  != ''  and  pay_time  != 'null' ">
+	  		<![CDATA[ A.pay_time = #{pay_time}, ]]>
+	  	</if>
+		<if test=" pay_price  != null ">
+  			<![CDATA[ A.pay_price = ${pay_price} , ]]>
+		</if>
+	  	<if test=" confirm_status  != null and  confirm_status  != ''  and  confirm_status  != 'null' ">
+	  		<![CDATA[ A.confirm_status = #{confirm_status}, ]]>
+	  	</if>
+	  	<if test=" confirm_time  != null and  confirm_time  != ''  and  confirm_time  != 'null' ">
+	  		<![CDATA[ A.confirm_time = #{confirm_time}, ]]>
+	  	</if>
+	  	<if test=" confirm_by  != null and  confirm_by  != ''  and  confirm_by  != 'null' ">
+	  		<![CDATA[ A.confirm_by = #{confirm_by}, ]]>
+	  	</if>
+	  	<if test=" confirm_id  != null and  confirm_id  != ''  and  confirm_id  != 'null' ">
+	  		<![CDATA[ A.confirm_id = #{confirm_id}, ]]>
+	  	</if>
+	  	<if test=" confirm_reason  != null and  confirm_reason  != ''  and  confirm_reason  != 'null' ">
+	  		<![CDATA[ A.confirm_reason = #{confirm_reason}, ]]>
+	  	</if>
+	  	<if test=" back_time  != null and  back_time  != ''  and  back_time  != 'null' ">
+	  		<![CDATA[ A.back_time = #{back_time}, ]]>
+	  	</if>
+	  	<if test=" back_by  != null and  back_by  != ''  and  back_by  != 'null' ">
+	  		<![CDATA[ A.back_by = #{back_by}, ]]>
+	  	</if>
+	  	<if test=" back_id  != null and  back_id  != ''  and  back_id  != 'null' ">
+	  		<![CDATA[ A.back_id = #{back_id}, ]]>
+	  	</if>
+	  	<![CDATA[ A.back_reason = #{back_reason}, ]]>
+		<if test=" back_price  != null ">
+  			<![CDATA[ A.back_price = ${back_price} , ]]>
+		</if>
+	  	<if test=" back_remarks  != null and  back_remarks  != ''  and  back_remarks  != 'null' ">
+	  		<![CDATA[ A.back_remarks = #{back_remarks}, ]]>
+	  	</if>
+	  	<if test=" order_descriptiion  != null and  order_descriptiion  != ''  and  order_descriptiion  != 'null' ">
+	  		<![CDATA[ A.order_descriptiion = #{order_descriptiion}, ]]>
+	  	</if>
+	  	<if test=" export_by  != null and  export_by  != ''  and  export_by  != 'null' ">
+	  		<![CDATA[ A.export_by = #{export_by}, ]]>
+	  	</if>
+	  	<if test=" export_id  != null and  export_id  != ''  and  export_id  != 'null' ">
+	  		<![CDATA[ A.export_id = #{export_id}, ]]>
+	  	</if>
+	  	<if test=" export_time  != null and  export_time  != ''  and  export_time  != 'null' ">
+	  		<![CDATA[ A.export_time = #{export_time}, ]]>
+	  	</if>
+	  	<if test=" result_url  != null and  result_url  != ''  and  result_url  != 'null' ">
+	  		<![CDATA[ A.result_url = #{result_url}, ]]>
+	  	</if>
+	  	<if test=" share_url  != null and  share_url  != ''  and  share_url  != 'null' ">
+	  		<![CDATA[ A.share_url = #{share_url}, ]]>
+	  	</if>
+	  	<if test=" promotion_id  != null and  promotion_id  != ''  and  promotion_id  != 'null' ">
+	  		<![CDATA[ A.promotion_id = #{promotion_id}, ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.created_time = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.created_by = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.modified_time = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.modified_by = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.version = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.delflag = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.ORDER_ID = #{order_id}]]>
+  	</update>
+  
+  	<delete id="deleteOrder" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BU_ORDER where ORDER_ID = #{order_id} ]]>
+	</delete>
+	
+ 	<select id="findOneOrder" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT A.*,B.template_name FROM BU_ORDER A
+		left join BU_BENISON_TEMPLATE B
+		on A.template_id = B.template_id
+		<include refid="orderWhereCondition" />
+  	</select>
+    
+  	<select id="findAllOrder" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BU_ORDER A ]]>
+		<include refid="orderWhereCondition" />
+  	</select>
+  	
+  	<!-- 保留原始findAllMap -->
+ 	<select id="findAllMapOrderOld" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BU_ORDER A ]]>
+		<include refid="orderWhereCondition" />
+	</select>
+<!-- 	SELECT A.order_id,A.created_time,A.order_code,A.transaction_no,A.total_price,A.pay_time,A.back_time,A.back_by,A.back_reason,
+  		   A.user_nickname,A.user_phone,A.bless_name,A.write_name,C.screen_name,
+  		   case A.order_status
+  		   		when '0' then '草稿'
+  		   		when '1' then '待支付'
+  		   		when '2' then '已支付'
+  		   		when '3' then '已播放'
+  		   		when '4' then '已取消'
+  		   		when '5' then '已退单'
+  		   		when '6' then '已退款'
+  		   	end as order_status
+  		FROM BU_ORDER A
+		left join BU_BENISON_TEMPLATE B
+		on A.template_id = B.template_id
+		left join BU_SCREEN C
+		on B.screen_id = C.screen_id
+          where 1=1 
+          AND A.DELFLAG = '1' 
+        <if test=" orderCode != null and orderCode != '' and orderCode != 'null' ">
+            <![CDATA[ AND A.order_code like concat('%', #{orderCode}, '%') ]]>
+        </if> 
+        <if test=" transactionNo != null and transactionNo != '' and transactionNo != 'null' ">
+            <![CDATA[ AND A.transaction_no like concat('%', #{transactionNo}, '%') ]]>
+        </if> 
+        <if test=" userNickname != null and userNickname != '' and userNickname != 'null' ">
+            <![CDATA[ AND A.user_nickname like concat('%', #{userNickname}, '%') ]]>
+        </if>
+        <if test=" startDate != null and startDate != '' and startDate != 'null' and (endDate == null or endDate == '' or endDate == 'null')">
+            <![CDATA[ AND DATE_FORMAT(A.created_time,'%Y-%m-%d') = #{startDate} ]]>
+        </if>
+        <if test=" endDate != null and endDate != '' and endDate != 'null' and (startDate == null or startDate == '' or startDate == 'null')">
+            <![CDATA[ AND DATE_FORMAT(A.created_time,'%Y-%m-%d') = #{endDate} ]]>
+        </if>
+        <if test=" startDate != null and startDate != '' and startDate != 'null' and endDate != null and endDate != '' and endDate != 'null'">
+            <![CDATA[ AND DATE_FORMAT(A.created_time,'%Y-%m-%d') >= #{startDate} ]]>
+            <![CDATA[ AND DATE_FORMAT(A.created_time,'%Y-%m-%d') <= #{endDate} ]]>
+        </if>
+        
+		<if test=" screenName != null and screenName != '' and screenName != 'null' ">
+            <![CDATA[ AND C.screen_name like concat('%', #{screenName}, '%') ]]>
+        </if>
+        <if test=" orderStatus != null and orderStatus != '' and orderStatus != 'null' ">
+            <![CDATA[ AND A.order_status = #{orderStatus} ]]>
+        </if>
+          ORDER BY created_time DESC
+  	</select> -->
+  	
+  	<select id="findAllMapOrder" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+  		SELECT A.order_id,A.created_time,A.order_code,A.transaction_no,A.total_price,A.pay_time,A.back_time,A.back_by,A.back_reason,
+  		   A.user_nickname,A.user_phone,A.bless_name,A.write_name,A.screen_name,
+  		   case A.order_status
+  		   		when '0' then '草稿'
+  		   		when '1' then '待支付'
+  		   		when '2' then '已支付'
+  		   		when '3' then '已播放'
+  		   		when '4' then '已取消'
+  		   		when '5' then '已退单'
+  		   		when '6' then '已退款'
+  		   	end as order_status
+  		FROM BU_ORDER A
+          where 1=1 
+          AND A.DELFLAG = '1' 
+        <if test=" orderCode != null and orderCode != '' and orderCode != 'null' ">
+            <![CDATA[ AND A.order_code like concat('%', #{orderCode}, '%') ]]>
+        </if> 
+        <if test=" transactionNo != null and transactionNo != '' and transactionNo != 'null' ">
+            <![CDATA[ AND A.transaction_no like concat('%', #{transactionNo}, '%') ]]>
+        </if> 
+        <if test=" userNickname != null and userNickname != '' and userNickname != 'null' ">
+            <![CDATA[ AND A.user_nickname like concat('%', #{userNickname}, '%') ]]>
+        </if>
+        <if test=" startDate != null and startDate != '' and startDate != 'null' and (endDate == null or endDate == '' or endDate == 'null')">
+            <![CDATA[ AND DATE_FORMAT(A.created_time,'%Y-%m-%d') = #{startDate} ]]>
+        </if>
+        <if test=" endDate != null and endDate != '' and endDate != 'null' and (startDate == null or startDate == '' or startDate == 'null')">
+            <![CDATA[ AND DATE_FORMAT(A.created_time,'%Y-%m-%d') = #{endDate} ]]>
+        </if>
+        <if test=" startDate != null and startDate != '' and startDate != 'null' and endDate != null and endDate != '' and endDate != 'null'">
+            <![CDATA[ AND DATE_FORMAT(A.created_time,'%Y-%m-%d') >= #{startDate} ]]>
+            <![CDATA[ AND DATE_FORMAT(A.created_time,'%Y-%m-%d') <= #{endDate} ]]>
+        </if>
+        
+		<if test=" screenName != null and screenName != '' and screenName != 'null' ">
+            <![CDATA[ AND A.screen_name like concat('%', #{screenName}, '%') ]]>
+        </if>
+        <if test=" orderStatus != null and orderStatus != '' and orderStatus != 'null' ">
+            <![CDATA[ AND A.order_status = #{orderStatus} ]]>
+        </if>
+          ORDER BY created_time DESC
+  	</select>
+  	
+  	<select id="findOrderTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BU_ORDER A ]]>
+		<include refid="orderWhereCondition" />
+  	</select>
+  
+  	<select id="queryOrderForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BU_ORDER A ]]>
+		<include refid="orderWhereCondition" />
+  	</select>
+  	
+  	<!-- 注意：查询语句要重新写
+  	<select id="queryOrderByConForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		SELECT A.order_id,A.order_code,A.transaction_no,A.order_type,A.order_status,A.total_price,A.user_nickname,A.created_time,
+			C.screen_name,A.confirm_status 
+		FROM BU_ORDER A
+		left join BU_BENISON_TEMPLATE B
+		on A.template_id = B.template_id
+		left join BU_SCREEN C
+		on B.screen_id = C.screen_id
+          where 1=1 
+          AND A.DELFLAG = '1' 
+        <if test=" orderCode != null and orderCode != '' and orderCode != 'null' ">
+            <![CDATA[ AND A.order_code like concat('%', #{orderCode}, '%') ]]>
+        </if> 
+        <if test=" transactionNo != null and transactionNo != '' and transactionNo != 'null' ">
+            <![CDATA[ AND A.transaction_no like concat('%', #{transactionNo}, '%') ]]>
+        </if> 
+        <if test=" userNickname != null and userNickname != '' and userNickname != 'null' ">
+            <![CDATA[ AND A.user_nickname like concat('%', #{userNickname}, '%') ]]>
+        </if>
+        <if test=" startDate != null and startDate != '' and startDate != 'null' and (endDate == null or endDate == '' or endDate == 'null')">
+            <![CDATA[ AND DATE_FORMAT(A.created_time,'%Y-%m-%d') = #{startDate} ]]>
+        </if>
+        <if test=" endDate != null and endDate != '' and endDate != 'null' and (startDate == null or startDate == '' or startDate == 'null')">
+            <![CDATA[ AND DATE_FORMAT(A.created_time,'%Y-%m-%d') = #{endDate} ]]>
+        </if>
+        <if test=" startDate != null and startDate != '' and startDate != 'null' and endDate != null and endDate != '' and endDate != 'null'">
+            <![CDATA[ AND DATE_FORMAT(A.created_time,'%Y-%m-%d') >= #{startDate} ]]>
+            <![CDATA[ AND DATE_FORMAT(A.created_time,'%Y-%m-%d') <= #{endDate} ]]>
+        </if>
+        
+		<if test=" screenName != null and screenName != '' and screenName != 'null' ">
+            <![CDATA[ AND C.screen_name like concat('%', #{screenName}, '%') ]]>
+        </if>
+        <if test=" orderStatus != null and orderStatus != '' and orderStatus != 'null' ">
+            <![CDATA[ AND A.order_status = #{orderStatus} ]]>
+        </if>
+          ORDER BY created_time DESC
+  	</select> -->
+  	
+  	<!-- 注意：列表查询 -->
+  	<select id="queryOrderByConForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		SELECT * FROM BU_ORDER A
+          where 1=1 
+          AND A.DELFLAG = '1' 
+        <if test=" orderCode != null and orderCode != '' and orderCode != 'null' ">
+            <![CDATA[ AND A.order_code like concat('%', #{orderCode}, '%') ]]>
+        </if> 
+        <if test=" transactionNo != null and transactionNo != '' and transactionNo != 'null' ">
+            <![CDATA[ AND A.transaction_no like concat('%', #{transactionNo}, '%') ]]>
+        </if> 
+        <if test=" userNickname != null and userNickname != '' and userNickname != 'null' ">
+            <![CDATA[ AND A.user_nickname like concat('%', #{userNickname}, '%') ]]>
+        </if>
+        <if test=" startDate != null and startDate != '' and startDate != 'null' and (endDate == null or endDate == '' or endDate == 'null')">
+            <![CDATA[ AND DATE_FORMAT(A.created_time,'%Y-%m-%d') = #{startDate} ]]>
+        </if>
+        <if test=" endDate != null and endDate != '' and endDate != 'null' and (startDate == null or startDate == '' or startDate == 'null')">
+            <![CDATA[ AND DATE_FORMAT(A.created_time,'%Y-%m-%d') = #{endDate} ]]>
+        </if>
+        <if test=" startDate != null and startDate != '' and startDate != 'null' and endDate != null and endDate != '' and endDate != 'null'">
+            <![CDATA[ AND DATE_FORMAT(A.created_time,'%Y-%m-%d') >= #{startDate} ]]>
+            <![CDATA[ AND DATE_FORMAT(A.created_time,'%Y-%m-%d') <= #{endDate} ]]>
+        </if>
+        
+		<if test=" screenName != null and screenName != '' and screenName != 'null' ">
+            <![CDATA[ AND A.screen_name like concat('%', #{screenName}, '%') ]]>
+        </if>
+        <if test=" orderStatus != null and orderStatus != '' and orderStatus != 'null' ">
+            <![CDATA[ AND A.order_status = #{orderStatus} ]]>
+        </if>
+        <if test=" confirmStatus != null and confirmStatus != '' and confirmStatus != 'null' ">
+            <![CDATA[ AND A.confirm_status = #{confirmStatus} ]]>
+        </if>
+          ORDER BY created_time DESC
+  	</select>
+  	
+  	<select id="findAllByTemplateId" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		SELECT A.* FROM BU_ORDER A 
+		where A.template_id = #{templateId}
+	</select>
+	
+	<select id="findAllMapByComId" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[SELECT A.* FROM BU_ORDER A 
+		where A.order_id in (select B.order_id from BU_ORDER_DETAIL B where B.commodity_id = #{commodityId} and B.play_date = #{playDate})
+		and A.order_status not in ("0","1","4","5","6") and A.confirm_status not in ("2")]]>
+	</select>
+	
+	<select id="findOrderCountList2Name" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		select s.screen_name as screenName,s.screen_id AS screenId,
+		<if test=' nameBy=="order_id" '>
+            count(o.${nameBy}) 
+        </if>
+        <if test=' nameBy=="pay_price" '>
+            SUM(o.${nameBy}-(case when o.back_price is null then 0 else o.back_price end))
+        </if>
+		as total from bu_screen s 
+			left outer join 
+		bu_order o 
+			on 
+		s.screen_id = o.screen_id and o.delflag = '1' and o.order_status in ('2','3','6')
+			 group by 
+		s.screen_name,s.screen_id;
+	</select>
+	
+	<select id="findOrderCount4Name" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		select s.screen_name as screenName,s.screen_id AS screenId,
+		<if test=' nameBy=="order_id" '>
+            count(o.${nameBy}) 
+        </if>
+        <if test=' nameBy=="pay_price" '>
+            SUM((case when o.${nameBy} is null then 0 else o.${nameBy} end)-(case when o.back_price is null then 0 else o.back_price end)) 
+        </if>
+		as total from bu_screen s 
+			left outer join 
+		bu_order o 
+			on 
+		s.screen_id = o.screen_id and o.delflag = '1' and o.order_status in ('2','3','6')
+			left join bu_order_detail od 
+            on
+        od.order_id = o.order_id
+			 group by 
+		s.screen_name,s.screen_id;
+	</select>
+	
+	<select id="findOrderCountList2Type" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		select bt.type_name  as typeName,
+		bt.type_id AS typeId,
+		<if test=' nameBy=="order_id" '>
+            count(o.${nameBy}) 
+        </if>
+        <if test=' nameBy=="pay_price" '>
+            SUM((case when o.${nameBy} is null then 0 else o.${nameBy} end)-(case when o.back_price is null then 0 else o.back_price end)) 
+        </if>
+		as total from bu_benison_type bt 
+			left outer join
+		bu_order o 
+			on 
+		bt.type_id = o.type_id and o.screen_id = #{screenId} and o.delflag = '1' and o.order_status in ('2','3','6')
+			group by 
+		bt.type_name,bt.type_id 
+		UNION ALL SELECT 
+		    '定制' AS typeName, 
+		    '' AS typeId,
+		    <if test=' nameBy=="order_id" '>
+	            count(o.${nameBy}) 
+	        </if>
+	        <if test=' nameBy=="pay_price" '>
+	            SUM((case when o.${nameBy} is null then 0 else o.${nameBy} end)-(case when o.back_price is null then 0 else o.back_price end)) 
+	        </if>
+		    AS total
+		FROM
+		    bu_order o
+		WHERE
+		    o.screen_id = #{screenId}
+		        AND o.delflag = '1' and o.order_status in ('2','3','6')
+		        AND o.type_id IS NULL;
+	</select>
+	
+	<select id="findOrderCountList2Benison" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		select b.benison_code  as benisonCode,
+		<if test=' nameBy=="order_id" '>
+            count(o.${nameBy}) 
+        </if>
+        <if test=' nameBy=="pay_price" '>
+            SUM((case when o.${nameBy} is null then 0 else o.${nameBy} end)-(case when o.back_price is null then 0 else o.back_price end)) 
+        </if>
+		as total from bu_benison b
+			left outer join
+		bu_order o 
+			on 
+		b.benison_id = o.benison_id 
+		and o.screen_id = #{screenId} 
+		and o.type_id = #{typeId} 
+		and o.delflag = '1' 
+		and o.order_status in ('2','3','6')
+			group by 
+		b.benison_code
+		UNION ALL SELECT 
+		    '定制' AS benisonCode, 
+		    <if test=' nameBy=="order_id" '>
+	            count(o.${nameBy}) 
+	        </if>
+	        <if test=' nameBy=="pay_price" '>
+	            SUM((case when o.${nameBy} is null then 0 else o.${nameBy} end)-(case when o.back_price is null then 0 else o.back_price end)) 
+	        </if>
+		    AS total
+		FROM
+		    bu_order o
+		WHERE
+		    o.screen_id = #{screenId}
+		        and o.type_id = #{typeId}
+		        AND o.delflag = '1' 
+		        and o.order_status in ('2','3','6')
+		        AND o.benison_id IS NULL;
+	</select>
+	
+	<select id="findTimeOrderList" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[
+			SELECT 
+			    od.play_date AS playDate
+			FROM
+			    bu_order o,
+			    bu_order_detail od
+			WHERE
+			    o.order_id = od.order_id
+			GROUP BY od.play_date
+			ORDER BY od.play_date ASC
+		]]>
+	</select>
+	
+	<select id="findTypeOrderList" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+        SELECT 
+      		 <if test=' nameBy=="order_id" '>
+				<foreach item="item" index="index" collection="secondColumsList" separator=",">
+					<choose>
+						<when test='item.TypeName == "小计"'> 
+							count(distinct if(o.screen_id = #{item.screenId}, o.${nameBy} ,null)) as #{item.typeField}
+				      	</when> 
+				      	<when test='item.TypeName == "定制"'> 
+							count(distinct if(o.screen_id = #{item.screenId} and o.type_id is null, o.${nameBy} ,null)) as #{item.typeField}
+				      	</when>
+				      	<otherwise>    
+				        	count(distinct if(o.screen_id = #{item.screenId} and o.type_id = #{item.typeId}, o.${nameBy} ,null)) as #{item.typeField}
+				      	</otherwise>
+			      	</choose>
+				</foreach>
+	        </if>
+	        <if test=' nameBy=="pay_price" '>
+	        	<foreach item="item" index="index" collection="secondColumsList" separator=",">
+		        	<choose>
+						<when test='item.TypeName == "小计"'> 
+							SUM(distinct if(o.screen_id = #{item.screenId}, o.${nameBy}-(case when o.back_price is null then 0 else o.back_price end),0)) as #{item.typeField}
+				      	</when>
+				      	<when test='item.TypeName == "定制"'> 
+							SUM(distinct if(o.screen_id = #{item.screenId} and o.type_id is null, o.${nameBy}-(case when o.back_price is null then 0 else o.back_price end),null)) as #{item.typeField}
+				      	</when> 
+				      	<otherwise>    
+				      		SUM(distinct if(o.screen_id = #{item.screenId}and o.type_id = #{item.typeId}, o.${nameBy}-(case when o.back_price is null then 0 else o.back_price end),0)) as #{item.typeField}
+				      	</otherwise>
+			      	</choose>
+				</foreach>
+	        </if>
+		FROM
+		    bu_order o
+		        LEFT JOIN
+		    bu_order_detail od ON o.order_id = od.order_id  
+		    where  o.delflag = '1' and o.order_status in ('2','3','6')
+			<if test=" playDate != null and playDate != '' and playDate != 'null' ">
+		    	and od.play_date = #{playDate}
+		    </if>
+	</select>
+	
+	<select id="findBenisonOrderList" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+        SELECT 
+      		 <if test=' nameBy=="order_id" '>
+				<foreach item="item" index="index" collection="thirdColumsList" separator=",">
+					<choose>
+				      	<when test='item.benisonId == "DINGZHI"'> 
+<!-- 							count(distinct if(o.screen_id = #{item.screenId} and o.type_id is null and o.benison_id = #{item.benisonId}, o.${nameBy} ,null)) as #{item.typeField} -->
+							0 as #{item.typeField}
+				      	</when>
+				      	<otherwise>    
+				        	count(distinct if(o.screen_id = #{item.screenId} and o.type_id = #{item.typeId} and o.benison_id = #{item.benisonId}, o.${nameBy} ,null)) as #{item.typeField}
+				      	</otherwise>
+			      	</choose>
+				</foreach>
+	        </if>
+	        <if test=' nameBy=="pay_price" '>
+	        	<foreach item="item" index="index" collection="thirdColumsList" separator=",">
+		        	<choose>
+				      	<when test='item.TypeName == "定制"'> 
+<!-- 							SUM(distinct if(o.screen_id = #{item.screenId} and o.type_id is null and o.benison_id = #{item.benisonId}, o.${nameBy}-(case when o.back_price is null then 0 else o.back_price end),null)) as #{item.typeField} -->
+				      		0 as #{item.typeField}
+				      	</when> 
+				      	<otherwise>    
+				      		SUM(distinct if(o.screen_id = #{item.screenId} and o.type_id = #{item.typeId} and o.benison_id = #{item.benisonId}, o.${nameBy}-(case when o.back_price is null then 0 else o.back_price end),0)) as #{item.typeField}
+				      	</otherwise>
+			      	</choose>
+				</foreach>
+	        </if>
+		FROM
+		    bu_order o
+		        LEFT JOIN
+		    bu_order_detail od ON o.order_id = od.order_id  
+		    where  o.delflag = '1' and o.order_status in ('2','3','6')
+			<if test=" playDate != null and playDate != '' and playDate != 'null' ">
+		    	and od.play_date = #{playDate}
+		    </if>
+	</select>
+	
+	<select id="findFirstColumns" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[
+			SELECT 
+			    a.screen_code AS screenCode,
+			    a.screen_name AS screenName,
+			    (b.type_num + 2) AS colspan
+			FROM
+			    bu_screen a,
+			    (SELECT 
+			        COUNT(*) AS type_num
+			    FROM
+			        bu_benison_type) b
+			ORDER BY a.screen_code
+
+		]]>
+	</select>
+	
+	<select id="findNewFirstColumns" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[
+			SELECT 
+			    a.screen_code AS screenCode,
+			    a.screen_id as screenId,
+			    a.screen_name AS screenName,
+			    (b.type_num+1) AS colspan
+			FROM
+			    bu_screen a,
+			    (SELECT 
+			        COUNT(*) AS type_num
+			    FROM
+			        bu_benison_type bt
+			    LEFT JOIN bu_benison b ON bt.type_id = b.type_id) b
+			    where screen_id = #{screenId}
+			ORDER BY a.screen_code
+		]]>
+	</select>
+	
+	<select id="findSecondColumns" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[
+			SELECT 
+			    z.screen_id AS screenId,
+			    z.type_id AS typeId,
+			    z.screen_name AS screenName,
+			    z.type_field AS typeField,
+			    z.type_name AS TypeName,
+				(z.benison_num + 1) AS colspan
+			FROM
+			    (SELECT 
+			        a.screen_name,
+		            a.screen_id,
+		            CONCAT(a.screen_code, '|', b.type_code) AS type_field,
+		            b.type_name,
+		            b.type_id,
+       				bn.benison_num
+			    FROM
+			        bu_screen a, bu_benison_type b,(SELECT 
+					COUNT(*) AS benison_num
+						FROM
+					bu_benison) bn  
+			        UNION ALL SELECT 
+					a.screen_name,
+                    a.screen_id,
+					CONCAT(a.screen_code, '|', 'DINGZHI') AS type_field,
+					'定制' AS type_name,
+					'' as type_id,
+        			bn.benison_num
+                    FROM
+					bu_screen a,(SELECT 
+					COUNT(*) AS benison_num
+						FROM
+					bu_benison) bn
+			        UNION ALL SELECT 
+					a.screen_name,
+                    a.screen_id,
+					CONCAT(a.screen_code, '|', 'ZCOUNT') AS type_field,
+					'小计' AS type_name,
+					'' as type_id,
+        			bn.benison_num
+				FROM
+					bu_screen a,(SELECT 
+					COUNT(*) AS benison_num
+						FROM
+					bu_benison) bn) z
+			ORDER BY z.type_field
+		]]>
+	</select>
+	
+	<select id="findNewSecondColumns" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[
+			SELECT 
+			    z.screen_id AS screenId,
+			    z.type_id AS typeId,
+			    z.screen_name AS screenName,
+			    z.type_field AS typeField,
+			    z.type_name AS TypeName,
+			    (select count(*) from bu_benison where type_id = z.type_id) as colspan
+			FROM
+			    (SELECT 
+			        a.screen_name,
+			            a.screen_id,
+			            CONCAT(a.screen_code, '|', b.type_code) AS type_field,
+			            b.type_name,
+			            b.type_id
+			    FROM
+			        bu_screen a, bu_benison_type b) z
+	        where screen_id = #{screenId}
+			ORDER BY z.type_name
+		]]>
+	</select>
+	
+	<select id="findThirdColumns" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[
+			SELECT 
+			    z.screen_id AS screenId,
+			    z.type_id AS typeId,
+			    z.benison_id AS benisonId,
+			    z.type_field AS typeField,
+			    z.screen_name AS screenName,
+			    z.type_name AS TypeName,
+			    z.benison_code AS benisonCode
+			FROM
+			    (SELECT 
+			    a.screen_name,
+			    a.screen_id,
+			    CONCAT(a.screen_code,
+			            '|',
+			            bt.type_code,
+			            '|',
+			            case when b.benison_code is null then 'DINGZHI' else b.benison_code end) AS type_field,
+			    bt.type_name,
+			    bt.type_id,
+			    b.benison_code,
+			    (case when b.benison_id is null then 'DINGZHI' else b.benison_id end) as benison_id
+			FROM
+			    bu_screen a,
+			    bu_benison_type bt
+			        LEFT OUTER JOIN
+			    bu_benison b ON bt.type_id = b.type_id) z
+			where screen_id = #{screenId}
+			ORDER BY z.type_name
+		]]>
+	</select>
+	
+	<!-- 查询屏幕订单汇总统计第一行的列名 -->
+	<select id="findFirstColumnsForSOT" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[
+			SELECT 
+			    distinct('aplayDate') AS field,
+			    '日期/屏幕' AS title,
+			    50 AS width,
+			    1 AS colspan,
+          		2 AS rowspan
+			FROM bu_screen c
+				
+			UNION ALL
+			SELECT 
+			    a.screen_code AS field,
+			    a.screen_name AS title,
+			    50 AS width,
+			    (b.type_num + 1) AS colspan,
+          		1 AS rowspan
+			FROM
+			    bu_screen a,
+			    (SELECT 
+			        COUNT(*) AS type_num
+			    FROM
+			        bu_benison_type) b
+			ORDER BY field
+
+		]]>
+	</select>
+	
+	<!-- 查询屏幕订单汇总统计第二行的列名 -->
+	<select id="findSecondColumnsForSOT" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[
+			SELECT 
+			    z.type_field AS field,
+			    z.type_name AS title,
+			    10 AS width,
+			    1 AS colspan,
+			    1 AS rowspan
+			FROM
+			    (SELECT 
+			        a.screen_name,
+			            CONCAT(a.screen_code, '|', b.type_code) AS type_field,
+			            b.type_name
+			    FROM
+			        bu_screen a, bu_benison_type b 
+			    UNION ALL 
+			    SELECT 
+			    	DISTINCT(a.screen_name),
+			            CONCAT(a.screen_code, '|', 'ZCOUNT') AS type_field,
+			            '小计' AS type_name
+			    FROM
+			        bu_screen a, bu_benison_type b) z
+			ORDER BY field
+		]]>
+	</select>
+	
+	<!-- 根据屏幕和播放起始时间查询一条订单总数 -->
+	<select id="findOneTimeOrderCount" parameterType="java.util.Map" resultType="int">
+		SELECT 
+		   count(distinct o.order_id)
+		FROM
+		    bu_order_detail od
+		        LEFT JOIN
+		    bu_order o ON od.order_id = o.order_id
+		WHERE
+			o.delflag = '1' and od.delflag = '1' and o.order_status in ('2','3','6') 
+		<if test=" screenId != null and screenId != '' and screenId != 'null' ">
+		    AND o.screen_id = #{screenId}
+		</if>
+	    <if test=" timeStart != null and timeStart != '' and timeStart != 'null' ">
+	    	<![CDATA[ AND od.time_start >= #{timeStart} ]]>
+		</if>
+		<if test=" timeEnd != null and timeEnd != '' and timeEnd != 'null' ">
+			<![CDATA[ AND od.time_end <= #{timeEnd} ]]>
+		</if>      
+  	</select>
+  	
+  	<!-- 根据屏幕和播放时间查询屏幕时间段订单列表 -->
+  	<select id="findScreenTimeOrderList" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[
+			SELECT 
+			    s.screen_name as screenName,a.total0,a.total1,a.total2,a.total3,a.total4,a.total5,a.total6,a.total7,a.total8,a.total9
+			FROM
+			    bu_screen s
+			   left outer join 
+			     (SELECT o.screen_id,  
+			     ]]>
+			     	<foreach item="item" index="index" collection="columns" separator=",">
+						<![CDATA[count(if(od.time_start>= #{item.timeStart} and od.time_end<= #{item.timeEnd}, o.order_id ,null)) as 'total${index}' ]]>
+					</foreach>  
+					<![CDATA[	 
+						FROM
+					    bu_order o
+					        LEFT JOIN
+					    bu_order_detail od ON o.order_id = od.order_id 
+					    where o.delflag = '1' and o.order_status in ('2','3','6') 
+			                group by o.screen_id) a
+			                on a.screen_id = s.screen_id
+		 				]]>
+	</select>
+	
+	<!-- 查询订单总数 -->
+	<select id="getAllCount" parameterType="java.util.Map" resultType="int">
+		<![CDATA[
+			SELECT 
+			    COUNT(*)
+			FROM
+			    bu_order o
+			        LEFT JOIN
+			    bu_order_detail od ON o.order_id = od.order_id
+			        AND o.delflag = '1' and o.order_status in ('2','3','6') 
+		]]>	  
+  	</select>
+  	
+  	<select id="findAllOrderByStatus" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+  		<![CDATA[
+			SELECT 
+			    o.order_id,o.order_status, od.play_date,od.time_start,od.time_end
+			FROM
+			    bu_order o
+			        LEFT JOIN
+			    bu_order_detail od ON o.order_id = od.order_id
+			WHERE
+			    od.play_date <= CURDATE()
+			        AND o.order_status = '2'
+			        AND o.confirm_status = '1'
+			ORDER BY od.play_date,od.time_start asc
+		]]>	  
+	</select>
+</mapper>

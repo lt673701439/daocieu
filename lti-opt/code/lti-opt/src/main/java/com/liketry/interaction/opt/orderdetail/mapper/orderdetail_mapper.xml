@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OrderDetail">
+	<resultMap id="orderDetailResultMap" type="com.liketry.interaction.opt.orderdetail.model.OrderDetailBO">
+		<result property="detailId" column="detail_id"/>
+		<result property="orderId" column="order_id"/>
+		<result property="commodityId" column="commodity_id"/>
+		<result property="commodityCode" column="commodity_code"/>
+		<result property="commodityName" column="commodity_name"/>
+		<result property="commodityDescription" column="commodity_description"/>
+		<result property="commodityPrice" column="commodity_price"/>
+		<result property="playDate" column="play_date"/>
+		<result property="timeStart" column="time_start"/>
+		<result property="timeEnd" column="time_end"/>
+		<result property="singleTime" column="single_time"/>
+		<result property="playTimes" column="play_times"/>
+		<result property="skuId" column="sku_id"/>
+		<result property="skuCode" column="sku_code"/>
+		<result property="skuName" column="sku_name"/>
+		<result property="skuDescription" column="sku_description"/>
+		<result property="skuPrice" column="sku_price"/>
+		<result property="exportBy" column="export_by"/>
+		<result property="exportId" column="export_id"/>
+		<result property="exportTime" column="export_time"/>
+		<result property="createdTime" column="created_time"/>
+		<result property="createdBy" column="created_by"/>
+		<result property="modifiedTime" column="modified_time"/>
+		<result property="modifiedBy" column="modified_by"/>
+		<result property="version" column="version"/>
+		<result property="delflag" column="delflag"/>
+  	</resultMap>
+  
+  	<sql id="orderDetailWhereCondition">
+		<where>
+	  	<if test=" detail_id != null and detail_id != '' and detail_id != 'null' ">
+			<![CDATA[ AND A.detail_id = #{detail_id} ]]>
+	  	</if>
+	  	<if test=" order_id != null and order_id != '' and order_id != 'null' ">
+			<![CDATA[ AND A.order_id = #{order_id} ]]>
+	  	</if>
+	  	<if test=" commodity_id != null and commodity_id != '' and commodity_id != 'null' ">
+			<![CDATA[ AND A.commodity_id = #{commodity_id} ]]>
+	  	</if>
+	  	<if test=" commodity_code != null and commodity_code != '' and commodity_code != 'null' ">
+			<![CDATA[ AND A.commodity_code = #{commodity_code} ]]>
+	  	</if>
+	  	<if test=" commodity_name != null and commodity_name != '' and commodity_name != 'null' ">
+			<![CDATA[ AND A.commodity_name = #{commodity_name} ]]>
+	  	</if>
+	  	<if test=" commodity_description != null and commodity_description != '' and commodity_description != 'null' ">
+			<![CDATA[ AND A.commodity_description = #{commodity_description} ]]>
+	  	</if>
+	  	<if test=" commodity_price != null ">
+	  		<![CDATA[ AND A.commodity_price = ${commodity_price} ]]>
+	  	</if>
+	  	<if test=" play_date != null and play_date != '' and play_date != 'null' ">
+			<![CDATA[ AND A.play_date = #{play_date} ]]>
+	  	</if>
+	  	<if test=" time_start != null and time_start != '' and time_start != 'null' ">
+			<![CDATA[ AND A.time_start = #{time_start} ]]>
+	  	</if>
+	  	<if test=" time_end != null and time_end != '' and time_end != 'null' ">
+			<![CDATA[ AND A.time_end = #{time_end} ]]>
+	  	</if>
+	  	<if test=" single_time != null ">
+	  		<![CDATA[ AND A.single_time = ${single_time} ]]>
+	  	</if>
+	  	<if test=" play_times != null ">
+	  		<![CDATA[ AND A.play_times = ${play_times} ]]>
+	  	</if>
+	  	<if test=" sku_id != null and sku_id != '' and sku_id != 'null' ">
+			<![CDATA[ AND A.sku_id = #{sku_id} ]]>
+	  	</if>
+	  	<if test=" sku_code != null and sku_code != '' and sku_code != 'null' ">
+			<![CDATA[ AND A.sku_code = #{sku_code} ]]>
+	  	</if>
+	  	<if test=" sku_name != null and sku_name != '' and sku_name != 'null' ">
+			<![CDATA[ AND A.sku_name = #{sku_name} ]]>
+	  	</if>
+	  	<if test=" sku_description != null and sku_description != '' and sku_description != 'null' ">
+			<![CDATA[ AND A.sku_description = #{sku_description} ]]>
+	  	</if>
+	  	<if test=" sku_price != null ">
+	  		<![CDATA[ AND A.sku_price = ${sku_price} ]]>
+	  	</if>
+	  	<if test=" export_by != null and export_by != '' and export_by != 'null' ">
+			<![CDATA[ AND A.export_by = #{export_by} ]]>
+	  	</if>
+	  	<if test=" export_id != null and export_id != '' and export_id != 'null' ">
+			<![CDATA[ AND A.export_id = #{export_id} ]]>
+	  	</if>
+	  	<if test=" export_time != null and export_time != '' and export_time != 'null' ">
+			<![CDATA[ AND A.export_time = #{export_time} ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.created_time = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ AND A.created_by = #{created_by} ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.modified_time = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ AND A.modified_by = #{modified_by} ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.version = ${version} ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.delflag = #{delflag} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addOrderDetail"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BU_ORDER_DETAIL
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" detail_id  != null and  detail_id  != ''  and  detail_id  != 'null' ">
+				<![CDATA[ detail_id , ]]>
+	  		</if>
+	  		<if test=" order_id  != null and  order_id  != ''  and  order_id  != 'null' ">
+				<![CDATA[ order_id , ]]>
+	  		</if>
+	  		<if test=" commodity_id  != null and  commodity_id  != ''  and  commodity_id  != 'null' ">
+				<![CDATA[ commodity_id , ]]>
+	  		</if>
+	  		<if test=" commodity_code  != null and  commodity_code  != ''  and  commodity_code  != 'null' ">
+				<![CDATA[ commodity_code , ]]>
+	  		</if>
+	  		<if test=" commodity_name  != null and  commodity_name  != ''  and  commodity_name  != 'null' ">
+				<![CDATA[ commodity_name , ]]>
+	  		</if>
+	  		<if test=" commodity_description  != null and  commodity_description  != ''  and  commodity_description  != 'null' ">
+				<![CDATA[ commodity_description , ]]>
+	  		</if>
+	  		<if test=" commodity_price  != null ">
+				<![CDATA[ commodity_price , ]]>
+	  		</if>
+	  		<if test=" play_date  != null and  play_date  != ''  and  play_date  != 'null' ">
+				<![CDATA[ play_date , ]]>
+	  		</if>
+	  		<if test=" time_start  != null and  time_start  != ''  and  time_start  != 'null' ">
+				<![CDATA[ time_start , ]]>
+	  		</if>
+	  		<if test=" time_end  != null and  time_end  != ''  and  time_end  != 'null' ">
+				<![CDATA[ time_end , ]]>
+	  		</if>
+	  		<if test=" single_time  != null ">
+				<![CDATA[ single_time , ]]>
+	  		</if>
+	  		<if test=" play_times  != null ">
+				<![CDATA[ play_times , ]]>
+	  		</if>
+	  		<if test=" sku_id  != null and  sku_id  != ''  and  sku_id  != 'null' ">
+				<![CDATA[ sku_id , ]]>
+	  		</if>
+	  		<if test=" sku_code  != null and  sku_code  != ''  and  sku_code  != 'null' ">
+				<![CDATA[ sku_code , ]]>
+	  		</if>
+	  		<if test=" sku_name  != null and  sku_name  != ''  and  sku_name  != 'null' ">
+				<![CDATA[ sku_name , ]]>
+	  		</if>
+	  		<if test=" sku_description  != null and  sku_description  != ''  and  sku_description  != 'null' ">
+				<![CDATA[ sku_description , ]]>
+	  		</if>
+	  		<if test=" sku_price  != null ">
+				<![CDATA[ sku_price , ]]>
+	  		</if>
+	  		<if test=" export_by  != null and  export_by  != ''  and  export_by  != 'null' ">
+				<![CDATA[ export_by , ]]>
+	  		</if>
+	  		<if test=" export_id  != null and  export_id  != ''  and  export_id  != 'null' ">
+				<![CDATA[ export_id , ]]>
+	  		</if>
+	  		<if test=" export_time  != null and  export_time  != ''  and  export_time  != 'null' ">
+				<![CDATA[ export_time , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ created_time , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ created_by , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ modified_time , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ modified_by , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ version , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ delflag , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" detail_id  != null and  detail_id  != ''  and  detail_id  != 'null' ">
+	  			<![CDATA[ #{detail_id} , ]]>
+	  		</if>
+	  		<if test=" order_id  != null and  order_id  != ''  and  order_id  != 'null' ">
+	  			<![CDATA[ #{order_id} , ]]>
+	  		</if>
+	  		<if test=" commodity_id  != null and  commodity_id  != ''  and  commodity_id  != 'null' ">
+	  			<![CDATA[ #{commodity_id} , ]]>
+	  		</if>
+	  		<if test=" commodity_code  != null and  commodity_code  != ''  and  commodity_code  != 'null' ">
+	  			<![CDATA[ #{commodity_code} , ]]>
+	  		</if>
+	  		<if test=" commodity_name  != null and  commodity_name  != ''  and  commodity_name  != 'null' ">
+	  			<![CDATA[ #{commodity_name} , ]]>
+	  		</if>
+	  		<if test=" commodity_description  != null and  commodity_description  != ''  and  commodity_description  != 'null' ">
+	  			<![CDATA[ #{commodity_description} , ]]>
+	  		</if>
+	  		<if test=" commodity_price  != null">
+	    		<![CDATA[ ${commodity_price} , ]]>
+	  		</if>
+	  		<if test=" play_date  != null and  play_date  != ''  and  play_date  != 'null' ">
+	  			<![CDATA[ #{play_date} , ]]>
+	  		</if>
+	  		<if test=" time_start  != null and  time_start  != ''  and  time_start  != 'null' ">
+	  			<![CDATA[ #{time_start} , ]]>
+	  		</if>
+	  		<if test=" time_end  != null and  time_end  != ''  and  time_end  != 'null' ">
+	  			<![CDATA[ #{time_end} , ]]>
+	  		</if>
+	  		<if test=" single_time  != null">
+	    		<![CDATA[ ${single_time} , ]]>
+	  		</if>
+	  		<if test=" play_times  != null">
+	    		<![CDATA[ ${play_times} , ]]>
+	  		</if>
+	  		<if test=" sku_id  != null and  sku_id  != ''  and  sku_id  != 'null' ">
+	  			<![CDATA[ #{sku_id} , ]]>
+	  		</if>
+	  		<if test=" sku_code  != null and  sku_code  != ''  and  sku_code  != 'null' ">
+	  			<![CDATA[ #{sku_code} , ]]>
+	  		</if>
+	  		<if test=" sku_name  != null and  sku_name  != ''  and  sku_name  != 'null' ">
+	  			<![CDATA[ #{sku_name} , ]]>
+	  		</if>
+	  		<if test=" sku_description  != null and  sku_description  != ''  and  sku_description  != 'null' ">
+	  			<![CDATA[ #{sku_description} , ]]>
+	  		</if>
+	  		<if test=" sku_price  != null">
+	    		<![CDATA[ ${sku_price} , ]]>
+	  		</if>
+	  		<if test=" export_by  != null and  export_by  != ''  and  export_by  != 'null' ">
+	  			<![CDATA[ #{export_by} , ]]>
+	  		</if>
+	  		<if test=" export_id  != null and  export_id  != ''  and  export_id  != 'null' ">
+	  			<![CDATA[ #{export_id} , ]]>
+	  		</if>
+	  		<if test=" export_time  != null and  export_time  != ''  and  export_time  != 'null' ">
+	  			<![CDATA[ #{export_time} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateOrderDetail" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BU_ORDER_DETAIL A ]]>
+		<set>
+	  	<if test=" order_id  != null and  order_id  != ''  and  order_id  != 'null' ">
+	  		<![CDATA[ A.order_id = #{order_id}, ]]>
+	  	</if>
+	  	<if test=" commodity_id  != null and  commodity_id  != ''  and  commodity_id  != 'null' ">
+	  		<![CDATA[ A.commodity_id = #{commodity_id}, ]]>
+	  	</if>
+	  	<if test=" commodity_code  != null and  commodity_code  != ''  and  commodity_code  != 'null' ">
+	  		<![CDATA[ A.commodity_code = #{commodity_code}, ]]>
+	  	</if>
+	  	<if test=" commodity_name  != null and  commodity_name  != ''  and  commodity_name  != 'null' ">
+	  		<![CDATA[ A.commodity_name = #{commodity_name}, ]]>
+	  	</if>
+	  	<if test=" commodity_description  != null and  commodity_description  != ''  and  commodity_description  != 'null' ">
+	  		<![CDATA[ A.commodity_description = #{commodity_description}, ]]>
+	  	</if>
+		<if test=" commodity_price  != null ">
+  			<![CDATA[ A.commodity_price = ${commodity_price} , ]]>
+		</if>
+	  	<if test=" play_date  != null and  play_date  != ''  and  play_date  != 'null' ">
+	  		<![CDATA[ A.play_date = #{play_date}, ]]>
+	  	</if>
+	  	<if test=" time_start  != null and  time_start  != ''  and  time_start  != 'null' ">
+	  		<![CDATA[ A.time_start = #{time_start}, ]]>
+	  	</if>
+	  	<if test=" time_end  != null and  time_end  != ''  and  time_end  != 'null' ">
+	  		<![CDATA[ A.time_end = #{time_end}, ]]>
+	  	</if>
+		<if test=" single_time  != null ">
+  			<![CDATA[ A.single_time = ${single_time} , ]]>
+		</if>
+		<if test=" play_times  != null ">
+  			<![CDATA[ A.play_times = ${play_times} , ]]>
+		</if>
+	  	<if test=" sku_id  != null and  sku_id  != ''  and  sku_id  != 'null' ">
+	  		<![CDATA[ A.sku_id = #{sku_id}, ]]>
+	  	</if>
+	  	<if test=" sku_code  != null and  sku_code  != ''  and  sku_code  != 'null' ">
+	  		<![CDATA[ A.sku_code = #{sku_code}, ]]>
+	  	</if>
+	  	<if test=" sku_name  != null and  sku_name  != ''  and  sku_name  != 'null' ">
+	  		<![CDATA[ A.sku_name = #{sku_name}, ]]>
+	  	</if>
+	  	<if test=" sku_description  != null and  sku_description  != ''  and  sku_description  != 'null' ">
+	  		<![CDATA[ A.sku_description = #{sku_description}, ]]>
+	  	</if>
+		<if test=" sku_price  != null ">
+  			<![CDATA[ A.sku_price = ${sku_price} , ]]>
+		</if>
+	  	<if test=" export_by  != null and  export_by  != ''  and  export_by  != 'null' ">
+	  		<![CDATA[ A.export_by = #{export_by}, ]]>
+	  	</if>
+	  	<if test=" export_id  != null and  export_id  != ''  and  export_id  != 'null' ">
+	  		<![CDATA[ A.export_id = #{export_id}, ]]>
+	  	</if>
+	  	<if test=" export_time  != null and  export_time  != ''  and  export_time  != 'null' ">
+	  		<![CDATA[ A.export_time = #{export_time}, ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.created_time = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.created_by = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.modified_time = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.modified_by = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.version = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.delflag = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.DETAIL_ID = #{detail_id}]]>
+  	</update>
+  
+  	<delete id="deleteOrderDetail" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BU_ORDER_DETAIL A where A.DETAIL_ID = #{detail_id} ]]>
+	</delete>
+  
+	<select id="findOneOrderDetail" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BU_ORDER_DETAIL A  ]]>
+		<include refid="orderDetailWhereCondition" />
+  	</select>
+    
+  	<select id="findAllOrderDetail" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BU_ORDER_DETAIL A ]]>
+		<include refid="orderDetailWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapOrderDetail" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BU_ORDER_DETAIL A ]]>
+		<include refid="orderDetailWhereCondition" />
+	</select>
+  
+  	<select id="findOrderDetailTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BU_ORDER_DETAIL A ]]>
+		<include refid="orderDetailWhereCondition" />
+  	</select>
+  
+  	<select id="queryOrderDetailForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BU_ORDER_DETAIL A ]]>
+		<include refid="orderDetailWhereCondition" />
+  	</select>
+  	
+  	<!-- 注意：查询语句要重新写 -->
+  	<select id="queryOrderDetailByConForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		SELECT A.* FROM BU_ORDER_DETAIL A, BU_ORDER B
+          where A.DELFLAG = '1' 
+		  AND A.order_id = #{orderId}
+		  AND A.order_id = B.order_id
+          ORDER BY A.commodity_code
+  	</select>
+  	
+  	<select id="findEffectOrderDetailList" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT 
+		    bu_order_detail.*
+		FROM
+		    bu_order_detail
+		        LEFT JOIN
+		    bu_order ON bu_order_detail.order_id = bu_order.order_id
+		WHERE 
+		bu_order.order_status IN ('2' , '3')
+		]]>
+		<if test=" commodity_id != null and commodity_id != '' and commodity_id != 'null' ">
+	    	  AND bu_order_detail.commodity_id = #{commodity_id}
+		</if>
+		<if test=" play_date != null and play_date != '' and play_date != 'null' ">
+	    	   AND bu_order_detail.play_date = #{play_date}
+		</if>
+	</select>
+</mapper>

@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Promotion">
+	<resultMap id="promotionResultMap" type="com.liketry.interaction.opt.promotion.model.PromotionBO">
+		<result property="promotionId" column="promotion_id"/>
+		<result property="promotionCode" column="promotion_code"/>
+		<result property="promotionName" column="promotion_name"/>
+		<result property="promotionDescription" column="promotion_description"/>
+		<result property="sortNum" column="sort_num"/>
+		<result property="promotionType" column="promotion_type"/>
+		<result property="promotionStatus" column="promotion_status"/>
+		<result property="promotionImg" column="promotion_img"/>
+		<result property="backUp" column="back_up"/>
+		<result property="addTime" column="add_time"/>
+		<result property="removeTime" column="remove_time"/>
+		<result property="startTime" column="start_time"/>
+		<result property="endTime" column="end_time"/>
+		<result property="isTogether" column="is_together"/>
+		<result property="createdTime" column="created_time"/>
+		<result property="createdBy" column="created_by"/>
+		<result property="modifiedTime" column="modified_time"/>
+		<result property="modifiedBy" column="modified_by"/>
+		<result property="version" column="version"/>
+		<result property="delflag" column="delflag"/>
+  	</resultMap>
+  
+  	<sql id="promotionWhereCondition">
+		<where>
+	  	<if test=" promotion_id != null and promotion_id != '' and promotion_id != 'null' ">
+			<![CDATA[ AND A.promotion_id = #{promotion_id} ]]>
+	  	</if>
+	  	<if test=" promotion_code != null and promotion_code != '' and promotion_code != 'null' ">
+			<![CDATA[ AND A.promotion_code = #{promotion_code} ]]>
+	  	</if>
+	  	<if test=" promotion_name != null and promotion_name != '' and promotion_name != 'null' ">
+			<![CDATA[ AND A.promotion_name = #{promotion_name} ]]>
+	  	</if>
+	  	<if test=" promotion_description != null and promotion_description != '' and promotion_description != 'null' ">
+			<![CDATA[ AND A.promotion_description = #{promotion_description} ]]>
+	  	</if>
+	  	<if test=" sort_num != null ">
+	  		<![CDATA[ AND A.sort_num = ${sort_num} ]]>
+	  	</if>
+	  	<if test=" promotion_type != null and promotion_type != '' and promotion_type != 'null' ">
+			<![CDATA[ AND A.promotion_type = #{promotion_type} ]]>
+	  	</if>
+	  	<if test=" promotion_status != null and promotion_status != '' and promotion_status != 'null' ">
+			<![CDATA[ AND A.promotion_status = #{promotion_status} ]]>
+	  	</if>
+	  	<if test=" promotion_img != null and promotion_img != '' and promotion_img != 'null' ">
+			<![CDATA[ AND A.promotion_img = #{promotion_img} ]]>
+	  	</if>
+	  	<if test=" back_up != null and back_up != '' and back_up != 'null' ">
+			<![CDATA[ AND A.back_up = #{back_up} ]]>
+	  	</if>
+	  	<if test=" add_time != null and add_time != '' and add_time != 'null' ">
+			<![CDATA[ AND A.add_time = #{add_time} ]]>
+	  	</if>
+	  	<if test=" remove_time != null and remove_time != '' and remove_time != 'null' ">
+			<![CDATA[ AND A.remove_time = #{remove_time} ]]>
+	  	</if>
+	  	<if test=" start_time != null and start_time != '' and start_time != 'null' ">
+			<![CDATA[ AND A.start_time = #{start_time} ]]>
+	  	</if>
+	  	<if test=" end_time != null and end_time != '' and end_time != 'null' ">
+			<![CDATA[ AND A.end_time = #{end_time} ]]>
+	  	</if>
+	  	<if test=" is_together != null and is_together != '' and is_together != 'null' ">
+			<![CDATA[ AND A.is_together = #{is_together} ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.created_time = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ AND A.created_by = #{created_by} ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.modified_time = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ AND A.modified_by = #{modified_by} ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.version = ${version} ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.delflag = #{delflag} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addPromotion"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BU_PROMOTION
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" promotion_id  != null and  promotion_id  != ''  and  promotion_id  != 'null' ">
+				<![CDATA[ promotion_id , ]]>
+	  		</if>
+	  		<if test=" promotion_code  != null and  promotion_code  != ''  and  promotion_code  != 'null' ">
+				<![CDATA[ promotion_code , ]]>
+	  		</if>
+	  		<if test=" promotion_name  != null and  promotion_name  != ''  and  promotion_name  != 'null' ">
+				<![CDATA[ promotion_name , ]]>
+	  		</if>
+	  		<if test=" promotion_description  != null and  promotion_description  != ''  and  promotion_description  != 'null' ">
+				<![CDATA[ promotion_description , ]]>
+	  		</if>
+	  		<if test=" sort_num  != null ">
+				<![CDATA[ sort_num , ]]>
+	  		</if>
+	  		<if test=" promotion_type  != null and  promotion_type  != ''  and  promotion_type  != 'null' ">
+				<![CDATA[ promotion_type , ]]>
+	  		</if>
+	  		<if test=" promotion_status  != null and  promotion_status  != ''  and  promotion_status  != 'null' ">
+				<![CDATA[ promotion_status , ]]>
+	  		</if>
+	  		<if test=" promotion_img  != null and  promotion_img  != ''  and  promotion_img  != 'null' ">
+				<![CDATA[ promotion_img , ]]>
+	  		</if>
+	  		<if test=" back_up  != null and  back_up  != ''  and  back_up  != 'null' ">
+				<![CDATA[ back_up , ]]>
+	  		</if>
+	  		<if test=" add_time  != null and  add_time  != ''  and  add_time  != 'null' ">
+				<![CDATA[ add_time , ]]>
+	  		</if>
+	  		<if test=" remove_time  != null and  remove_time  != ''  and  remove_time  != 'null' ">
+				<![CDATA[ remove_time , ]]>
+	  		</if>
+	  		<if test=" start_time  != null and  start_time  != ''  and  start_time  != 'null' ">
+				<![CDATA[ start_time , ]]>
+	  		</if>
+	  		<if test=" end_time  != null and  end_time  != ''  and  end_time  != 'null' ">
+				<![CDATA[ end_time , ]]>
+	  		</if>
+	  		<if test=" is_together  != null and  is_together  != ''  and  is_together  != 'null' ">
+				<![CDATA[ is_together , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ created_time , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ created_by , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ modified_time , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ modified_by , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ version , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ delflag , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" promotion_id  != null and  promotion_id  != ''  and  promotion_id  != 'null' ">
+	  			<![CDATA[ #{promotion_id} , ]]>
+	  		</if>
+	  		<if test=" promotion_code  != null and  promotion_code  != ''  and  promotion_code  != 'null' ">
+	  			<![CDATA[ #{promotion_code} , ]]>
+	  		</if>
+	  		<if test=" promotion_name  != null and  promotion_name  != ''  and  promotion_name  != 'null' ">
+	  			<![CDATA[ #{promotion_name} , ]]>
+	  		</if>
+	  		<if test=" promotion_description  != null and  promotion_description  != ''  and  promotion_description  != 'null' ">
+	  			<![CDATA[ #{promotion_description} , ]]>
+	  		</if>
+	  		<if test=" sort_num  != null">
+	    		<![CDATA[ ${sort_num} , ]]>
+	  		</if>
+	  		<if test=" promotion_type  != null and  promotion_type  != ''  and  promotion_type  != 'null' ">
+	  			<![CDATA[ #{promotion_type} , ]]>
+	  		</if>
+	  		<if test=" promotion_status  != null and  promotion_status  != ''  and  promotion_status  != 'null' ">
+	  			<![CDATA[ #{promotion_status} , ]]>
+	  		</if>
+	  		<if test=" promotion_img  != null and  promotion_img  != ''  and  promotion_img  != 'null' ">
+	  			<![CDATA[ #{promotion_img} , ]]>
+	  		</if>
+	  		<if test=" back_up  != null and  back_up  != ''  and  back_up  != 'null' ">
+	  			<![CDATA[ #{back_up} , ]]>
+	  		</if>
+	  		<if test=" add_time  != null and  add_time  != ''  and  add_time  != 'null' ">
+	  			<![CDATA[ #{add_time} , ]]>
+	  		</if>
+	  		<if test=" remove_time  != null and  remove_time  != ''  and  remove_time  != 'null' ">
+	  			<![CDATA[ #{remove_time} , ]]>
+	  		</if>
+	  		<if test=" start_time  != null and  start_time  != ''  and  start_time  != 'null' ">
+	  			<![CDATA[ #{start_time} , ]]>
+	  		</if>
+	  		<if test=" end_time  != null and  end_time  != ''  and  end_time  != 'null' ">
+	  			<![CDATA[ #{end_time} , ]]>
+	  		</if>
+	  		<if test=" is_together  != null and  is_together  != ''  and  is_together  != 'null' ">
+	  			<![CDATA[ #{is_together} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updatePromotion" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BU_PROMOTION A ]]>
+		<set>
+	  	<if test=" promotion_code  != null and  promotion_code  != ''  and  promotion_code  != 'null' ">
+	  		<![CDATA[ A.promotion_code = #{promotion_code}, ]]>
+	  	</if>
+	  	<if test=" promotion_name  != null and  promotion_name  != ''  and  promotion_name  != 'null' ">
+	  		<![CDATA[ A.promotion_name = #{promotion_name}, ]]>
+	  	</if>
+	  	<if test=" promotion_description  != null and  promotion_description  != ''  and  promotion_description  != 'null' ">
+	  		<![CDATA[ A.promotion_description = #{promotion_description}, ]]>
+	  	</if>
+		<if test=" sort_num  != null ">
+  			<![CDATA[ A.sort_num = ${sort_num} , ]]>
+		</if>
+	  	<if test=" promotion_type  != null and  promotion_type  != ''  and  promotion_type  != 'null' ">
+	  		<![CDATA[ A.promotion_type = #{promotion_type}, ]]>
+	  	</if>
+	  	<if test=" promotion_status  != null and  promotion_status  != ''  and  promotion_status  != 'null' ">
+	  		<![CDATA[ A.promotion_status = #{promotion_status}, ]]>
+	  	</if>
+	  	<if test=" promotion_img  != null and  promotion_img  != ''  and  promotion_img  != 'null' ">
+	  		<![CDATA[ A.promotion_img = #{promotion_img}, ]]>
+	  	</if>
+	  	<if test=" back_up  != null and  back_up  != ''  and  back_up  != 'null' ">
+	  		<![CDATA[ A.back_up = #{back_up}, ]]>
+	  	</if>
+	  	<if test=" add_time  != null and  add_time  != ''  and  add_time  != 'null' ">
+	  		<![CDATA[ A.add_time = #{add_time}, ]]>
+	  	</if>
+	  	<if test=" remove_time  != null and  remove_time  != ''  and  remove_time  != 'null' ">
+	  		<![CDATA[ A.remove_time = #{remove_time}, ]]>
+	  	</if>
+	  	<if test=" start_time  != null and  start_time  != ''  and  start_time  != 'null' ">
+	  		<![CDATA[ A.start_time = #{start_time}, ]]>
+	  	</if>
+	  	<if test=" end_time  != null and  end_time  != ''  and  end_time  != 'null' ">
+	  		<![CDATA[ A.end_time = #{end_time}, ]]>
+	  	</if>
+	  	<if test=" is_together  != null and  is_together  != ''  and  is_together  != 'null' ">
+	  		<![CDATA[ A.is_together = #{is_together}, ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.created_time = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.created_by = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.modified_time = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.modified_by = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.version = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.delflag = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.PROMOTION_ID = #{promotion_id}]]>
+  	</update>
+  
+  	<delete id="deletePromotion" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BU_PROMOTION where PROMOTION_ID = #{promotion_id} ]]>
+	</delete>
+  
+	<select id="findOnePromotion" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BU_PROMOTION A  ]]>
+		<include refid="promotionWhereCondition" />
+  	</select>
+    
+  	<select id="findAllPromotion" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BU_PROMOTION A ]]>
+		<include refid="promotionWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapPromotion" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BU_PROMOTION A ]]>
+		<include refid="promotionWhereCondition" />
+	</select>
+  
+  	<select id="findPromotionTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BU_PROMOTION A ]]>
+		<include refid="promotionWhereCondition" />
+  	</select>
+  
+  	<select id="queryPromotionForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BU_PROMOTION A ]]>
+		<include refid="promotionWhereCondition" />
+  	</select>
+  	
+  	<!-- 注意：查询语句要重新写 -->
+	<select id="queryPromotionByConForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		SELECT A.* FROM BU_PROMOTION A
+          where 1=1 
+          AND A.DELFLAG = '1' 
+        <if test=" promotionCode != null and promotionCode != '' and promotionCode != 'null' ">
+            <![CDATA[ AND A.promotion_code like concat('%', #{promotionCode}, '%') ]]>
+        </if> 
+        <if test=" promotionName != null and promotionName != '' and promotionName != 'null' ">
+            <![CDATA[ AND A.promotion_name like concat('%', #{promotionName}, '%') ]]>
+        </if> 
+		<if test=" promotionStatus != null and promotionStatus != '' and promotionStatus != 'null' ">
+            <![CDATA[ AND A.promotion_status = #{promotionStatus} ]]>
+        </if> 
+          ORDER BY A.promotion_code
+  	</select>
+</mapper>

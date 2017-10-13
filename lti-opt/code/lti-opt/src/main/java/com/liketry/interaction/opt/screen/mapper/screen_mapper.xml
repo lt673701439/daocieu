@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Screen">
+	<resultMap id="screenResultMap" type="com.liketry.interaction.opt.screen.model.ScreenBO">
+		<result property="screenId" column="screen_id"/>
+		<result property="spotId" column="spot_id"/>
+		<result property="screenCode" column="screen_code"/>
+		<result property="screenName" column="screen_name"/>
+		<result property="screenStatus" column="screen_status"/>
+		<result property="screenImg" column="screen_img"/>
+		<result property="screenLocation" column="screen_location"/>
+		<result property="screenLongitude" column="screen_longitude"/>
+		<result property="screenDimension" column="screen_dimension"/>
+		<result property="screenLong" column="screen_long"/>
+		<result property="screenWide" column="screen_wide"/>
+		<result property="screenSize" column="screen_size"/>
+		<result property="screenResolution" column="screen_resolution"/>
+		<result property="screenDescription" column="screen_description"/>
+  	</resultMap>
+  
+  	<sql id="screenWhereCondition">
+		<where>
+	  	<if test=" screen_id != null and screen_id != '' and screen_id != 'null' ">
+			<![CDATA[ AND A.screen_id = #{screen_id} ]]>
+	  	</if>
+	  	<if test=" spot_id != null and spot_id != '' and spot_id != 'null' ">
+			<![CDATA[ AND A.spot_id = #{spot_id} ]]>
+	  	</if>
+	  	<if test=" screen_code != null and screen_code != '' and screen_code != 'null' ">
+			<![CDATA[ AND A.screen_code = #{screen_code} ]]>
+	  	</if>
+	  	<if test=" screen_name != null and screen_name != '' and screen_name != 'null' ">
+			<![CDATA[ AND A.screen_name = #{screen_name} ]]>
+	  	</if>
+	  	<if test=" screen_status != null and screen_status != '' and screen_status != 'null' ">
+			<![CDATA[ AND A.screen_status = #{screen_status} ]]>
+	  	</if>
+	  	<if test=" screen_img != null and screen_img != '' and screen_img != 'null' ">
+			<![CDATA[ AND A.screen_img = #{screen_img} ]]>
+	  	</if>
+	  	<if test=" screen_location != null and screen_location != '' and screen_location != 'null' ">
+			<![CDATA[ AND A.screen_location = #{screen_location} ]]>
+	  	</if>
+	  	<if test=" screen_longitude != null and screen_longitude != '' and screen_longitude != 'null' ">
+			<![CDATA[ AND A.screen_longitude = #{screen_longitude} ]]>
+	  	</if>
+	  	<if test=" screen_dimension != null and screen_dimension != '' and screen_dimension != 'null' ">
+			<![CDATA[ AND A.screen_dimension = #{screen_dimension} ]]>
+	  	</if>
+	  	<if test=" screen_long != null and screen_long != '' and screen_long != 'null' ">
+			<![CDATA[ AND A.screen_long = #{screen_long} ]]>
+	  	</if>
+	  	<if test=" screen_wide != null and screen_wide != '' and screen_wide != 'null' ">
+			<![CDATA[ AND A.screen_wide = #{screen_wide} ]]>
+	  	</if>
+	  	<if test=" screen_size != null and screen_size != '' and screen_size != 'null' ">
+			<![CDATA[ AND A.screen_size = #{screen_size} ]]>
+	  	</if>
+	  	<if test=" screen_resolution != null and screen_resolution != '' and screen_resolution != 'null' ">
+			<![CDATA[ AND A.screen_resolution = #{screen_resolution} ]]>
+	  	</if>
+	  	<if test=" screen_description != null and screen_description != '' and screen_description != 'null' ">
+			<![CDATA[ AND A.screen_description = #{screen_description} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addScreen"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BU_SCREEN
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" screen_id  != null and  screen_id  != ''  and  screen_id  != 'null' ">
+				<![CDATA[ screen_id , ]]>
+	  		</if>
+	  		<if test=" spot_id  != null and  spot_id  != ''  and  spot_id  != 'null' ">
+				<![CDATA[ spot_id , ]]>
+	  		</if>
+	  		<if test=" screen_code  != null and  screen_code  != ''  and  screen_code  != 'null' ">
+				<![CDATA[ screen_code , ]]>
+	  		</if>
+	  		<if test=" screen_name  != null and  screen_name  != ''  and  screen_name  != 'null' ">
+				<![CDATA[ screen_name , ]]>
+	  		</if>
+	  		<if test=" screen_status  != null and  screen_status  != ''  and  screen_status  != 'null' ">
+				<![CDATA[ screen_status , ]]>
+	  		</if>
+	  		<if test=" screen_img  != null and  screen_img  != ''  and  screen_img  != 'null' ">
+				<![CDATA[ screen_img , ]]>
+	  		</if>
+	  		<if test=" screen_location  != null and  screen_location  != ''  and  screen_location  != 'null' ">
+				<![CDATA[ screen_location , ]]>
+	  		</if>
+	  		<if test=" screen_longitude  != null and  screen_longitude  != ''  and  screen_longitude  != 'null' ">
+				<![CDATA[ screen_longitude , ]]>
+	  		</if>
+	  		<if test=" screen_dimension  != null and  screen_dimension  != ''  and  screen_dimension  != 'null' ">
+				<![CDATA[ screen_dimension , ]]>
+	  		</if>
+	  		<if test=" screen_long  != null and  screen_long  != ''  and  screen_long  != 'null' ">
+				<![CDATA[ screen_long , ]]>
+	  		</if>
+	  		<if test=" screen_wide  != null and  screen_wide  != ''  and  screen_wide  != 'null' ">
+				<![CDATA[ screen_wide , ]]>
+	  		</if>
+	  		<if test=" screen_size  != null and  screen_size  != ''  and  screen_size  != 'null' ">
+				<![CDATA[ screen_size , ]]>
+	  		</if>
+	  		<if test=" screen_resolution  != null and  screen_resolution  != ''  and  screen_resolution  != 'null' ">
+				<![CDATA[ screen_resolution , ]]>
+	  		</if>
+	  		<if test=" screen_description  != null and  screen_description  != ''  and  screen_description  != 'null' ">
+				<![CDATA[ screen_description , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" screen_id  != null and  screen_id  != ''  and  screen_id  != 'null' ">
+	  			<![CDATA[ #{screen_id} , ]]>
+	  		</if>
+	  		<if test=" spot_id  != null and  spot_id  != ''  and  spot_id  != 'null' ">
+	  			<![CDATA[ #{spot_id} , ]]>
+	  		</if>
+	  		<if test=" screen_code  != null and  screen_code  != ''  and  screen_code  != 'null' ">
+	  			<![CDATA[ #{screen_code} , ]]>
+	  		</if>
+	  		<if test=" screen_name  != null and  screen_name  != ''  and  screen_name  != 'null' ">
+	  			<![CDATA[ #{screen_name} , ]]>
+	  		</if>
+	  		<if test=" screen_status  != null and  screen_status  != ''  and  screen_status  != 'null' ">
+	  			<![CDATA[ #{screen_status} , ]]>
+	  		</if>
+	  		<if test=" screen_img  != null and  screen_img  != ''  and  screen_img  != 'null' ">
+	  			<![CDATA[ #{screen_img} , ]]>
+	  		</if>
+	  		<if test=" screen_location  != null and  screen_location  != ''  and  screen_location  != 'null' ">
+	  			<![CDATA[ #{screen_location} , ]]>
+	  		</if>
+	  		<if test=" screen_longitude  != null and  screen_longitude  != ''  and  screen_longitude  != 'null' ">
+	  			<![CDATA[ #{screen_longitude} , ]]>
+	  		</if>
+	  		<if test=" screen_dimension  != null and  screen_dimension  != ''  and  screen_dimension  != 'null' ">
+	  			<![CDATA[ #{screen_dimension} , ]]>
+	  		</if>
+	  		<if test=" screen_long  != null and  screen_long  != ''  and  screen_long  != 'null' ">
+	  			<![CDATA[ #{screen_long} , ]]>
+	  		</if>
+	  		<if test=" screen_wide  != null and  screen_wide  != ''  and  screen_wide  != 'null' ">
+	  			<![CDATA[ #{screen_wide} , ]]>
+	  		</if>
+	  		<if test=" screen_size  != null and  screen_size  != ''  and  screen_size  != 'null' ">
+	  			<![CDATA[ #{screen_size} , ]]>
+	  		</if>
+	  		<if test=" screen_resolution  != null and  screen_resolution  != ''  and  screen_resolution  != 'null' ">
+	  			<![CDATA[ #{screen_resolution} , ]]>
+	  		</if>
+	  		<if test=" screen_description  != null and  screen_description  != ''  and  screen_description  != 'null' ">
+	  			<![CDATA[ #{screen_description} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateScreen" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BU_SCREEN A ]]>
+		<set>
+	  	<if test=" spot_id  != null and  spot_id  != ''  and  spot_id  != 'null' ">
+	  		<![CDATA[ A.spot_id = #{spot_id}, ]]>
+	  	</if>
+	  	<if test=" screen_code  != null and  screen_code  != ''  and  screen_code  != 'null' ">
+	  		<![CDATA[ A.screen_code = #{screen_code}, ]]>
+	  	</if>
+	  	<if test=" screen_name  != null and  screen_name  != ''  and  screen_name  != 'null' ">
+	  		<![CDATA[ A.screen_name = #{screen_name}, ]]>
+	  	</if>
+	  	<if test=" screen_status  != null and  screen_status  != ''  and  screen_status  != 'null' ">
+	  		<![CDATA[ A.screen_status = #{screen_status}, ]]>
+	  	</if>
+	  	<if test=" screen_img  != null and  screen_img  != ''  and  screen_img  != 'null' ">
+	  		<![CDATA[ A.screen_img = #{screen_img}, ]]>
+	  	</if>
+	  	<if test=" screen_location  != null and  screen_location  != ''  and  screen_location  != 'null' ">
+	  		<![CDATA[ A.screen_location = #{screen_location}, ]]>
+	  	</if>
+	  	<if test=" screen_longitude  != null and  screen_longitude  != ''  and  screen_longitude  != 'null' ">
+	  		<![CDATA[ A.screen_longitude = #{screen_longitude}, ]]>
+	  	</if>
+	  	<if test=" screen_dimension  != null and  screen_dimension  != ''  and  screen_dimension  != 'null' ">
+	  		<![CDATA[ A.screen_dimension = #{screen_dimension}, ]]>
+	  	</if>
+	  	<if test=" screen_long  != null and  screen_long  != ''  and  screen_long  != 'null' ">
+	  		<![CDATA[ A.screen_long = #{screen_long}, ]]>
+	  	</if>
+	  	<if test=" screen_wide  != null and  screen_wide  != ''  and  screen_wide  != 'null' ">
+	  		<![CDATA[ A.screen_wide = #{screen_wide}, ]]>
+	  	</if>
+	  	<if test=" screen_size  != null and  screen_size  != ''  and  screen_size  != 'null' ">
+	  		<![CDATA[ A.screen_size = #{screen_size}, ]]>
+	  	</if>
+	  	<if test=" screen_resolution  != null and  screen_resolution  != ''  and  screen_resolution  != 'null' ">
+	  		<![CDATA[ A.screen_resolution = #{screen_resolution}, ]]>
+	  	</if>
+	  	<if test=" screen_description  != null and  screen_description  != ''  and  screen_description  != 'null' ">
+	  		<![CDATA[ A.screen_description = #{screen_description}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.SCREEN_ID = #{screen_id}]]>
+  	</update>
+  
+ 	<delete id="deleteScreen" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BU_SCREEN where SCREEN_ID = #{screen_id} ]]>
+	</delete>
+  
+	<select id="findOneScreen" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BU_SCREEN A  ]]>
+		<include refid="screenWhereCondition" />
+  	</select>
+    
+  	<select id="findAllScreen" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BU_SCREEN A ]]>
+		<include refid="screenWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapScreen" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BU_SCREEN A ]]>
+		<include refid="screenWhereCondition" />
+	</select>
+  
+  	<select id="findScreenTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BU_SCREEN A ]]>
+		<include refid="screenWhereCondition" />
+  	</select>
+  
+  	<select id="queryScreenForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BU_SCREEN A ]]>
+		<include refid="screenWhereCondition" />
+  	</select>
+  	
+  	<select id="queryScreenByConForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		SELECT A.* FROM BU_SCREEN A
+          where 1=1 
+        <if test=" screenCode != null and screenCode != '' and screenCode != 'null' ">
+            <![CDATA[ AND A.screen_code like concat('%', #{screenCode}, '%') ]]>
+        </if> 
+        <if test=" screenName != null and screenName != '' and screenName != 'null' ">
+            <![CDATA[ AND A.screen_name like concat('%', #{screenName}, '%') ]]>
+        </if> 
+        <if test=" screenStatus != null and screenStatus != '' and screenStatus != 'null' ">
+            <![CDATA[ AND A.screen_status like concat('%', #{screenStatus}, '%') ]]>
+        </if>
+         order by  screen_code asc
+  	</select>
+  	
+  	<select id="findAllBySpotId" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		SELECT A.* FROM BU_SCREEN A
+		where A.spot_id = #{spotId}
+	</select>
+	
+	<select id="findOneByTemplateId" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BU_SCREEN A  ]]>
+		where
+  	</select>
+</mapper>

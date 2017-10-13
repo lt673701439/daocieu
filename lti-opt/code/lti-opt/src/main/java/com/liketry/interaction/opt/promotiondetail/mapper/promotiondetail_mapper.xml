@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PromotionDetail">
+	<resultMap id="promotionDetailResultMap" type="com.liketry.interaction.opt.promotiondetail.model.PromotionDetailBO">
+		<result property="detailId" column="detail_id"/>
+		<result property="promotionId" column="promotion_id"/>
+		<result property="commodityId" column="commodity_id"/>
+		<result property="commodityNum" column="commodity_num"/>
+		<result property="discountRatio" column="discount_ratio"/>
+		<result property="createdTime" column="created_time"/>
+		<result property="createdBy" column="created_by"/>
+		<result property="modifiedTime" column="modified_time"/>
+		<result property="modifiedBy" column="modified_by"/>
+		<result property="version" column="version"/>
+		<result property="delflag" column="delflag"/>
+  	</resultMap>
+  
+  	<sql id="promotionDetailWhereCondition">
+		<where>
+	  	<if test=" detail_id != null and detail_id != '' and detail_id != 'null' ">
+			<![CDATA[ AND A.detail_id = #{detail_id} ]]>
+	  	</if>
+	  	<if test=" promotion_id != null and promotion_id != '' and promotion_id != 'null' ">
+			<![CDATA[ AND A.promotion_id = #{promotion_id} ]]>
+	  	</if>
+	  	<if test=" commodity_id != null and commodity_id != '' and commodity_id != 'null' ">
+			<![CDATA[ AND A.commodity_id = #{commodity_id} ]]>
+	  	</if>
+	  	<if test=" commodity_num != null ">
+	  		<![CDATA[ AND A.commodity_num = ${commodity_num} ]]>
+	  	</if>
+	  	<if test=" discount_ratio != null ">
+	  		<![CDATA[ AND A.discount_ratio = ${discount_ratio} ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.created_time = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ AND A.created_by = #{created_by} ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.modified_time = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ AND A.modified_by = #{modified_by} ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.version = ${version} ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.delflag = #{delflag} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addPromotionDetail"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BU_PROMOTION_DETAIL
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" detail_id  != null and  detail_id  != ''  and  detail_id  != 'null' ">
+				<![CDATA[ detail_id , ]]>
+	  		</if>
+	  		<if test=" promotion_id  != null and  promotion_id  != ''  and  promotion_id  != 'null' ">
+				<![CDATA[ promotion_id , ]]>
+	  		</if>
+	  		<if test=" commodity_id  != null and  commodity_id  != ''  and  commodity_id  != 'null' ">
+				<![CDATA[ commodity_id , ]]>
+	  		</if>
+	  		<if test=" commodity_num  != null ">
+				<![CDATA[ commodity_num , ]]>
+	  		</if>
+	  		<if test=" discount_ratio  != null ">
+				<![CDATA[ discount_ratio , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ created_time , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ created_by , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ modified_time , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ modified_by , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ version , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ delflag , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" detail_id  != null and  detail_id  != ''  and  detail_id  != 'null' ">
+	  			<![CDATA[ #{detail_id} , ]]>
+	  		</if>
+	  		<if test=" promotion_id  != null and  promotion_id  != ''  and  promotion_id  != 'null' ">
+	  			<![CDATA[ #{promotion_id} , ]]>
+	  		</if>
+	  		<if test=" commodity_id  != null and  commodity_id  != ''  and  commodity_id  != 'null' ">
+	  			<![CDATA[ #{commodity_id} , ]]>
+	  		</if>
+	  		<if test=" commodity_num  != null">
+	    		<![CDATA[ ${commodity_num} , ]]>
+	  		</if>
+	  		<if test=" discount_ratio  != null">
+	    		<![CDATA[ ${discount_ratio} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updatePromotionDetail" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BU_PROMOTION_DETAIL A ]]>
+		<set>
+	  	<if test=" promotion_id  != null and  promotion_id  != ''  and  promotion_id  != 'null' ">
+	  		<![CDATA[ A.promotion_id = #{promotion_id}, ]]>
+	  	</if>
+	  	<if test=" commodity_id  != null and  commodity_id  != ''  and  commodity_id  != 'null' ">
+	  		<![CDATA[ A.commodity_id = #{commodity_id}, ]]>
+	  	</if>
+		<if test=" commodity_num  != null ">
+  			<![CDATA[ A.commodity_num = ${commodity_num} , ]]>
+		</if>
+		<if test=" discount_ratio  != null ">
+  			<![CDATA[ A.discount_ratio = ${discount_ratio} , ]]>
+		</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.created_time = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.created_by = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.modified_time = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.modified_by = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.version = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.delflag = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.DETAIL_ID = #{detail_id}]]>
+  	</update>
+  
+  	<delete id="deletePromotionDetail" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BU_PROMOTION_DETAIL where DETAIL_ID = #{detail_id} ]]>
+	</delete>
+  
+	<select id="findOnePromotionDetail" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.*, B.commodity_name FROM BU_PROMOTION_DETAIL A, BU_COMMODITY B  ]]>
+		<include refid="promotionDetailWhereCondition" />
+		<![CDATA[ AND A.commodity_id = B.commodity_id ]]>
+  	</select>
+    
+  	<select id="findAllPromotionDetail" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BU_PROMOTION_DETAIL A ]]>
+		<include refid="promotionDetailWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapPromotionDetail" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BU_PROMOTION_DETAIL A ]]>
+		<include refid="promotionDetailWhereCondition" />
+	</select>
+  
+  	<select id="findPromotionDetailTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BU_PROMOTION_DETAIL A ]]>
+		<include refid="promotionDetailWhereCondition" />
+  	</select>
+  
+  	<select id="queryPromotionDetailForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BU_PROMOTION_DETAIL A ]]>
+		<include refid="promotionDetailWhereCondition" />
+  	</select>
+  	
+  	<!-- 注意：查询语句要重新写 -->
+	<select id="queryPromotionDetailByConForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		SELECT A.*, B.commodity_code, B.commodity_name, B.commodity_price FROM BU_PROMOTION_DETAIL A
+		  left join BU_COMMODITY B 
+		  on  A.commodity_id = B.commodity_id    
+          where A.DELFLAG = '1' 
+		  AND A.promotion_id = #{promotionId}
+          ORDER BY B.commodity_code
+  	</select>
+  	
+  	<!-- 查询商品列表 -->
+  	<select id="findAllCommodityById" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		SELECT A.*, B.commodity_name, B.commodity_price, CONCAT(#{urlHead},B.commodity_img) as commodity_img, B.start_time, B.end_time, C.screen_name
+			FROM BU_PROMOTION_DETAIL A, BU_COMMODITY B, BU_SCREEN C 
+			where A.DELFLAG = '1' 
+		  	AND  A.commodity_id = B.commodity_id 
+		  	AND  B.screen_id = C.screen_id  
+		  	AND A.promotion_id = #{promotionId}
+		  	ORDER BY B.commodity_code
+	</select>
+</mapper>

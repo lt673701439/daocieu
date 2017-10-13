@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="User">
+	<resultMap id="userResultMap" type="com.taikang.udp.sys.model.UserBO">
+		<result property="userId" column="User_Id"/>
+		<result property="userType" column="User_Type"/>
+		<result property="userCode" column="User_Code"/>
+		<result property="userPwd" column="User_Pwd"/>
+		<result property="userName" column="User_Name"/>
+		<result property="phoneNum" column="Phone_Num"/>
+		<result property="userEmail" column="User_Email"/>
+		<result property="emailPwd" column="Email_Pwd"/>
+		<result property="errNum" column="Err_Num"/>
+		<result property="pwdLog" column="Pwd_Log"/>
+		<result property="modifyTime" column="Modify_Time"/>
+		<result property="startValidate" column="Start_Validate"/>
+		<result property="endValidate" column="End_Validate"/>
+		<result property="userNature" column="User_Nature"/>
+		<result property="userDept" column="User_Dept"/>
+		<result property="userCom" column="User_Com"/>
+		<result property="workStatus" column="Work_Status"/>
+		<result property="userStatus" column="User_Status"/>
+		<result property="loginTime" column="Login_Time"/>
+		<result property="isLogin" column="Is_Login"/>
+		<result property="clientIp" column="Client_Ip"/>
+		<result property="comCoy" column="Com_Coy"/>
+		<result property="comBranch" column="Com_Branch"/>
+		<result property="comAgenter" column="Com_Agenter"/>
+		<result property="backup1" column="Backup1"/>
+		<result property="backup2" column="Backup2"/>
+		<result property="creator" column="Creator"/>
+		<result property="createTime" column="Create_Time"/>
+		<result property="lastModby" column="Last_Modby"/>
+		<result property="lastModtime" column="Last_Modtime"/>
+  	</resultMap>
+  
+  	<sql id="userWhereCondition">
+		<where>
+	  	<if test=" user_id != null ">
+	  		<![CDATA[ AND A.User_Id = ${user_id} ]]>
+	  	</if>
+	  	<if test=" user_type != null and user_type != '' and user_type != 'null' ">
+			<![CDATA[ AND A.User_Type = #{user_type} ]]>
+	  	</if>
+	  	<if test=" user_code != null and user_code != '' and user_code != 'null' ">
+			<![CDATA[ AND A.User_Code = #{user_code} ]]>
+	  	</if>
+	  	<if test=" user_pwd != null and user_pwd != '' and user_pwd != 'null' ">
+			<![CDATA[ AND A.User_Pwd = #{user_pwd} ]]>
+	  	</if>
+	  	<if test=" user_name != null and user_name != '' and user_name != 'null' ">
+			<![CDATA[ AND A.User_Name = #{user_name} ]]>
+	  	</if>
+	  	<if test=" phone_num != null and phone_num != '' and phone_num != 'null' ">
+			<![CDATA[ AND A.Phone_Num = #{phone_num} ]]>
+	  	</if>
+	  	<if test=" user_email != null and user_email != '' and user_email != 'null' ">
+			<![CDATA[ AND A.User_Email = #{user_email} ]]>
+	  	</if>
+	  	<if test=" email_pwd != null and email_pwd != '' and email_pwd != 'null' ">
+			<![CDATA[ AND A.Email_Pwd = #{email_pwd} ]]>
+	  	</if>
+	  	<if test=" err_num != null ">
+	  		<![CDATA[ AND A.Err_Num = ${err_num} ]]>
+	  	</if>
+	  	<if test=" pwd_log != null and pwd_log != '' and pwd_log != 'null' ">
+			<![CDATA[ AND A.Pwd_Log = #{pwd_log} ]]>
+	  	</if>
+	  	<if test=" modify_time != null and modify_time != '' and modify_time  != 'null' ">
+	    	<![CDATA[ AND A.Modify_Time = DATE_FORMAT(#{modify_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" start_validate != null and start_validate != '' and start_validate  != 'null' ">
+	    	<![CDATA[ AND A.Start_Validate = DATE_FORMAT(#{start_validate},'%Y-%m-%d') ]]>
+	  	</if>
+	  	<if test=" end_validate != null and end_validate != '' and end_validate  != 'null' ">
+	    	<![CDATA[ AND A.End_Validate = DATE_FORMAT(#{end_validate},'%Y-%m-%d') ]]>
+	  	</if>
+	  	<if test=" user_nature != null and user_nature != '' and user_nature != 'null' ">
+			<![CDATA[ AND A.User_Nature = #{user_nature} ]]>
+	  	</if>
+	  	<if test=" user_dept != null and user_dept != '' and user_dept != 'null' ">
+			<![CDATA[ AND A.User_Dept = #{user_dept} ]]>
+	  	</if>
+	  	<if test=" user_com != null and user_com != '' and user_com != 'null' ">
+			<![CDATA[ AND A.User_Com = #{user_com} ]]>
+	  	</if>
+	  	<if test=" work_status != null and work_status != '' and work_status != 'null' ">
+			<![CDATA[ AND A.Work_Status = #{work_status} ]]>
+	  	</if>
+	  	<if test=" user_status != null and user_status != '' and user_status != 'null' ">
+			<![CDATA[ AND A.User_Status = #{user_status} ]]>
+	  	</if>
+	  	<if test=" login_time != null and login_time != '' and login_time  != 'null' ">
+	    	<![CDATA[ AND A.Login_Time = DATE_FORMAT(#{login_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" is_login != null and is_login != '' and is_login != 'null' ">
+			<![CDATA[ AND A.Is_Login = #{is_login} ]]>
+	  	</if>
+	  	<if test=" client_ip != null and client_ip != '' and client_ip != 'null' ">
+			<![CDATA[ AND A.Client_Ip = #{client_ip} ]]>
+	  	</if>
+	  	<if test=" com_coy != null and com_coy != '' and com_coy != 'null' ">
+			<![CDATA[ AND A.Com_Coy = #{com_coy} ]]>
+	  	</if>
+	  	<if test=" com_branch != null and com_branch != '' and com_branch != 'null' ">
+			<![CDATA[ AND A.Com_Branch = #{com_branch} ]]>
+	  	</if>
+	  	<if test=" com_agenter != null and com_agenter != '' and com_agenter != 'null' ">
+			<![CDATA[ AND A.Com_Agenter = #{com_agenter} ]]>
+	  	</if>
+	  	<if test=" backup1 != null and backup1 != '' and backup1 != 'null' ">
+			<![CDATA[ AND A.Backup1 = #{backup1} ]]>
+	  	</if>
+	  	<if test=" backup2 != null and backup2 != '' and backup2 != 'null' ">
+			<![CDATA[ AND A.Backup2 = #{backup2} ]]>
+	  	</if>
+	  	<if test=" creator != null ">
+	  		<![CDATA[ AND A.Creator = ${creator} ]]>
+	  	</if>
+	  	<if test=" create_time != null and create_time != '' and create_time  != 'null' ">
+	    	<![CDATA[ AND A.Create_Time = DATE_FORMAT(#{create_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" last_modby != null ">
+	  		<![CDATA[ AND A.Last_Modby = ${last_modby} ]]>
+	  	</if>
+	  	<if test=" last_modtime != null and last_modtime != '' and last_modtime  != 'null' ">
+	    	<![CDATA[ AND A.Last_Modtime = DATE_FORMAT(#{last_modtime},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addUser"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BSC_USER_T
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" user_id  != null ">
+				<![CDATA[ User_Id , ]]>
+	  		</if>
+	  		<if test=" user_type  != null and  user_type  != ''  and  user_type  != 'null' ">
+				<![CDATA[ User_Type , ]]>
+	  		</if>
+	  		<if test=" user_code  != null and  user_code  != ''  and  user_code  != 'null' ">
+				<![CDATA[ User_Code , ]]>
+	  		</if>
+	  		<if test=" user_pwd  != null and  user_pwd  != ''  and  user_pwd  != 'null' ">
+				<![CDATA[ User_Pwd , ]]>
+	  		</if>
+	  		<if test=" user_name  != null and  user_name  != ''  and  user_name  != 'null' ">
+				<![CDATA[ User_Name , ]]>
+	  		</if>
+	  		<if test=" phone_num  != null and  phone_num  != ''  and  phone_num  != 'null' ">
+				<![CDATA[ Phone_Num , ]]>
+	  		</if>
+	  		<if test=" user_email  != null and  user_email  != ''  and  user_email  != 'null' ">
+				<![CDATA[ User_Email , ]]>
+	  		</if>
+	  		<if test=" email_pwd  != null and  email_pwd  != ''  and  email_pwd  != 'null' ">
+				<![CDATA[ Email_Pwd , ]]>
+	  		</if>
+	  		<if test=" err_num  != null ">
+				<![CDATA[ Err_Num , ]]>
+	  		</if>
+	  		<if test=" pwd_log  != null and  pwd_log  != ''  and  pwd_log  != 'null' ">
+				<![CDATA[ Pwd_Log , ]]>
+	  		</if>
+	  		<if test=" modify_time  != null and  modify_time  != ''  and  modify_time  != 'null' ">
+				<![CDATA[ Modify_Time , ]]>
+	  		</if>
+	  		<if test=" start_validate  != null and  start_validate  != ''  and  start_validate  != 'null' ">
+				<![CDATA[ Start_Validate , ]]>
+	  		</if>
+	  		<if test=" end_validate  != null and  end_validate  != ''  and  end_validate  != 'null' ">
+				<![CDATA[ End_Validate , ]]>
+	  		</if>
+	  		<if test=" user_nature  != null and  user_nature  != ''  and  user_nature  != 'null' ">
+				<![CDATA[ User_Nature , ]]>
+	  		</if>
+	  		<if test=" user_dept  != null and  user_dept  != ''  and  user_dept  != 'null' ">
+				<![CDATA[ User_Dept , ]]>
+	  		</if>
+	  		<if test=" user_com  != null and  user_com  != ''  and  user_com  != 'null' ">
+				<![CDATA[ User_Com , ]]>
+	  		</if>
+	  		<if test=" work_status  != null and  work_status  != ''  and  work_status  != 'null' ">
+				<![CDATA[ Work_Status , ]]>
+	  		</if>
+	  		<if test=" user_status  != null and  user_status  != ''  and  user_status  != 'null' ">
+				<![CDATA[ User_Status , ]]>
+	  		</if>
+	  		<if test=" login_time  != null and  login_time  != ''  and  login_time  != 'null' ">
+				<![CDATA[ Login_Time , ]]>
+	  		</if>
+	  		<if test=" is_login  != null and  is_login  != ''  and  is_login  != 'null' ">
+				<![CDATA[ Is_Login , ]]>
+	  		</if>
+	  		<if test=" client_ip  != null and  client_ip  != ''  and  client_ip  != 'null' ">
+				<![CDATA[ Client_Ip , ]]>
+	  		</if>
+	  		<if test=" com_coy  != null and  com_coy  != ''  and  com_coy  != 'null' ">
+				<![CDATA[ Com_Coy , ]]>
+	  		</if>
+	  		<if test=" com_branch  != null and  com_branch  != ''  and  com_branch  != 'null' ">
+				<![CDATA[ Com_Branch , ]]>
+	  		</if>
+	  		<if test=" com_agenter  != null and  com_agenter  != ''  and  com_agenter  != 'null' ">
+				<![CDATA[ Com_Agenter , ]]>
+	  		</if>
+	  		<if test=" backup1  != null and  backup1  != ''  and  backup1  != 'null' ">
+				<![CDATA[ Backup1 , ]]>
+	  		</if>
+	  		<if test=" backup2  != null and  backup2  != ''  and  backup2  != 'null' ">
+				<![CDATA[ Backup2 , ]]>
+	  		</if>
+	  		<if test=" creator  != null ">
+				<![CDATA[ Creator , ]]>
+	  		</if>
+	  		<if test=" create_time  != null and  create_time  != ''  and  create_time  != 'null' ">
+				<![CDATA[ Create_Time , ]]>
+	  		</if>
+	  		<if test=" last_modby  != null ">
+				<![CDATA[ Last_Modby , ]]>
+	  		</if>
+	  		<if test=" last_modtime  != null and  last_modtime  != ''  and  last_modtime  != 'null' ">
+				<![CDATA[ Last_Modtime , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" user_id  != null">
+	    		<![CDATA[ ${user_id} , ]]>
+	  		</if>
+	  		<if test=" user_type  != null and  user_type  != ''  and  user_type  != 'null' ">
+	  			<![CDATA[ #{user_type} , ]]>
+	  		</if>
+	  		<if test=" user_code  != null and  user_code  != ''  and  user_code  != 'null' ">
+	  			<![CDATA[ #{user_code} , ]]>
+	  		</if>
+	  		<if test=" user_pwd  != null and  user_pwd  != ''  and  user_pwd  != 'null' ">
+	  			<![CDATA[ #{user_pwd} , ]]>
+	  		</if>
+	  		<if test=" user_name  != null and  user_name  != ''  and  user_name  != 'null' ">
+	  			<![CDATA[ #{user_name} , ]]>
+	  		</if>
+	  		<if test=" phone_num  != null and  phone_num  != ''  and  phone_num  != 'null' ">
+	  			<![CDATA[ #{phone_num} , ]]>
+	  		</if>
+	  		<if test=" user_email  != null and  user_email  != ''  and  user_email  != 'null' ">
+	  			<![CDATA[ #{user_email} , ]]>
+	  		</if>
+	  		<if test=" email_pwd  != null and  email_pwd  != ''  and  email_pwd  != 'null' ">
+	  			<![CDATA[ #{email_pwd} , ]]>
+	  		</if>
+	  		<if test=" err_num  != null">
+	    		<![CDATA[ ${err_num} , ]]>
+	  		</if>
+	  		<if test=" pwd_log  != null and  pwd_log  != ''  and  pwd_log  != 'null' ">
+	  			<![CDATA[ #{pwd_log} , ]]>
+	  		</if>
+	  		<if test=" modify_time != null and modify_time != '' and modify_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modify_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" start_validate != null and start_validate != '' and start_validate  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{start_validate},'%Y-%m-%d'), ]]>
+	  		</if>
+	  		<if test=" end_validate != null and end_validate != '' and end_validate  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{end_validate},'%Y-%m-%d'), ]]>
+	  		</if>
+	  		<if test=" user_nature  != null and  user_nature  != ''  and  user_nature  != 'null' ">
+	  			<![CDATA[ #{user_nature} , ]]>
+	  		</if>
+	  		<if test=" user_dept  != null and  user_dept  != ''  and  user_dept  != 'null' ">
+	  			<![CDATA[ #{user_dept} , ]]>
+	  		</if>
+	  		<if test=" user_com  != null and  user_com  != ''  and  user_com  != 'null' ">
+	  			<![CDATA[ #{user_com} , ]]>
+	  		</if>
+	  		<if test=" work_status  != null and  work_status  != ''  and  work_status  != 'null' ">
+	  			<![CDATA[ #{work_status} , ]]>
+	  		</if>
+	  		<if test=" user_status  != null and  user_status  != ''  and  user_status  != 'null' ">
+	  			<![CDATA[ #{user_status} , ]]>
+	  		</if>
+	  		<if test=" login_time != null and login_time != '' and login_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{login_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" is_login  != null and  is_login  != ''  and  is_login  != 'null' ">
+	  			<![CDATA[ #{is_login} , ]]>
+	  		</if>
+	  		<if test=" client_ip  != null and  client_ip  != ''  and  client_ip  != 'null' ">
+	  			<![CDATA[ #{client_ip} , ]]>
+	  		</if>
+	  		<if test=" com_coy  != null and  com_coy  != ''  and  com_coy  != 'null' ">
+	  			<![CDATA[ #{com_coy} , ]]>
+	  		</if>
+	  		<if test=" com_branch  != null and  com_branch  != ''  and  com_branch  != 'null' ">
+	  			<![CDATA[ #{com_branch} , ]]>
+	  		</if>
+	  		<if test=" com_agenter  != null and  com_agenter  != ''  and  com_agenter  != 'null' ">
+	  			<![CDATA[ #{com_agenter} , ]]>
+	  		</if>
+	  		<if test=" backup1  != null and  backup1  != ''  and  backup1  != 'null' ">
+	  			<![CDATA[ #{backup1} , ]]>
+	  		</if>
+	  		<if test=" backup2  != null and  backup2  != ''  and  backup2  != 'null' ">
+	  			<![CDATA[ #{backup2} , ]]>
+	  		</if>
+	  		<if test=" creator  != null">
+	    		<![CDATA[ ${creator} , ]]>
+	  		</if>
+	  		<if test=" create_time != null and create_time != '' and create_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{create_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" last_modby  != null">
+	    		<![CDATA[ ${last_modby} , ]]>
+	  		</if>
+	  		<if test=" last_modtime != null and last_modtime != '' and last_modtime  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{last_modtime},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateUser" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BSC_USER_T A ]]>
+		<set>
+	  	<if test=" user_type  != null and  user_type  != ''  and  user_type  != 'null' ">
+	  		<![CDATA[ A.User_Type = #{user_type}, ]]>
+	  	</if>
+	  	<if test=" user_code  != null and  user_code  != ''  and  user_code  != 'null' ">
+	  		<![CDATA[ A.User_Code = #{user_code}, ]]>
+	  	</if>
+	  	<if test=" user_pwd  != null and  user_pwd  != ''  and  user_pwd  != 'null' ">
+	  		<![CDATA[ A.User_Pwd = #{user_pwd}, ]]>
+	  	</if>
+	  	<if test=" user_name  != null and  user_name  != ''  and  user_name  != 'null' ">
+	  		<![CDATA[ A.User_Name = #{user_name}, ]]>
+	  	</if>
+	  	<if test=" phone_num  != null and  phone_num  != ''  and  phone_num  != 'null' ">
+	  		<![CDATA[ A.Phone_Num = #{phone_num}, ]]>
+	  	</if>
+	  	<if test=" user_email  != null and  user_email  != ''  and  user_email  != 'null' ">
+	  		<![CDATA[ A.User_Email = #{user_email}, ]]>
+	  	</if>
+	  	<if test=" email_pwd  != null and  email_pwd  != ''  and  email_pwd  != 'null' ">
+	  		<![CDATA[ A.Email_Pwd = #{email_pwd}, ]]>
+	  	</if>
+		<if test=" err_num  != null ">
+  			<![CDATA[ A.Err_Num = ${err_num} , ]]>
+		</if>
+	  	<if test=" pwd_log  != null and  pwd_log  != ''  and  pwd_log  != 'null' ">
+	  		<![CDATA[ A.Pwd_Log = #{pwd_log}, ]]>
+	  	</if>
+	  	<if test=" modify_time != null and modify_time != '' and modify_time  != 'null' ">
+	    	<![CDATA[ A.Modify_Time = DATE_FORMAT(#{modify_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" start_validate != null and start_validate != '' and start_validate  != 'null' ">
+	    	<![CDATA[ A.Start_Validate = DATE_FORMAT(#{start_validate},'%Y-%m-%d'), ]]>
+	  	</if>
+	  	<if test=" end_validate != null and end_validate != '' and end_validate  != 'null' ">
+	    	<![CDATA[ A.End_Validate = DATE_FORMAT(#{end_validate},'%Y-%m-%d'), ]]>
+	  	</if>
+	  	<if test=" user_nature  != null and  user_nature  != ''  and  user_nature  != 'null' ">
+	  		<![CDATA[ A.User_Nature = #{user_nature}, ]]>
+	  	</if>
+	  	<if test=" user_dept  != null and  user_dept  != ''  and  user_dept  != 'null' ">
+	  		<![CDATA[ A.User_Dept = #{user_dept}, ]]>
+	  	</if>
+	  	<if test=" user_com  != null and  user_com  != ''  and  user_com  != 'null' ">
+	  		<![CDATA[ A.User_Com = #{user_com}, ]]>
+	  	</if>
+	  	<if test=" work_status  != null and  work_status  != ''  and  work_status  != 'null' ">
+	  		<![CDATA[ A.Work_Status = #{work_status}, ]]>
+	  	</if>
+	  	<if test=" user_status  != null and  user_status  != ''  and  user_status  != 'null' ">
+	  		<![CDATA[ A.User_Status = #{user_status}, ]]>
+	  	</if>
+	  	<if test=" login_time != null and login_time != '' and login_time  != 'null' ">
+	    	<![CDATA[ A.Login_Time = DATE_FORMAT(#{login_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" is_login  != null and  is_login  != ''  and  is_login  != 'null' ">
+	  		<![CDATA[ A.Is_Login = #{is_login}, ]]>
+	  	</if>
+	  	<if test=" client_ip  != null and  client_ip  != ''  and  client_ip  != 'null' ">
+	  		<![CDATA[ A.Client_Ip = #{client_ip}, ]]>
+	  	</if>
+	  	<if test=" com_coy  != null and  com_coy  != ''  and  com_coy  != 'null' ">
+	  		<![CDATA[ A.Com_Coy = #{com_coy}, ]]>
+	  	</if>
+	  	<if test=" com_branch  != null and  com_branch  != ''  and  com_branch  != 'null' ">
+	  		<![CDATA[ A.Com_Branch = #{com_branch}, ]]>
+	  	</if>
+	  	<if test=" com_agenter  != null and  com_agenter  != ''  and  com_agenter  != 'null' ">
+	  		<![CDATA[ A.Com_Agenter = #{com_agenter}, ]]>
+	  	</if>
+	  	<if test=" backup1  != null and  backup1  != ''  and  backup1  != 'null' ">
+	  		<![CDATA[ A.Backup1 = #{backup1}, ]]>
+	  	</if>
+	  	<if test=" backup2  != null and  backup2  != ''  and  backup2  != 'null' ">
+	  		<![CDATA[ A.Backup2 = #{backup2}, ]]>
+	  	</if>
+		<if test=" creator  != null ">
+  			<![CDATA[ A.Creator = ${creator} , ]]>
+		</if>
+	  	<if test=" create_time != null and create_time != '' and create_time  != 'null' ">
+	    	<![CDATA[ A.Create_Time = DATE_FORMAT(#{create_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+		<if test=" last_modby  != null ">
+  			<![CDATA[ A.Last_Modby = ${last_modby} , ]]>
+		</if>
+	  	<if test=" last_modtime != null and last_modtime != '' and last_modtime  != 'null' ">
+	    	<![CDATA[ A.Last_Modtime = DATE_FORMAT(#{last_modtime},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.USER_ID = #{user_id}]]>
+  	</update>
+
+	<delete id="deleteUser" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BSC_USER_T where USER_ID = #{user_id} ]]>
+	</delete>
+
+	<select id="findOneUser" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BSC_USER_T A  ]]>
+		<include refid="userWhereCondition" />
+	</select>
+	
+	<select id="findNewOneUser" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		<![CDATA[ 
+		select a.* from bsc_user_t a, bsc_user_role_t b, bsc_role_t c 
+		where a.user_id=#{user_id} 
+		and a.user_id = b.user_id 
+		and b.role_id = c.role_id
+		and c.role_code in (${roleCode})
+		]]>
+	</select>
+
+	<select id="findAllUser" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BSC_USER_T A ]]>
+		<include refid="userWhereCondition" />
+	</select>
+
+	<select id="findAllMapUser" parameterType="java.util.Map"
+		resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BSC_USER_T A ]]>
+		<include refid="userWhereCondition" />
+	</select>
+
+	<select id="findUserTotal" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BSC_USER_T A ]]>
+		<include refid="userWhereCondition" />
+	</select>
+
+	<select id="queryUserForPage" parameterType="java.util.Map"
+		resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BSC_USER_T A ]]>
+		<include refid="userWhereCondition" />
+	</select>
+	
+	<!-- 注意：查询语句要重新写 -->
+	<select id="queryUserByConForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		SELECT A.* FROM BSC_USER_T A
+          where 1=1 
+        <if test=" userCode != null and userCode != '' and userCode != 'null' ">
+            <![CDATA[ AND A.User_Code like concat('%', #{userCode}, '%') ]]>
+        </if> 
+        <if test=" userName != null and userName != '' and userName != 'null' ">
+            <![CDATA[ AND A.User_Name like concat('%', #{userName}, '%') ]]>
+        </if> 
+          ORDER BY A.Create_Time
+  	</select>
+</mapper>

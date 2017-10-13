@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CommodityCost">
+	<resultMap id="commodityCostResultMap" type="com.liketry.interaction.opt.commoditycost.model.CommodityCostBO">
+		<result property="costId" column="cost_id"/>
+		<result property="commodityId" column="commodity_id"/>
+		<result property="skuId" column="sku_id"/>
+		<result property="costType" column="cost_type"/>
+		<result property="costName" column="cost_name"/>
+		<result property="costPrice" column="cost_price"/>
+  	</resultMap>
+  
+  	<sql id="commodityCostWhereCondition">
+		<where>
+	  	<if test=" cost_id != null and cost_id != '' and cost_id != 'null' ">
+			<![CDATA[ AND A.cost_id = #{cost_id} ]]>
+	  	</if>
+	  	<if test=" commodity_id != null and commodity_id != '' and commodity_id != 'null' ">
+			<![CDATA[ AND A.commodity_id = #{commodity_id} ]]>
+	  	</if>
+	  	<if test=" sku_id != null and sku_id != '' and sku_id != 'null' ">
+			<![CDATA[ AND A.sku_id = #{sku_id} ]]>
+	  	</if>
+	  	<if test=" cost_type != null and cost_type != '' and cost_type != 'null' ">
+			<![CDATA[ AND A.cost_type = #{cost_type} ]]>
+	  	</if>
+	  	<if test=" cost_name != null and cost_name != '' and cost_name != 'null' ">
+			<![CDATA[ AND A.cost_name = #{cost_name} ]]>
+	  	</if>
+	  	<if test=" cost_price != null ">
+	  		<![CDATA[ AND A.cost_price = ${cost_price} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addCommodityCost"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BU_COMMODITY_COST
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" cost_id  != null and  cost_id  != ''  and  cost_id  != 'null' ">
+				<![CDATA[ cost_id , ]]>
+	  		</if>
+	  		<if test=" commodity_id  != null and  commodity_id  != ''  and  commodity_id  != 'null' ">
+				<![CDATA[ commodity_id , ]]>
+	  		</if>
+	  		<if test=" sku_id  != null and  sku_id  != ''  and  sku_id  != 'null' ">
+				<![CDATA[ sku_id , ]]>
+	  		</if>
+	  		<if test=" cost_type  != null and  cost_type  != ''  and  cost_type  != 'null' ">
+				<![CDATA[ cost_type , ]]>
+	  		</if>
+	  		<if test=" cost_name  != null and  cost_name  != ''  and  cost_name  != 'null' ">
+				<![CDATA[ cost_name , ]]>
+	  		</if>
+	  		<if test=" cost_price  != null ">
+				<![CDATA[ cost_price , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" cost_id  != null and  cost_id  != ''  and  cost_id  != 'null' ">
+	  			<![CDATA[ #{cost_id} , ]]>
+	  		</if>
+	  		<if test=" commodity_id  != null and  commodity_id  != ''  and  commodity_id  != 'null' ">
+	  			<![CDATA[ #{commodity_id} , ]]>
+	  		</if>
+	  		<if test=" sku_id  != null and  sku_id  != ''  and  sku_id  != 'null' ">
+	  			<![CDATA[ #{sku_id} , ]]>
+	  		</if>
+	  		<if test=" cost_type  != null and  cost_type  != ''  and  cost_type  != 'null' ">
+	  			<![CDATA[ #{cost_type} , ]]>
+	  		</if>
+	  		<if test=" cost_name  != null and  cost_name  != ''  and  cost_name  != 'null' ">
+	  			<![CDATA[ #{cost_name} , ]]>
+	  		</if>
+	  		<if test=" cost_price  != null">
+	    		<![CDATA[ ${cost_price} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateCommodityCost" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BU_COMMODITY_COST A ]]>
+		<set>
+	  	<if test=" commodity_id  != null and  commodity_id  != ''  and  commodity_id  != 'null' ">
+	  		<![CDATA[ A.commodity_id = #{commodity_id}, ]]>
+	  	</if>
+	  	<if test=" sku_id  != null and  sku_id  != ''  and  sku_id  != 'null' ">
+	  		<![CDATA[ A.sku_id = #{sku_id}, ]]>
+	  	</if>
+	  	<if test=" cost_type  != null and  cost_type  != ''  and  cost_type  != 'null' ">
+	  		<![CDATA[ A.cost_type = #{cost_type}, ]]>
+	  	</if>
+	  	<if test=" cost_name  != null and  cost_name  != ''  and  cost_name  != 'null' ">
+	  		<![CDATA[ A.cost_name = #{cost_name}, ]]>
+	  	</if>
+		<if test=" cost_price  != null ">
+  			<![CDATA[ A.cost_price = ${cost_price} , ]]>
+		</if>
+		</set>
+		<![CDATA[ where A.COST_ID = #{cost_id}]]>
+  	</update>
+  
+  	<delete id="deleteCommodityCost" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BU_COMMODITY_COST where COST_ID = #{cost_id} ]]>
+	</delete>
+  
+	<select id="findOneCommodityCost" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BU_COMMODITY_COST A  ]]>
+		<include refid="commodityCostWhereCondition" />
+  	</select>
+    
+  	<select id="findAllCommodityCost" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BU_COMMODITY_COST A ]]>
+		<include refid="commodityCostWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapCommodityCost" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BU_COMMODITY_COST A ]]>
+		<include refid="commodityCostWhereCondition" />
+	</select>
+  
+  	<select id="findCommodityCostTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BU_COMMODITY_COST A ]]>
+		<include refid="commodityCostWhereCondition" />
+  	</select>
+  
+  	<select id="queryCommodityCostForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BU_COMMODITY_COST A ]]>
+		<include refid="commodityCostWhereCondition" />
+  	</select>
+  	
+  	  	<!-- 注意：查询语句要重新写 -->
+	<select id="queryCommodityCostByConForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		SELECT A.* FROM BU_COMMODITY_COST A    
+          where A.commodity_id = #{commodityId}
+          ORDER BY (A.sku_id + 0)
+  	</select>
+</mapper>

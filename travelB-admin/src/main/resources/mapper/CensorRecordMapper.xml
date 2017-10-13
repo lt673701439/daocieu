@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liketry.mapper.CensorRecordMapper">
+    <resultMap id="BaseResultMap" type="com.liketry.domain.CensorRecord">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="cr_censor_id" jdbcType="CHAR" property="crCensorId"/>
+        <result column="cr_create_time" jdbcType="TIMESTAMP" property="crCreateTime"/>
+        <result column="cr_operator" jdbcType="CHAR" property="crOperator"/>
+        <result column="cr_description" jdbcType="VARCHAR" property="crDescription"/>
+        <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_user_id" jdbcType="VARCHAR" property="updateUserId"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+
+    <select id="selectByPage">
+        select temp_table.id,temp_table.cr_user_id,cr_merchant_id,temp_table.cr_description,temp_table.create_time,temp_table.merchant_shopname,temp_table.create_user_id,sys_user.username from(SELECT
+        censor_record.id,censor_record.cr_user_id,cr_merchant_id,censor_record.cr_description,censor_record.create_time,merchant.merchant_shopname,censor_record.create_user_id FROM censor_record left
+        join merchant on censor_record.cr_merchant_id = merchant.id)temp_table left join sys_user on temp_table.create_user_id = sys_user.id where 1 = 1
+        <if test="merchantId != null">
+            and cr_merchant_id = #{ merchantId }
+        </if>
+        <if test="order != null">
+            ORDER BY #{order} #{orderStatus}
+        </if>
+    </select>
+</mapper>

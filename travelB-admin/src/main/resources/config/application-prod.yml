@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/travelb_admin?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: Lti_1234
+
+server:
+  port: 8070
+
+logging:
+  config: classpath:logback-spring.xml
+  level: debug
+
+current-project:
+  benison-url: http://localhost:8090/lti-benison/qr_code_api/create

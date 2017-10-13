@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BenisonType">
+	<resultMap id="benisonTypeResultMap" type="com.liketry.interaction.opt.benisontype.model.BenisonTypeBO">
+		<result property="typeId" column="type_id"/>
+		<result property="typeCode" column="type_code"/>
+		<result property="typeName" column="type_name"/>
+		<result property="effectFlag" column="effect_flag"/>
+		<result property="sortNum" column="sort_num"/>
+  	</resultMap>
+  
+  	<sql id="benisonTypeWhereCondition">
+		<where>
+	  	<if test=" type_id != null and type_id != '' and type_id != 'null' ">
+			<![CDATA[ AND A.type_id = #{type_id} ]]>
+	  	</if>
+	  	<if test=" type_code != null and type_code != '' and type_code != 'null' ">
+			<![CDATA[ AND A.type_code = #{type_code} ]]>
+	  	</if>
+	  	<if test=" type_name != null and type_name != '' and type_name != 'null' ">
+			<![CDATA[ AND A.type_name = #{type_name} ]]>
+	  	</if>
+	  	<if test=" effect_flag != null and effect_flag != '' and effect_flag != 'null' ">
+			<![CDATA[ AND A.effect_flag = #{effect_flag} ]]>
+	  	</if>
+	  	<if test=" sort_num != null ">
+	  		<![CDATA[ AND A.sort_num = ${sort_num} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addBenisonType"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BU_BENISON_TYPE
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" type_id  != null and  type_id  != ''  and  type_id  != 'null' ">
+				<![CDATA[ type_id , ]]>
+	  		</if>
+	  		<if test=" type_code  != null and  type_code  != ''  and  type_code  != 'null' ">
+				<![CDATA[ type_code , ]]>
+	  		</if>
+	  		<if test=" type_name  != null and  type_name  != ''  and  type_name  != 'null' ">
+				<![CDATA[ type_name , ]]>
+	  		</if>
+	  		<if test=" effect_flag  != null and  effect_flag  != ''  and  effect_flag  != 'null' ">
+				<![CDATA[ effect_flag , ]]>
+	  		</if>
+	  		<if test=" sort_num  != null ">
+				<![CDATA[ sort_num , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" type_id  != null and  type_id  != ''  and  type_id  != 'null' ">
+	  			<![CDATA[ #{type_id} , ]]>
+	  		</if>
+	  		<if test=" type_code  != null and  type_code  != ''  and  type_code  != 'null' ">
+	  			<![CDATA[ #{type_code} , ]]>
+	  		</if>
+	  		<if test=" type_name  != null and  type_name  != ''  and  type_name  != 'null' ">
+	  			<![CDATA[ #{type_name} , ]]>
+	  		</if>
+	  		<if test=" effect_flag  != null and  effect_flag  != ''  and  effect_flag  != 'null' ">
+	  			<![CDATA[ #{effect_flag} , ]]>
+	  		</if>
+	  		<if test=" sort_num  != null">
+	    		<![CDATA[ ${sort_num} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateBenisonType" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BU_BENISON_TYPE A ]]>
+		<set>
+	  	<if test=" type_code  != null and  type_code  != ''  and  type_code  != 'null' ">
+	  		<![CDATA[ A.type_code = #{type_code}, ]]>
+	  	</if>
+	  	<if test=" type_name  != null and  type_name  != ''  and  type_name  != 'null' ">
+	  		<![CDATA[ A.type_name = #{type_name}, ]]>
+	  	</if>
+	  	<if test=" effect_flag  != null and  effect_flag  != ''  and  effect_flag  != 'null' ">
+	  		<![CDATA[ A.effect_flag = #{effect_flag}, ]]>
+	  	</if>
+		<if test=" sort_num  != null ">
+  			<![CDATA[ A.sort_num = ${sort_num} , ]]>
+		</if>
+		</set>
+		<![CDATA[ where A.TYPE_ID = #{type_id}]]>
+  	</update>
+  
+  	<delete id="deleteBenisonType" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BU_BENISON_TYPE  where TYPE_ID = #{type_id} ]]>
+	</delete>
+  
+	<select id="findOneBenisonType" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BU_BENISON_TYPE A  ]]>
+		<include refid="benisonTypeWhereCondition" />
+  	</select>
+    
+  	<select id="findAllBenisonType" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BU_BENISON_TYPE A ]]>
+		<include refid="benisonTypeWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapBenisonType" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BU_BENISON_TYPE A ]]>
+		<include refid="benisonTypeWhereCondition" />
+	</select>
+  
+  	<select id="findBenisonTypeTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BU_BENISON_TYPE A ]]>
+		<include refid="benisonTypeWhereCondition" />
+  	</select>
+  
+  	<select id="queryBenisonTypeForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BU_BENISON_TYPE A ]]>
+		<include refid="benisonTypeWhereCondition" />
+  	</select>
+  	
+  	<select id="queryBenisonTypeByConForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		SELECT A.* FROM BU_BENISON_TYPE A
+          where 1=1 
+        <if test=" typeCode != null and typeCode != '' and typeCode != 'null' ">
+            <![CDATA[ AND A.type_code like concat('%', #{typeCode}, '%') ]]>
+        </if> 
+        <if test=" typeName != null and typeName != '' and typeName != 'null' ">
+            <![CDATA[ AND A.type_name like concat('%', #{typeName}, '%') ]]>
+        </if> 
+         order by  type_code asc
+  	</select>
+</mapper>

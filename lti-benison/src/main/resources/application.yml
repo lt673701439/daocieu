@@ -1,0 +1,35 @@
+server:
+  port: @server.port@
+  context-path: /lti-benison
+  session.timeout: 30
+  tomcat:
+    basedir: ./tomcat
+    accesslog.enabled: true
+    accesslog.pattern: common
+    accesslog.buffered: false
+
+spring:
+  datasource:
+    name: mydb
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://@mysql.host@:3306/interaction?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    username: root
+    password: Lti_1234
+    driverClassName: com.mysql.jdbc.Driver
+    minIdle: 10
+    maxActive: 2000
+    initialSize: 10
+    timeBetweenEvictionRunsMillis: 1800000
+    minEvictableIdleTimeMillis: 1800000
+    validationQuery: SELECT 1
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+  http:
+    multipart:
+      maxFileSize: 10Mb  
+      maxRequestSize: 10Mb  
+
+mybatis:
+  mapperLocations: classpath:/mappers/*.xml
+  typeAliasesPackage: com.liketry.interaction.benison.model

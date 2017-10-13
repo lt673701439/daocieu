@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ScreenStock">
+	<resultMap id="screenStockResultMap" type="com.liketry.interaction.opt.screenstock.model.ScreenStockBO">
+		<result property="stockId" column="stock_id"/>
+		<result property="screenId" column="screen_id"/>
+		<result property="startDate" column="start_date"/>
+		<result property="endDate" column="end_date"/>
+		<result property="startTime" column="start_time"/>
+		<result property="endTime" column="end_time"/>
+		<result property="createdTime" column="created_time"/>
+		<result property="createdBy" column="created_by"/>
+		<result property="modifiedTime" column="modified_time"/>
+		<result property="modifiedBy" column="modified_by"/>
+		<result property="version" column="version"/>
+		<result property="delflag" column="delflag"/>
+		<result property="screenName" column="screen_name"/>
+  	</resultMap>
+  
+  	<sql id="screenStockWhereCondition">
+		<where>
+	  	<if test=" stock_id != null and stock_id != '' and stock_id != 'null' ">
+			<![CDATA[ AND A.stock_id = #{stock_id} ]]>
+	  	</if>
+	  	<if test=" screen_id != null and screen_id != '' and screen_id != 'null' ">
+			<![CDATA[ AND A.screen_id = #{screen_id} ]]>
+	  	</if>
+	  	<if test=" start_date != null and start_date != '' and start_date != 'null' ">
+			<![CDATA[ AND A.start_date = #{start_date} ]]>
+	  	</if>
+	  	<if test=" end_date != null and end_date != '' and end_date != 'null' ">
+			<![CDATA[ AND A.end_date = #{end_date} ]]>
+	  	</if>
+	  	<if test=" start_time != null and start_time != '' and start_time != 'null' ">
+			<![CDATA[ AND A.start_time = #{start_time} ]]>
+	  	</if>
+	  	<if test=" end_time != null and end_time != '' and end_time != 'null' ">
+			<![CDATA[ AND A.end_time = #{end_time} ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.created_time = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ AND A.created_by = #{created_by} ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.modified_time = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ AND A.modified_by = #{modified_by} ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.version = ${version} ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.delflag = #{delflag} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addScreenStock"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BU_SCREEN_STOCK
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" stock_id  != null and  stock_id  != ''  and  stock_id  != 'null' ">
+				<![CDATA[ stock_id , ]]>
+	  		</if>
+	  		<if test=" screen_id  != null and  screen_id  != ''  and  screen_id  != 'null' ">
+				<![CDATA[ screen_id , ]]>
+	  		</if>
+	  		<if test=" start_date  != null and  start_date  != ''  and  start_date  != 'null' ">
+				<![CDATA[ start_date , ]]>
+	  		</if>
+	  		<if test=" end_date  != null and  end_date  != ''  and  end_date  != 'null' ">
+				<![CDATA[ end_date , ]]>
+	  		</if>
+	  		<if test=" start_time  != null and  start_time  != ''  and  start_time  != 'null' ">
+				<![CDATA[ start_time , ]]>
+	  		</if>
+	  		<if test=" end_time  != null and  end_time  != ''  and  end_time  != 'null' ">
+				<![CDATA[ end_time , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ created_time , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ created_by , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ modified_time , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ modified_by , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ version , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ delflag , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" stock_id  != null and  stock_id  != ''  and  stock_id  != 'null' ">
+	  			<![CDATA[ #{stock_id} , ]]>
+	  		</if>
+	  		<if test=" screen_id  != null and  screen_id  != ''  and  screen_id  != 'null' ">
+	  			<![CDATA[ #{screen_id} , ]]>
+	  		</if>
+	  		<if test=" start_date  != null and  start_date  != ''  and  start_date  != 'null' ">
+	  			<![CDATA[ #{start_date} , ]]>
+	  		</if>
+	  		<if test=" end_date  != null and  end_date  != ''  and  end_date  != 'null' ">
+	  			<![CDATA[ #{end_date} , ]]>
+	  		</if>
+	  		<if test=" start_time  != null and  start_time  != ''  and  start_time  != 'null' ">
+	  			<![CDATA[ #{start_time} , ]]>
+	  		</if>
+	  		<if test=" end_time  != null and  end_time  != ''  and  end_time  != 'null' ">
+	  			<![CDATA[ #{end_time} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateScreenStock" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BU_SCREEN_STOCK A ]]>
+		<set>
+	  	<if test=" screen_id  != null and  screen_id  != ''  and  screen_id  != 'null' ">
+	  		<![CDATA[ A.screen_id = #{screen_id}, ]]>
+	  	</if>
+	  	<if test=" start_date  != null and  start_date  != ''  and  start_date  != 'null' ">
+	  		<![CDATA[ A.start_date = #{start_date}, ]]>
+	  	</if>
+	  	<if test=" end_date  != null and  end_date  != ''  and  end_date  != 'null' ">
+	  		<![CDATA[ A.end_date = #{end_date}, ]]>
+	  	</if>
+	  	<if test=" start_time  != null and  start_time  != ''  and  start_time  != 'null' ">
+	  		<![CDATA[ A.start_time = #{start_time}, ]]>
+	  	</if>
+	  	<if test=" end_time  != null and  end_time  != ''  and  end_time  != 'null' ">
+	  		<![CDATA[ A.end_time = #{end_time}, ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.created_time = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.created_by = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.modified_time = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.modified_by = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.version = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.delflag = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.STOCK_ID = #{stock_id}]]>
+  	</update>
+  
+  	<delete id="deleteScreenStock" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BU_SCREEN_STOCK A where A.STOCK_ID = #{stock_id} ]]>
+	</delete>
+  
+	<select id="findOneScreenStock" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BU_SCREEN_STOCK A  ]]>
+		<include refid="screenStockWhereCondition" />
+  	</select>
+    
+  	<select id="findAllScreenStock" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BU_SCREEN_STOCK A ]]>
+		<include refid="screenStockWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapScreenStock" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BU_SCREEN_STOCK A ]]>
+		<include refid="screenStockWhereCondition" />
+	</select>
+  
+  	<select id="findScreenStockTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BU_SCREEN_STOCK A ]]>
+		<include refid="screenStockWhereCondition" />
+  	</select>
+  
+  	<select id="queryScreenStockForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BU_SCREEN_STOCK A ]]>
+		<include refid="screenStockWhereCondition" />
+  	</select>
+  	
+  	<select id="queryScreenStockForPageByCon" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+  		<![CDATA[
+		select t.*,s.screen_name from 
+		(
+		(select *  from  bu_screen_stock  where start_date<=CURDATE() and end_date >=CURDATE() order by start_date ASC)
+		union all
+		(select *  from  bu_screen_stock  where start_date>CURDATE() or end_date < CURDATE() order by start_date ASC)
+		) t 
+		left join bu_screen s on t.screen_id = s.screen_id 
+          where t.DELFLAG = '1']]>
+        <if test=" startDate != null and startDate != '' and startDate != 'null' ">
+            <![CDATA[ AND  t.start_date >=#{startDate}]]>
+        </if> 
+        <if test=" endDate != null and endDate != '' and endDate != 'null' ">
+            <![CDATA[ AND t.end_date<= #{endDate}]]>
+        </if>
+         <if test=" newScreenName != null and newScreenName != '' and newScreenName != 'null' ">
+            <![CDATA[ AND s.screen_name like concat('%', #{newScreenName}, '%') ]]>
+        </if>
+  	</select>
+  	
+  	<select id="findNewOneScreenStock" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT A.*,s.screen_name FROM BU_SCREEN_STOCK A 
+	 	 left join bu_screen s on A.screen_id = s.screen_id
+         where A.DELFLAG = '1' 
+		and A.stock_id = #{stock_id}
+  	</select>
+  	
+  	<!-- # 有重叠的第一种情况：当库屏幕开始日期【小于】本屏幕开始日期 并且 库结束日期【大于等于】本屏幕开始日期
+                  #（库开始时间【小于】本屏幕开始时间 并且 库结束时间【大于等于】本屏幕开始时间）
+                  # 或者
+                  #（库开始时间在本屏幕开始和结束时间之间)
+              
+        # 有重叠的第二种情况：当库屏幕开始日期在本屏幕开始和结束日期之间
+                  #（库开始时间【小于】本屏幕开始时间 并且 库结束时间【大于等于】本屏幕开始时间）
+                  # 或者
+                  #（库开始时间在本屏幕开始和结束时间之间) -->
+	<select id="findRepeatByDateAndTime" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		 SELECT A.*,s.screen_code FROM BU_SCREEN_STOCK A 
+	 	 left join bu_screen s on A.screen_id = s.screen_id 
+	 	 where A.DELFLAG = '1' 
+<![CDATA[ and A.screen_id = #{screenId}
+		and ((A.start_date < #{startDate} and A.end_date >= #{startDate})
+                or (A.start_date >= #{startDate} and A.start_date <= #{endDate}))
+          and ((A.start_time < #{startTime} and A.end_time > #{startTime})
+                or (A.start_time >= #{startTime} and A.start_time < #{endTime}))
+          ORDER BY A.created_time ]]>
+	</select>
+</mapper>

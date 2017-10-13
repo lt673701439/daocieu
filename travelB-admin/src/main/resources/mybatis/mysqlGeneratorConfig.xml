@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration> 
+    <classPathEntry location="C:\Users\dell\.m2\repository\mysql\mysql-connector-java\5.1.39\mysql-connector-java-5.1.39.jar" />
+   
+  <context id="mysqlTables" targetRuntime="MyBatis3">
+  
+ 	<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://211.159.151.156:3306/travelb_admin"
+      userId="root" password="root"/> 
+      
+    <!-- 指定生成的类型为java类型，避免数据库中number等类型字段 -->
+    <javaTypeResolver>
+      <property name="forceBigDecimals" value="false"/>
+    </javaTypeResolver>
+     
+    <!-- 生成model模型，对应的包，存放位置可以指定具体的路径,如/ProjectName/src，也可以使用MyWebservice/src/main/java来自动生成 -->
+    <javaModelGenerator targetPackage="com.liketry.domain" targetProject="travelB-admin/src/main/java">
+      <property name="enableSubPackages" value="true"/>
+    </javaModelGenerator>
+    
+    <!--对应的xml mapper文件  -->
+    <sqlMapGenerator targetPackage="mapper" targetProject="travelB-admin/src/main/resources">
+      <property name="enableSubPackages" value="true"/>
+    </sqlMapGenerator>
+    
+    <!-- 对应的dao接口类 -->
+    <javaClientGenerator type="XMLMAPPER" targetPackage="com.liketry.mapper" targetProject="travelB-admin/src/main/java">
+      <property name="enableSubPackages" value="true"/>
+    </javaClientGenerator>
+    <!-- tables 配置好表名和对应的实体对象名 -->
+    <!-- 基础表
+    <table tableName="bsc_admin" domainObjectName="Admin" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>-->
+    <!-- <table tableName="bsc_biz_seqno_t" domainObjectName="BizSeqno" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table> -->
+    <!-- <table tableName="bsc_dict_entry" domainObjectName="DictEntry" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>
+        <table tableName="bsc_dict_type" domainObjectName="DictType" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>
+    <table tableName="bsc_menu" domainObjectName="Menu" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>
+        <table tableName="bsc_role" domainObjectName="Role" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>
+    <table tableName="bsc_role_menu" domainObjectName="RoleMenu" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>
+    <table tableName="bsc_sequence" domainObjectName="Sequence" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>
+    <table tableName="bsc_user_role" domainObjectName="UserRole" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table> -->
+    
+    <!-- 业务表 -->
+   <!-- <table tableName="bank_card" domainObjectName="BankCard" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table> 
+    <table tableName="bu_divide_rule" domainObjectName="DivideRule" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>
+    <table tableName="bu_promotion" domainObjectName="Promotion" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>
+        <table tableName="bu_promotion_detail" domainObjectName="PromotionDetail" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>
+    <table tableName="bu_rec_dis" domainObjectName="RecDis" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>
+     
+        <table tableName="bu_user" domainObjectName="User" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>
+    <table tableName="censor" domainObjectName="Censor" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table> 
+     <table tableName="censor_record" domainObjectName="CensorRecord" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table> 
+     <table tableName="merchant" domainObjectName="Merchant" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>
+    <table tableName="order_record" domainObjectName="OrderRecord" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>   -->
+  </context>
+</generatorConfiguration>

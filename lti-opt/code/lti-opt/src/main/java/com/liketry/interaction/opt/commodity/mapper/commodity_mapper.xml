@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Commodity">
+	<resultMap id="commodityResultMap" type="com.liketry.interaction.opt.commodity.model.CommodityBO">
+		<result property="commodityId" column="commodity_id"/>
+		<result property="commodityCode" column="commodity_code"/>
+		<result property="commodityName" column="commodity_name"/>
+		<result property="commodityDescription" column="commodity_description"/>
+		<result property="commodityType" column="commodity_type"/>
+		<result property="commodityStatus" column="commodity_status"/>
+		<result property="commodityPrice" column="commodity_price"/>
+		<result property="commodityImg" column="commodity_img"/>
+		<result property="screenId" column="screen_id"/>
+		<result property="startDate" column="start_date"/>
+		<result property="endDate" column="end_date"/>
+		<result property="timeFrame" column="time_frame"/>
+		<result property="startTime" column="start_time"/>
+		<result property="endTime" column="end_time"/>
+		<result property="shelfTime" column="shelf_time"/>
+		<result property="planNumber" column="plan_number"/>
+		<result property="singleTime" column="single_time"/>
+		<result property="playTimes" column="play_times"/>
+		<result property="createdTime" column="created_time"/>
+		<result property="createdBy" column="created_by"/>
+		<result property="modifiedTime" column="modified_time"/>
+		<result property="modifiedBy" column="modified_by"/>
+		<result property="version" column="version"/>
+		<result property="delflag" column="delflag"/>
+  	</resultMap>
+  
+  	<sql id="commodityWhereCondition">
+		<where>
+	  	<if test=" commodity_id != null and commodity_id != '' and commodity_id != 'null' ">
+			<![CDATA[ AND A.commodity_id = #{commodity_id} ]]>
+	  	</if>
+	  	<if test=" commodity_code != null and commodity_code != '' and commodity_code != 'null' ">
+			<![CDATA[ AND A.commodity_code = #{commodity_code} ]]>
+	  	</if>
+	  	<if test=" commodity_name != null and commodity_name != '' and commodity_name != 'null' ">
+			<![CDATA[ AND A.commodity_name = #{commodity_name} ]]>
+	  	</if>
+	  	<if test=" commodity_description != null and commodity_description != '' and commodity_description != 'null' ">
+			<![CDATA[ AND A.commodity_description = #{commodity_description} ]]>
+	  	</if>
+	  	<if test=" commodity_type != null and commodity_type != '' and commodity_type != 'null' ">
+			<![CDATA[ AND A.commodity_type = #{commodity_type} ]]>
+	  	</if>
+	  	<if test=" commodity_status != null and commodity_status != '' and commodity_status != 'null' ">
+			<![CDATA[ AND A.commodity_status = #{commodity_status} ]]>
+	  	</if>
+	  	<if test=" commodity_price != null ">
+	  		<![CDATA[ AND A.commodity_price = ${commodity_price} ]]>
+	  	</if>
+	  	<if test=" commodity_img != null and commodity_img != '' and commodity_img != 'null' ">
+			<![CDATA[ AND A.commodity_img = #{commodity_img} ]]>
+	  	</if>
+	  	<if test=" screen_id != null and screen_id != '' and screen_id != 'null' ">
+			<![CDATA[ AND A.screen_id = #{screen_id} ]]>
+	  	</if>
+	  	<if test=" start_date != null and start_date != '' and start_date != 'null' ">
+			<![CDATA[ AND A.start_date = #{start_date} ]]>
+	  	</if>
+	  	<if test=" end_date != null and end_date != '' and end_date != 'null' ">
+			<![CDATA[ AND A.end_date = #{end_date} ]]>
+	  	</if>
+	  	<if test=" time_frame != null and time_frame != '' and time_frame != 'null' ">
+			<![CDATA[ AND A.time_frame = #{time_frame} ]]>
+	  	</if>
+	  	<if test=" start_time != null and start_time != '' and start_time != 'null' ">
+			<![CDATA[ AND A.start_time = #{start_time} ]]>
+	  	</if>
+	  	<if test=" end_time != null and end_time != '' and end_time != 'null' ">
+			<![CDATA[ AND A.end_time = #{end_time} ]]>
+	  	</if>
+	  	<if test=" shelf_time != null and shelf_time != '' and shelf_time != 'null' ">
+			<![CDATA[ AND A.shelf_time = #{shelf_time} ]]>
+	  	</if>
+	  	<if test=" plan_number != null ">
+	  		<![CDATA[ AND A.plan_number = ${plan_number} ]]>
+	  	</if>
+	  	<if test=" single_time != null ">
+	  		<![CDATA[ AND A.single_time = ${single_time} ]]>
+	  	</if>
+	  	<if test=" play_times != null ">
+	  		<![CDATA[ AND A.play_times = ${play_times} ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.created_time = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ AND A.created_by = #{created_by} ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.modified_time = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ AND A.modified_by = #{modified_by} ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.version = ${version} ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.delflag = #{delflag} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addCommodity"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BU_COMMODITY
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" commodity_id  != null and  commodity_id  != ''  and  commodity_id  != 'null' ">
+				<![CDATA[ commodity_id , ]]>
+	  		</if>
+	  		<if test=" commodity_code  != null and  commodity_code  != ''  and  commodity_code  != 'null' ">
+				<![CDATA[ commodity_code , ]]>
+	  		</if>
+	  		<if test=" commodity_name  != null and  commodity_name  != ''  and  commodity_name  != 'null' ">
+				<![CDATA[ commodity_name , ]]>
+	  		</if>
+	  		<if test=" commodity_description  != null and  commodity_description  != ''  and  commodity_description  != 'null' ">
+				<![CDATA[ commodity_description , ]]>
+	  		</if>
+	  		<if test=" commodity_type  != null and  commodity_type  != ''  and  commodity_type  != 'null' ">
+				<![CDATA[ commodity_type , ]]>
+	  		</if>
+	  		<if test=" commodity_status  != null and  commodity_status  != ''  and  commodity_status  != 'null' ">
+				<![CDATA[ commodity_status , ]]>
+	  		</if>
+	  		<if test=" commodity_price  != null ">
+				<![CDATA[ commodity_price , ]]>
+	  		</if>
+	  		<if test=" commodity_img  != null and  commodity_img  != ''  and  commodity_img  != 'null' ">
+				<![CDATA[ commodity_img , ]]>
+	  		</if>
+	  		<if test=" screen_id  != null and  screen_id  != ''  and  screen_id  != 'null' ">
+				<![CDATA[ screen_id , ]]>
+	  		</if>
+	  		<if test=" start_date  != null and  start_date  != ''  and  start_date  != 'null' ">
+				<![CDATA[ start_date , ]]>
+	  		</if>
+	  		<if test=" end_date  != null and  end_date  != ''  and  end_date  != 'null' ">
+				<![CDATA[ end_date , ]]>
+	  		</if>
+	  		<if test=" time_frame  != null and  time_frame  != ''  and  time_frame  != 'null' ">
+				<![CDATA[ time_frame , ]]>
+	  		</if>
+	  		<if test=" start_time  != null and  start_time  != ''  and  start_time  != 'null' ">
+				<![CDATA[ start_time , ]]>
+	  		</if>
+	  		<if test=" end_time  != null and  end_time  != ''  and  end_time  != 'null' ">
+				<![CDATA[ end_time , ]]>
+	  		</if>
+	  		<if test=" shelf_time  != null and  shelf_time  != ''  and  shelf_time  != 'null' ">
+				<![CDATA[ shelf_time , ]]>
+	  		</if>
+	  		<if test=" plan_number  != null ">
+				<![CDATA[ plan_number , ]]>
+	  		</if>
+	  		<if test=" single_time  != null ">
+				<![CDATA[ single_time , ]]>
+	  		</if>
+	  		<if test=" play_times  != null ">
+				<![CDATA[ play_times , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ created_time , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ created_by , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ modified_time , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ modified_by , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ version , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ delflag , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" commodity_id  != null and  commodity_id  != ''  and  commodity_id  != 'null' ">
+	  			<![CDATA[ #{commodity_id} , ]]>
+	  		</if>
+	  		<if test=" commodity_code  != null and  commodity_code  != ''  and  commodity_code  != 'null' ">
+	  			<![CDATA[ #{commodity_code} , ]]>
+	  		</if>
+	  		<if test=" commodity_name  != null and  commodity_name  != ''  and  commodity_name  != 'null' ">
+	  			<![CDATA[ #{commodity_name} , ]]>
+	  		</if>
+	  		<if test=" commodity_description  != null and  commodity_description  != ''  and  commodity_description  != 'null' ">
+	  			<![CDATA[ #{commodity_description} , ]]>
+	  		</if>
+	  		<if test=" commodity_type  != null and  commodity_type  != ''  and  commodity_type  != 'null' ">
+	  			<![CDATA[ #{commodity_type} , ]]>
+	  		</if>
+	  		<if test=" commodity_status  != null and  commodity_status  != ''  and  commodity_status  != 'null' ">
+	  			<![CDATA[ #{commodity_status} , ]]>
+	  		</if>
+	  		<if test=" commodity_price  != null">
+	    		<![CDATA[ ${commodity_price} , ]]>
+	  		</if>
+	  		<if test=" commodity_img  != null and  commodity_img  != ''  and  commodity_img  != 'null' ">
+	  			<![CDATA[ #{commodity_img} , ]]>
+	  		</if>
+	  		<if test=" screen_id  != null and  screen_id  != ''  and  screen_id  != 'null' ">
+	  			<![CDATA[ #{screen_id} , ]]>
+	  		</if>
+	  		<if test=" start_date  != null and  start_date  != ''  and  start_date  != 'null' ">
+	  			<![CDATA[ #{start_date} , ]]>
+	  		</if>
+	  		<if test=" end_date  != null and  end_date  != ''  and  end_date  != 'null' ">
+	  			<![CDATA[ #{end_date} , ]]>
+	  		</if>
+	  		<if test=" time_frame  != null and  time_frame  != ''  and  time_frame  != 'null' ">
+	  			<![CDATA[ #{time_frame} , ]]>
+	  		</if>
+	  		<if test=" start_time  != null and  start_time  != ''  and  start_time  != 'null' ">
+	  			<![CDATA[ #{start_time} , ]]>
+	  		</if>
+	  		<if test=" end_time  != null and  end_time  != ''  and  end_time  != 'null' ">
+	  			<![CDATA[ #{end_time} , ]]>
+	  		</if>
+	  		<if test=" shelf_time  != null and  shelf_time  != ''  and  shelf_time  != 'null' ">
+	  			<![CDATA[ #{shelf_time} , ]]>
+	  		</if>
+	  		<if test=" plan_number  != null">
+	    		<![CDATA[ ${plan_number} , ]]>
+	  		</if>
+	  		<if test=" single_time  != null">
+	    		<![CDATA[ ${single_time} , ]]>
+	  		</if>
+	  		<if test=" play_times  != null">
+	    		<![CDATA[ ${play_times} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateCommodity" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BU_COMMODITY A ]]>
+		<set>
+	  	<if test=" commodity_code  != null and  commodity_code  != ''  and  commodity_code  != 'null' ">
+	  		<![CDATA[ A.commodity_code = #{commodity_code}, ]]>
+	  	</if>
+	  	<if test=" commodity_name  != null and  commodity_name  != ''  and  commodity_name  != 'null' ">
+	  		<![CDATA[ A.commodity_name = #{commodity_name}, ]]>
+	  	</if>
+	  	<if test=" commodity_description  != null and  commodity_description  != ''  and  commodity_description  != 'null' ">
+	  		<![CDATA[ A.commodity_description = #{commodity_description}, ]]>
+	  	</if>
+	  	<if test=" commodity_type  != null and  commodity_type  != ''  and  commodity_type  != 'null' ">
+	  		<![CDATA[ A.commodity_type = #{commodity_type}, ]]>
+	  	</if>
+	  	<if test=" commodity_status  != null and  commodity_status  != ''  and  commodity_status  != 'null' ">
+	  		<![CDATA[ A.commodity_status = #{commodity_status}, ]]>
+	  	</if>
+		<if test=" commodity_price  != null ">
+  			<![CDATA[ A.commodity_price = ${commodity_price} , ]]>
+		</if>
+	  	<if test=" commodity_img  != null and  commodity_img  != ''  and  commodity_img  != 'null' ">
+	  		<![CDATA[ A.commodity_img = #{commodity_img}, ]]>
+	  	</if>
+	  	<if test=" screen_id  != null and  screen_id  != ''  and  screen_id  != 'null' ">
+	  		<![CDATA[ A.screen_id = #{screen_id}, ]]>
+	  	</if>
+	  	<if test=" start_date  != null and  start_date  != ''  and  start_date  != 'null' ">
+	  		<![CDATA[ A.start_date = #{start_date}, ]]>
+	  	</if>
+	  	<if test=" end_date  != null and  end_date  != ''  and  end_date  != 'null' ">
+	  		<![CDATA[ A.end_date = #{end_date}, ]]>
+	  	</if>
+	  	<if test=" time_frame  != null and  time_frame  != ''  and  time_frame  != 'null' ">
+	  		<![CDATA[ A.time_frame = #{time_frame}, ]]>
+	  	</if>
+	  	<if test=" start_time  != null and  start_time  != ''  and  start_time  != 'null' ">
+	  		<![CDATA[ A.start_time = #{start_time}, ]]>
+	  	</if>
+	  	<if test=" end_time  != null and  end_time  != ''  and  end_time  != 'null' ">
+	  		<![CDATA[ A.end_time = #{end_time}, ]]>
+	  	</if>
+	  	<if test=" shelf_time  != null and  shelf_time  != ''  and  shelf_time  != 'null' ">
+	  		<![CDATA[ A.shelf_time = #{shelf_time}, ]]>
+	  	</if>
+		<if test=" plan_number  != null ">
+  			<![CDATA[ A.plan_number = ${plan_number} , ]]>
+		</if>
+		<if test=" single_time  != null ">
+  			<![CDATA[ A.single_time = ${single_time} , ]]>
+		</if>
+		<if test=" play_times  != null ">
+  			<![CDATA[ A.play_times = ${play_times} , ]]>
+		</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.created_time = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.created_by = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.modified_time = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.modified_by = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.version = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.delflag = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.COMMODITY_ID = #{commodity_id}]]>
+  	</update>
+  
+ 	<delete id="deleteCommodity" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BU_COMMODITY where commodity_id = #{commodity_id} ]]>
+	</delete>
+  
+	<select id="findOneCommodity" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.*, B.screen_name FROM BU_COMMODITY A,  BU_SCREEN B ]]>
+		<include refid="commodityWhereCondition" />
+		<![CDATA[ AND A.screen_id = B.screen_id ]]>
+		
+  	</select>
+    
+  	<select id="findAllCommodity" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BU_COMMODITY A ]]>
+		<include refid="commodityWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapCommodity" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BU_COMMODITY A ]]>
+		<include refid="commodityWhereCondition" />
+	</select>
+  
+  	<select id="findCommodityTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BU_COMMODITY A ]]>
+		<include refid="commodityWhereCondition" />
+  	</select>
+  
+  	<select id="queryCommodityForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BU_COMMODITY A ]]>
+		<include refid="commodityWhereCondition" />
+  	</select>
+  	
+  	<!-- 注意：查询语句要重新写 -->
+	<select id="queryCommodityByConForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		SELECT A.*,B.screen_name FROM BU_COMMODITY A, BU_SCREEN B
+          where 1=1 
+          AND A.DELFLAG = '1' 
+          AND A.screen_id = B.screen_id
+        <if test=" commodityCode != null and commodityCode != '' and commodityCode != 'null' ">
+            <![CDATA[ AND A.commodity_code like concat('%', #{commodityCode}, '%') ]]>
+        </if> 
+        <if test=" commodityName != null and commodityName != '' and commodityName != 'null' ">
+            <![CDATA[ AND A.commodity_name like concat('%', #{commodityName}, '%') ]]>
+        </if> 
+        <if test=" commodityDate != null and commodityDate != '' and commodityDate != 'null' ">
+            <![CDATA[ AND A.start_date <= #{commodityDate} ]]>
+            <![CDATA[ AND A.end_date >= #{commodityDate} ]]>
+        </if>
+		<if test=" commodityStatus != null and commodityStatus != '' and commodityStatus != 'null' ">
+            <![CDATA[ AND A.commodity_status = #{commodityStatus} ]]>
+        </if> 
+          ORDER BY A.commodity_code
+  	</select>
+  	
+  	<select id="findAllMapByDateAndTime" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		 SELECT A.* FROM BU_COMMODITY A 
+		  where  A.DELFLAG = '1' 
+          <![CDATA[and (A.start_date <=#{startDate} and A.end_date >= #{endDate}
+          and A.start_time <=#{startTime} and A.end_time >= #{endTime})]]>
+	</select>
+	
+	<!-- # 有重叠的第一种情况：当库商品开始日期【小于】本商品开始日期 并且 库结束日期【大于等于】本商品开始日期
+                  #（库开始时间【小于】本商品开始时间 并且 库结束时间【大于】本商品开始时间）
+                  # 或者
+                  #（库开始时间【大于等于】本商品开始时间 并且 库开始时间【小于】本商品结束时间)
+              
+        # 有重叠的第二种情况：当库商品开始日期在本商品开始和结束日期之间
+                  #（库开始时间【小于】本商品开始时间 并且 库结束时间【大于】本商品开始时间）
+                  # 或者
+                  #（库开始时间【大于等于】本商品开始时间 并且 库开始时间【小于】本商品结束时间) -->
+	<select id="findRepeatByDateAndTime" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		 SELECT A.* FROM BU_COMMODITY A 
+		  where  A.DELFLAG = '1' 
+<![CDATA[ and A.screen_id = #{screenId}
+		  and A.commodity_status = '1'
+		  and ((A.start_date < #{startDate} and A.end_date >= #{startDate})
+                or (A.start_date >= #{startDate} and A.start_date <= #{endDate}))
+          and ((A.start_time < #{startTime} and A.end_time > #{startTime})
+                or (A.start_time >= #{startTime} and A.start_time < #{endTime}))
+          ORDER BY A.commodity_code ]]>
+	</select>
+</mapper>
