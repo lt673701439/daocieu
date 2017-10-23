@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#ffffff</color>
+    <color name="gray">#cccccc</color>
+    <color name="black">#000000</color>
+    <color name="bb">#bbbbbb</color>
+    <color name="gray_8e">#8e8f92</color>
+    <color name="gray_d15b">#ffd1d5db</color>
+    <color name="calendar_common">#e65100</color>
+    <color name="code_orange">#ffbc51</color>
+</resources>

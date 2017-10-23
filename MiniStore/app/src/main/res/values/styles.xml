@@ -1,0 +1,55 @@
+<resources>
+    <item name="tag_first" type="id" />
+    <item name="tag_second" type="id" />
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorAccent">@color/white</item>
+    </style>
+
+    <style name="black_common_15">
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">#242322</item>
+    </style>
+
+    <style name="black_15">
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="white_15">
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+    <style name="orange_15">
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">#f2b09c</item>
+    </style>
+
+    <style name="black_13">
+        <item name="android:textSize">13dp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="gray9b_13">
+        <item name="android:textSize">13dp</item>
+        <item name="android:textColor">#9b9b9b</item>
+    </style>
+
+    <style name="black24_13">
+        <item name="android:textSize">13dp</item>
+        <item name="android:textColor">#242322</item>
+    </style>
+
+    <style name="gray_13">
+        <item name="android:textSize">13dp</item>
+        <item name="android:textColor">#cccccc</item>
+    </style>
+
+    <style name="white_20">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+</resources>

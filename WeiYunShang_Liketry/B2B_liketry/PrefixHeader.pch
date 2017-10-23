@@ -1,0 +1,15 @@
+//
+//  PrefixHeader.pch
+//  B2B_liketry
+//
+//  Created by GentleZ on 2017/9/4.
+//  Copyright © 2017年 GentleZ. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import "YSSConst.h"
+#import "YSSToolConst.h"
+
+#endif /* PrefixHeader_pch */

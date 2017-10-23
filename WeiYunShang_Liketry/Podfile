@@ -1,0 +1,28 @@
+platform :ios, '8.0'
+inhibit_all_warnings!
+
+target 'B2B_liketry' do
+
+pod 'AFNetworking', '~> 3.1.0'
+pod 'MJRefresh', '~> 3.1.12'
+pod 'MJExtension', '~> 3.0.13'
+pod 'Masonry', '~> 1.0.2'
+pod 'SDWebImage', '~> 4.0.0'
+pod 'SVProgressHUD', '~> 2.2.2'
+pod 'UMengUShare/UI'
+pod 'UMengUShare/Social/WeChat'
+pod 'UMengUShare/Social/QQ'
+pod 'UMengUShare/Social/Sina'
+pod 'IMYWebView', '~> 0.8.1'
+pod 'YYText', '~> 1.0.7'
+pod 'FSCalendar', '~> 2.7.9'
+pod 'JQFMDB', '~> 1.1.6'
+pod 'YUChineseSorting', '~> 1.0.2'
+pod 'AMap3DMap', '~> 5.0.0'
+pod 'AMapLocation', '~> 2.4.0'
+pod 'AMapSearch', '~> 5.2.1'
+pod 'UMessage', '~> 1.4.0'
+pod 'MLLabel', '~> 1.10.5'
+pod 'YBPopupMenu', '~> 1.0.0'
+
+end
