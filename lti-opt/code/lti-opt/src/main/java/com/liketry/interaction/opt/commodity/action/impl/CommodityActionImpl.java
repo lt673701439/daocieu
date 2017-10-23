@@ -1,6 +1,7 @@
 package com.liketry.interaction.opt.commodity.action.impl;
 
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -545,6 +546,20 @@ public class CommodityActionImpl extends BaseActionImpl
         g.dispose();
 
         FileOutputStream out = new FileOutputStream(newImgUrl);
+        
+        //描边
+		if(!StringUtils.isEmpty(benisonTemplateBO.getStrokeFigure())){
+			logger.info("<======开始进行描边操作，描边图url:{}===========>",benisonTemplateBO.getStrokeFigure());
+			String realPath = CommonUtil.uploadFilePath();
+			File boomfile = new File(realPath+benisonTemplateBO.getStrokeFigure()); //描边图
+			try {
+				buffImg = watermark(boomfile, buffImg, Integer.parseInt(benisonTemplateBO.getStrokeX()), 
+						Integer.parseInt(benisonTemplateBO.getStrokeY()), benisonTemplateBO.getStrokeAlpha());
+			} catch (Exception e) {
+				logger.info("<====描边错误,模板ID:{},错误信息:{}=======>",benisonTemplateBO.getTemplateId(),e);
+			} 
+		}
+		
         //创键编码器，用于编码内存中的图象数据。            
         ImageIO.write(buffImg,fileFormat,out);
 //        is.close();  
@@ -729,7 +744,14 @@ public class CommodityActionImpl extends BaseActionImpl
 								g.drawString(chidrenStr, startX, tempY);
 								//如果不是最后一行，则换行
 								if(!chidrenStr.equals(chidrenStrs[chidrenStrs.length-1])){
-									tempY += bodyText.getWm_text_size() + 17;
+									if(bodyText.getWm_text_size() <= 22){
+										tempY += bodyText.getWm_text_size() + 9;
+									}else if(bodyText.getWm_text_size() > 23 && bodyText.getWm_text_size() <= 39){
+										tempY += bodyText.getWm_text_size() + 13;
+									}else if(bodyText.getWm_text_size() >= 40){
+										tempY += bodyText.getWm_text_size() + 18;
+									}
+//									tempY += bodyText.getWm_text_size() + 17;
 								}
 							}
 						}else{
@@ -766,7 +788,14 @@ public class CommodityActionImpl extends BaseActionImpl
 					
 					//如果不是最后一行，则换行
 					if(!str.equals(strs[strs.length-1])){
-						tempY += bodyText.getWm_text_size() + 17;
+						if(bodyText.getWm_text_size() <= 22){
+							tempY += bodyText.getWm_text_size() + 9;
+						}else if(bodyText.getWm_text_size() > 23 && bodyText.getWm_text_size() <= 39){
+							tempY += bodyText.getWm_text_size() + 13;
+						}else if(bodyText.getWm_text_size() >= 40){
+							tempY += bodyText.getWm_text_size() + 18;
+						}
+//						tempY += bodyText.getWm_text_size() + 17;
 					}
 					logger.info("《=====单行水印文字总长度:"+ width +"============>");
 				}
@@ -811,5 +840,39 @@ public class CommodityActionImpl extends BaseActionImpl
 		map.put("msg", newImgUrl);
 	    return map; 
     }  
+	
+	/**
+	 * 
+	 * @Title: 构造叠加图片
+	 * @Description: 生成水印并返回java.awt.image.BufferedImage
+	 * @param file
+	 *            源文件(图片)
+	 * @param waterFile
+	 *            水印文件(图片)
+	 * @param x
+	 *            距离右下角的X偏移量
+	 * @param y
+	 *            距离右下角的Y偏移量
+	 * @param alpha
+	 *            透明度, 选择值从0.0~1.0: 完全透明~完全不透明
+	 * @return BufferedImage
+	 * @throws IOException
+	 */
+	public BufferedImage watermark(File file, BufferedImage waterImg, int x, int y, float alpha) throws IOException {
+		// 获取底图
+		BufferedImage buffImg = ImageIO.read(file);
+		// 获取层图
+//		BufferedImage waterImg = ImageIO.read(waterFile);
+		// 创建Graphics2D对象，用在底图对象上绘图
+		Graphics2D g2d = buffImg.createGraphics();
+		int waterImgWidth = waterImg.getWidth();// 获取层图的宽度
+		int waterImgHeight = waterImg.getHeight();// 获取层图的高度
+		// 在图形和图像中实现混合和透明效果
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, alpha));
+		// 绘制
+		g2d.drawImage(waterImg, x, y, waterImgWidth, waterImgHeight, null);
+		g2d.dispose();// 释放图形上下文使用的系统资源
+		return buffImg;
+	}
 	
 }

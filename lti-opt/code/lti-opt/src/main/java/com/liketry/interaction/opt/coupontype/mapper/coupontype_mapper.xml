@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CouponType">
+	<resultMap id="couponTypeResultMap" type="com.liketry.interaction.opt.coupontype.model.CouponTypeBO">
+		<result property="couponTypeId" column="coupon_type_id"/>
+		<result property="couponTypeCode" column="coupon_type_code"/>
+		<result property="couponName" column="coupon_name"/>
+		<result property="couponType" column="coupon_type"/>
+		<result property="validType" column="valid_type"/>
+		<result property="publishType" column="publish_type"/>
+		<result property="specialOffer" column="special_offer"/>
+		<result property="discount" column="discount"/>
+		<result property="deduction" column="deduction"/>
+		<result property="screenIds" column="screen_ids"/>
+		<result property="commodityIds" column="commodity_ids"/>
+		<result property="benisonTypeIds" column="benison_type_ids"/>
+		<result property="createdTime" column="created_time"/>
+		<result property="createdBy" column="created_by"/>
+		<result property="modifiedTime" column="modified_time"/>
+		<result property="modifiedBy" column="modified_by"/>
+		<result property="version" column="version"/>
+		<result property="delflag" column="delflag"/>
+  	</resultMap>
+  
+  	<sql id="couponTypeWhereCondition">
+		<where>
+	  	<if test=" coupon_type_id != null and coupon_type_id != '' and coupon_type_id != 'null' ">
+			<![CDATA[ AND A.coupon_type_id = #{coupon_type_id} ]]>
+	  	</if>
+	  	<if test=" coupon_type_code != null and coupon_type_code != '' and coupon_type_code != 'null' ">
+			<![CDATA[ AND A.coupon_type_code = #{coupon_type_code} ]]>
+	  	</if>
+	  	<if test=" coupon_name != null and coupon_name != '' and coupon_name != 'null' ">
+			<![CDATA[ AND A.coupon_name = #{coupon_name} ]]>
+	  	</if>
+	  	<if test=" coupon_type != null and coupon_type != '' and coupon_type != 'null' ">
+			<![CDATA[ AND A.coupon_type = #{coupon_type} ]]>
+	  	</if>
+	  	<if test=" valid_type != null and valid_type != '' and valid_type != 'null' ">
+			<![CDATA[ AND A.valid_type = #{valid_type} ]]>
+	  	</if>
+	  	<if test=" publish_type != null and publish_type != '' and publish_type != 'null' ">
+			<![CDATA[ AND A.publish_type = #{publish_type} ]]>
+	  	</if>
+	  	<if test=" special_offer != null ">
+	  		<![CDATA[ AND A.special_offer = ${special_offer} ]]>
+	  	</if>
+	  	<if test=" discount != null ">
+	  		<![CDATA[ AND A.discount = ${discount} ]]>
+	  	</if>
+	  	<if test=" deduction != null ">
+	  		<![CDATA[ AND A.deduction = ${deduction} ]]>
+	  	</if>
+	  	<if test=" screen_ids != null and screen_ids != '' and screen_ids != 'null' ">
+			<![CDATA[ AND A.screen_ids = #{screen_ids} ]]>
+	  	</if>
+	  	<if test=" commodity_ids != null and commodity_ids != '' and commodity_ids != 'null' ">
+			<![CDATA[ AND A.commodity_ids = #{commodity_ids} ]]>
+	  	</if>
+	  	<if test=" benison_type_ids != null and benison_type_ids != '' and benison_type_ids != 'null' ">
+			<![CDATA[ AND A.benison_type_ids = #{benison_type_ids} ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.created_time = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ AND A.created_by = #{created_by} ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.modified_time = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ AND A.modified_by = #{modified_by} ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.version = ${version} ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.delflag = #{delflag} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addCouponType"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BU_COUPON_TYPE
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" coupon_type_id  != null and  coupon_type_id  != ''  and  coupon_type_id  != 'null' ">
+				<![CDATA[ coupon_type_id , ]]>
+	  		</if>
+	  		<if test=" coupon_type_code  != null and  coupon_type_code  != ''  and  coupon_type_code  != 'null' ">
+				<![CDATA[ coupon_type_code , ]]>
+	  		</if>
+	  		<if test=" coupon_name  != null and  coupon_name  != ''  and  coupon_name  != 'null' ">
+				<![CDATA[ coupon_name , ]]>
+	  		</if>
+	  		<if test=" coupon_type  != null and  coupon_type  != ''  and  coupon_type  != 'null' ">
+				<![CDATA[ coupon_type , ]]>
+	  		</if>
+	  		<if test=" valid_type  != null and  valid_type  != ''  and  valid_type  != 'null' ">
+				<![CDATA[ valid_type , ]]>
+	  		</if>
+	  		<if test=" publish_type  != null and  publish_type  != ''  and  publish_type  != 'null' ">
+				<![CDATA[ publish_type , ]]>
+	  		</if>
+	  		<if test=" special_offer  != null ">
+				<![CDATA[ special_offer , ]]>
+	  		</if>
+	  		<if test=" discount  != null ">
+				<![CDATA[ discount , ]]>
+	  		</if>
+	  		<if test=" deduction  != null ">
+				<![CDATA[ deduction , ]]>
+	  		</if>
+	  		<if test=" screen_ids  != null and  screen_ids  != ''  and  screen_ids  != 'null' ">
+				<![CDATA[ screen_ids , ]]>
+	  		</if>
+	  		<if test=" commodity_ids  != null and  commodity_ids  != ''  and  commodity_ids  != 'null' ">
+				<![CDATA[ commodity_ids , ]]>
+	  		</if>
+	  		<if test=" benison_type_ids  != null and  benison_type_ids  != ''  and  benison_type_ids  != 'null' ">
+				<![CDATA[ benison_type_ids , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ created_time , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ created_by , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ modified_time , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ modified_by , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ version , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ delflag , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" coupon_type_id  != null and  coupon_type_id  != ''  and  coupon_type_id  != 'null' ">
+	  			<![CDATA[ #{coupon_type_id} , ]]>
+	  		</if>
+	  		<if test=" coupon_type_code  != null and  coupon_type_code  != ''  and  coupon_type_code  != 'null' ">
+	  			<![CDATA[ #{coupon_type_code} , ]]>
+	  		</if>
+	  		<if test=" coupon_name  != null and  coupon_name  != ''  and  coupon_name  != 'null' ">
+	  			<![CDATA[ #{coupon_name} , ]]>
+	  		</if>
+	  		<if test=" coupon_type  != null and  coupon_type  != ''  and  coupon_type  != 'null' ">
+	  			<![CDATA[ #{coupon_type} , ]]>
+	  		</if>
+	  		<if test=" valid_type  != null and  valid_type  != ''  and  valid_type  != 'null' ">
+	  			<![CDATA[ #{valid_type} , ]]>
+	  		</if>
+	  		<if test=" publish_type  != null and  publish_type  != ''  and  publish_type  != 'null' ">
+	  			<![CDATA[ #{publish_type} , ]]>
+	  		</if>
+	  		<if test=" special_offer  != null">
+	    		<![CDATA[ ${special_offer} , ]]>
+	  		</if>
+	  		<if test=" discount  != null">
+	    		<![CDATA[ ${discount} , ]]>
+	  		</if>
+	  		<if test=" deduction  != null">
+	    		<![CDATA[ ${deduction} , ]]>
+	  		</if>
+	  		<if test=" screen_ids  != null and  screen_ids  != ''  and  screen_ids  != 'null' ">
+	  			<![CDATA[ #{screen_ids} , ]]>
+	  		</if>
+	  		<if test=" commodity_ids  != null and  commodity_ids  != ''  and  commodity_ids  != 'null' ">
+	  			<![CDATA[ #{commodity_ids} , ]]>
+	  		</if>
+	  		<if test=" benison_type_ids  != null and  benison_type_ids  != ''  and  benison_type_ids  != 'null' ">
+	  			<![CDATA[ #{benison_type_ids} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateCouponType" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BU_COUPON_TYPE A ]]>
+		<set>
+	  	<if test=" coupon_type_code  != null and  coupon_type_code  != ''  and  coupon_type_code  != 'null' ">
+	  		<![CDATA[ A.coupon_type_code = #{coupon_type_code}, ]]>
+	  	</if>
+	  	<if test=" coupon_name  != null and  coupon_name  != ''  and  coupon_name  != 'null' ">
+	  		<![CDATA[ A.coupon_name = #{coupon_name}, ]]>
+	  	</if>
+	  	<if test=" coupon_type  != null and  coupon_type  != ''  and  coupon_type  != 'null' ">
+	  		<![CDATA[ A.coupon_type = #{coupon_type}, ]]>
+	  	</if>
+	  	<if test=" valid_type  != null and  valid_type  != ''  and  valid_type  != 'null' ">
+	  		<![CDATA[ A.valid_type = #{valid_type}, ]]>
+	  	</if>
+	  	<if test=" publish_type  != null and  publish_type  != ''  and  publish_type  != 'null' ">
+	  		<![CDATA[ A.publish_type = #{publish_type}, ]]>
+	  	</if>
+		<if test=" special_offer  != null ">
+  			<![CDATA[ A.special_offer = ${special_offer} , ]]>
+		</if>
+		<if test=" discount  != null ">
+  			<![CDATA[ A.discount = ${discount} , ]]>
+		</if>
+		<if test=" deduction  != null ">
+  			<![CDATA[ A.deduction = ${deduction} , ]]>
+		</if>
+	  	<if test=" screen_ids  != null and  screen_ids  != ''  and  screen_ids  != 'null' ">
+	  		<![CDATA[ A.screen_ids = #{screen_ids}, ]]>
+	  	</if>
+	  	<if test=" commodity_ids  != null and  commodity_ids  != ''  and  commodity_ids  != 'null' ">
+	  		<![CDATA[ A.commodity_ids = #{commodity_ids}, ]]>
+	  	</if>
+	  	<if test=" benison_type_ids  != null and  benison_type_ids  != ''  and  benison_type_ids  != 'null' ">
+	  		<![CDATA[ A.benison_type_ids = #{benison_type_ids}, ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.created_time = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.created_by = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.modified_time = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.modified_by = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.version = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.delflag = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.COUPON_TYPE_ID = #{coupon_type_id}]]>
+  	</update>
+  
+  	<delete id="deleteCouponType" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BU_COUPON_TYPE  where COUPON_TYPE_ID = #{coupon_type_id} ]]>
+	</delete>
+  
+	<select id="findOneCouponType" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BU_COUPON_TYPE A  ]]>
+		<include refid="couponTypeWhereCondition" />
+  	</select>
+    
+  	<select id="findAllCouponType" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BU_COUPON_TYPE A ]]>
+		<include refid="couponTypeWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapCouponType" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BU_COUPON_TYPE A ]]>
+		<include refid="couponTypeWhereCondition" />
+	</select>
+  
+  	<select id="findCouponTypeTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BU_COUPON_TYPE A ]]>
+		<include refid="couponTypeWhereCondition" />
+  	</select>
+  
+  	<select id="queryCouponTypeForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BU_COUPON_TYPE A ]]>
+		where 1=1
+		<if test="couponType != null and couponType != '' and couponType != 'null' ">
+			AND A.coupon_type = #{couponType}
+		</if>
+		<if test="couponName != null and couponName != '' and couponName != 'null' ">
+			AND A.coupon_name like concat('%', #{couponName}, '%')
+		</if>
+		<if test="couponTypeCode != null and couponTypeCode != '' and couponTypeCode != 'null' ">
+			AND A.coupon_type_code like concat('%', #{couponTypeCode}, '%')
+		</if>
+		order by A.coupon_type_code asc
+  	</select>
+  	
+  	<!-- 查询最新的优惠码类型 -->
+	<select id="findLastOneCouponType" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BU_COUPON_TYPE A  ]]>
+		where 1=1 
+		<if test=" coupon_type_code != null and coupon_type_code != '' and coupon_type_code != 'null' ">
+            <![CDATA[ AND A.coupon_type_code like concat('%', #{coupon_type_code}, '%') ]]>
+        </if> 
+		ORDER BY A.coupon_type_code DESC
+		limit 1
+  	</select>
+</mapper>

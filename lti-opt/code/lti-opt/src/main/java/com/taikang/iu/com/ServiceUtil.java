@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.SocketTimeoutException;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
@@ -15,10 +16,20 @@ import javax.ws.rs.core.Response;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.cxf.common.util.Base64Utility;
 import org.apache.cxf.jaxrs.client.WebClient;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ConnectTimeoutException;
+import org.apache.http.conn.ConnectionPoolTimeoutException;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.tree.DefaultElement;
+import org.slf4j.Logger;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -26,6 +37,7 @@ import com.taikang.udp.framework.common.datastructre.Dto;
 import com.taikang.udp.framework.common.json.JsonMapper;
 import com.taikang.udp.framework.common.util.TKConstants;
 import com.taikang.udp.framework.common.util.TKDateTimeUtils;
+import com.taikang.udp.framework.common.util.logger.LoggerFactory;
 import com.taikang.udp.framework.core.exception.TKCheckedException;
 import com.taikang.udp.framework.core.properties.PropertiesFile;
 import com.taikang.udp.framework.core.properties.PropertiesHandler;
@@ -48,6 +60,10 @@ public class ServiceUtil {
     private static JsonMapper objectMapper = new JsonMapper();
 
     private static boolean formateOutputJson = true;
+    
+    private final static String DEFAULT_CHARSET_NAME = "UTF-8";
+    
+    private static final Logger logger = LoggerFactory.getLogger();
 	
     /**
      *  创建webclient
@@ -58,6 +74,37 @@ public class ServiceUtil {
         client.header("Authorization", auth);
         return client;
     }
+    
+    /**
+     * post请求
+     * @param url
+     * @param cnt
+     * @return
+     */
+    public static String sendPost(String url, String cnt) {
+		String result = null;
+		HttpPost httpPost = new HttpPost(url);
+		StringEntity postEntity = new StringEntity(cnt, DEFAULT_CHARSET_NAME);
+		httpPost.setEntity(postEntity);
+		httpPost.addHeader("Content-Type", "application/json");
+		HttpClient client = HttpClients.createDefault();
+		try {
+			HttpResponse response = client.execute(httpPost);
+			HttpEntity entity = response.getEntity();
+			result = EntityUtils.toString(entity, DEFAULT_CHARSET_NAME);
+		} catch (ConnectionPoolTimeoutException e) {
+			logger.error("http get throw ConnectionPoolTimeoutException(wait time out)");
+		} catch (ConnectTimeoutException e) {
+			logger.error("http get throw ConnectTimeoutException");
+		} catch (SocketTimeoutException e) {
+			logger.error("http get throw SocketTimeoutException");
+		} catch (Exception e) {
+			logger.error("http get throw Exception" + e.toString());
+		} finally {
+			httpPost.abort();
+		}
+		return result;
+	}
     
     /**
      * 生成body

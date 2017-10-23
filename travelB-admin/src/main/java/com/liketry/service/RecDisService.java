@@ -1,14 +1,14 @@
 package com.liketry.service;
 
-import java.math.BigDecimal;
-import java.util.Map;
-
-import org.springframework.stereotype.Service;
-
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.service.IService;
 import com.liketry.domain.Merchant;
 import com.liketry.domain.RecDis;
+import com.liketry.web.vm.RecDisVM;
+import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.util.Map;
 
 /**
  * author pengyy
@@ -35,7 +35,7 @@ public interface RecDisService extends IService<RecDis> {
 	/**
 	 * 该商户所有收款单或付款单金额之和
 	 * @param commdityId 商户ID
-	 * @param status 收付单类型
+	 * @param type 收付单类型
 	 * @return
 	 */
 	public BigDecimal findAllRecOrDis(String commdityId,String type);
@@ -46,4 +46,11 @@ public interface RecDisService extends IService<RecDis> {
 	 * @return
 	 */
 	public Map<String,Object> updateRecAndMerchant(RecDis recDis);
+
+	/**
+	 * 查询收付单及银行卡信息
+	 * @param id
+	 * @return
+	 */
+	RecDisVM selectNewOne(String id);
 }

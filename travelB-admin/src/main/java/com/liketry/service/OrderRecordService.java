@@ -12,5 +12,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface OrderRecordService extends IService<OrderRecord> {
 
+    //获取收支总和
     float generalIncome(String merchantId, String startTime, String endTime);
 }

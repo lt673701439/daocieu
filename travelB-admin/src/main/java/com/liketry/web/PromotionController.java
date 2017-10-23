@@ -158,20 +158,20 @@ public class PromotionController extends BaseController<PromotionService,Promoti
      */
     private String checkPromotion(Promotion t){
 
-		String startTime = formatTime(t.getStartTime());//开始时间
-		String endTime = formatTime(t.getEndTime());//结束时间
-		String addTime = formatTime(t.getAddTime());//上架时间
-		String removeTime = formatTime(t.getRemoveTime());//下架时间
+		String startTime = t.getStartTime();//开始时间
+		String endTime = t.getEndTime();//结束时间
+		String addTime = t.getAddTime();//上架时间
+		String removeTime = t.getRemoveTime();//下架时间
 		String promotionName = t.getPromotionName();
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	
     	//校验时间
 		try {
 			
-			t.setAddTime(addTime);
-			t.setRemoveTime(removeTime);
-			t.setStartTime(startTime);
-			t.setEndTime(endTime);
+			//t.setAddTime(addTime);
+			//t.setRemoveTime(removeTime);
+			//t.setStartTime(startTime);
+			//t.setEndTime(endTime);
 			
 			// 如果开始时间大于结束时间，则返回
 			if(StringUtils.isNotBlank(startTime)&&StringUtils.isNotBlank(endTime)){

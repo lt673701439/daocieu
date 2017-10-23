@@ -1,14 +1,15 @@
 package com.liketry.api;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.liketry.domain.Merchant;
 import com.liketry.domain.TbDict;
 import com.liketry.service.CodeService;
 import com.liketry.service.MerChantService;
 import com.liketry.service.TbDictService;
 import com.liketry.service.UserService;
-import com.liketry.util.*;
+import com.liketry.util.CommonUtils;
+import com.liketry.util.Constants;
+import com.liketry.util.FileUtils;
 import com.liketry.web.BaseController;
 import com.liketry.web.vm.ResultVM;
 import io.swagger.annotations.Api;
@@ -20,8 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
-
-import static com.liketry.util.Constants.ERROR_DATA_NOT_COMPLETE;
 
 /**
  * author Simon
@@ -147,7 +146,7 @@ public class MerchantApi extends BaseController<MerChantService, Merchant> {
             default:
                 return ResultVM.error(ERROR_TYPE_FAILED, null);
         }
-        boolean saveStatus = FileUtils.saveFile(Constants.ROOT_SRC + Constants.ROOT_LOCAL + path, img);
+        boolean saveStatus = FileUtils.saveFile(path, img);
         log.info("merchantId: " + merchantId + ",path: " + path + ",status: " + saveStatus);
         if (saveStatus)
             saveStatus = service.updateById(merchant);
@@ -209,11 +208,15 @@ public class MerchantApi extends BaseController<MerChantService, Merchant> {
 
     @Override
     @GetMapping("/{id}")
-    public Merchant getInfo(@PathVariable String id) {
+    public ResultVM getInfo(@PathVariable String id) {
         Merchant merchant = service.selectById(id);
         merchant.setCreateUserId(null);
         merchant.setUpdateUserId(null);
-        return merchant;
+        if(merchant!=null){
+            return  ResultVM.ok(merchant);
+        }else{
+            return  ResultVM.error();
+        }
     }
 
     //验证是否合法化 SUCCESS 代表验证通过，其他代表错误号

@@ -58,5 +58,16 @@
     merchant_operating_start, merchant_operating_end, merchant_description, create_user_id, 
     create_time, update_user_id, update_time, merchant_delflag
   </sql>
+
+  <select id="selectByDevice" resultType="java.lang.String">
+    select login_source from merchant,bu_user where merchant.merchant_user_id = bu_user.id and  merchant.id = #{merchantId}
+  </select>
+  <select id="selectAllMobile" resultType="java.lang.String">
+    SELECT login_name FROM  merchant  left join  bu_user on merchant.merchant_user_id = bu_user.id where bu_user.delflag = 1 and merchant.merchant_delflag = 1 and merchant_censor_status= 1
+  </select>
   
+  <select id="selectByMobile" resultType="java.lang.String">
+     select login_name from merchant,bu_user where merchant.merchant_user_id = bu_user.id and merchant.id = #{merchantId}
+  </select>
+
 </mapper>

@@ -1,7 +1,8 @@
 package com.liketry.interaction.opt.benisontemplate.model;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
-import java.lang.String;
+
 import com.taikang.udp.framework.common.datastructre.impl.BaseBO;
 
 
@@ -18,7 +19,7 @@ public class BenisonTemplateBO  extends BaseBO {
 	
 	protected void init(){
 		super.init();
-		this.addList(Arrays.asList("template_id","template_code","template_name","screen_id","type_id","benison_id","bg_img_id","sm_img_id","title_x","title_y","title_colour","title_size","title_type","body_x","body_y","body_colour","body_size","body_type","tail_x","tail_y","tail_colour","tail_size","tail_type","benison_content","img_url","img_code","rule_content"));
+		this.addList(Arrays.asList("template_id","template_code","template_name","screen_id","type_id","benison_id","bg_img_id","sm_img_id","title_x","title_y","title_colour","title_size","title_type","body_x","body_y","body_colour","body_size","body_type","tail_x","tail_y","tail_colour","tail_size","tail_type","stroke_figure","stroke_x","stroke_y","stroke_alpha","benison_content","img_url","img_code","rule_content"));
 	}
 	
 		
@@ -273,6 +274,49 @@ public class BenisonTemplateBO  extends BaseBO {
 	
 	public String getTailType(){
 		return (String)getData().get("tail_type");
+	}
+	
+	private String strokeFigure;
+	public void setStrokeFigure(String strokeFigure){
+		getData().put("stroke_figure",strokeFigure);
+		this.strokeFigure=strokeFigure;
+	}
+	
+	public String getStrokeFigure(){
+		return (String)getData().get("stroke_figure");
+	}	
+		
+		
+	private String strokeX;
+	public void setStrokeX(String strokeX){
+		getData().put("stroke_x",strokeX);
+		this.strokeX=strokeX;
+	}
+	
+	public String getStrokeX(){
+		return (String)getData().get("stroke_x");
+	}	
+		
+		
+	private String strokeY;
+		public void setStrokeY(String strokeY){
+		getData().put("stroke_y",strokeY);
+		this.strokeY=strokeY;
+	}
+	
+	public String getStrokeY(){
+		return (String)getData().get("stroke_y");
+	}	
+		
+		
+	private Float strokeAlpha;
+		public void setStrokeAlpha(Float strokeAlpha){
+		getData().put("stroke_alpha",strokeAlpha);
+		this.strokeAlpha=strokeAlpha;
+	}
+	
+	public Float getStrokeAlpha(){
+		return (Float)getData().get("stroke_alpha");
 	}	
 	
 	private String benisonContent;

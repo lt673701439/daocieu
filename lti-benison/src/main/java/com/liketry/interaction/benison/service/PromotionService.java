@@ -24,4 +24,6 @@ public interface PromotionService {
 
     List<PromotionDetail> getPromotionDetailList(Map<String, Object> map);
 
+    //获取首单9.9元活动的下单数
+    int findFirstPromotionNumber();
 }

@@ -13,14 +13,7 @@ import java.net.URL;
  * 获取二维码
  */
 public class QRCodeUtils {
-    //获取小程序码路径
-    public static String getMINACode(String merchantId) {
-        File file = new File(SystemConstants.QR_CODE_PATH + merchantId + ".jpg");
-        if (file.exists() && file.isFile())
-            return SystemConstants.URL_QR_CODE + merchantId + ".jpg";
-        else
-            return createMINACode(merchantId);
-    }
+
 
     //制作小程序码
     public static String createMINACode(String merchantId) {
@@ -188,8 +181,11 @@ public class QRCodeUtils {
             if (!createStatus)
                 return null;
             file = new File(SystemConstants.QR_CODE_PATH + merchantId + ".jpg");
-            if (!file.exists())
-                createStatus = file.createNewFile();
+            if (file.exists() && file.isFile())
+                createStatus = file.delete();
+            if (!createStatus)
+                return null;
+            createStatus = file.createNewFile();
             if (!createStatus)
                 return null;
             outputStream = new FileOutputStream(file);

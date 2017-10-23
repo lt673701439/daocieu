@@ -11,7 +11,7 @@
 </head>
 <body>
 <div>
-	<form id="dataForm">
+	<form id="dataForm" enctype="multipart/form-data" accept="image/gif,image/jpeg,image/jpg,image/png" method="post">
 			<div class="fitem">
 		    	<label>模板名称:</label>
 		        <input name="templateName" class="easyui-textbox" style="width: 180px;"  data-options="required:true" validType="length[0,50]">
@@ -136,6 +136,22 @@
 		    	<input class="easyui-combobox" editable="false" name="tailType" style="width:100px" value="黑体" url="${rootPath}/benisonTemplate/getFontsList" 
 					   valueField="fontId" textField="fontName">
 			</div>
+			<div class="fitem">
+				<label>描边图URL:</label>
+				<input class="easyui-filebox" name="strokeFigure" id="strokeFigure" data-options="prompt:'请选择一个图片'" >
+			</div>
+			<div class="fitem">
+		    	<label>描边偏移X:</label>
+		        <input name="strokeX" class="easyui-numberbox" value="150" style="width: 100px;" validType="length[0,10]">
+			</div>
+			<div class="fitem">
+		    	<label>描边偏移Y:</label>
+		        <input name="strokeY" class="easyui-numberbox" value="12" style="width: 100px;" validType="length[0,10]">
+			</div>
+			<div class="fitem">
+		    	<label>描边透明度:</label>
+		        <input name="strokeAlpha" class="easyui-numberbox" precision="1" groupSeparator="," decimalSeparator="."  value="1.0" style="width: 100px;" validType="length[0,3]">
+			</div>
 			</form>
     <div id="dlg-buttons" align="center">
        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" id="save" onclick="saveOrUpdate()" style="width:90px">保存</a>
@@ -148,40 +164,47 @@
 //保存记录
 function saveOrUpdate()
 {
-	var r = $('#dataForm').form('validate');
-	if(!r) {
-		return false;
-	}
-	else
-	{		
-		$('#save').linkbutton('disable');
-		$.post("${rootPath}/benisonTemplate/save",$("#dataForm").serializeArray(),
-		function(data)
-		{			
-			if(data.result == 'true' || data.result == true)
-			{
-			 	$.messager.alert("提示", data.msg);
-				goBack(1);
-			}
-			else
-			{
-				$.messager.alert("提示", data.msg);
-				$('#save').linkbutton('enable');
-// 				$.messager.confirm("提示",data.msg,function(r){
-// 			 	    if (r){
-// 			 	    	var strs = data.strs.split(",");
-// 			 	    	//替换相应的字体为黑体再提交
-// 			 	    	$.each(strs,function(index,value){
-// 							$('#'+value).textbox('setValue','黑体');
-// 			 	    	});
-// 			 	    	saveOrUpdate();
-// 			 	    }else{
-// 			 	    	$('#save').linkbutton('enable');
-// 			 	    }
-// 			 	});
-			}
-		});
-	}
+	
+	$('#dataForm').form('submit', { 
+		        url: "${rootPath}/benisonTemplate/save", 
+		        onSubmit: function () {        //表单提交前的回调函数 
+					//校验必填项
+					var r = $('#dataForm').form('validate');
+					if(!r) {
+						return false;
+					}
+					//验证是否有文件
+// 					var imgFileArr=$(":file");
+// 					if(imgFileArr){
+// 						var isNum=false;
+// 						for(i=0;i<imgFileArr.length;i++){
+// 							var fileName=imgFileArr[i];
+// 							console.log($(fileName).val());
+// 							if($.trim($(fileName).val())!=""&&$(fileName).val()!=null){
+// 								isNum=true;
+// 							}
+// 						}		
+// 						if(!isNum){
+// 							$.messager.alert("提示", "请上传一张图片！");				
+// 							return false;
+// 						}
+// 					}else{
+// 						$.messager.alert("提示", "请上传至少一张图片！");				
+// 						return false;
+// 					}
+// 					$('#save').linkbutton('disable');
+		        }, 
+		        success: function (data) {  //表单提交成功后的回调函数，里面参数data是我们调用方法的返回值。 
+					var json = JSON.parse(data)
+					if(json.result == 'true' || json.result == true){
+						$.messager.alert("提示", json.msg);
+						goBack(1);
+					}else{
+						$.messager.alert("提示", json.msg);
+						$('#save').linkbutton('enable');
+					}
+		        } 
+	      }); 
 }
 //点祝福语类型，清空祝福语
 $('#benisonTypeButton').bind('click',function(){

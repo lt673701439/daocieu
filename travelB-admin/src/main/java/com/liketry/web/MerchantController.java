@@ -5,9 +5,11 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.liketry.domain.Censor;
 import com.liketry.domain.CensorRecord;
 import com.liketry.domain.Merchant;
+import com.liketry.domain.TbDict;
 import com.liketry.service.CensorRecordService;
 import com.liketry.service.CensorService;
 import com.liketry.service.MerChantService;
+import com.liketry.service.TbDictService;
 import com.liketry.util.*;
 import com.liketry.web.vm.CensorBodyVM;
 import com.liketry.web.vm.ResultVM;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Field;
 import java.util.Date;
+import java.util.List;
 
 /**
  * author Simon
@@ -35,11 +38,13 @@ public class MerchantController extends BaseController<MerChantService, Merchant
     private final int ERROR_DELETE_FAILED = 1001;//更新失败
     private final CensorService censorService;
     private final CensorRecordService censorRecordService;
+    private final TbDictService tbDictService;
 
     @Autowired
-    public MerchantController(CensorService censorService, CensorRecordService censorRecordService) {
+    public MerchantController(CensorService censorService, CensorRecordService censorRecordService, TbDictService tbDictService) {
         this.censorService = censorService;
         this.censorRecordService = censorRecordService;
+        this.tbDictService = tbDictService;
     }
 
     @Override
@@ -48,7 +53,20 @@ public class MerchantController extends BaseController<MerChantService, Merchant
         Merchant merchant = spage.getSearch();
         merchant.setMerchantDelflag(1);
         spage.setSearch(merchant);
-        return super.getSmartData(spage);
+        ResultVM smartData = super.getSmartData(spage);
+        Page<Merchant> resultPage = (Page<Merchant>) smartData.getResult();
+        List<Merchant> datas = resultPage.getRecords();
+        if (datas != null && !datas.isEmpty()) {
+            for (int i = 0; i < datas.size(); i++) {
+                String itemId = datas.get(i).getMerchantTypeId();
+                TbDict tb = tbDictService.selectById(itemId);
+                if (tb != null)
+                    datas.get(i).setMerchantTypeName(tb.getText());
+            }
+            resultPage.setRecords(datas);
+        }
+        smartData.setResult(resultPage);
+        return smartData;
     }
 
     @PostMapping("/getSpecialSmartData")
@@ -79,7 +97,18 @@ public class MerchantController extends BaseController<MerChantService, Merchant
             }
         }
         wrapper.notIn("merchant_censor_status", 2, 3);
-        return ResultVM.ok(service.selectPage(page, wrapper));
+        Page<Merchant> resultPage = service.selectPage(page, wrapper);
+        List<Merchant> datas = resultPage.getRecords();
+        if (datas != null && !datas.isEmpty()) {
+            for (int i = 0; i < datas.size(); i++) {
+                String itemId = datas.get(i).getMerchantTypeId();
+                TbDict tb = tbDictService.selectById(itemId);
+                if (tb != null)
+                    datas.get(i).setMerchantTypeName(tb.getText());
+            }
+            resultPage.setRecords(datas);
+        }
+        return ResultVM.ok(resultPage);
     }
 
     @Override

@@ -1,0 +1,6 @@
+{
+        MongoClientOptions.Builder build = new MongoClientOptions.Builder();
+        MongoClientOptions myOptions = build.build();
+        MongoClient mongoClient = new MongoClient(new ServerAddress("localhost",27017),myOptions);
+        mongoClient.getDatabase("").getCollection("").count();
+    }

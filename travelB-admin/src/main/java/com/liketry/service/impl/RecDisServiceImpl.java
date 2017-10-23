@@ -1,16 +1,5 @@
 package com.liketry.service.impl;
 
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
-import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.liketry.domain.Merchant;
@@ -19,13 +8,27 @@ import com.liketry.domain.RecDis;
 import com.liketry.mapper.MerchantMapper;
 import com.liketry.mapper.OrderRecordMapper;
 import com.liketry.mapper.RecDisMapper;
+import com.liketry.service.MessageService;
 import com.liketry.service.RecDisService;
 import com.liketry.util.Constants;
+import com.liketry.web.vm.RecDisVM;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * author pengyy
  */
 @Service
+@Slf4j
 public class RecDisServiceImpl extends ServiceImpl<RecDisMapper, RecDis> implements RecDisService {
 	
 	@Autowired
@@ -33,6 +36,9 @@ public class RecDisServiceImpl extends ServiceImpl<RecDisMapper, RecDis> impleme
 	
 	@Autowired
 	private OrderRecordMapper orderRecordMapper;
+
+	@Autowired
+	private MessageService messageService;
 	
 	@Override
 	@Transactional
@@ -54,16 +60,27 @@ public class RecDisServiceImpl extends ServiceImpl<RecDisMapper, RecDis> impleme
 			orderRecord.setId(json.getString("bookAcountId"));
 			if(price.compareTo(new BigDecimal(0))==1){
 				orderRecord.setOrMerchantGain(price); //商户的收入金额
+				//支付时，发送消息
+				if(!messageService.payOrderMessage(merchant.getId(),String.valueOf(price))){
+					log.error("<====支付订单发送消息失败，商户ID：{}，金额：{}======>",merchant.getId(),String.valueOf(price));
+				}
+
 			}else if(price.compareTo(new BigDecimal(0))==-1){
 				orderRecord.setOrMerchantBackPrice(price.abs());  //商户的退款金额
+				//退款时，发送消息
+				if(!messageService.drawbackMessage(merchant.getId(),date,String.valueOf(price.abs()))){
+					log.error("<====订单退款发送消息失败，商户ID：{}，金额：{}======>",merchant.getId(),date,String.valueOf(price.abs()));
+				}
+
 			}else{
 				orderRecord.setOrMerchantGain(price);
 				orderRecord.setOrMerchantBackPrice(price);
 			}
 			orderRecordMapper.updateById(orderRecord);
 		}
-	
+
 		if(count > 0){
+
 			//新增收付单记录
 			RecDis recDis = new RecDis();
 			recDis.setId(UUID.randomUUID().toString().replace("-", ""));
@@ -153,11 +170,15 @@ public class RecDisServiceImpl extends ServiceImpl<RecDisMapper, RecDis> impleme
 	/**
 	 * 该商户所有收款单或付款单金额之和
 	 * @param commdityId 商户ID
-	 * @param status 收付单类型
+	 * @param type 收付单类型
 	 * @return
 	 */
 	public BigDecimal findAllRecOrDis(String commdityId,String type){
 		return baseMapper.findAllNewRecOrDis(commdityId,type);
 	}
-	
+
+	@Override
+	public RecDisVM selectNewOne(String id) {
+		return baseMapper.selectNewOne(id);
+	}
 }

@@ -14,18 +14,19 @@ public final class Constants {
     public static final String WX_APPID = "wx0b06d2c09d05afbd";
     public static final String WX_SECRET = "038986cb1127d8c885265d20b43cf51f";
 
-    public static final String ROOT_SRC = "src/main/resources/";
-    public static final String ROOT_LOCAL = "data/";//文件根目录
+    //    public static final String ROOT_SRC = "src/main/resources/";
+//    public static final String ROOT_LOCAL = "data/";//文件根目录
     public static final String QR_CODE_LOCAL = "qrImg/";
     public static final String LICENSE_LOCAL = "license/";//证件上传根目录
     public static final String MERCHANT_ICON_LOCAL = "merchantIcon/";//证件上传根目录
     public static final String ID_UP_LOCAL = "idUp/";//身份证正面根目录
     public static final String ID_DOWN_LOCAL = "idDown/";//身份证背面根目录
+    public static final String ACTIVITY_LOCAL = "activity/";//消息活动图片目录
 
-    public static final String LICENSE_PATH = ROOT_SRC + ROOT_LOCAL + LICENSE_LOCAL;//证件上传根目录
-    public static final String ID_UP_PATH = ROOT_SRC + ROOT_LOCAL + ID_UP_LOCAL;//身份证正面根目录
-    public static final String ID_DOWN_PATH = ROOT_SRC + ROOT_LOCAL + ID_DOWN_LOCAL;//身份证背面根目录
-    public static final String QR_CODE_PATH = ROOT_SRC + ROOT_LOCAL + QR_CODE_LOCAL;//二维码存放地方
+//    public static final String LICENSE_PATH = ROOT_SRC + ROOT_LOCAL + LICENSE_LOCAL;//证件上传根目录
+//    public static final String ID_UP_PATH = ROOT_SRC + ROOT_LOCAL + ID_UP_LOCAL;//身份证正面根目录
+//    public static final String ID_DOWN_PATH = ROOT_SRC + ROOT_LOCAL + ID_DOWN_LOCAL;//身份证背面根目录
+//    public static final String QR_CODE_PATH = ROOT_SRC + ROOT_LOCAL + QR_CODE_LOCAL;//二维码存放地方
 
     public static final String URL_QR_CODE = "/qrCode/";//二维码
 
@@ -72,11 +73,23 @@ public final class Constants {
     public static final int MSG_SERVER = 2;//服务
 
     //--------------推送类型-----------------//
-    public static final boolean PRODUCTION_MODE = true;
-    public static final int PUSH_ORDER = 1;//订单推送
+    public static final int MAX_ALIAS = 50;//别名最大上限
+    public static final int MAX_SMS = 1000;//别名最大上限
+    public static final boolean PRODUCTION_MODE = true;//推送模式
+    public static final int PUSH_NOTICE = 2;//公告推送
+    public static final int PUSH_ACTION = 3;//活动推送
+    public static final int PUSH_SERVER = 4;//服务推送
+    public static final int PUSH_ORDER_ADD = 5;//新增订单
+    public static final int PUSH_ORDER_PAY = 6;//支付订单
+    public static final int PUSH_ORDER_BACK = 7;//退单
+    public static final int PUSH_ORDER_DRAWBACK = 8;//退款
+    public static final int PUSH_ORDER_ENCHASHMENT = 9;//提现
+
+
+
     //--------------推送类型-----------------//
-    public static final String DEVICE_IOS = "ios";
-    public static final String DEVICE_ANDROID = "android";//订单推送
+    public static final String DEVICE_IOS = "1";
+    public static final String DEVICE_ANDROID = "0";//订单推送
 
     //错误code
     //--------------通用------------------//

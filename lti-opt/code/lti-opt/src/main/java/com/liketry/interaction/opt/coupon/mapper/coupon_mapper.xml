@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Coupon">
+	<resultMap id="couponResultMap" type="com.liketry.interaction.opt.coupon.model.CouponBO">
+		<result property="couponId" column="coupon_id"/>
+		<result property="couponTypeId" column="coupon_type_id"/>
+		<result property="couponCode" column="coupon_code"/>
+		<result property="couponName" column="coupon_name"/>
+		<result property="couponNum" column="coupon_num"/>
+		<result property="validType" column="valid_type"/>
+		<result property="publishType" column="publish_type"/>
+		<result property="useType" column="use_type"/>
+		<result property="expire" column="expire"/>
+		<result property="publishTargetType" column="publish_target_type"/>
+		<result property="personalName" column="personal_name"/>
+		<result property="idCard" column="id_card"/>
+		<result property="merchantName" column="merchant_name"/>
+		<result property="businessLicence" column="business_licence"/>
+		<result property="validDate" column="valid_date"/>
+		<result property="publishBy" column="publish_by"/>
+		<result property="publishDate" column="publish_date"/>
+		<result property="orderCode" column="order_code"/>
+		<result property="useTime" column="use_time"/>
+		<result property="createdTime" column="created_time"/>
+		<result property="createdBy" column="created_by"/>
+		<result property="modifiedTime" column="modified_time"/>
+		<result property="modifiedBy" column="modified_by"/>
+		<result property="version" column="version"/>
+		<result property="delflag" column="delflag"/>
+		<result property="couponType" column="coupon_type"/>
+  	</resultMap>
+  
+  	<sql id="couponWhereCondition">
+		<where>
+	  	<if test=" coupon_id != null and coupon_id != '' and coupon_id != 'null' ">
+			<![CDATA[ AND A.coupon_id = #{coupon_id} ]]>
+	  	</if>
+	  	<if test=" coupon_type_id != null and coupon_type_id != '' and coupon_type_id != 'null' ">
+			<![CDATA[ AND A.coupon_type_id = #{coupon_type_id} ]]>
+	  	</if>
+	  	<if test=" coupon_code != null and coupon_code != '' and coupon_code != 'null' ">
+			<![CDATA[ AND A.coupon_code = #{coupon_code} ]]>
+	  	</if>
+	  	<if test=" coupon_name != null and coupon_name != '' and coupon_name != 'null' ">
+			<![CDATA[ AND A.coupon_name = #{coupon_name} ]]>
+	  	</if>
+	  	<if test=" coupon_num != null ">
+	  		<![CDATA[ AND A.coupon_num = ${coupon_num} ]]>
+	  	</if>
+	  	<if test=" valid_type != null and valid_type != '' and valid_type != 'null' ">
+			<![CDATA[ AND A.valid_type = #{valid_type} ]]>
+	  	</if>
+	  	<if test=" publish_type != null and publish_type != '' and publish_type != 'null' ">
+			<![CDATA[ AND A.publish_type = #{publish_type} ]]>
+	  	</if>
+	  	<if test=" use_type != null and use_type != '' and use_type != 'null' ">
+			<![CDATA[ AND A.use_type = #{use_type} ]]>
+	  	</if>
+	  	<if test=" expire != null and expire != '' and expire != 'null' ">
+			<![CDATA[ AND A.expire = #{expire} ]]>
+	  	</if>
+	  	<if test=" publish_target_type != null and publish_target_type != '' and publish_target_type != 'null' ">
+			<![CDATA[ AND A.publish_target_type = #{publish_target_type} ]]>
+	  	</if>
+	  	<if test=" personal_name != null and personal_name != '' and personal_name != 'null' ">
+			<![CDATA[ AND A.personal_name = #{personal_name} ]]>
+	  	</if>
+	  	<if test=" id_card != null and id_card != '' and id_card != 'null' ">
+			<![CDATA[ AND A.id_card = #{id_card} ]]>
+	  	</if>
+	  	<if test=" merchant_name != null and merchant_name != '' and merchant_name != 'null' ">
+			<![CDATA[ AND A.merchant_name = #{merchant_name} ]]>
+	  	</if>
+	  	<if test=" business_licence != null and business_licence != '' and business_licence != 'null' ">
+			<![CDATA[ AND A.business_licence = #{business_licence} ]]>
+	  	</if>
+	  	<if test=" valid_date != null and valid_date != '' and valid_date  != 'null' ">
+	    	<![CDATA[ AND A.valid_date = DATE_FORMAT(#{valid_date},'%Y-%m-%d') ]]>
+	  	</if>
+	  	<if test=" publish_by != null and publish_by != '' and publish_by != 'null' ">
+			<![CDATA[ AND A.publish_by = #{publish_by} ]]>
+	  	</if>
+	  	<if test=" publish_date != null and publish_date != '' and publish_date  != 'null' ">
+	    	<![CDATA[ AND A.publish_date = DATE_FORMAT(#{publish_date},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" order_code != null and order_code != '' and order_code != 'null' ">
+			<![CDATA[ AND A.order_code = #{order_code} ]]>
+	  	</if>
+	  	<if test=" use_time != null and use_time != '' and use_time  != 'null' ">
+	    	<![CDATA[ AND A.use_time = DATE_FORMAT(#{use_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.created_time = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ AND A.created_by = #{created_by} ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.modified_time = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ AND A.modified_by = #{modified_by} ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.version = ${version} ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.delflag = #{delflag} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addCoupon"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BU_COUPON
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" coupon_id  != null and  coupon_id  != ''  and  coupon_id  != 'null' ">
+				<![CDATA[ coupon_id , ]]>
+	  		</if>
+	  		<if test=" coupon_type_id  != null and  coupon_type_id  != ''  and  coupon_type_id  != 'null' ">
+				<![CDATA[ coupon_type_id , ]]>
+	  		</if>
+	  		<if test=" coupon_code  != null and  coupon_code  != ''  and  coupon_code  != 'null' ">
+				<![CDATA[ coupon_code , ]]>
+	  		</if>
+	  		<if test=" coupon_name  != null and  coupon_name  != ''  and  coupon_name  != 'null' ">
+				<![CDATA[ coupon_name , ]]>
+	  		</if>
+	  		<if test=" coupon_num  != null ">
+				<![CDATA[ coupon_num , ]]>
+	  		</if>
+	  		<if test=" valid_type  != null and  valid_type  != ''  and  valid_type  != 'null' ">
+				<![CDATA[ valid_type , ]]>
+	  		</if>
+	  		<if test=" publish_type  != null and  publish_type  != ''  and  publish_type  != 'null' ">
+				<![CDATA[ publish_type , ]]>
+	  		</if>
+	  		<if test=" use_type  != null and  use_type  != ''  and  use_type  != 'null' ">
+				<![CDATA[ use_type , ]]>
+	  		</if>
+	  		<if test=" expire  != null and  expire  != ''  and  expire  != 'null' ">
+				<![CDATA[ expire , ]]>
+	  		</if>
+	  		<if test=" publish_target_type  != null and  publish_target_type  != ''  and  publish_target_type  != 'null' ">
+				<![CDATA[ publish_target_type , ]]>
+	  		</if>
+	  		<if test=" personal_name  != null and  personal_name  != ''  and  personal_name  != 'null' ">
+				<![CDATA[ personal_name , ]]>
+	  		</if>
+	  		<if test=" id_card  != null and  id_card  != ''  and  id_card  != 'null' ">
+				<![CDATA[ id_card , ]]>
+	  		</if>
+	  		<if test=" merchant_name  != null and  merchant_name  != ''  and  merchant_name  != 'null' ">
+				<![CDATA[ merchant_name , ]]>
+	  		</if>
+	  		<if test=" business_licence  != null and  business_licence  != ''  and  business_licence  != 'null' ">
+				<![CDATA[ business_licence , ]]>
+	  		</if>
+	  		<if test=" valid_date  != null and  valid_date  != ''  and  valid_date  != 'null' ">
+				<![CDATA[ valid_date , ]]>
+	  		</if>
+	  		<if test=" publish_by  != null and  publish_by  != ''  and  publish_by  != 'null' ">
+				<![CDATA[ publish_by , ]]>
+	  		</if>
+	  		<if test=" publish_date  != null and  publish_date  != ''  and  publish_date  != 'null' ">
+				<![CDATA[ publish_date , ]]>
+	  		</if>
+	  		<if test=" order_code  != null and  order_code  != ''  and  order_code  != 'null' ">
+				<![CDATA[ order_code , ]]>
+	  		</if>
+	  		<if test=" use_time  != null and  use_time  != ''  and  use_time  != 'null' ">
+				<![CDATA[ use_time , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ created_time , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ created_by , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ modified_time , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ modified_by , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ version , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ delflag , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" coupon_id  != null and  coupon_id  != ''  and  coupon_id  != 'null' ">
+	  			<![CDATA[ #{coupon_id} , ]]>
+	  		</if>
+	  		<if test=" coupon_type_id  != null and  coupon_type_id  != ''  and  coupon_type_id  != 'null' ">
+	  			<![CDATA[ #{coupon_type_id} , ]]>
+	  		</if>
+	  		<if test=" coupon_code  != null and  coupon_code  != ''  and  coupon_code  != 'null' ">
+	  			<![CDATA[ #{coupon_code} , ]]>
+	  		</if>
+	  		<if test=" coupon_name  != null and  coupon_name  != ''  and  coupon_name  != 'null' ">
+	  			<![CDATA[ #{coupon_name} , ]]>
+	  		</if>
+	  		<if test=" coupon_num  != null">
+	    		<![CDATA[ ${coupon_num} , ]]>
+	  		</if>
+	  		<if test=" valid_type  != null and  valid_type  != ''  and  valid_type  != 'null' ">
+	  			<![CDATA[ #{valid_type} , ]]>
+	  		</if>
+	  		<if test=" publish_type  != null and  publish_type  != ''  and  publish_type  != 'null' ">
+	  			<![CDATA[ #{publish_type} , ]]>
+	  		</if>
+	  		<if test=" use_type  != null and  use_type  != ''  and  use_type  != 'null' ">
+	  			<![CDATA[ #{use_type} , ]]>
+	  		</if>
+	  		<if test=" expire  != null and  expire  != ''  and  expire  != 'null' ">
+	  			<![CDATA[ #{expire} , ]]>
+	  		</if>
+	  		<if test=" publish_target_type  != null and  publish_target_type  != ''  and  publish_target_type  != 'null' ">
+	  			<![CDATA[ #{publish_target_type} , ]]>
+	  		</if>
+	  		<if test=" personal_name  != null and  personal_name  != ''  and  personal_name  != 'null' ">
+	  			<![CDATA[ #{personal_name} , ]]>
+	  		</if>
+	  		<if test=" id_card  != null and  id_card  != ''  and  id_card  != 'null' ">
+	  			<![CDATA[ #{id_card} , ]]>
+	  		</if>
+	  		<if test=" merchant_name  != null and  merchant_name  != ''  and  merchant_name  != 'null' ">
+	  			<![CDATA[ #{merchant_name} , ]]>
+	  		</if>
+	  		<if test=" business_licence  != null and  business_licence  != ''  and  business_licence  != 'null' ">
+	  			<![CDATA[ #{business_licence} , ]]>
+	  		</if>
+	  		<if test=" valid_date != null and valid_date != '' and valid_date  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{valid_date},'%Y-%m-%d'), ]]>
+	  		</if>
+	  		<if test=" publish_by  != null and  publish_by  != ''  and  publish_by  != 'null' ">
+	  			<![CDATA[ #{publish_by} , ]]>
+	  		</if>
+	  		<if test=" publish_date != null and publish_date != '' and publish_date  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{publish_date},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" order_code  != null and  order_code  != ''  and  order_code  != 'null' ">
+	  			<![CDATA[ #{order_code} , ]]>
+	  		</if>
+	  		<if test=" use_time != null and use_time != '' and use_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{use_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateCoupon" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BU_COUPON A ]]>
+		<set>
+	  	<if test=" coupon_type_id  != null and  coupon_type_id  != ''  and  coupon_type_id  != 'null' ">
+	  		<![CDATA[ A.coupon_type_id = #{coupon_type_id}, ]]>
+	  	</if>
+	  	<if test=" coupon_code  != null and  coupon_code  != ''  and  coupon_code  != 'null' ">
+	  		<![CDATA[ A.coupon_code = #{coupon_code}, ]]>
+	  	</if>
+	  	<if test=" coupon_name  != null and  coupon_name  != ''  and  coupon_name  != 'null' ">
+	  		<![CDATA[ A.coupon_name = #{coupon_name}, ]]>
+	  	</if>
+		<if test=" coupon_num  != null ">
+  			<![CDATA[ A.coupon_num = ${coupon_num} , ]]>
+		</if>
+	  	<if test=" valid_type  != null and  valid_type  != ''  and  valid_type  != 'null' ">
+	  		<![CDATA[ A.valid_type = #{valid_type}, ]]>
+	  	</if>
+	  	<if test=" publish_type  != null and  publish_type  != ''  and  publish_type  != 'null' ">
+	  		<![CDATA[ A.publish_type = #{publish_type}, ]]>
+	  	</if>
+	  	<if test=" use_type  != null and  use_type  != ''  and  use_type  != 'null' ">
+	  		<![CDATA[ A.use_type = #{use_type}, ]]>
+	  	</if>
+	  	<if test=" expire  != null and  expire  != ''  and  expire  != 'null' ">
+	  		<![CDATA[ A.expire = #{expire}, ]]>
+	  	</if>
+	  	<if test=" publish_target_type  != null and  publish_target_type  != ''  and  publish_target_type  != 'null' ">
+	  		<![CDATA[ A.publish_target_type = #{publish_target_type}, ]]>
+	  	</if>
+	  	<if test=" personal_name  != null and  personal_name  != ''  and  personal_name  != 'null' ">
+	  		<![CDATA[ A.personal_name = #{personal_name}, ]]>
+	  	</if>
+	  	<if test=" id_card  != null and  id_card  != ''  and  id_card  != 'null' ">
+	  		<![CDATA[ A.id_card = #{id_card}, ]]>
+	  	</if>
+	  	<if test=" merchant_name  != null and  merchant_name  != ''  and  merchant_name  != 'null' ">
+	  		<![CDATA[ A.merchant_name = #{merchant_name}, ]]>
+	  	</if>
+	  	<if test=" business_licence  != null and  business_licence  != ''  and  business_licence  != 'null' ">
+	  		<![CDATA[ A.business_licence = #{business_licence}, ]]>
+	  	</if>
+	  	<if test=" valid_date != null and valid_date != '' and valid_date  != 'null' ">
+	    	<![CDATA[ A.valid_date = DATE_FORMAT(#{valid_date},'%Y-%m-%d'), ]]>
+	  	</if>
+	  	<if test=" publish_by  != null and  publish_by  != ''  and  publish_by  != 'null' ">
+	  		<![CDATA[ A.publish_by = #{publish_by}, ]]>
+	  	</if>
+	  	<if test=" publish_date != null and publish_date != '' and publish_date  != 'null' ">
+	    	<![CDATA[ A.publish_date = DATE_FORMAT(#{publish_date},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" order_code  != null and  order_code  != ''  and  order_code  != 'null' ">
+	  		<![CDATA[ A.order_code = #{order_code}, ]]>
+	  	</if>
+	  	<if test=" use_time != null and use_time != '' and use_time  != 'null' ">
+	    	<![CDATA[ A.use_time = DATE_FORMAT(#{use_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.created_time = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.created_by = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.modified_time = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.modified_by = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.version = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.delflag = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.COUPON_ID = #{coupon_id}]]>
+  	</update>
+  
+  	<delete id="deleteCoupon" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BU_COUPON where COUPON_ID = #{coupon_id} ]]>
+	</delete>
+  
+	<select id="findOneCoupon" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BU_COUPON A  ]]>
+		<include refid="couponWhereCondition" />
+  	</select>
+    
+  	<select id="findAllCoupon" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BU_COUPON A ]]>
+		<include refid="couponWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapCoupon" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BU_COUPON A ]]>
+		<include refid="couponWhereCondition" />
+	</select>
+  
+  	<select id="findCouponTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BU_COUPON A ]]>
+		<include refid="couponWhereCondition" />
+  	</select>
+  
+  	<select id="queryCouponForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT 
+		    A.*, ct.coupon_type
+		FROM
+		    BU_COUPON A
+		        LEFT JOIN
+		    bu_coupon_type ct ON A.coupon_type_id = ct.coupon_type_id
+		]]>
+		where 1=1
+		<if test="couponType != null and couponType != '' and couponType != 'null' ">
+			AND ct.coupon_type = #{couponType}
+		</if>
+		<if test="couponName != null and couponName != '' and couponName != 'null' ">
+			AND ct.coupon_name like concat('%', #{couponName}, '%')
+		</if>
+		order by A.publish_date desc
+  	</select>
+  	
+  	<select id="findAllCouponMap" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+  		SELECT 
+		    A.coupon_id,
+		    A.coupon_code,
+		    A.coupon_name,
+		    A.coupon_num,
+		    case A.use_type
+		  		   		when '0' then '已使用'
+		  		   		when '1' then '未使用'
+		  		   		when '2' then '已过期'
+		  		   	end as use_type,
+		     case A.publish_target_type
+		  		   		when '0' then '个人'
+		  		   		when '1' then '商户'
+		  		   	end as publish_target_type,
+			A.personal_name,
+		    A.id_card,
+		    A.merchant_name,
+		    A.business_licence,
+		    A.valid_date,
+		    A.publish_by,
+		    A.publish_date,
+		    A.order_code,
+		    A.use_time,
+			case B.coupon_type
+		  		   		when '0' then '特价'
+		  		   		when '1' then '折扣'
+		                when '2' then '抵扣'
+		  		   	end as coupon_type,
+			case B.valid_type
+		  		   		when '0' then '有效'
+		  		   		when '1' then '无效'
+		  		   	end as valid_type,
+		     case B.publish_type
+		  		   		when '0' then '已发布'
+		  		   		when '1' then '未发布'
+		  		   	end as publish_type      
+		FROM
+		    BU_COUPON A left join bu_coupon_type B on A.coupon_type_id = B.coupon_type_id
+		    WHERE 1=1
+		    <if test="couponType != null and couponType != '' and couponType != 'null' ">
+				AND A.coupon_type = #{couponType}
+			</if>
+			<if test="couponName != null and couponName != '' and couponName != 'null' ">
+				AND A.coupon_name like concat('%', #{couponName}, '%')
+			</if>
+		    order by A.publish_date desc
+	</select>
+</mapper>

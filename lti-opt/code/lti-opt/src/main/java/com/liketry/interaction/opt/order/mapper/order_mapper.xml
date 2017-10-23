@@ -7,6 +7,8 @@
 		<result property="transactionNo" column="transaction_no"/>
 		<result property="orderType" column="order_type"/>
 		<result property="orderStatus" column="order_status"/>
+		<result property="bookAcountId" column="book_acount_id"/>
+		<result property="couponId" column="coupon_id"/>
 		<result property="userId" column="user_id"/>
 		<result property="scene" column="scene"/>
 		<result property="userNickname" column="user_nickname"/>
@@ -71,6 +73,12 @@
 	  	</if>
 	  	<if test=" order_status != null and order_status != '' and order_status != 'null' ">
 			<![CDATA[ AND A.order_status = #{order_status} ]]>
+	  	</if>
+	  	<if test=" book_acount_id != null and book_acount_id != '' and book_acount_id != 'null' ">
+			<![CDATA[ AND A.book_acount_id = #{book_acount_id} ]]>
+	  	</if>
+	  	<if test=" coupon_id != null and coupon_id != '' and coupon_id != 'null' ">
+			<![CDATA[ AND A.coupon_id = #{coupon_id} ]]>
 	  	</if>
 	  	<if test=" user_id != null and user_id != '' and user_id != 'null' ">
 			<![CDATA[ AND A.user_id = #{user_id} ]]>
@@ -233,6 +241,12 @@
 	  		<if test=" order_status  != null and  order_status  != ''  and  order_status  != 'null' ">
 				<![CDATA[ order_status , ]]>
 	  		</if>
+	  		<if test=" book_acount_id  != null and  book_acount_id  != ''  and  book_acount_id  != 'null' ">
+				<![CDATA[ book_acount_id , ]]>
+	  		</if>
+	  		<if test=" coupon_id  != null and  coupon_id  != ''  and  coupon_id  != 'null' ">
+				<![CDATA[ coupon_id , ]]>
+	  		</if>
 	  		<if test=" user_id  != null and  user_id  != ''  and  user_id  != 'null' ">
 				<![CDATA[ user_id , ]]>
 	  		</if>
@@ -388,6 +402,12 @@
 	  		</if>
 	  		<if test=" order_status  != null and  order_status  != ''  and  order_status  != 'null' ">
 	  			<![CDATA[ #{order_status} , ]]>
+	  		</if>
+	  		<if test=" book_acount_id  != null and  book_acount_id  != ''  and  book_acount_id  != 'null' ">
+	  			<![CDATA[ #{book_acount_id} , ]]>
+	  		</if>
+	  		<if test=" coupon_id  != null and  coupon_id  != ''  and  coupon_id  != 'null' ">
+	  			<![CDATA[ #{coupon_id} , ]]>
 	  		</if>
 	  		<if test=" user_id  != null and  user_id  != ''  and  user_id  != 'null' ">
 	  			<![CDATA[ #{user_id} , ]]>
@@ -545,6 +565,12 @@
 	  	<if test=" order_status  != null and  order_status  != ''  and  order_status  != 'null' ">
 	  		<![CDATA[ A.order_status = #{order_status}, ]]>
 	  	</if>
+	  	<if test=" book_acount_id  != null and  book_acount_id  != ''  and  book_acount_id  != 'null' ">
+	  		<![CDATA[ A.book_acount_id = #{book_acount_id}, ]]>
+	  	</if>
+	  	<if test=" coupon_id  != null and  coupon_id  != ''  and  coupon_id  != 'null' ">
+	  		<![CDATA[ A.coupon_id = #{coupon_id}, ]]>
+	  	</if>
 	  	<if test=" user_id  != null and  user_id  != ''  and  user_id  != 'null' ">
 	  		<![CDATA[ A.user_id = #{user_id}, ]]>
 	  	</if>
@@ -635,7 +661,9 @@
 	  	<if test=" back_id  != null and  back_id  != ''  and  back_id  != 'null' ">
 	  		<![CDATA[ A.back_id = #{back_id}, ]]>
 	  	</if>
-	  	<![CDATA[ A.back_reason = #{back_reason}, ]]>
+	  	<if test=" back_reason  != null and  back_reason  != ''  and  back_reason  != 'null' ">
+	  		<![CDATA[ A.back_reason = #{back_reason}, ]]>
+	  	</if>
 		<if test=" back_price  != null ">
   			<![CDATA[ A.back_price = ${back_price} , ]]>
 		</if>

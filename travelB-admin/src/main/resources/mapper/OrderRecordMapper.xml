@@ -50,6 +50,6 @@
     </sql>
 
     <select id="generalIncome" resultType="java.lang.Float">
-        select ifnull(sum(or_merchant_gain) + sum(or_merchant_back_price) ,0) from order_record where or_merchant_id = #{merchantId} and create_time between #{start} and #{end}
+        select ifnull(sum(or_merchant_gain) - sum(or_merchant_back_price) ,0) from order_record where or_merchant_id = #{merchantId} and create_time between #{start} and #{end}
   </select>
 </mapper>

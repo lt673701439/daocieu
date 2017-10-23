@@ -99,13 +99,13 @@
     		enableSelectByExample="false" enableDeleteByExample="false"
     		selectByExampleQueryId="false">
     		<property name="useActualColumnNames" value="false"/>
-    </table>
+    </table>-->
     <table tableName="bu_benison_template" domainObjectName="BenisonTemplate" 
     		enableCountByExample="false" enableUpdateByExample="false"
     		enableSelectByExample="false" enableDeleteByExample="false"
     		selectByExampleQueryId="false">
     		<property name="useActualColumnNames" value="false"/>
-    </table>-->
+    </table>
    
      <!--<table tableName="bu_benison_type" domainObjectName="BenisonType" 
     		enableCountByExample="false" enableUpdateByExample="false"
@@ -132,13 +132,13 @@
     		enableSelectByExample="false" enableDeleteByExample="false"
     		selectByExampleQueryId="false">
     		<property name="useActualColumnNames" value="false"/>
-    </table> -->
-    <!--<table tableName="bu_order" domainObjectName="Order" 
+    </table> 
+    <table tableName="bu_order" domainObjectName="Order" 
     		enableCountByExample="false" enableUpdateByExample="false"
     		enableSelectByExample="false" enableDeleteByExample="false"
     		selectByExampleQueryId="false">
     		<property name="useActualColumnNames" value="false"/>
-    </table>  -->
+    </table> --> 
     <!-- <table tableName="bu_order_detail" domainObjectName="OrderDetail" 
     		enableCountByExample="false" enableUpdateByExample="false"
     		enableSelectByExample="false" enableDeleteByExample="false"
@@ -194,13 +194,25 @@
     		enableSelectByExample="false" enableDeleteByExample="false"
     		selectByExampleQueryId="false">
     		<property name="useActualColumnNames" value="false"/>
-    </table>-->
+    </table>
     <table tableName="identifying_code" domainObjectName="IdentifyingCode" 
     		enableCountByExample="false" enableUpdateByExample="false"
     		enableSelectByExample="false" enableDeleteByExample="false"
     		selectByExampleQueryId="false">
     		<property name="useActualColumnNames" value="false"/>
     </table>
-
+    <table tableName="bu_coupon" domainObjectName="Coupon" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>
+    <table tableName="bu_coupon_type" domainObjectName="CouponType" 
+    		enableCountByExample="false" enableUpdateByExample="false"
+    		enableSelectByExample="false" enableDeleteByExample="false"
+    		selectByExampleQueryId="false">
+    		<property name="useActualColumnNames" value="false"/>
+    </table>
+	-->
   </context>
 </generatorConfiguration>

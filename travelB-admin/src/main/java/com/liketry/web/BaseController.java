@@ -1,17 +1,5 @@
 package com.liketry.web;
 
-import java.lang.reflect.Field;
-import java.util.Date;
-
-import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
@@ -21,13 +9,16 @@ import com.liketry.util.ShiroUtils;
 import com.liketry.util.StringTools;
 import com.liketry.web.vm.ResultVM;
 import com.liketry.web.vm.SmartPageVM;
-
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.lang.reflect.Field;
+import java.util.Date;
 
 /**
  * 通用Controller（增删改查）
@@ -134,8 +125,13 @@ public abstract class BaseController<S extends IService<T>, T extends BaseModel<
 	  	 @ApiImplicitParam(name = "id", value = "主键", required = true,dataType = "String",paramType="path")
 	   })
     @GetMapping("/{id}")
-    public T getInfo(@PathVariable String id) {
-        return service.selectById(id);
+    public ResultVM getInfo(@PathVariable String id) {
+        T t = service.selectById(id);
+        if(t != null){
+            return ResultVM.ok(t);
+        }else{
+            return ResultVM.error();
+        }
     }
 
     /**

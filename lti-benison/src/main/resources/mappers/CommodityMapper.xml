@@ -450,8 +450,6 @@ and bu_screen.screen_id = bu_commodity.screen_id
 and bu_commodity.commodity_id = bu_stock.commodity_id
       and bu_commodity.start_time = bu_stock.start_time and bu_commodity.end_time = bu_stock.end_time
       and bu_promotion_detail.promotion_id = #{promotionId} and bu_commodity.commodity_id=#{commodityId}
-      and bu_commodity.end_date &gt; bu_promotion.end_time
-      and bu_commodity.start_date &lt; bu_promotion.start_time
       and (str_to_date(stock_date,'%Y-%m-%d') > curdate() or (str_to_date(stock_date,'%Y-%m-%d') = curdate() and shelf_time > DATE_FORMAT(curtime(),'%H:%i')))
       ORDER BY stock_date ASC;
     </select>
@@ -506,8 +504,6 @@ and bu_commodity.commodity_id = bu_stock.commodity_id
         and bu_commodity.commodity_id = bu_stock.commodity_id
         and bu_commodity.start_time = bu_stock.start_time and bu_commodity.end_time = bu_stock.end_time
         and bu_promotion_detail.promotion_id = #{promotionId} and bu_commodity.commodity_id=#{commodityId} and stock_date = #{reserveDate,jdbcType=DATE}
-        and bu_commodity.end_date > bu_promotion.end_time
-        and bu_commodity.start_date &lt; bu_promotion.start_time
     </select>
 
 

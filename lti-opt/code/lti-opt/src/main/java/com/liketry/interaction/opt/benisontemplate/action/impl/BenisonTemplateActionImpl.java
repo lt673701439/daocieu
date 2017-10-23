@@ -3,10 +3,16 @@ package com.liketry.interaction.opt.benisontemplate.action.impl;
 
 import java.util.Arrays;
 import java.util.List;
+
+import com.liketry.interaction.opt.benisonimg.model.BenisonImgBO;
 import com.liketry.interaction.opt.benisontemplate.action.IBenisonTemplateAction;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
 import com.taikang.udp.framework.core.persistence.pagination.CurrentPage;
+import com.taikang.iu.com.CommonUtil;
+import com.taikang.iu.com.UploadFile;
 import com.taikang.udp.framework.common.datastructre.Dto;
 import com.taikang.udp.framework.common.datastructre.impl.BaseDto;
 import com.liketry.interaction.opt.benisontemplate.service.IBenisonTemplateService;
@@ -26,6 +32,7 @@ public class BenisonTemplateActionImpl extends BaseActionImpl
     @Resource(name=IBenisonTemplateService.SERVICE_ID)
 	private IBenisonTemplateService<BenisonTemplateBO> benisonTemplateService;	
 	
+    
 	/**
 	  * 增加数据
 	  */
@@ -37,11 +44,53 @@ public class BenisonTemplateActionImpl extends BaseActionImpl
 	}
 	
 	/**
+	 * 上传图片并新增数据
+	 */
+	public void insertObjectAndUpload(Dto param,HttpServletRequest request) {
+		logger.debug("<======BenisonTemplateAction--insertObjectAndUpload======>");
+		//上传图片
+		String realUrl = null;
+		String upLoadPath = CommonUtil.uploadFilePath();
+		try {
+			realUrl = UploadFile.uploadFile(request,upLoadPath,"BENISONTEMPLATE",
+					param.getAsString("templateCode").substring(0,3));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(realUrl!=null && !"".equals(realUrl)){
+			param.put("strokeFigure", realUrl);
+		}
+		BenisonTemplateBO benisonTemplateBO = BaseDto.toModel(BenisonTemplateBO.class , param);
+		benisonTemplateService.insertObject(benisonTemplateBO);
+	}
+	
+	/**
       * 修改数据
       */
 	public void updateObject(Dto param){
 		logger.debug("<======BenisonTemplateAction--updateBenisonTemplate======>");
 		
+		BenisonTemplateBO benisonTemplateBO = BaseDto.toModel(BenisonTemplateBO.class , param);
+		benisonTemplateService.updateObject(benisonTemplateBO);
+	}
+	
+	/**
+	  * 上传图片并修改数据
+	  */
+	public void updateObjectAndUpload(Dto param,HttpServletRequest request) {
+		logger.debug("<======BenisonTemplateAction--updateObjectAndUpload======>");
+		//上传图片
+		String realUrl = null;
+		String upLoadPath = CommonUtil.uploadFilePath();
+		try {
+			realUrl = UploadFile.uploadFile(request,upLoadPath,"BENISONTEMPLATE",
+					param.getAsString("templateCode").substring(0,3));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(realUrl!=null && !"".equals(realUrl)){
+			param.put("strokeFigure", realUrl);
+		}
 		BenisonTemplateBO benisonTemplateBO = BaseDto.toModel(BenisonTemplateBO.class , param);
 		benisonTemplateService.updateObject(benisonTemplateBO);
 	}

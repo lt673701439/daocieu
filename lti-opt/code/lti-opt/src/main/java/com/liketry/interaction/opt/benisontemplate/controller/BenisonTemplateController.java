@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import com.taikang.udp.framework.core.persistence.pagination.CurrentPage;
+import com.taikang.iu.com.CommonUtil;
 import com.taikang.udp.framework.common.datastructre.Dto;
 
 
@@ -105,6 +106,7 @@ public class BenisonTemplateController  extends BaseController  {
 		if(rowId!=null && !rowId.equals(""))
 		{
 			model.addAttribute("templateId",rowId );
+			model.addAttribute("urlList", getStrokeUrlList(rowId));
 		}
 		
 		return "benisonTemplate/benisonTemplateEdit"; 
@@ -120,11 +122,11 @@ public class BenisonTemplateController  extends BaseController  {
 		if(rowId!=null && !rowId.equals(""))
 		{
 			model.addAttribute("templateId",rowId );
+			model.addAttribute("urlList", getStrokeUrlList(rowId));
 		}
 		
 		return "benisonTemplate/benisonTemplateView"; 
 	}
-	
 	
 	/**
 	 * 获取一条记录详细信息，用来填充修改界面
@@ -253,7 +255,7 @@ public class BenisonTemplateController  extends BaseController  {
 			param.put("templateId", UUID.randomUUID().toString().replace("-", ""));
 			param.put("templateCode", "BTL_"+screenCode+"_"+lastNum);
 			param.put("bgImgId", param.get("imgId"));
-			benisonTemplateAction.insertObject(param);
+			benisonTemplateAction.insertObjectAndUpload(param,request);
 			map.put(MESSAGE_INFO, "新增成功！");
 			map.put(RTN_RESULT, "true");
 		}
@@ -286,7 +288,11 @@ public class BenisonTemplateController  extends BaseController  {
 				oldOne.put("tailColour", param.get("tailColour"));
 				oldOne.put("tailSize", param.get("tailSize"));
 				oldOne.put("tailType", param.get("tailType"));
-				benisonTemplateAction.updateObject(oldOne);
+				oldOne.put("strokeFigure", param.get("strokeFigure"));
+				oldOne.put("strokeX", param.get("strokeX"));
+				oldOne.put("strokeY", param.get("strokeY"));
+				oldOne.put("strokeAlpha", param.get("strokeAlpha"));
+				benisonTemplateAction.updateObjectAndUpload(oldOne,request);
 				map.put(MESSAGE_INFO, "更新成功！");
 				map.put(RTN_RESULT, "true");
 			}
@@ -367,6 +373,30 @@ public class BenisonTemplateController  extends BaseController  {
 			listDto.add(tmpDto);
 		}
 		return listDto;
+	}
+	
+	/**
+	 * 获取图片路径
+	 * @param templateId
+	 * @return
+	 */
+	public List<Dto> getStrokeUrlList(String templateId){
+		Dto param = new BaseDto();
+		param.put("templateId", templateId);
+		Dto list = benisonTemplateAction.findOne(param);
+		//组装数据
+		List<Dto> urlList = new ArrayList<Dto>();
+		String pictureUrl = list.getAsString("strokeFigure");
+		if (pictureUrl != null && !"".equals(pictureUrl)) {
+			String[] split = pictureUrl.split(",");
+			for (int i = 0; i < split.length; i++) {
+				Dto map = new BaseDto();
+				String url = CommonUtil.RELATION_UPLOAD_FILEPATH + split[i];
+				map.put("url", url);
+				urlList.add(map);
+			}
+		}
+		return urlList;
 	}
 }
 

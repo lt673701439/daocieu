@@ -176,6 +176,7 @@
 				<ref bean="commodityTrigger" />
 				<ref bean="updateBOfangTrigger" />
 				<ref bean="promotionTrigger" />
+				<ref bean="couponTrigger" />
 			</list>
 		</property>
 	</bean>
@@ -215,6 +216,15 @@
 		<property name="cronExpression">
 <!-- 	配置时间表达式  每10分钟整触发 格式为 秒 分 时 日 月 星期 年（可选） -->
 		<value>0 0/10 * * * ?</value>
+		</property>
+	</bean>
+	<bean id="couponTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="couponBean" />
+		</property>
+		<property name="cronExpression">
+<!-- 	配置时间表达式  每天00:05触发 格式为 秒 分 时 日 月 星期 年（可选） -->
+		<value>0 5 0 * * ?</value>
 		</property>
 	</bean>
 	
@@ -263,10 +273,22 @@
 			<value>false</value>
 		</property>
 	</bean>
+	<bean id="couponBean" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property  name="targetObject">
+			<ref bean="couponJob" />
+		</property>
+		<property  name="targetMethod">
+			<value>freshCouponStatus</value>
+		</property>
+		<property name="concurrent">
+			<value>false</value>
+		</property>
+	</bean>
 	<!-- 定时器运行的类  -->
     <bean id="promotionJob" class="com.taikang.iu.job.service.impl.PromotionJob" />
     <bean id="orderJob" class="com.taikang.iu.job.service.impl.OrderJob" />
     <bean id="commodityJob" class="com.taikang.iu.job.service.impl.CommodityJob" />
+    <bean id="couponJob" class="com.taikang.iu.job.service.impl.CouponJob" />
 	<!-- 定时器设置完成 -->
     
     <!-- 应用加载成功后需要执行的内容 -->

@@ -169,6 +169,9 @@ public class UserApi extends BaseController<UserService,User>{
 		User newUser = service.selectOne(new EntityWrapper<User>(user));
 
     	if(newUser!=null){
+			//修改登录来源
+			newUser.setLoginSource(param.getLoginSource());
+			service.updateById(newUser);
     		return ResultVM.ok(newUser);
     	}else{
     		return ResultVM.error(Constants.code_user_noExist,"用户名或密码错误！");

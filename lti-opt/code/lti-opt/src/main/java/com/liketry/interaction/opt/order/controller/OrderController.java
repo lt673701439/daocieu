@@ -33,6 +33,7 @@ import com.liketry.interaction.opt.stockdetail.action.IStockDetailAction;
 import com.taikang.iu.com.ExcelUtil;
 import com.taikang.iu.com.MailUtils;
 import com.taikang.iu.com.PropertiesUtils;
+import com.taikang.iu.com.ServiceUtil;
 import com.taikang.iu.com.SmsUtils;
 import com.taikang.udp.framework.common.datastructre.Dto;
 import com.taikang.udp.framework.common.datastructre.impl.BaseDto;
@@ -381,6 +382,24 @@ public class OrderController extends BaseController {
 			dto.put("modifiedBy", user.getUserId());
 			dto.put("modifiedTime", TKDateTimeUtils.getTodayTimeStamp());
 			orderAction.updateObject(dto);
+			
+			//退单发送消息
+			JSONObject json = new JSONObject();
+			json.put("orSourceId", dto.get("orderId"));
+			json.put("orType", dto.get("orderType"));
+			json.put("orSourceCode", dto.get("orderCode"));
+			
+			try {
+				String msg = ServiceUtil.sendPost(PropertiesUtils.getInstance().getValue("daoceu.serviceUrl")+"api/orderApi/chargeBack",json.toString());
+				if(msg == null){
+					logger.info("<==退单确认时，发送消息失败,订单ID:{},订单code:{},订单类型:{}=========>",
+							order.get("order_id"),order.get("order_code"),order.get("order_type"));
+		    	}
+			} catch (Exception e) {
+				logger.info("<==退单确认时，发送消息失败,订单ID:{},订单code:{},订单类型:{}=========>",
+						order.get("order_id"),order.get("order_code"),order.get("order_type"));
+			}
+			
 			map.put(MESSAGE_INFO, "退单成功！");
 			map.put(RTN_RESULT, "true");
 		}

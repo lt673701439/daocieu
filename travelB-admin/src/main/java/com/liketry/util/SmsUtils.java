@@ -8,6 +8,7 @@ import com.aliyuncs.dysmsapi.model.v20170525.QuerySendDetailsResponse;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsRequest;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
+import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +23,6 @@ import java.util.Random;
  * 工程依赖了2个jar包(存放在工程的libs目录下)
  * 1:aliyun-java-sdk-core.jar
  * 2:aliyun-java-sdk-dysmsapi.jar
- *
  */
 @Slf4j
 public class SmsUtils {
@@ -31,36 +31,37 @@ public class SmsUtils {
     private static final String product = "Dysmsapi";
     //产品域名,开发者无需替换
     private static final String domain = "dysmsapi.aliyuncs.com";
-    
+
     private static PropertiesUtils pro = PropertiesUtils.getInstance();
-    
+
     private static SmsUtils instance = null;
 
     // TODO 此处需要替换成开发者自己的AK(在阿里云访问控制台寻找)
     private static final String accessKeyId = pro.getValue("accessKeyId");
     private static final String accessKeySecret = pro.getValue("accessKeySecret");
 
-    public static synchronized SmsUtils getInstance(){
+    public static synchronized SmsUtils getInstance() {
 
-		if (instance == null){
-			instance = new SmsUtils();
-		}
-		return instance;
-	}
+        if (instance == null) {
+            instance = new SmsUtils();
+        }
+        return instance;
+    }
 
     /**
      * 发送短信
-     * @param phoneNumber  接收人手机号
-     * @param signName  短信签名
+     *
+     * @param phoneNumber   接收人手机号
+     * @param signName      短信签名
      * @param templateCode  短信模板code
      * @param templateParam 模板中的变量替换JSON串,如模板内容为"欢迎注册,您的验证码为${code}"时,此处的值为 {\"code\":\"1234\"}
      * @return
      * @throws ClientException
      */
-    public SendSmsResponse sendSms(String phoneNumber,String signName,String templateCode,
-    		String templateParam) throws Exception {
+    public SendSmsResponse sendSms(String phoneNumber, String signName, String templateCode,
+                                   String templateParam) throws Exception {
 
-    	log.info("<======发送短信通知，手机号：{}，签名：{}，模板：{}===============>",phoneNumber,signName,templateCode);
+        log.info("<======发送短信通知，手机号：{}，签名：{}，模板：{}===============>", phoneNumber, signName, templateCode);
         //可自助调整超时时间
         System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
         System.setProperty("sun.net.client.defaultReadTimeout", "10000");
@@ -90,26 +91,27 @@ public class SmsUtils {
         //hint 此处可能会抛出异常，注意catch
         SendSmsResponse sendSmsResponse = null;
         try {
-        	sendSmsResponse = acsClient.getAcsResponse(request);
-		} catch (Exception e) {
-			log.error("<======发送短信错误，手机号：{}，签名：{}，模板：{}，错误信息：{}===============>",phoneNumber,signName,templateCode,e);
-			e.printStackTrace();
-		}
+            sendSmsResponse = acsClient.getAcsResponse(request);
+        } catch (Exception e) {
+            log.error("<======发送短信错误，手机号：{}，签名：{}，模板：{}，错误信息：{}===============>", phoneNumber, signName, templateCode, e);
+            e.printStackTrace();
+        }
 
         return sendSmsResponse;
     }
 
     /**
      * 查询发送短信记录
-     * @param bizId 业务流水号（发送回执中获取）
+     *
+     * @param bizId       业务流水号（发送回执中获取）
      * @param phoneNumber 接收人手机号
-     * @param date 查询日期
+     * @param date        查询日期
      * @return
      * @throws ClientException
      */
-    public QuerySendDetailsResponse querySendDetails(String bizId,String phoneNumber,Date date) throws Exception {
+    public QuerySendDetailsResponse querySendDetails(String bizId, String phoneNumber, Date date) throws Exception {
 
-    	log.info("<======查询发送短信记录，手机号：{}，流水号：{}===============>",phoneNumber,bizId);
+        log.info("<======查询发送短信记录，手机号：{}，流水号：{}===============>", phoneNumber, bizId);
         //可自助调整超时时间
         System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
         System.setProperty("sun.net.client.defaultReadTimeout", "10000");
@@ -136,17 +138,43 @@ public class SmsUtils {
         //hint 此处可能会抛出异常，注意catch
         QuerySendDetailsResponse querySendDetailsResponse = null;
         try {
-        	querySendDetailsResponse = acsClient.getAcsResponse(request);
-		} catch (Exception e) {
-			log.error("<======查询发送短信记录错误，手机号：{}，流水号：{}，错误信息：{}===============>",phoneNumber,bizId,e);
-			e.printStackTrace();
-		}
-        
+            querySendDetailsResponse = acsClient.getAcsResponse(request);
+        } catch (Exception e) {
+            log.error("<======查询发送短信记录错误，手机号：{}，流水号：{}，错误信息：{}===============>", phoneNumber, bizId, e);
+            e.printStackTrace();
+        }
+
         return querySendDetailsResponse;
     }
 
+    //mobile 上线1000个手机号，可以逗号分割
+    public String sendMessageMsg(String mobile, String name, String time) {
+        try {
+            System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
+            System.setProperty("sun.net.client.defaultReadTimeout", "10000");
+            IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", product, domain);
+            DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", "Dysmsapi", "dysmsapi.aliyuncs.com");
+            SendSmsRequest request = new SendSmsRequest();
+            request.setMethod(MethodType.POST);
+            request.setPhoneNumbers(mobile);
+            request.setSignName(PropertiesUtils.getInstance().getValue("msg_signName"));
+            request.setTemplateCode(PropertiesUtils.getInstance().getValue("msg_templateCode"));
+            JSONObject parent = new JSONObject();
+            parent.put("name", name);
+            parent.put("time", time);
+            request.setTemplateParam(parent.toJSONString());
+            request.setOutId("yourOutId");
+            return new DefaultAcsClient(profile).getAcsResponse(request).getCode();
+        } catch (Exception e) {
+            log.error("sendMsg:", e);
+            return "exception";
+        }
+    }
+
+
     /**
      * 测试
+     *
      * @param args
      * @throws ClientException
      * @throws InterruptedException
@@ -154,8 +182,8 @@ public class SmsUtils {
     public static void main(String[] args) throws Exception {
 
         //发短信
-    	JSONObject smsJson = new JSONObject();
-    	smsJson.put("code",new Random().nextInt(8999) + 1000);
+        JSONObject smsJson = new JSONObject();
+        smsJson.put("code", new Random().nextInt(8999) + 1000);
         SendSmsResponse response = SmsUtils.getInstance().sendSms("1760040154", "阿里云短信测试专用", "SMS_95605478", smsJson.toString());
         log.info("短信接口返回的数据----------------");
         log.info("Code=" + response.getCode());
@@ -166,15 +194,14 @@ public class SmsUtils {
         Thread.sleep(3000L);
 
         //查明细
-        if(response.getCode() != null && response.getCode().equals("OK")) {
-            QuerySendDetailsResponse querySendDetailsResponse = SmsUtils.getInstance().querySendDetails(response.getBizId(),"1760040154",new Date());
+        if (response.getCode() != null && response.getCode().equals("OK")) {
+            QuerySendDetailsResponse querySendDetailsResponse = SmsUtils.getInstance().querySendDetails(response.getBizId(), "1760040154", new Date());
             log.info("短信明细查询接口返回数据----------------");
             log.info("Code=" + querySendDetailsResponse.getCode());
             log.info("Message=" + querySendDetailsResponse.getMessage());
             int i = 0;
-            for(QuerySendDetailsResponse.SmsSendDetailDTO smsSendDetailDTO : querySendDetailsResponse.getSmsSendDetailDTOs())
-            {
-                log.info("SmsSendDetailDTO["+i+"]:");
+            for (QuerySendDetailsResponse.SmsSendDetailDTO smsSendDetailDTO : querySendDetailsResponse.getSmsSendDetailDTOs()) {
+                log.info("SmsSendDetailDTO[" + i + "]:");
                 log.info("Content=" + smsSendDetailDTO.getContent());
                 log.info("ErrCode=" + smsSendDetailDTO.getErrCode());
                 log.info("OutId=" + smsSendDetailDTO.getOutId());

@@ -25,6 +25,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.liketry.interaction.benison.constants.SystemConstants;
+import com.liketry.interaction.benison.dao.CouponMapper;
 import com.liketry.interaction.benison.dao.OrderDetailMapper;
 import com.liketry.interaction.benison.dao.OrderMapper;
 import com.liketry.interaction.benison.dao.ScreenMapper;
@@ -32,6 +33,7 @@ import com.liketry.interaction.benison.dao.StockDetailMapper;
 import com.liketry.interaction.benison.dao.StockMapper;
 import com.liketry.interaction.benison.dao.UserMapper;
 import com.liketry.interaction.benison.model.BenisonTemplate;
+import com.liketry.interaction.benison.model.Coupon;
 import com.liketry.interaction.benison.model.Order;
 import com.liketry.interaction.benison.model.OrderDetail;
 import com.liketry.interaction.benison.model.Screen;
@@ -41,7 +43,6 @@ import com.liketry.interaction.benison.model.User;
 import com.liketry.interaction.benison.service.BizSeqNoService;
 import com.liketry.interaction.benison.service.OrderService;
 import com.liketry.interaction.benison.util.HttpUtil;
-import com.liketry.interaction.benison.util.MailUtils;
 import com.liketry.interaction.benison.util.MakeImgUtils;
 import com.liketry.interaction.benison.util.PropertiesUtils;
 import com.liketry.interaction.benison.util.SensitivewordFilter;
@@ -79,6 +80,9 @@ public class OrderServiceImpl implements OrderService {
     
     @Autowired
     UserMapper userMapper;
+    
+    @Autowired
+    CouponMapper couponMapper;
     
     
     private static final Logger log = LoggerFactory.getLogger(OrderServiceImpl.class);
@@ -187,6 +191,7 @@ public class OrderServiceImpl implements OrderService {
      * 交易单号不能为空
      */
 	@Override
+	@Transactional
 	public String updateOrderStatus(String orderId, String userId, String transactionNo, BigDecimal payPrice, String payType) {
 		
 		log.info("<=====OrderServiceImpl.updateOrderStatus====start=======>");
@@ -212,19 +217,36 @@ public class OrderServiceImpl implements OrderService {
 		
 		int count = orderMapper.updateByPrimaryKey(order);
 		
-		//同步收付单
-		Map<String,Object> map = syncRecDisOrder(order,true);
-		if("false".equals(map.get("flag"))){
-			return map.get("msg").toString();
-		}
-		
-		//更新订账单
-		map = updateBookAcountOrder(order);
-		if("false".equals(map.get("flag"))){
-			return map.get("msg").toString();
-		}
-		
 		if(count>0){
+			//修改优惠码状态
+			String couponId = order.getCouponId();
+			if(!StringUtils.isEmpty(couponId)){
+				Coupon coupon = couponMapper.selectByPrimaryKey(couponId);
+				if(coupon != null){
+					coupon.setUseType("0"); //已使用
+					coupon.setOrderCode(order.getOrderCode());
+					coupon.setUseTime(UserUtils.getCurrentDate());
+					coupon.setModifiedTime(UserUtils.getCurrentDate());
+					coupon.setModifiedBy(order.getUserId());
+					int couponCount = couponMapper.updateByPrimaryKey(coupon);
+					if(couponCount <=0 ){
+						log.info("<===支付时，修改优惠码状态错误，订单号：{}，优惠码Id：{}，=======>",order.getOrderCode(),couponId);
+					}
+				}
+			}
+			
+			//同步收付单
+			Map<String,Object> map = syncRecDisOrder(order,true);
+			if("false".equals(map.get("flag"))){
+				return map.get("msg").toString();
+			}
+			
+			//更新订账单
+			map = updateBookAcountOrder(order);
+			if("false".equals(map.get("flag"))){
+				return map.get("msg").toString();
+			}
+			
 			log.info("<=====根据订单编号，更新订单状态、交易单号、支付价格、支付类型====操作成功！=======>");
 			return "操作成功！";
 		}else{

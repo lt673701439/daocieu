@@ -23,7 +23,7 @@ import java.util.List;
 @RestController
 @RequestMapping("screen_api")
 public class ScreenApiController {
-    private final int HOT_SCREEN_SIZE = 5;//热门屏幕数量
+    private final int HOT_SCREEN_SIZE = 6;//热门屏幕数量
 
     @Autowired
     ScreenService screenService;

@@ -1,0 +1,28 @@
+sql语句：
+mb.runSQLQuery(`
+
+       
+       SELECT country,count(*) AS total FROM goods GROUP BY country ORDER BY total DESC LIMIT 10
+       
+`)
+
+shell语句：
+db.goods.find({})
+
+db.goods.aggregate().group({_id:"$country",count:{$sum:1}})
+
+db.goods.group({
+    key:{country:1},
+    cond: {},
+    reduce: function(curr,result){
+        result.count++;
+        result.name = result.country;
+        result.value = result.count;
+    },
+    initial:{value:0,count:0},
+    finalize:function(out){
+        if(out.country==null || out.country==''){out.country="其它"};
+        out.name = out.country;
+        out.value = out.count;
+    }
+})

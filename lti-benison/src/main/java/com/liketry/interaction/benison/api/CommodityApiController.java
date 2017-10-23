@@ -226,10 +226,10 @@ public class CommodityApiController {
      * @return 包含当天的连续天数状态
      */
     @RequestMapping("getPromotionLatestCommodityStock")
-    public Result<boolean[]> getPromotionLatestCommodityStock(@RequestParam String promotionId, @RequestParam String commodityId, @RequestParam int day) {
+    public Result<boolean[]> getPromotionLatestCommodityStock(@RequestParam String promotionId, @RequestParam String commodityId, Integer day) {
         if (day < 1 || day > 365)
             return new Result<>(ERROR_DAY, "天数格式错误");
-        boolean[] status = commodityService.findPromotionLatestCommodityStock(promotionId, commodityId, day);
+        boolean[] status = commodityService.findPromotionLatestCommodityStock(promotionId, commodityId, RESERVE_DAY);
         return new Result<>(SystemConstants.RESULT_SUCCESS, status);
     }
 

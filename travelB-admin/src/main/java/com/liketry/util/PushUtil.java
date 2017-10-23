@@ -13,7 +13,10 @@ import org.apache.http.impl.client.HttpClients;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * author Simon
@@ -36,9 +39,9 @@ public class PushUtil {
 
     public static String getSingle(String device, String title, String content, String id, int actionType) {
         switch (device) {
-            case "ios":
+            case Constants.DEVICE_IOS:
                 return getIOSAliasData(title, content, id, actionType);
-            case "android":
+            case Constants.DEVICE_ANDROID:
                 return getAndroidAliasData(title, content, id, actionType);
             default:
                 return null;
@@ -46,6 +49,7 @@ public class PushUtil {
     }
 
 
+    //获取根据ios别名生成数据
     private static String getIOSAliasData(String title, String content, String id, int actionType) {
         HashMap<String, Object> data = new HashMap<>();
         data.put("appkey", Constants.UMENG_IOS_APP_KEY);
@@ -63,9 +67,11 @@ public class PushUtil {
         payload.put("action_type", actionType);
         data.put("payload", payload);
         data.put("production_mode", Constants.PRODUCTION_MODE);
+        data.put("description", "single");
         return JSON.toJSONString(data);
     }
 
+    //获取根据android别名生成数据
     private static String getAndroidAliasData(String title, String content, String id, int actionType) {
         HashMap<String, Object> data = new HashMap<>();
         data.put("appkey", Constants.UMENG_IOS_APP_KEY);
@@ -74,40 +80,139 @@ public class PushUtil {
         data.put("alias_type", ALIAS_TYPE);
         data.put("alias", id);
         HashMap<String, Object> body = new HashMap<>();
-
-
         HashMap<String, Object> payload = new HashMap<>();
         payload.put("display_type", DISPLAY_TYPE_MESSAGE);
-
         return null;
     }
 
+    //获取ios广播数据
+    public static String getIOSBroadcastData(String title, boolean immediately, Date pushTime, String pushContent, int actionType, Map<String, Object> extras) {
+        HashMap<String, Object> data = new HashMap<>();
+        data.put("appkey", Constants.UMENG_IOS_APP_KEY);
+        data.put("timestamp", String.valueOf(System.currentTimeMillis() / 1000));
+        data.put("type", TYPE_BROADCAST);
+        HashMap<String, String> alert = new HashMap<>();
+        alert.put("title", title);
+        alert.put("body", pushContent);
+        HashMap<String, Object> aps = new HashMap<>();
+        aps.put("alert", alert);
+        HashMap<String, Object> payload = new HashMap<>();
+        payload.put("aps", aps);
+        payload.put("action_type", actionType);
+        if (extras != null && !extras.isEmpty()) {
+            for (Map.Entry<String, Object> entry : extras.entrySet()) {
+                String key = entry.getKey();
+                Object value = entry.getValue();
+                payload.put(key, value);
+            }
+        }
+        data.put("payload", payload);
+        if (!immediately) {
+            HashMap<String, Object> policy = new HashMap<>();
+            policy.put("start_time", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(pushTime));
+            data.put("policy", policy);
+        }
+        data.put("production_mode", Constants.PRODUCTION_MODE);
+        data.put("description", "broadcast");
+        return JSON.toJSONString(data);
+    }
 
-//    //根据id发送数据
-//    public static String getSingle(String title, String text, String id, String activity) {
-//        PushModel info = new PushModel();
-//        info.setType(TYPE_CUSTOMIZEDCAST);
-//        info.setAlias_type("alias");
-//        info.setAlias(id);
-//        AndroidPayLoadBody body = new AndroidPayLoadBody();
-//        body.ticker = "新信息";
-//        body.title = title;
-//        body.text = text;
-//        body.activity = activity;
-//        info.setPayload(new AndroidPayload(DISPLAY_TYPE_NOTIFICATION, body, null));
-//        return JSON.toJSONString(info);
-//    }
+    //获取android广播数据
+    public static String getAndroidBroadcastData(String title, boolean immediately, Date pushTime, String pushContent, int actionType, Map<String, Object> extras) {
+        HashMap<String, Object> data = new HashMap<>();
+        data.put("appkey", Constants.UMENG_ANDROID_APP_KEY);
+        data.put("timestamp", String.valueOf(System.currentTimeMillis() / 1000));
+        data.put("type", TYPE_BROADCAST);
 
-    //广播数据
-    public static String getBroadCast(String title, String text) {
-        PushModel info = new PushModel();
-        info.setType(TYPE_BROADCAST);
-        AndroidPayLoadBody body = new AndroidPayLoadBody();
-        body.ticker = "新信息";
-        body.title = title;
-        body.text = text;
-        info.setPayload(new AndroidPayload(DISPLAY_TYPE_NOTIFICATION, body, null));
-        return JSON.toJSONString(info);
+        HashMap<String, Object> body = new HashMap<>();
+        body.put("custom", "");
+        HashMap<String, Object> payload = new HashMap<>();
+        payload.put("display_type", "message");
+        payload.put("body", body);
+        data.put("payload", payload);
+        HashMap<String, Object> extra = new HashMap<>();
+        extra.put("action_type", actionType);
+        if (extras != null && !extras.isEmpty()) {
+            for (Map.Entry<String, Object> entry : extras.entrySet()) {
+                String key = entry.getKey();
+                Object value = entry.getValue();
+                extra.put(key, value);
+            }
+        }
+        data.put("extra", extra);
+        if (!immediately) {
+            HashMap<String, Object> policy = new HashMap<>();
+            policy.put("start_time", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(pushTime));
+            data.put("policy", policy);
+        }
+        data.put("production_mode", Constants.PRODUCTION_MODE);
+        return JSON.toJSONString(data);
+    }
+
+    //获取ios组播数据
+    public static String getIOSGroupCastData(String title, boolean immediately, Date pushTime, String pushContent, int actionType, String merchants, Map<String, Object> extras) {
+        HashMap<String, Object> data = new HashMap<>();
+        data.put("appkey", Constants.UMENG_IOS_APP_KEY);
+        data.put("timestamp", String.valueOf(System.currentTimeMillis() / 1000));
+        data.put("type", TYPE_CUSTOMIZEDCAST);
+        data.put("alias_type", ALIAS_TYPE);
+        data.put("alias", merchants);
+        HashMap<String, String> alert = new HashMap<>();
+        alert.put("title", title);
+        alert.put("body", pushContent);
+        HashMap<String, Object> aps = new HashMap<>();
+        aps.put("alert", alert);
+        HashMap<String, Object> payload = new HashMap<>();
+        payload.put("aps", aps);
+        payload.put("action_type", actionType);
+        if (extras != null && !extras.isEmpty()) {
+            for (Map.Entry<String, Object> entry : extras.entrySet()) {
+                String key = entry.getKey();
+                Object value = entry.getValue();
+                payload.put(key, value);
+            }
+        }
+        data.put("payload", payload);
+        if (!immediately) {
+            HashMap<String, Object> policy = new HashMap<>();
+            policy.put("start_time", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(pushTime));
+            data.put("policy", policy);
+        }
+        data.put("production_mode", Constants.PRODUCTION_MODE);
+        return JSON.toJSONString(data);
+    }
+
+    //获取android组播数据
+    public static String getAndroidGroupCastData(String title, boolean immediately, Date pushTime, String pushContent, int actionType, String merchants, Map<String, Object> extras) {
+        HashMap<String, Object> data = new HashMap<>();
+        data.put("appkey", Constants.UMENG_ANDROID_APP_KEY);
+        data.put("timestamp", String.valueOf(System.currentTimeMillis() / 1000));
+        data.put("type", TYPE_CUSTOMIZEDCAST);
+        data.put("alias_type", ALIAS_TYPE);
+        data.put("alias", merchants);
+        HashMap<String, Object> body = new HashMap<>();
+        body.put("custom", "");
+        HashMap<String, Object> payload = new HashMap<>();
+        payload.put("display_type", "message");
+        payload.put("body", body);
+        data.put("payload", payload);
+        HashMap<String, Object> extra = new HashMap<>();
+        extra.put("action_type", actionType);
+        if (extras != null && !extras.isEmpty()) {
+            for (Map.Entry<String, Object> entry : extras.entrySet()) {
+                String key = entry.getKey();
+                Object value = entry.getValue();
+                extra.put(key, value);
+            }
+        }
+        data.put("extra", extra);
+        if (!immediately) {
+            HashMap<String, Object> policy = new HashMap<>();
+            policy.put("start_time", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(pushTime));
+            data.put("policy", policy);
+        }
+        data.put("production_mode", Constants.PRODUCTION_MODE);
+        return JSON.toJSONString(data);
     }
 
     public static UMResultModel getUMData(String device, String body) {
@@ -150,62 +255,4 @@ public class PushUtil {
             this.content = content;
         }
     }
-}
-
-
-@Data
-class PushModel { //主结构
-    private boolean production_mode;//生产、测试
-    private String appkey;
-    private String timestamp;
-    private String type;
-    private String device_tokens;
-    private String alias_type;
-    private String alias;
-    private String file_id;
-    private Object filter;
-    private AndroidPayload payload;
-    private Object policy;
-    private String description;
-
-    PushModel() {
-        this.production_mode = true;
-        this.appkey = Constants.UMENG_ANDROID_APP_KEY;
-        this.timestamp = String.valueOf(System.currentTimeMillis() / 1000);
-    }
-}
-
-@Data
-class AndroidPayload { //android 主结构
-    String display_type;
-    AndroidPayLoadBody body;
-    HashMap<String, Object> extra;
-
-    public AndroidPayload() {
-    }
-
-    AndroidPayload(String display_type, AndroidPayLoadBody body, HashMap<String, Object> extra) {
-        this.display_type = display_type;
-        this.body = body;
-        this.extra = extra;
-    }
-}
-
-@Data
-class AndroidPayLoadBody { //android 主数据
-    String ticker;
-    String title;
-    String text;
-    String icon;
-    String largeIcon;
-    String img;
-    String sound;
-    String builder_id;
-    String play_vibrate;
-    String play_lights;
-    String play_sound;
-    String after_open;
-    String url;
-    String activity;
-    String custom;
 }

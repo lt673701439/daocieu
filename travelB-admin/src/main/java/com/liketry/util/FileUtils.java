@@ -21,14 +21,16 @@ public class FileUtils {
      */
     public static String getPathAndCreate(String folderName, String suffix) {
         final String path_today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        File folder = new File(Constants.ROOT_SRC + Constants.ROOT_LOCAL + folderName + path_today);
+        String ROOT_LOCAL = PropertiesUtils.getInstance().getValue("default_upload_filepath");
+        File folder = new File(ROOT_LOCAL + folderName + path_today);
         if (!folder.exists() || folder.isFile())
             folder.mkdirs();
         return folderName + path_today + "/" + CommonUtils.getId() + "." + suffix;
     }
 
     public static boolean saveFile(String path, MultipartFile multipartFile) {
-        File file = new File(path);
+        String ROOT_LOCAL = PropertiesUtils.getInstance().getValue("default_upload_filepath");
+        File file = new File(ROOT_LOCAL + path);
         if (file.exists())
             throw new RuntimeException(path + " exists");
         try {

@@ -1,12 +1,11 @@
 package com.liketry.domain;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
 import com.baomidou.mybatisplus.annotations.TableName;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.math.BigDecimal;
+import java.util.Date;
 
 @TableName("bu_rec_dis")
 @Data

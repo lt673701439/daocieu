@@ -11,8 +11,6 @@ import com.liketry.service.MessageService;
 import com.liketry.service.OrderRecordService;
 import com.liketry.util.CommonUtils;
 import com.liketry.util.Constants;
-import com.liketry.util.ShiroUtils;
-import com.liketry.util.StringTools;
 import com.liketry.web.BaseController;
 import com.liketry.web.vm.ResultVM;
 import com.liketry.web.vm.SmartPageVM;
@@ -21,7 +19,6 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Field;
 import java.util.Date;
 
 @Slf4j
@@ -70,24 +67,26 @@ public class OrderRecordApi extends BaseController<OrderRecordService, OrderReco
     //创建
     @PostMapping
     public ResultVM create(@RequestBody OrderRecord order) {
+        log.info("receive: create order parameter =  " + order.toString());
         if (!insertValidate(order))
-            ResultVM.error(String.valueOf(Constants.ERROR_DATA_NOT_COMPLETE));
+            return ResultVM.error(String.valueOf(Constants.ERROR_DATA_NOT_COMPLETE));
         Merchant merchant = merChantService.selectById(order.getOrMerchantId());
         if (merchant == null)
-            ResultVM.error(String.valueOf(ERROR_NOT_FIND_MERCHANT));
+            return  ResultVM.error(String.valueOf(ERROR_NOT_FIND_MERCHANT));
         order.setOrBalance(merchant.getMerchantBalance());
         order.setId(CommonUtils.getId());
         order.setOrCode(codeService.getBODCode(merchant.getMerchantCode()));
         boolean insert = service.insert(order);
-        if(insert){
-            messageService.addOrderMessage(order.getOrMerchantId(),order.getOrOrderTime());
+        if (insert) {
+            messageService.addOrderMessage(order.getOrMerchantId(), order.getOrOrderTime());
         }
         return insert ? ResultVM.ok(order) : ResultVM.error(String.valueOf(Constants.ERROR_INSERT_FAILED));
     }
 
-    //退单
+    //三分钟失效订单
     @PostMapping("back")
     public ResultVM back(@RequestBody OrderRecord order) {
+        log.info("receive: back order parameter =  " + order.toString());
         if (!backValidate(order))
             return ResultVM.error(String.valueOf(Constants.ERROR_DATA_NOT_COMPLETE));
         EntityWrapper<OrderRecord> entity = new EntityWrapper<OrderRecord>();
@@ -95,9 +94,29 @@ public class OrderRecordApi extends BaseController<OrderRecordService, OrderReco
         OrderRecord sqlOrder = service.selectOne(entity);
         if (sqlOrder == null)
             return ResultVM.error(String.valueOf(Constants.ERROR_DATA_EMPTY));
-        sqlOrder.setOrType(order.getOrType());
-        sqlOrder.setOrBackTime(order.getOrBackTime());
+        sqlOrder.setOrStatus(4);
+        sqlOrder.setOrBackTime(new Date());
         boolean insert = service.updateById(sqlOrder);
+        return insert ? ResultVM.ok() : ResultVM.error(String.valueOf(Constants.ERROR_INSERT_FAILED));
+    }
+
+    //后台手动退单
+    @PostMapping("chargeBack")
+    public ResultVM chargeBack(@RequestBody OrderRecord order) {
+        log.info("receive: chargeBack order parameter =  " + order.toString());
+        if (!backValidate(order))
+            return ResultVM.error(String.valueOf(Constants.ERROR_DATA_NOT_COMPLETE));
+        EntityWrapper<OrderRecord> entity = new EntityWrapper<OrderRecord>();
+        entity.where("or_source_id = {0} and or_source_code = {1}", order.getOrSourceId(), order.getOrSourceCode());
+        OrderRecord sqlOrder = service.selectOne(entity);
+        if (sqlOrder == null)
+            return ResultVM.error(String.valueOf(Constants.ERROR_DATA_EMPTY));
+        sqlOrder.setOrStatus(5);
+        sqlOrder.setOrBackTime(new Date());
+        boolean insert = service.updateById(sqlOrder);
+        if (insert) {
+            messageService.chargeBackMessage(sqlOrder.getOrMerchantId(), sqlOrder.getOrOrderTime());
+        }
         return insert ? ResultVM.ok() : ResultVM.error(String.valueOf(Constants.ERROR_INSERT_FAILED));
     }
 
@@ -124,8 +143,8 @@ public class OrderRecordApi extends BaseController<OrderRecordService, OrderReco
             return false;
         if (order.getOrType() == null)
             return false;
-        if (order.getOrBackTime() == null)
-            return false;
+        //if (order.getOrBackTime() == null)
+        //    return false;
         return true;
     }
 

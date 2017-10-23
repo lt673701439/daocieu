@@ -217,14 +217,9 @@
     </resultMap>
     <select id="selectApiAll" resultMap="ResultApiMap">
         SELECT
-        <!--景区表-->
-        bu_spot.spot_id sid, spot_code, spot_name, spot_status, spot_province, spot_city, spot_address, spot_description,
-        <!--屏幕子结果-->
-        cname, cid, screen_id, screen_code, screen_name, screen_status, screen_location,IFNULL(screen_longitude,'') as screen_longitude ,IFNULL(screen_dimension,'') as screen_dimension , screen_long,
-        screen_wide, screen_size, screen_resolution, screen_description,screen_img
-        FROM bu_spot LEFT JOIN
-        (SELECT spot_name cname, bu_screen.spot_id cid, screen_id, screen_code, screen_name, screen_status, screen_location, screen_longitude, screen_dimension, screen_long, screen_wide, screen_size,
-        screen_resolution, screen_description,screen_img FROM bu_screen,bu_spot WHERE bu_screen.spot_id = bu_spot.spot_id AND bu_screen.screen_status = '1') AS bu_screen_temp
-        ON spot_id = cid;
+bu_spot.spot_id sid, spot_code, spot_name, spot_status, spot_province, spot_city, spot_address, spot_description,
+ bu_spot.spot_name cname, bu_screen.spot_id cid, screen_id, screen_code, screen_name, screen_status, screen_location,IFNULL(screen_longitude,'') as screen_longitude ,IFNULL(screen_dimension,'') as screen_dimension , screen_long
+ ,screen_wide, screen_size, screen_resolution, screen_description,screen_img
+ FROM bu_spot left join bu_screen on  bu_spot.spot_id = bu_screen.spot_id where bu_spot.spot_status = 1 and bu_screen.screen_status = 1
     </select>
 </mapper>

@@ -1,6 +1,5 @@
 package com.liketry.interaction.benison.service.impl;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -21,12 +20,14 @@ import com.liketry.interaction.benison.service.PromotionService;
  */
 @Service
 public class PromotionServiceImpl implements PromotionService {
+    final PromotionMapper promotionMapper;
+    final PromotionDetailMapper promotionDetailMapper;
 
     @Autowired
-    PromotionMapper promotionMapper;
-
-    @Autowired
-    PromotionDetailMapper promotionDetailMapper;
+    public PromotionServiceImpl(PromotionMapper promotionMapper, PromotionDetailMapper promotionDetailMapper) {
+        this.promotionMapper = promotionMapper;
+        this.promotionDetailMapper = promotionDetailMapper;
+    }
 
     /**
      * 获取促销活动列表
@@ -46,12 +47,13 @@ public class PromotionServiceImpl implements PromotionService {
         return promotionDetailMapper.findPromotionDetailList(promotionId);
     }
 
-
 //    @Override
 //    public List<PromotionCommodityVo> findPromotionDetailList(String promotionId, Date reserveDate) {
 //        return promotionDetailMapper.findPromotionDetailList(null, promotionId, reserveDate);
 //    }
 
+
+    //根据活动id 获取参与数量
     @Override
     public int findPartakeNumber(String promotionId) {
         return promotionDetailMapper.findPartakeNumber(promotionId);
@@ -60,5 +62,11 @@ public class PromotionServiceImpl implements PromotionService {
     @Override
     public List<PromotionDetail> getPromotionDetailList(Map<String, Object> map) {
         return promotionDetailMapper.getPromotionDetailList(map);
+    }
+
+    //获取0元活动的下单数
+    @Override
+    public int findFirstPromotionNumber() {
+        return promotionMapper.findFirstPromotionNumber();
     }
 }

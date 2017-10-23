@@ -117,6 +117,24 @@
 		    	<label>落款字体:</label>
 		    	<input class="easyui-combobox" name="tailType" style="width:100px" disabled>
 			</div>
+			<div class="fitem">
+				<label>图片:</label>
+		        <c:forEach  items="${urlList}" var="picture" varStatus="s">
+						<img src="${picture.url}" width="80" height="50" />
+				</c:forEach>
+		    </div>
+		    <div class="fitem">
+		    	<label>描边偏移X:</label>
+		        <input name="strokeX" class="easyui-numberbox"  style="width: 100px;"  disabled>
+			</div>
+			<div class="fitem">
+		    	<label>描边偏移Y:</label>
+		        <input name="strokeY" class="easyui-numberbox"  style="width: 100px;"  disabled>
+			</div>
+			<div class="fitem">
+		    	<label>描边透明度:</label>
+		        <input name="strokeAlpha" class="easyui-numberbox" precision="1" groupSeparator="," decimalSeparator="." style="width: 100px;" disabled>
+			</div>
 			</form>
     <div id="dlg-buttons" align="center">
        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="goBack(0)" style="width:90px">取消</a>

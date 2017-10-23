@@ -1,6 +1,11 @@
 package com.liketry.service;
 
+import org.omg.CORBA.OBJ_ADAPTER;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.Map;
+
 /**
  * author Simon
  * create 2017/10/11
@@ -8,18 +13,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface PushService {
-    //新增订单
-    boolean sendAddOrderMessage(String merchantId, String time);
+    //发送单个消息消息给固定商户
+    boolean addMessage(String merchantId, String content, int actionType);
 
-    //支付订单
-    boolean sendPayOrderMessage(String merchantId, String money);
+    //发送广播数据
+    boolean sendBroadcastMessage(boolean immediately, Date pushTime, String pushContent, int type, Map<String, Object> extra);
 
-    //退单
-    boolean sendBackOrderMessage(String merchantId, String time);
-
-    //退款
-    boolean sendRefundMessage(String merchantId, String time);
-
-    //提现
-    boolean sendEnchashmentMessage(String merchantId, String money);
+    //发送组播数据
+    boolean sendGroupCastMessage(boolean immediately, Date pushTime, String[] selectMerchant, String pushContent, int type, Map<String, Object> extra);
 }

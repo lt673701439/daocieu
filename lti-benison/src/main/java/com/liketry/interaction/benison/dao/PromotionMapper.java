@@ -46,4 +46,7 @@ public interface PromotionMapper {
      * @return
      */
     List<Promotion> findAllPromotion();
+
+	//获取首单9.9元活动的下单数
+	int findFirstPromotionNumber();
 }

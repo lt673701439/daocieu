@@ -4,7 +4,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import com.liketry.interaction.benison.dao.StockDetailMapper;
 import com.liketry.interaction.benison.dao.StockMapper;
 import com.liketry.interaction.benison.model.Stock;
 import com.liketry.interaction.benison.service.ScreenService;
@@ -109,7 +108,13 @@ public class PromotionApiController {
      */
     @RequestMapping("getPartakeNumber")
     Result<Integer> getPartakeNumber(@RequestParam String promotionId) {
-        int size = promotionService.findPartakeNumber(promotionId);
+        int size;
+        if ("2a4de77a6a084ebca52b6d784b7dd91e".equals(promotionId)) {//如果进入到首单9.9活动
+            size = promotionService.findFirstPromotionNumber();
+        } else {
+            size = promotionService.findPartakeNumber(promotionId);
+            size += new Random().nextInt(11);
+        }
         return new Result<>(SystemConstants.RESULT_SUCCESS, size);
     }
 

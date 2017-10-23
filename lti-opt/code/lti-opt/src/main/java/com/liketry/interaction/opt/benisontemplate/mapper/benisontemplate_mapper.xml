@@ -25,6 +25,10 @@
 		<result property="tailColour" column="tail_colour"/>
 		<result property="tailSize" column="tail_size"/>
 		<result property="tailType" column="tail_type"/>
+		<result property="strokeFigure" column="stroke_figure"/>
+		<result property="strokeX" column="stroke_X"/>
+		<result property="strokeY" column="stroke_Y"/>
+		<result property="strokeAlpha" column="stroke_alpha"/>
 		<result property="benisonContent" column="benison_content"/>
 		<result property="imgUrl" column="img_url"/>
 		<result property="imgCode" column="img_code"/>
@@ -101,6 +105,18 @@
 	  	</if>
 	  	<if test=" tail_type != null and tail_type != '' and tail_type != 'null' ">
 			<![CDATA[ AND A.tail_type = #{tail_type} ]]>
+	  	</if>
+	  	<if test=" stroke_figure != null and stroke_figure != '' and stroke_figure != 'null' ">
+			<![CDATA[ AND A.stroke_figure = #{stroke_figure} ]]>
+	  	</if>
+	  	<if test=" stroke_x != null and stroke_x != '' and stroke_x != 'null' ">
+			<![CDATA[ AND A.stroke_X = #{stroke_x} ]]>
+	  	</if>
+	  	<if test=" stroke_y != null and stroke_y != '' and stroke_y != 'null' ">
+			<![CDATA[ AND A.stroke_Y = #{stroke_y} ]]>
+	  	</if>
+	  	<if test=" stroke_alpha != null ">
+	  		<![CDATA[ AND A.stroke_alpha = ${stroke_alpha} ]]>
 	  	</if>
 		</where>
   	</sql>
@@ -179,6 +195,18 @@
 	  		<if test=" tail_type  != null and  tail_type  != ''  and  tail_type  != 'null' ">
 				<![CDATA[ tail_type , ]]>
 	  		</if>
+	  		<if test=" stroke_figure  != null and  stroke_figure  != ''  and  stroke_figure  != 'null' ">
+				<![CDATA[ stroke_figure , ]]>
+	  		</if>
+	  		<if test=" stroke_x  != null and  stroke_x  != ''  and  stroke_x  != 'null' ">
+				<![CDATA[ stroke_X , ]]>
+	  		</if>
+	  		<if test=" stroke_y  != null and  stroke_y  != ''  and  stroke_y  != 'null' ">
+				<![CDATA[ stroke_Y , ]]>
+	  		</if>
+	  		<if test=" stroke_alpha  != null ">
+				<![CDATA[ stroke_alpha , ]]>
+	  		</if>
 		</trim>
 		VALUES
 		<trim prefix="(" suffix=")" suffixOverrides=",">
@@ -250,6 +278,18 @@
 	  		</if>
 	  		<if test=" tail_type  != null and  tail_type  != ''  and  tail_type  != 'null' ">
 	  			<![CDATA[ #{tail_type} , ]]>
+	  		</if>
+	  		<if test=" stroke_figure  != null and  stroke_figure  != ''  and  stroke_figure  != 'null' ">
+	  			<![CDATA[ #{stroke_figure} , ]]>
+	  		</if>
+	  		<if test=" stroke_x  != null and  stroke_x  != ''  and  stroke_x  != 'null' ">
+	  			<![CDATA[ #{stroke_x} , ]]>
+	  		</if>
+	  		<if test=" stroke_y  != null and  stroke_y  != ''  and  stroke_y  != 'null' ">
+	  			<![CDATA[ #{stroke_y} , ]]>
+	  		</if>
+	  		<if test=" stroke_alpha  != null">
+	    		<![CDATA[ ${stroke_alpha} , ]]>
 	  		</if>
 		</trim>
   	</insert>
@@ -323,6 +363,18 @@
 	  	<if test=" tail_type  != null and  tail_type  != ''  and  tail_type  != 'null' ">
 	  		<![CDATA[ A.tail_type = #{tail_type}, ]]>
 	  	</if>
+	  	<if test=" stroke_figure  != null and  stroke_figure  != ''  and  stroke_figure  != 'null' ">
+	  		<![CDATA[ A.stroke_figure = #{stroke_figure}, ]]>
+	  	</if>
+	  	<if test=" stroke_x  != null and  stroke_x  != ''  and  stroke_x  != 'null' ">
+	  		<![CDATA[ A.stroke_X = #{stroke_x}, ]]>
+	  	</if>
+	  	<if test=" stroke_y  != null and  stroke_y  != ''  and  stroke_y  != 'null' ">
+	  		<![CDATA[ A.stroke_Y = #{stroke_y}, ]]>
+	  	</if>
+		<if test=" stroke_alpha  != null ">
+  			<![CDATA[ A.stroke_alpha = ${stroke_alpha} , ]]>
+		</if>
 		</set>
 		<![CDATA[ where A.TEMPLATE_ID = #{template_id}]]>
   	</update>

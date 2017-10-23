@@ -1,43 +1,24 @@
 package com.liketry.api;
 
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-import org.apache.commons.lang.StringUtils;
-import org.apache.shiro.crypto.hash.Sha256Hash;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.liketry.domain.BankCard;
-import com.liketry.domain.DivideRule;
-import com.liketry.domain.Merchant;
-import com.liketry.domain.RecDis;
-import com.liketry.domain.User;
-import com.liketry.service.BankCardService;
-import com.liketry.service.CodeService;
-import com.liketry.service.DivideRuleService;
-import com.liketry.service.MerChantService;
-import com.liketry.service.RecDisService;
-import com.liketry.service.UserService;
+import com.liketry.domain.*;
+import com.liketry.service.*;
 import com.liketry.util.Constants;
 import com.liketry.web.BaseController;
 import com.liketry.web.vm.ResultVM;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.crypto.hash.Sha256Hash;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
+import java.util.*;
 
 /**
  * author pengyy
@@ -63,10 +44,13 @@ public class RecDisApi extends BaseController<RecDisService, RecDis> {
 	
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private MessageService messageService;
 	
    /**
      * 收付单同步
-     * @param t
+     * @param json
      * @return
      */
 	@ApiOperation(value="收付单同步")
@@ -263,7 +247,7 @@ public class RecDisApi extends BaseController<RecDisService, RecDis> {
     
     /**
      * 校验数据
-     * @param t
+     * @param json
      * @return
      */
     private String checkData(JSONObject json){
@@ -295,7 +279,7 @@ public class RecDisApi extends BaseController<RecDisService, RecDis> {
     
     /**
      * 计算分成金额
-     * @param price 需要分成的金额
+     * @param recDisPrice 需要分成的金额
      * @param divideRuleType  分成规则类型
      * @return
      */

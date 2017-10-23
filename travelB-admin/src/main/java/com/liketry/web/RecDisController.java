@@ -1,49 +1,34 @@
 package com.liketry.web;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.liketry.domain.Merchant;
 import com.liketry.domain.RecDis;
 import com.liketry.service.CodeService;
 import com.liketry.service.MerChantService;
+import com.liketry.service.MessageService;
 import com.liketry.service.RecDisService;
-import com.liketry.util.CommonUtils;
 import com.liketry.util.Constants;
 import com.liketry.util.ShiroUtils;
-import com.liketry.web.BaseController;
+import com.liketry.web.vm.RecDisVM;
 import com.liketry.web.vm.ResultVM;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
+import java.util.*;
 
 /**
  * author pengyy
  * 收付单
  */
 @Api(value="收付单服务",description="供平台管理调用")
+@Slf4j
 @RestController
 @RequestMapping("sys/rec_dis")
 public class RecDisController extends BaseController<RecDisService, RecDis> {
@@ -54,7 +39,10 @@ public class RecDisController extends BaseController<RecDisService, RecDis> {
   
   @Autowired
   CodeService codeService;
-	
+
+  @Autowired
+  MessageService messageService;
+
   /**
     * 新增
     * @param t
@@ -89,6 +77,27 @@ public class RecDisController extends BaseController<RecDisService, RecDis> {
 	       return ResultVM.error();
 	   }
    }
+
+	/**
+	 * 根据id获取实体对象
+	 * @param id
+	 * @return
+	 */
+	@ApiOperation(value="查询详细",notes="通用查询详细")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "id", value = "主键", required = true,dataType = "String",paramType="path")
+	})
+	@GetMapping("/{id}")
+	public ResultVM getInfo(@PathVariable String id) {
+
+		RecDisVM t = service.selectNewOne(id);
+
+		if(t != null){
+			return ResultVM.ok(t);
+		}else{
+			return ResultVM.error();
+		}
+	}
    
    
    /**
@@ -193,7 +202,7 @@ public class RecDisController extends BaseController<RecDisService, RecDis> {
    
    /**
     * 确认转账
-    * @param id
+    * @param t
     * @return
     */
   @ApiOperation(value="确认转账")
@@ -226,6 +235,10 @@ public class RecDisController extends BaseController<RecDisService, RecDis> {
 		   Map<String,Object> map = service.updateRecAndMerchant(recDis);
 		   
 		   if(Boolean.valueOf(map.get("flag").toString())){
+			   //商户提现时，推送消息
+			   if(!messageService.enchashmentMessage(recDis.getCommdityId(),String.valueOf(recDis.getRecDisPrice()))){
+				   log.error("<====商户提现发送消息失败，商户ID：{}，金额：{}======>",recDis.getCommdityId(),String.valueOf(recDis.getRecDisPrice()));
+			   }
 	           return ResultVM.ok();
 	       }else{
 	           return ResultVM.error(map.get("msg").toString());
@@ -238,7 +251,7 @@ public class RecDisController extends BaseController<RecDisService, RecDis> {
    
    /**
     * 确认到账
-    * @param id
+    * @param t
     * @return
     */
   @ApiOperation(value="确认到账")
@@ -311,7 +324,7 @@ public class RecDisController extends BaseController<RecDisService, RecDis> {
 		   BigDecimal recPrice = service.findAllRecOrDis(commdityId, Constants.rec_dis_type_gat);
 		   
 		   //商户所有付款单和
-		   BigDecimal disPrice = service.findAllRecOrDis(commdityId, Constants.rec_dis_type_gat);
+		   BigDecimal disPrice = service.findAllRecOrDis(commdityId, Constants.rec_dis_type_pay);
 		   
 		   map.put("merchantId", commdityId);
 		   map.put("merchantName", merchant.getMerchantShopname());
@@ -327,7 +340,7 @@ public class RecDisController extends BaseController<RecDisService, RecDis> {
    
    /**
     * 余额更新
-    * @param json串
+    * @param data
     * @return
     */
   @ApiOperation(value="余额更新")
@@ -355,7 +368,7 @@ public class RecDisController extends BaseController<RecDisService, RecDis> {
 		   
 		   merchant.setMerchantBalance(price);
 		   merchantList.add(merchant);
-		   
+
 	   }
 	   
 	   if(merChantService.updateBatchById(merchantList)){

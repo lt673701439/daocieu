@@ -319,4 +319,8 @@
     ]]>
     order by sort_num;
   </select>
+
+  <select id="findFirstPromotionNumber"  resultType="Integer">
+      select count(*) from (SELECT count(*) FROM interaction.bu_order  where order_status in (1,2,3) group by user_id) as a
+  </select>
 </mapper>

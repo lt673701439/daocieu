@@ -21,7 +21,7 @@ public class OrderBO  extends BaseBO {
 	
 	protected void init(){
 		super.init();
-		this.addList(Arrays.asList("order_id","order_code","transaction_no","order_type","order_status","user_id","scene","user_nickname","user_phone","bless_name","write_name","template_id","screen_id","screen_name","type_id","type_name","benison_id","benison_content","rule_content","bkimg_id","bkimg_name","bkimg_url","total_price","total_orig_price","pay_type","pay_time","pay_price","confirm_status","confirm_time","confirm_by","confirm_id","confirm_reason","back_time","back_by","back_id","back_reason","back_price","back_remarks","order_descriptiion","export_by","export_id","export_time","result_url","share_url","promotion_id","created_time","created_by","modified_time","modified_by","version","delflag","template_name"));
+		this.addList(Arrays.asList("order_id","order_code","transaction_no","order_type","order_status","user_id","scene","user_nickname","user_phone","bless_name","write_name","template_id","screen_id","screen_name","type_id","type_name","benison_id","benison_content","rule_content","bkimg_id","bkimg_name","bkimg_url","total_price","total_orig_price","pay_type","pay_time","pay_price","confirm_status","confirm_time","confirm_by","confirm_id","confirm_reason","back_time","back_by","back_id","back_reason","back_price","back_remarks","order_descriptiion","export_by","export_id","export_time","result_url","share_url","promotion_id","created_time","created_by","modified_time","modified_by","version","delflag","template_name","coupon_id"));
 	}
 	
 		
@@ -594,5 +594,15 @@ public class OrderBO  extends BaseBO {
 	public String getTemplateName(){
 		return (String)getData().get("template_name");
 	}
+	
+	private String couponId;
+	public void setCouponId(String couponId){
+		getData().put("coupon_id",couponId);
+		this.couponId=couponId;
+	}
+	
+	public String getCouponId(){
+		return (String)getData().get("coupon_id");
+	}	
 }
 

@@ -15,11 +15,15 @@ import com.liketry.interaction.opt.order.action.IOrderAction;
 import com.liketry.interaction.opt.stock.action.IStockAction;
 import com.liketry.interaction.opt.stock.model.StockBO;
 import com.liketry.interaction.opt.stockdetail.action.IStockDetailAction;
+import com.taikang.iu.com.PropertiesUtils;
+import com.taikang.iu.com.ServiceUtil;
 import com.taikang.udp.framework.common.datastructre.Dto;
 import com.taikang.udp.framework.common.datastructre.impl.BaseDto;
 import com.taikang.udp.framework.common.util.TKDateTimeUtils;
 import com.taikang.udp.framework.core.exception.app.TKDaoException;
 import com.taikang.udp.framework.core.web.BaseController;
+
+import net.sf.json.JSONObject;
 
 
 @Service("orderJob")
@@ -79,6 +83,19 @@ public class OrderJob extends BaseController{
 									stockDetailAction.deleteObject(newStockDetail);
 								});
 							}
+							
+							//取消订单时，调到此一游接口，推送消息
+							JSONObject json = new JSONObject();
+							json.put("orSourceId", order.get("order_id"));
+							json.put("orType", order.get("order_type"));
+							json.put("orSourceCode", order.get("order_code"));
+							String msg = ServiceUtil.sendPost(PropertiesUtils.getInstance().getValue("daoceu.serviceUrl"+"api/orderApi/back"),json.toString());
+							
+							if(msg == null){
+								logger.info("<==定时器，取消订单时，发送消息失败,订单ID:{},订单code:{},订单类型:{}=========>",
+										order.get("order_id"),order.get("order_code"),order.get("order_type"));
+					    	}
+							
 					}
 				}catch(Exception e){
 					logger.error(" update failed ,Exception= "+e.getMessage());

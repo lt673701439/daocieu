@@ -27,7 +27,7 @@ public class QRCodeApi {
     Result<String> get(@RequestParam String merchantId) {
         if (merchantId == null || merchantId.length() != 32)
             return new Result<>(ERROR_MERCHANT_ID, "id validate failed");
-        String code = QRCodeUtils.createMINACode(merchantId);
+        String code = QRCodeUtils.createQRCode(merchantId);
         if (code == null)
             return new Result<>(ERROR_CREATE_FAILED, "create failed");
         else
